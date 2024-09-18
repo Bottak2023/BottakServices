@@ -37,7 +37,7 @@ function Home() {
     }
     function save(e) {
         e.preventDefault()
-        const data = { ...state, image1, image2, image3, rol: 'Cliente', uuid: user.uid, habilitado: true, bloqueado: false }
+        const data = { ...state, image1, image2, image3, rol: 'Cliente', uuid: user.uid, habilitado: false, bloqueado: false }
         setModal('Guardando...')
         const callback = () => {
             getSpecificData(`/users/${user.uid}`, setUserData)
