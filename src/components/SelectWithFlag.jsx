@@ -74,7 +74,7 @@ export default function App({ placeholder, value, onChange, propHandlerSelect, p
               <span className="pl-5 "> {i.code}, {i.currency}</span>
             </li>)
             : userDB !== null && userDB!== undefined 
-		?Object.values(divisas).map((i, index) => i.habilitado !== undefined && i.habilitado !== false && i.habilitado !== null && (countries[userDB && userDB !== undefined ? userDB.cca3 : 'BOL']?.divisasPaisRemitente?.includes(i.code) || i.cca3 === userDB?.cca3) && <li className='w-full  h-[50px] flex justify-start items-center px-10' key={index} onClick={(e) => handlerUserSelect(e, i)}>
+		?Object.values(divisas).map((i, index) => i.habilitado !== undefined && i.habilitado !== false && i.habilitado !== null && (countries[userDB && userDB !== undefined ? userDB.cca3 : 'BOL']?.divisasPaisRemitente?.includes(i.code) || i.cca3 === userDB?.cca3 || i.code === 'USDT') && <li className='w-full  h-[50px] flex justify-start items-center px-10' key={index} onClick={(e) => handlerUserSelect(e, i)}>
               {/* <span className="inline-block w-[30px]"><CurrencyFlag currency={i.code} size="lg" /></span> */}
               <span className="inline-block  h-[20px] "><img src={i.flagPNG} className="inline-block w-[30px] h-[20px]" alt="" /></span>
               <span className="pl-5 "> {i.code}, {i.currency}</span>
