@@ -8,7 +8,7 @@ import { writeUserData, getSpecificData } from "@/firebase/database"
 import divisasJSON from '@/utils/divisas'
 
 export default function App({ placeholder, value, onChange, propHandlerSelect, propSelect, propIsSelect, propHandlerIsSelect, defaultValue }) {
-  const { userDB, currency, setCurrency, setUserSuccess, select, setSelect, select2, setSelect2, transferencia, setTransferencia, comision, setComision, success, setuserSuccess, divisas, setDivisas, isSelect, setIsSelect, isSelect2, setIsSelect2, } = useUser()
+  const { userDB, currency, setCurrency, setUserSuccess, select, setSelect, select2, setSelect2, transferencia, countries, setTransferencia, comision, setComision, success, setuserSuccess, divisas, setDivisas, isSelect, setIsSelect, isSelect2, setIsSelect2, } = useUser()
 
 
 
@@ -35,7 +35,7 @@ export default function App({ placeholder, value, onChange, propHandlerSelect, p
     (divisas && divisas[select] && divisas[select2] && (e.target.value * divisas['USDT'].compra / divisas[select].venta).toFixed(2)) > 100000 && setComision('CONTACTESE CON SOPORTE');
 
   }
-  console.log(comision)
+  // console.log(countries[divisas[propSelect].cioc])
   // console.log(Object.values(divisasJSON))
   // useEffect(() => {
   //   // writeUserData('divisas', divisasJSON, setUserSuccess)
@@ -45,10 +45,10 @@ export default function App({ placeholder, value, onChange, propHandlerSelect, p
   // console.log(select)
   // console.log(propSelect)
 
-  // console.log(divisas[select2].cambio)
+  // console.log(countries[userDB && userDB !== undefined ?userDB.cca3 :'BOL'].divisasPaisRemitente)
 
   return (
-    <div className={`relative w-[100%] sm:max-w-[380px] bg-transparent border border-gray-300 text-gray-900 text-[14px] rounded-xl focus:ring-blue-500 focus:border-blue-500 block  p-0 `} >
+    countries && countries !== undefined && divisas && <div className={`relative w-[100%] sm:max-w-[380px] bg-transparent border border-gray-300 text-gray-900 text-[14px] rounded-xl focus:ring-blue-500 focus:border-blue-500 block  p-0 `} >
       <div className='relative w-full bg-transparent flex justify-between items-center'>
         <input
           type="number"
@@ -67,12 +67,18 @@ export default function App({ placeholder, value, onChange, propHandlerSelect, p
 
       <div className={`absolute left-0 top-10 bg-gray-100 flex flex-col justify-start items-center  text-gray-900 text-[14px] rounded-b-xl focus:ring-blue-500 focus:outline-blue-500 w-full  z-30  transition-all ${propIsSelect ? 'h-[150px] outline outline-1 outline-gray-300 overflow-y-auto ' : 'h-0 overflow-y-hidden'}`} >
         <ul className="inline-block w-full">
-          {divisas !== undefined && Object.values(divisas).map((i, index) => i.habilitado !== undefined && i.habilitado !== false && i.habilitado !== null &&
-            <li className='w-full  h-[50px] flex justify-start items-center px-10' key={index} onClick={(e) => handlerUserSelect(e, i)}>
+          {value && divisas !== undefined
+            ? Object.values(divisas).map((i, index) => i.habilitado !== undefined && i.habilitado !== false && i.habilitado !== null && <li className='w-full  h-[50px] flex justify-start items-center px-10' key={index} onClick={(e) => handlerUserSelect(e, i)}>
               {/* <span className="inline-block w-[30px]"><CurrencyFlag currency={i.code} size="lg" /></span> */}
               <span className="inline-block  h-[20px] "><img src={i.flagPNG} className="inline-block w-[30px] h-[20px]" alt="" /></span>
               <span className="pl-5 "> {i.code}, {i.currency}</span>
-            </li>)}
+            </li>)
+            : Object.values(divisas).map((i, index) => i.habilitado !== undefined && i.habilitado !== false && i.habilitado !== null && (countries[userDB && userDB !== undefined ? userDB.cca3 : 'BOL']?.divisasPaisRemitente.includes(i.code) || i.cca3 === userDB?.cca3) && <li className='w-full  h-[50px] flex justify-start items-center px-10' key={index} onClick={(e) => handlerUserSelect(e, i)}>
+              {/* <span className="inline-block w-[30px]"><CurrencyFlag currency={i.code} size="lg" /></span> */}
+              <span className="inline-block  h-[20px] "><img src={i.flagPNG} className="inline-block w-[30px] h-[20px]" alt="" /></span>
+              <span className="pl-5 "> {i.code}, {i.currency}</span>
+            </li>)
+          }
         </ul>
       </div>
 

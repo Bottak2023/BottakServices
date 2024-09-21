@@ -4,10 +4,10 @@ import React, { useState, useEffect } from "react";
 import { useUser } from '@/context/Context'
 import { writeUserData, getSpecificData } from "@/firebase/database"
 
-export default function App({ propIsSelect, propHandlerIsSelect, operation, click, arr}) {
+export default function App({ propIsSelect, propHandlerIsSelect, operation, click, arr, bg}) {
     const { countries } = useUser()
     const [countrie, setCountrie] = useState(undefined)
-    const [select, setSelect] = useState('Seleccionar')
+    const [select, setSelect] = useState('Seleccionar Banco')
     const [flag, setFlag] = useState('')
 
     function handlerUserSelect(e, i) {
@@ -22,7 +22,7 @@ export default function App({ propIsSelect, propHandlerIsSelect, operation, clic
     }
 
     return (
-        <div className={`relative w-full sm:max-w-[380px] bg-transparent border border-gray-300 text-gray-900 text-[14px] rounded-xl focus:ring-blue-500 focus:border-blue-500 block p-0 `} >
+        <div className={`relative w-full sm:max-w-[380px] ${bg ? bg:'bg-transparent'} border border-gray-300 text-gray-900 text-[14px] rounded-xl focus:ring-blue-500 focus:border-blue-500 block p-0 `} >
             <div className='relative w-full bg-transparent flex justify-between items-center'>
                 <span className=" w-full text-gray-100 p-3 " onClick={(e) => handlerIsSelect(e)}>{select}</span>
                 <span className='w-[auto] flex items-center rounded-[20px] '><img src={flag} className="max-w-[50px] h-[30px]" alt="" /></span>

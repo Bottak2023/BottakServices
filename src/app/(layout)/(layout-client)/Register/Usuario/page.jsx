@@ -12,7 +12,6 @@ import Button from '@/components/Button'
 import { useMask } from '@react-input/mask';
 import { useRouter } from 'next/navigation';
 import { WithAuth } from '@/HOCs/WithAuth'
-import SelectBank from '@/components/SelectBank'
 
 function Home() {
     const { user, userDB, setUserData, setUserSuccess, select3, setSelect3, isSelect3, setIsSelect3, isSelect4, setIsSelect4, image1, setImage1, image2, setImage2, image3, transferencia, countries, setCountries, modal, setModal } = useUser()
@@ -37,7 +36,7 @@ function Home() {
     }
     function save(e) {
         e.preventDefault()
-        const data = { ...state, image1, image2, image3, rol: 'Cliente', uuid: user.uid, habilitado: true, bloqueado: false }
+        const data = { ...state, image1, image2, image3, rol: 'Cliente', uuid: user.uid, habilitado: false, bloqueado: false }
         setModal('Guardando...')
         const callback = () => {
             getSpecificData(`/users/${user.uid}`, setUserData)

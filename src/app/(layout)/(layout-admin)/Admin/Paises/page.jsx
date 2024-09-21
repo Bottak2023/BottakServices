@@ -108,9 +108,9 @@ export default function Home() {
       setRouteCountry(null)
     }
     const callback = () => {
-      uploadStorage(`currencies/${routeCountry.cca3}/countries/${e.target[3].value}`, postImageQR, { banco: e.target[3].value, ['cta bancaria']: e.target[4].value, dominio : e.target[5].value  }, callback2, 'qrURL')
+      uploadStorage(`currencies/${routeCountry.cca3}/countries/${e.target[3].value}`, postImageQR, { banco: e.target[3].value, ['cta bancaria']: e.target[4].value, dominio: e.target[5].value }, callback2, 'qrURL')
     }
-    uploadStorage(`currencies/${routeCountry.cca3}/countries/${e.target[3].value}`, postImageBank, { banco: e.target[3].value, ['cta bancaria']: e.target[4].value, dominio : e.target[5].value }, callback)
+    uploadStorage(`currencies/${routeCountry.cca3}/countries/${e.target[3].value}`, postImageBank, { banco: e.target[3].value, ['cta bancaria']: e.target[4].value, dominio: e.target[5].value }, callback)
   }
   function manageInputIMGbank(e, name) {
     const file = e.target.files[0]
@@ -155,7 +155,7 @@ export default function Home() {
   return (
     <main className='h-full w-full'>
       {modal === 'Guardando...' && <Loader> {modal} </Loader>}
-      {modal === 'Save' && <Modal funcion={saveConfirm}>Estas por modificar los datos de:  {item['currency']}</Modal>}
+      {modal === 'Save' && <Modal funcion={saveConfirm}>Estas por modificar los datos de la siguiente divisa:  {item['currency'].toUpperCase()}</Modal>}
       {modal === 'recepcion' && <Modal funcion={() => disableConfirm('recepcion')}>Estas por {item.recepcion !== undefined && item.recepcion !== false ? 'DESABILITAR' : 'HABILITAR'} la RECEPCIÓN para el siguiente pais:  {item['currency']}</Modal>}
       {modal === 'envio' && <Modal funcion={() => disableConfirm('envio')}>Estas por {item.envio !== undefined && item.envio !== false ? 'DESABILITAR' : 'HABILITAR'} el ENVIO para el siguiente pais:   {item['currency']}</Modal>}
       {modal === 'DELETE' && bankDB !== null && <Modal theme="Danger" button="Eliminar" funcion={deletConfirmBank}>Estas por eliminar al siguiente banco:  {bankDB['banco']}</Modal>}
@@ -169,7 +169,7 @@ export default function Home() {
         <input type="text" className='border-b-[1px] text-[14px] outline-none w-[400px]' onChange={onChangeFilter} placeholder='Buscar Divisa' />
         <br />
         <br />
-        <table className="w-full overflow-visible min-w-[1800px]  text-[14px] text-left text-gray-500 border-t-4 border-gray-400" >
+        <table className="w-full overflow-visible min-w-[2000px]  text-[14px] text-left text-gray-500 border-t-4 border-gray-400" >
           {/* <table className="relative w-full overflow-scroll max-w-[800px] h-[50px]  text-[14px] text-left text-gray-500 border-t-4 border-gray-400"> */}
           <thead className="text-[14px] text-gray-700 uppercase bg-white">
             <tr>
@@ -192,17 +192,23 @@ export default function Home() {
               <th scope="col" className="text-center px-3 py-3">
                 QR de cobro
               </th> */}
-                 <th scope="col" className="text-center px-3 py-3">
+              <th scope="col" className="text-center px-3 py-3">
                 Bancos admitidos
               </th>
               <th scope="col" className="text-center px-3 py-3">
-               Agregar banco
+                Agregar banco
               </th>
               <th scope="col" className="text-center px-3 py-3">
                 Recepción
               </th>
               <th scope="col" className="text-center px-3 py-3">
                 Envio
+              </th>
+              <th scope="col" className="text-center px-3 py-3">
+                Divisas Remitente
+              </th>
+              <th scope="col" className="text-center px-3 py-3">
+                Divisas Receptor
               </th>
               <th scope="col" className="text-center px-3 py-3">
                 Guardar
@@ -233,9 +239,9 @@ export default function Home() {
                     <input id={`img${index}`} type="file" onChange={(e) => manageInputIMG(e, i.cca3)} className='hidden' accept='image/*' />
                   </label>
                 </td> */}
-                <td className="w-[500px] px-3 py-4 text-gray-900 ">
+                <td className="w-[600px] px-3 py-4 text-gray-900 ">
                   {i.countries !== undefined && Object.values(i.countries).map((e, index) => <div className='flex items-center justify-between border-b-[1px] border-gray-400 py-2'>
-                    <img src={e.url} className='w-[30px]' alt="Subir QR" /> 
+                    <img src={e.url} className='w-[30px]' alt="Subir QR" />
                     <img src={e.qrURL} className='w-[30px]' alt="Subir QR" />
                     <span className='inline-block  pl-[10px]'>{e.banco}</span>
                     <span className='inline-block  pl-[10px]'>{e['cta bancaria']}</span>
@@ -245,23 +251,28 @@ export default function Home() {
                     </svg>
                   </div>)}
                 </td>
-                <td className="px-3 py-4">
-                    <Button theme={"Success"} click={() => handlerAddBank(i)}>Agregar Banco</Button>
-
+                <td className="w-[50px] px-3 py-4">
+                  <Button theme={"Success"} click={() => handlerAddBank(i)}>Agregar Banco</Button>
                 </td>
-                <td className="px-3 py-4">
+                <td className="w-[50px] px-3 py-4">
                   {i.recepcion !== undefined && i.recepcion !== false
                     ? <Button theme={"Success"} click={() => manage(i, 'Desabilitar', 'recepcion')}>Habilitado</Button>
                     : <Button theme={"Danger"} click={() => manage(i, 'Habilitar', 'recepcion')}>Desabilitado</Button>
                   }
                 </td>
-                <td className="px-3 py-4">
+                <td className="w-[50px] px-3 py-4">
                   {i.envio !== undefined && i.envio !== false
                     ? <Button theme={"Success"} click={() => manage(i, 'Desabilitar', 'envio')}>Habilitado</Button>
                     : <Button theme={"Danger"} click={() => manage(i, 'Habilitar', 'envio')}>Desabilitado</Button>
                   }
                 </td>
-                <td className="px-3 py-4">
+                <td className="w-[200px] p-4">
+                  <input type="text" name="divisasPaisRemitente" className='w-[200px]  p-2 outline-blue-200 rounded-xl' onChange={(e) => onChangeHandler(e, i)} defaultValue={i['divisasPaisRemitente'] !== undefined ? i['divisasPaisRemitente'] : 'Ninguna...'} />
+                </td>
+                <td className="w-[200px] p-4">
+                  <input type="text" name="divisasPaisDestinatario" className='w-[200px]  p-2 outline-blue-200 rounded-xl' onChange={(e) => onChangeHandler(e, i)} defaultValue={i['divisasPaisDestinatario'] !== undefined ? i['divisasPaisDestinatario'] : 'Ninguna...'} />
+                </td>
+                <td className="w-[50px] px-3 py-4">
                   {(state && state[i.cca3] !== undefined) || (postImage && postImage[i.cca3] !== undefined)
                     ? <Button theme={"Success"} click={() => save(i)}>Guardar</Button>
                     : <Button theme={"Disable"} >Disable</Button>

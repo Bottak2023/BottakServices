@@ -54,10 +54,21 @@ export default function RootLayout({ children }) {
                 Esta cuenta esta bloqueada, <br />por favor comuniquese con soporte.<br />
             </Modal> : ''
             }
-            { modal === 'INFO: No habilitado' &&userDB && userDB.habilitado === false ? <ModalINFO cancel={signOutHandler} close={true} theme='Success' cancelText="Cerrar sesión">
+            {modal === 'INFO: No habilitado' && userDB && userDB.habilitado === false ? <ModalINFO cancel={signOutHandler} close={true} theme='Success' cancelText="Cerrar sesión">
                 Felicidades su cuenta esta en VERFICACIÓN, le rogamos paciencia hasta que nuestros agentes validen sus datos.<br />
             </ModalINFO> : ''
             }
+
+            {modal === 'INFO: Tu pais no puede hacer envio de divisa, solo recepeciones, lo sentimos...'  ? <ModalINFO cancel={signOutHandler} close={true} theme='Danger' cancelText="Cerrar sesión">
+                {modal}<br />
+            </ModalINFO> : ''
+            }
+
+            {modal === 'INFO: Tu pais no esta habilitado para transaccionar, lo sentimos...'? <ModalINFO cancel={signOutHandler} close={true} theme='Danger' cancelText="Cerrar sesión">
+                {modal}<br />
+            </ModalINFO> : ''
+            }
+
             <Navbar />
             <div className={`relative  w-screen px-[20px]  pt-[80px] pb-[30px] md:pb-0 flex items-center min-h-full   ${nav ? 'left-[100vw] sm:left-[250px]' : 'left-0'} ${userNav ? 'top-[70px]' : 'top-0'}`} style={{ transition: 'all .02s linear' }} onClick={mainHandler}>
                 {children}
