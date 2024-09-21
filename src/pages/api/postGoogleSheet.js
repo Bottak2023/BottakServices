@@ -5,7 +5,7 @@ export default async function handler(req, res) {
   console.log(req.body)
   if (req.method === 'POST') {
     // URL del Google Apps Script (reemplaza con tu propia URL)
-    const url = 'https://script.google.com/macros/s/AKfycbxPajHUWbK6Ipe34dH_lQRXCxtTWgx8Pk_UpCDNiPr0QXibn_x-JSRZL03IKelVVZSB/exec';
+    const url = 'https://script.google.com/macros/s/AKfycbziMsevo_Ajf1SWp-lu5Qj-HLpVlZ3JA3deQdEkwPpYa1BwtV6c7yELbdMVT-Oy9xdZ/exec';
     try {
       // Realiza la solicitud POST
       const response = await fetch(url, {
