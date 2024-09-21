@@ -75,7 +75,7 @@ function Home() {
 
     useEffect(() => {
         users === undefined && getSpecificData(`/users/`, setUsers)
-    }, [users])
+    })
 
     return (
         <main className='w-full h-full'>
