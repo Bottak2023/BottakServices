@@ -67,17 +67,29 @@ export default function App({ placeholder, value, onChange, propHandlerSelect, p
 
       <div className={`absolute left-0 top-10 bg-gray-100 flex flex-col justify-start items-center  text-gray-900 text-[14px] rounded-b-xl focus:ring-blue-500 focus:outline-blue-500 w-full  z-30  transition-all ${propIsSelect ? 'h-[150px] outline outline-1 outline-gray-300 overflow-y-auto ' : 'h-0 overflow-y-hidden'}`} >
         <ul className="inline-block w-full">
+<<<<<<< HEAD
           {value && divisas !== undefined
+=======
+          {value && divisas !== undefined 
+>>>>>>> 5a7cf0831aa5fe92fee51673c38044eb9accb447
             ? Object.values(divisas).map((i, index) => i.habilitado !== undefined && i.habilitado !== false && i.habilitado !== null && <li className='w-full  h-[50px] flex justify-start items-center px-10' key={index} onClick={(e) => handlerUserSelect(e, i)}>
               {/* <span className="inline-block w-[30px]"><CurrencyFlag currency={i.code} size="lg" /></span> */}
               <span className="inline-block  h-[20px] "><img src={i.flagPNG} className="inline-block w-[30px] h-[20px]" alt="" /></span>
               <span className="pl-5 "> {i.code}, {i.currency}</span>
             </li>)
+<<<<<<< HEAD
             : Object.values(divisas).map((i, index) => i.habilitado !== undefined && i.habilitado !== false && i.habilitado !== null && (countries[userDB && userDB !== undefined ? userDB.cca3 : 'BOL']?.divisasPaisRemitente.includes(i.code) || i.cca3 === userDB?.cca3) && <li className='w-full  h-[50px] flex justify-start items-center px-10' key={index} onClick={(e) => handlerUserSelect(e, i)}>
+=======
+            : Object.values(divisas).map((i, index) => i.habilitado !== undefined && i.habilitado !== false && i.habilitado !== null && <li className='w-full  h-[50px] flex justify-start items-center px-10' key={index} onClick={(e) => handlerUserSelect(e, i)}>
+>>>>>>> 5a7cf0831aa5fe92fee51673c38044eb9accb447
               {/* <span className="inline-block w-[30px]"><CurrencyFlag currency={i.code} size="lg" /></span> */}
               <span className="inline-block  h-[20px] "><img src={i.flagPNG} className="inline-block w-[30px] h-[20px]" alt="" /></span>
               <span className="pl-5 "> {i.code}, {i.currency}</span>
             </li>)
+<<<<<<< HEAD
+=======
+          
+>>>>>>> 5a7cf0831aa5fe92fee51673c38044eb9accb447
           }
         </ul>
       </div>

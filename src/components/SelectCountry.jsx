@@ -33,8 +33,13 @@ export default function App({ propIsSelect, propHandlerIsSelect, click }) {
                 <span className='w-[auto] flex items-center rounded-[20px] '><img src={flag} className="max-w-[50px] h-[30px]" alt="" /></span>
                 <span className={propIsSelect ? 'text-white text-center w-[10%] right-5 rotate-[270deg] p-3 ' : 'text-white text-center w-[10%] right-5 rotate-90 p-3 '} onClick={(e) => handlerIsSelect(e)}>{'>'}</span>
             </div>
+<<<<<<< HEAD
             {propIsSelect === false && operation === 'recepcion' && countrie && countrie !== undefined && countrie.translation.spa.common === selectC && countrie['recepcion'] !== true && <span className=" inline-block text-green-400 text-[14px] font-light p-3">{countrie.translation.spa.common} esta habilitado unicamente para envio de dinero</span>}
             {propIsSelect === false && operation === 'envio' && countrie && countrie !== undefined && countrie.translation.spa.common === selectC && countrie['envio'] !== true && <span className=" inline-block text-green-400 text-[14px] font-light p-3">{countrie.translation.spa.common} esta habilitado unicamente para recepciones de dinero</span>}
+=======
+            {propIsSelect === false && operation === 'recepcion' && countrie && countrie !== undefined && countrie.translation.spa.common === select && countrie['recepcion'] !== true && <span className=" inline-block text-green-400 text-[14px] font-light p-3">{countrie.translation.spa.common} esta habilitado unicamente para envio de dinero</span>}
+            {propIsSelect === false && operation === 'recepcion' && countrie && countrie !== undefined && countrie.translation.spa.common === select && countrie['envio'] !== true && <span className=" inline-block text-green-400 text-[14px] font-light p-3">{countrie.translation.spa.common} esta habilitado unicamente para recepciones de dinero</span>}
+>>>>>>> 5a7cf0831aa5fe92fee51673c38044eb9accb447
             <div className={`absolute left-0 top-10 bg-gray-100 flex flex-col justify-start items-center  text-gray-900 text-[14px] rounded-b-xl focus:ring-blue-500 focus:outline-blue-500 w-full   z-30 overflow-y-auto transition-all ${propIsSelect ? 'h-[150px] outline outline-1 outline-gray-300' : 'h-0 overflow-y-hidden'}`} >
                 <ul className="inline-block w-full">
                     {pathname === '/Register/Destinatario'
