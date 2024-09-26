@@ -113,9 +113,7 @@ export default function Home() {
                             <th scope="col" className=" px-3 py-3">
                                 QR
                             </th>
-                            <th scope="col" className="px-3 py-3">
-                                Banco
-                            </th>
+                           
                             <th scope="col" className="text-center px-3 py-3">
                                 Enviar
                             </th>
@@ -143,7 +141,7 @@ export default function Home() {
                                     {/* <input type="text" name="celular" className='min-w-[100px] text-center p-2 outline-blue-200 rounded-xl' onChange={(e) => onChangeHandler(e, i)} defaultValue={i['celular'] !== undefined ? i['celular'] : 0} /> */}
                                 </td>
                                 <td className="w-32 p-3">
-                                {i['cuenta de billetera']}
+                                {i['direccion de billetera']}
                                     {/* <input type="text" name="cuenta destinatario" className='min-w-[100px] text-center p-2 outline-blue-200 rounded-xl' onChange={(e) => onChangeHandler(e, i)} defaultValue={i['cuenta destinatario'] !== undefined ? i['cuenta destinatario'] : 0} /> */}
                                 </td>
                                 <td className="w-32 p-3">
