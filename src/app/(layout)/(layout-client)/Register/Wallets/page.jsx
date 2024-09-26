@@ -89,7 +89,7 @@ function Home() {
              
                 <div className=' space-y-5'>
                     <Label htmlFor="">Red</Label>
-                    <Select name="pais" defaul={Object.values(wallets).map(i => i.network)[0]} arr={Object.values(wallets).map(i => i.network)} click={handlerSelect} uuid='123312'/>
+                    <Select name="red" defaul={Object.values(wallets).map(i => i.network)[0]} arr={Object.values(wallets).map(i => i.network)} click={handlerSelect} uuid='123312'/>
                 </div>
                 <div className=' space-y-5'>
                     <Label htmlFor="">Direccion de billtera o QR</Label>

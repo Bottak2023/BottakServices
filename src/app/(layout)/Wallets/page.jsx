@@ -101,17 +101,17 @@ export default function Home() {
                             <th scope="col" className="px-3 py-3">
                                 DNI
                             </th>
-                            <th scope="col" className=" px-3 py-3">
-                                Pais
-                            </th>
-                            <th scope="col" className=" px-3 py-3">
-                                Dirección
-                            </th>
                             <th scope="col" className="px-3 py-3">
                                 Celular
                             </th>
                             <th scope="col" className=" px-3 py-3">
-                                Nro de cuenta
+                                Dirección de billetera
+                            </th>
+                            <th scope="col" className="px-3 py-3">
+                                Red
+                            </th>
+                            <th scope="col" className=" px-3 py-3">
+                                QR
                             </th>
                             <th scope="col" className="px-3 py-3">
                                 Banco
@@ -131,32 +131,28 @@ export default function Home() {
                                     <span className='h-full flex py-2'>{index + 1}</span>
                                 </td>
                                 <td className="px-3 py-4 text-gray-900 ">
-                                    {i['destinatario']}
+                                    {userDB.nombre}  {userDB.apellido}
                                 </td>
-                                <td className="w-32 p-3">
-                                {i['dni']}
+                                <td className=" p-3">
+                                {userDB.dni}
                                     {/* <input type="text" name="dni" className='min-w-[100px] text-center p-2 outline-blue-200 rounded-xl' onChange={(e) => onChangeHandler(e, i)} defaultValue={i['dni'] !== undefined ? i['dni'] : 0} /> */}
                                 </td>
-                                <td className="w-32 p-3">
-                                {i['pais']}
-                                    {/* <input type="text" name="pais" className='min-w-[100px] text-left p-2 outline-blue-200 rounded-xl' onChange={(e) => onChangeHandler(e, i)} defaultValue={i['pais'] !== undefined ? i['pais'] : 0} /> */}
-                                </td>
-                                <td className="w-32 p-3">
-                                {i['direccion']}
-                                    {/* <input type="text" name="direccion" className='min-w-[100px] text-left p-2 outline-blue-200 rounded-xl' onChange={(e) => onChangeHandler(e, i)} defaultValue={i['direccion'] !== undefined ? i['direccion'] : 0} /> */}
-                                </td>
-                                <td className="w-32 p-3">
-                                {i['celular']}
+                                
+                                <td className=" p-3">
+                                {userDB.whatsapp}
                                     {/* <input type="text" name="celular" className='min-w-[100px] text-center p-2 outline-blue-200 rounded-xl' onChange={(e) => onChangeHandler(e, i)} defaultValue={i['celular'] !== undefined ? i['celular'] : 0} /> */}
                                 </td>
                                 <td className="w-32 p-3">
-                                {i['cuenta destinatario']}
+                                {i['cuenta de billetera']}
                                     {/* <input type="text" name="cuenta destinatario" className='min-w-[100px] text-center p-2 outline-blue-200 rounded-xl' onChange={(e) => onChangeHandler(e, i)} defaultValue={i['cuenta destinatario'] !== undefined ? i['cuenta destinatario'] : 0} /> */}
                                 </td>
                                 <td className="w-32 p-3">
-                                {i['nombre de banco']}
+                                {i['red']}
                                     {/* <input type="text" name="nombre de banco" className='min-w-[100px] text-center p-2 outline-blue-200 rounded-xl' onChange={(e) => onChangeHandler(e, i)} defaultValue={i['nombre de banco'] !== undefined ? i['nombre de banco'] : 0} /> */}
                                 </td>
+                                <td className="w-32 p-4">
+                                        <img src={i.url} className={`h-[100px] w-[100px]`} onClick={() => handlerProfileIMG(i.image3)} alt="Apple Watch" />
+                                    </td>
                                 <td className="px-3 py-4 w-32 text-center">
                                     <Button theme={"Success"} click={() => save(i)}>Continuar</Button>
                                 </td>
