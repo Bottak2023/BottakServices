@@ -10,8 +10,6 @@ import dynamic from 'next/dynamic'
 import Confeti from '@/components/Confeti';
 import QRCode from "qrcode.react";
 import { useSearchParams } from 'next/navigation'
-import jsPDF from 'jspdf';
-import html2canvas from 'html2canvas';
 import { PDFDownloadLink } from '@react-pdf/renderer'
 const InvoicePDF = dynamic(() => import("@/components/PDFprint"), {
     ssr: false,
