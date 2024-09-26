@@ -65,7 +65,7 @@ function Home() {
         const destinatarioDB = {["direccion de billetera"]: Object.values(wallets).map(i => i.network)[0], ...destinatario, uuid, operacion: pathname ? pathname : destinatario.operacion }
         setModal('Guardando...')
         const callback = () => {
-            redirectHandler('/Confirm', destinatarioDB)
+            redirectHandler( pathname === 'Cambio' ?'/ConfirmCambio':'/Confirm', destinatarioDB)
             setModal('')
         }
         
