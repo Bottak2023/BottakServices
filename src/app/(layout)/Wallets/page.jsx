@@ -38,7 +38,7 @@ export default function Home() {
     // }
     function save(i) {
         setDestinatario({ ...i, ...state, operacion: pathname })
-        router.push('/Confirm/')
+        router.push('/ConfirmCambio/')
     }
     function redirect() {
         setDestinatario({ operacion: pathname })
