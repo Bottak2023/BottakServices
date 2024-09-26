@@ -112,13 +112,21 @@ function Page() {
         setModal('INFO: Tu pais no esta habilitado para transaccionar, lo sentimos...')
         return
       }
-
-      if (user && userDB) {
-        userDB.destinatarios && userDB.destinatarios !== undefined && Object.keys(userDB.destinatarios).length > 0
+      if (divisas?.[select2]?.currency === 'Crypto') {
+        userDB.wallets && userDB.wallets !== undefined && Object.keys(userDB.wallets).length > 0
+          ? router.push('/Wallets?operacion=Envio')
+          : router.push('Register/Wallets?operacion=Envio')
+      } else {
+        user && userDB && userDB.bancos && userDB.bancos !== undefined && Object.keys(userDB.bancos).length > 0
           ? router.push('/Destinatarios?operacion=Envio')
-          : router.push('/Register/Destinatario?operacion=Envio')
-        return
+          : router.push('Register/Destinatario?operacion=Envio')
       }
+      // if (user && userDB) {
+      //   userDB.destinatarios && userDB.destinatarios !== undefined && Object.keys(userDB.destinatarios).length > 0
+      //     ? router.push('/Destinatarios?operacion=Envio')
+      //     : router.push('/Register/Destinatario?operacion=Envio')
+      //   return
+      // }
     }
     const handlerRedirect = (rute) => {
       router.push(rute)

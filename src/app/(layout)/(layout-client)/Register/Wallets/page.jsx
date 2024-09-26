@@ -56,24 +56,35 @@ function Home() {
         router.replace(route)
     }
     function handlerSelect(name, i, uuid) {
-        setDestinatario({ ...destinatario,  [name]: i })
-      }
+        setDestinatario({ ...destinatario, [name]: i })
+    }
     function save(e) {
         e.preventDefault()
         e.stopPropagation()
 
         const uuid = generateUUID()
-        const destinatarioDB = {["direccion de billetera"]: Object.values(wallets).map(i => i.network)[0], ...destinatario, uuid, operacion: pathname ? pathname : destinatario.operacion }
+        const destinatarioDB = { ["direccion de billetera"]: Object.values(wallets).map(i => i.network)[0], ...destinatario, uuid, operacion: pathname ? pathname : destinatario.operacion }
         setModal('Guardando...')
         const callback = () => {
-            redirectHandler( pathname === 'Cambio' ?'/ConfirmCambio':'/Confirm', destinatarioDB)
+            redirectHandler(pathname === 'Cambio' ? '/ConfirmCambio' : '/Confirm', destinatarioDB)
             setModal('')
         }
-        
-        
-        postImage !== undefined 
-        ? uploadStorage(`users/${user.uid}/wallets/${uuid}`, postImage,  { ...destinatario, uuid }, callback)
-        : writeUserData(`users/${user.uid}/wallets/${uuid}`, { ...destinatario, uuid }, setUserSuccess, callback)
+
+        if (pathname === 'Cambio') {
+            postImage !== undefined
+                ? uploadStorage(`users/${user.uid}/wallets/${uuid}`, postImage, { ...destinatario, uuid }, callback)
+                : writeUserData(`users/${user.uid}/wallets/${uuid}`, { ...destinatario, uuid }, setUserSuccess, callback)
+
+        }
+
+
+        if (pathname === 'Envio') {
+            postImage !== undefined
+                ? uploadStorage(`users/${user.uid}/destinatarioWallets/${uuid}`, postImage, { ...destinatario, uuid }, callback)
+                : writeUserData(`users/${user.uid}/destinatarioWallets/${uuid}`, { ...destinatario, uuid }, setUserSuccess, callback)
+
+        }
+
     }
 
 
@@ -86,10 +97,39 @@ function Home() {
                 <div className='w-full border-b-[2px] border-gray-100 col-span-2'>
                     <h3 className=' pb-3 text-white  text-right'>Registrar nuevo Wallet</h3>
                 </div>
-             
+
+           {pathname === 'Envio'  &&     <div>
+                    <div className=' space-y-5'>
+                        <Label htmlFor="">Nombre</Label>
+                        <Input type="text" name="destinatario" onChange={onChangeHandler} required />
+                    </div>
+                    <div className=' space-y-5'>
+                        <Label htmlFor="">DNI</Label>
+                        <Input type="text" name="dni" onChange={onChangeHandler} required />
+                    </div>
+                    <div className=' space-y-5'>
+                        <Label htmlFor="">Pais</Label>
+                        <SelectCountry name="pais" propHandlerIsSelect={handlerIsSelect} propIsSelect={isSelect3} operation="envio" click={handlerCountrySelect} />
+
+
+
+                    </div>
+                    <div className=' space-y-5'>
+                        <Label htmlFor="">Dirección</Label>
+                        <Input type="text" name="direccion" onChange={onChangeHandler} required />
+                    </div>
+                    <div className=' space-y-5'>
+                        <Label htmlFor="">Numero de celular</Label>
+                        <Input type="text" name="celular" onChange={onChangeHandler} required />
+                    </div>
+                </div>}
+
+
+
+
                 <div className=' space-y-5'>
                     <Label htmlFor="">Red</Label>
-                    <Select name="red" defaul={Object.values(wallets).map(i => i.network)[0]} arr={Object.values(wallets).map(i => i.network)} click={handlerSelect} uuid='123312'/>
+                    <Select name="red" defaul={Object.values(wallets).map(i => i.network)[0]} arr={Object.values(wallets).map(i => i.network)} click={handlerSelect} uuid='123312' />
                 </div>
                 <div className=' space-y-5'>
                     <Label htmlFor="">Direccion de billtera o QR</Label>
