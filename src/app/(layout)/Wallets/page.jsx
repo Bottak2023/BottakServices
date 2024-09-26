@@ -85,7 +85,7 @@ export default function Home() {
                 <h3 className='font-medium text-[14px]'>Destinatarios</h3>
                 <br />
                 <div className="w-[405px] grid grid-cols-2 gap-[5px]" >
-                    <input type="text" className='border-b-[1px] text-[14px] text-black outline-none w-[200px]' onChange={onChangeFilter} placeholder='Buscar Destinatario' />
+                    {/* <input type="text" className='border-b-[1px] text-[14px] text-black outline-none w-[200px]' onChange={onChangeFilter} placeholder='Buscar Destinatario' /> */}
                     <button className='w-[200px] flex justify-center items-center h-[40px] text-white text-[14px] font-medium bg-[#32CD32] border border-gray-200 rounded-[10px] px-5 cursor-pointer' onClick={redirect}>Nuevo destinatario</button>
                 </div>
                 <br />
@@ -125,8 +125,8 @@ export default function Home() {
                         </tr>
                     </thead>
                     <tbody>
-                        {userDB && userDB !== undefined && userDB.destinatarios && userDB.destinatarios !== undefined && Object.values(userDB.destinatarios).map((i, index) => {
-                            return i.destinatario.toLowerCase().includes(filter.toLowerCase()) && <tr className={`text-[14px] border-b hover:bg-gray-100  ${index % 2 === 0 ? 'bg-gray-100' : 'bg-gray-100'} `} key={index}>
+                        {userDB && userDB !== undefined && userDB.wallets && userDB.wallets !== undefined && Object.values(userDB.wallets).map((i, index) => {
+                            return <tr className={`text-[14px] border-b hover:bg-gray-100  ${index % 2 === 0 ? 'bg-gray-100' : 'bg-gray-100'} `} key={index}>
                                 <td className="px-3 py-4  flex text-gray-900 ">
                                     <span className='h-full flex py-2'>{index + 1}</span>
                                 </td>
