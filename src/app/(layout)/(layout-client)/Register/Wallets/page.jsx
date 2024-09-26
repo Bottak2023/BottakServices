@@ -35,7 +35,21 @@ function Home() {
         setDestinatario({ ...destinatario, [e.target.name]: e.target.value })
     }
 
-
+    const handlerCountrySelect = (i, cca3) => {
+        const obj = {...destinatario}
+        delete obj['nombre de banco']
+        setDestinatario({...obj, ['pais']: i}) 
+        setCca3(cca3)
+    }
+    const handlerBankSelect = (i) => {
+        setDestinatario({ ...destinatario, ['nombre de banco']: i })
+    }
+    const handlerIsSelect = () => {
+        setIsSelect3(!isSelect3)
+    }
+    const handlerIsSelect4 = () => {
+        setIsSelect4(!isSelect4)
+    }
     function manageInputIMG(e) {
         const file = e.target.files[0]
         setPostImage(file)
@@ -73,7 +87,7 @@ function Home() {
         if (pathname === 'Cambio') {
             postImage !== undefined
                 ? uploadStorage(`users/${user.uid}/wallets/${uuid}`, postImage, { ...destinatario, uuid }, callback)
-                : writeUserData(`users/${user.uid}/wallets/${uuid}`, { ...destinatario, uuid }, setUserSuccess, callback)
+                : writeUserData(`users/${user.uid}/wallets/${uuid}`, { red: Object.values(wallets).map(i => i.network)[0], ...destinatario, uuid }, setUserSuccess, callback)
 
         }
 
@@ -81,7 +95,7 @@ function Home() {
         if (pathname === 'Envio') {
             postImage !== undefined
                 ? uploadStorage(`users/${user.uid}/destinatarioWallets/${uuid}`, postImage, { ...destinatario, uuid }, callback)
-                : writeUserData(`users/${user.uid}/destinatarioWallets/${uuid}`, { ...destinatario, uuid }, setUserSuccess, callback)
+                : writeUserData(`users/${user.uid}/destinatarioWallets/${uuid}`, { red: Object.values(wallets).map(i => i.network)[0], ...destinatario, uuid }, setUserSuccess, callback)
 
         }
 
