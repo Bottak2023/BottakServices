@@ -123,7 +123,51 @@ export default function Home() {
                         </tr>
                     </thead>
                     <tbody>
-                        {userDB && userDB !== undefined && userDB.wallets && userDB.wallets !== undefined && Object.values(userDB.wallets).map((i, index) => {
+                        {pathname === 'Envio' &&userDB && userDB !== undefined && userDB.DestinatarioWallets && userDB.DestinatarioWallets !== undefined && Object.values(userDB.wallets).map((i, index) => {
+                            return <tr className={`text-[14px] border-b hover:bg-gray-100  ${index % 2 === 0 ? 'bg-gray-100' : 'bg-gray-100'} `} key={index}>
+                                <td className="px-3 py-4  flex text-gray-900 ">
+                                    <span className='h-full flex py-2'>{index + 1}</span>
+                                </td>
+                                <td className="px-3 py-4 text-gray-900 ">
+                                    {i['destinatario']}
+                                </td>
+                                <td className="w-32 p-3">
+                                {i['dni']}
+                                    {/* <input type="text" name="dni" className='min-w-[100px] text-center p-2 outline-blue-200 rounded-xl' onChange={(e) => onChangeHandler(e, i)} defaultValue={i['dni'] !== undefined ? i['dni'] : 0} /> */}
+                                </td>
+                                <td className="w-32 p-3">
+                                {i['pais']}
+                                    {/* <input type="text" name="pais" className='min-w-[100px] text-left p-2 outline-blue-200 rounded-xl' onChange={(e) => onChangeHandler(e, i)} defaultValue={i['pais'] !== undefined ? i['pais'] : 0} /> */}
+                                </td>
+                                <td className="w-32 p-3">
+                                {i['direccion']}
+                                    {/* <input type="text" name="direccion" className='min-w-[100px] text-left p-2 outline-blue-200 rounded-xl' onChange={(e) => onChangeHandler(e, i)} defaultValue={i['direccion'] !== undefined ? i['direccion'] : 0} /> */}
+                                </td>
+                                <td className="w-32 p-3">
+                                {i['celular']}
+                                    {/* <input type="text" name="celular" className='min-w-[100px] text-center p-2 outline-blue-200 rounded-xl' onChange={(e) => onChangeHandler(e, i)} defaultValue={i['celular'] !== undefined ? i['celular'] : 0} /> */}
+                                </td>
+                                <td className="w-32 p-3">
+                                {i['direccion de billetera']}
+                                    {/* <input type="text" name="cuenta destinatario" className='min-w-[100px] text-center p-2 outline-blue-200 rounded-xl' onChange={(e) => onChangeHandler(e, i)} defaultValue={i['cuenta destinatario'] !== undefined ? i['cuenta destinatario'] : 0} /> */}
+                                </td>
+                                <td className="w-32 p-3">
+                                {i['red']}
+                                    {/* <input type="text" name="nombre de banco" className='min-w-[100px] text-center p-2 outline-blue-200 rounded-xl' onChange={(e) => onChangeHandler(e, i)} defaultValue={i['nombre de banco'] !== undefined ? i['nombre de banco'] : 0} /> */}
+                                </td>
+                                <td className="w-32 p-4">
+                                        <img src={i.url} className={`h-[100px] w-[100px]`} onClick={() => handlerProfileIMG(i.image3)} alt="Apple Watch" />
+                                    </td>
+                                <td className="px-3 py-4 w-32 text-center">
+                                    <Button theme={"Success"} click={() => save(i)}>Continuar</Button>
+                                </td>
+                                {/* <td className="px-3 py-4 ">
+                                    <Button theme={"Danger"} click={() => manage(i, 'DELETE')}>Eliminar</Button>
+                                </td> */}
+                            </tr>
+                        })
+                        }
+                               {pathname === 'Cambio' &&userDB && userDB !== undefined && userDB.wallets && userDB.wallets !== undefined && Object.values(userDB.wallets).map((i, index) => {
                             return <tr className={`text-[14px] border-b hover:bg-gray-100  ${index % 2 === 0 ? 'bg-gray-100' : 'bg-gray-100'} `} key={index}>
                                 <td className="px-3 py-4  flex text-gray-900 ">
                                     <span className='h-full flex py-2'>{index + 1}</span>
