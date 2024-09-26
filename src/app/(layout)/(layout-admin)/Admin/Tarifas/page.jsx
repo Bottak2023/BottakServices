@@ -617,7 +617,7 @@ export default function Home() {
 
 
 
-        <h3 className='font-medium text-[14px]'>Lista De Cambios</h3>
+        <h3 className='font-medium text-[14px]'>Lista De Divisas, Tipo De Cambio y Comisiones</h3>
         <br />
         <div className=' space-y-5 lg:space-y-0 lg:grid grid-cols-2 gap-2'>
           <input type="text" className='border-b-[1px] text-[14px] outline-none w-[400px] text-black' onChange={onChangeFilter} placeholder='Buscar Divisa' />
@@ -630,7 +630,7 @@ export default function Home() {
 
         <br />
         <br />
-        <table className="w-full overflow-visible min-w-[1500px]  text-[14px] text-left text-gray-500 border-t-4 border-gray-400" style={{ minWidth: '1500px' }}>
+        <table className="w-full overflow-visible  text-[14px] text-left text-gray-500 border-t-4 border-gray-400" style={{ minWidth: '2000px' }}>
           {/* <table className="relative w-full overflow-scroll max-w-[800px] h-[50px]  text-[14px] text-left text-gray-500 border-t-4 border-gray-400"> */}
           <thead className="text-[14px] text-gray-700 uppercase bg-white">
             <tr>
@@ -725,7 +725,7 @@ export default function Home() {
                   <input type="number" name="transAmount" className='w-[100px] text-center p-2 outline-blue-200 rounded-xl' onChange={(e) => onChangeHandler(e, i)} value={state[i.code] && state[i.code].transAmount ? state[i.code].transAmount : (i['transAmount'] !== undefined ? i['transAmount'] : '')} />
                 </td>
 
-                <td className="w-32 p-4">
+                <td className="w-[170px] p-4">
                   <Button theme={"Success"} click={() => getExchage(i)}>Get & Apply</Button>
                 </td>
 

@@ -83,7 +83,7 @@ export default function TextEditor({ value, setValue, edit }) {
     useEffect(() => {
         setIsLoading(true)
     }, []);
-    return isLoading && <div className='bg-white z-50'>
+    return isLoading && <div className='bg-white z-50 ql-editor'>
    
         {
             edit

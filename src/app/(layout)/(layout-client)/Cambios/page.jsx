@@ -13,7 +13,7 @@ import { WithAuth } from '@/HOCs/WithAuth'
 import { useRouter, usePathname } from 'next/navigation';
 
 export default function Home() {
-  const { nav, setNav, user, userDB, setUserProfile, select, setSelect, select2, setSelect2, isSelect, setIsSelect, isSelect2, setIsSelect2, state, setState, setUserSuccess, success, setUserData, postsIMG, setUserPostsIMG, modal, setModal, setTransferencia, transferencia, divisas, setDivisas } = useUser()
+  const { nav, setNav, user, userDB, setUserProfile, comision, select, setSelect, select2, setSelect2, isSelect, setIsSelect, isSelect2, setIsSelect2, state, setState, setUserSuccess, success, setUserData, postsIMG, setUserPostsIMG, modal, setModal, setTransferencia, transferencia, divisas, setDivisas } = useUser()
   const pathname = usePathname()
   const router = useRouter()
 
@@ -92,10 +92,20 @@ export default function Home() {
       return
     }
 
-    user && userDB
-      ? router.push('/ConfirmCambio?operacion=Cambio')
-      : router.push('/Register/Destinatario?operacion=Cambio')
+    if (divisas?.[select2]?.currency === 'Crypto') {
+      userDB.wallets && userDB.wallets !== undefined && Object.keys(userDB.wallets).length > 0
+        ? router.push('/Wallets?operacion=Cambio')
+        : router.push('Register/Wallets?operacion=Cambio')
+    } else {
+      user && userDB && userDB.bancos && userDB.bancos !== undefined && Object.keys(userDB.bancos).length > 0
+        ? router.push('/Bancos?operacion=Cambio')
+        : router.push('Register/Bancos?operacion=Cambio')
+    }
+
   }
+
+  console.log(divisas[select2].currency === 'Crypto')
+
   useEffect(() => {
     if (user === undefined) onAuth(setUserProfile, setUserData)
     user && userDB === undefined && getSpecificData(`/users/${user.uid}`, setUserData)
@@ -121,10 +131,18 @@ export default function Home() {
         {/* <h3 className='text-[greenyellow] text-[14px] font-light'>Solo disponible para Bolivia</h3> */}
 
         <div className="relative flex justify-between  w-[100%] sm:max-w-[350px] py-1 ">
-          <span className="bg-transparent w-1/2 py-1 border-[1px] border-gray-200 text-gray-200 text-center">{divisas && divisas !== undefined && divisas[select] && divisas[select] !== undefined && select && select !== undefined && (divisas[select].venta / divisas[select].venta).toFixed(2)} {select}</span>
-          <button className='absolute left-0 right-0 top-0 bottom-0 m-auto bg-[yellow] rounded-full w-[50px] h-[50px]'></button>
-          <span className="bg-gray-200 w-1/2 py-1 border-[1px] border-gray-200 text-center">{divisas && divisas !== undefined && divisas[select2] && divisas[select2] !== undefined && select2 && select2 !== undefined && (divisas[select2].venta / divisas[select].venta).toFixed(2)} {select2}</span>
+          <span className="bg-transparent w-1/2 py-1 border-[1px] border-gray-200 text-gray-200 text-center">
+            {divisas && divisas !== undefined && divisas[select2] && divisas[select2] !== undefined && select2 && select2 !== undefined && (divisas[select2].venta / divisas[select2].venta).toFixed(2)} {select2}
+          </span>
+          <button className='absolute left-0 right-0 top-0 bottom-0 m-auto bg-[yellow] rounded-full w-[50px] h-[50px]'>
+            <svg xmlns="http://www.w3.org/2000/svg" className='w-full text-gray-800' viewBox="0 0 24 24"><defs><filter id="IconifyId1921c44ec09dd769a112"><feGaussianBlur in="SourceGraphic" result="y" stdDeviation="1" /><feColorMatrix in="y" result="z" values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 18 -7" /><feBlend in="SourceGraphic" in2="z" /></filter></defs><g filter="url(#IconifyId1921c44ec09dd769a112)"><circle cx="5" cy="12" r="4" fill="currentColor"><animate attributeName="cx" calcMode="spline" dur="2s" keySplines=".36,.62,.43,.99;.79,0,.58,.57" repeatCount="indefinite" values="5;8;5" /></circle><circle cx="19" cy="12" r="4" fill="currentColor"><animate attributeName="cx" calcMode="spline" dur="2s" keySplines=".36,.62,.43,.99;.79,0,.58,.57" repeatCount="indefinite" values="19;16;19" /></circle><animateTransform attributeName="transform" dur="0.75s" repeatCount="indefinite" type="rotate" values="0 12 12;360 12 12" /></g></svg>
+          </button>
+          <span className="bg-gray-200 w-1/2 py-1 border-[1px] border-gray-200 text-center text-gray-900 font-medium">
+            {divisas && divisas !== undefined && divisas[select] && divisas[select] !== undefined && select && select !== undefined && (divisas[select].compra / divisas[select2].compra).toFixed(2)} {select}
+          </span>
         </div>
+
+
         <SelectCambio onChange="Transference" placeholder='Monto a cambiar' propHandlerSelect={handlerSelect} propSelect={select} propHandlerIsSelect={handlerIsSelect} propIsSelect={isSelect} defaultValue={transferencia} />
         <span className='text-[#FFF500] text-[14px] font-light'>Cambiar a:</span>
         <SelectCambio value={true} propHandlerSelect={handlerSelect2} propSelect={select2} propHandlerIsSelect={handlerIsSelect2} propIsSelect={isSelect2} />
@@ -132,9 +150,19 @@ export default function Home() {
         <div className="">
           <div className='grid grid-cols-2 gap-[15px]'>
             <span className='text-white text-[14px] font-light'>Tasa de cambio </span>
-            <span className='text-white text-[14px] font-light'>{divisas && divisas !== undefined && divisas[select2] && divisas[select2] !== undefined && select2 && select2 !== undefined && (divisas[select2].venta / divisas[select2].venta).toFixed(2)} {select2} = {divisas && divisas !== undefined && divisas[select] && divisas[select] !== undefined && select && select !== undefined && (divisas[select].venta / divisas[select2].venta).toFixed(2)} {select}</span>
+            <span className='text-white text-[14px] font-light'>
+              {divisas && divisas !== undefined && divisas[select2] && divisas[select2] !== undefined && select2 && select2 !== undefined && (divisas[select2].venta / divisas[select2].venta).toFixed(2)} {select2}
+              =
+              {divisas && divisas !== undefined && divisas[select] && divisas[select] !== undefined && select && select !== undefined && (divisas[select].compra / divisas[select2].compra).toFixed(2)} {select}
+            </span>
           </div>
           <div className='grid grid-cols-2 gap-[15px]'>
+            <span className='text-white text-[14px] font-light'>Comisiones</span>
+            <span className='text-white text-[14px] font-light'>
+              {comision} {select}
+            </span>
+          </div>
+          {/* <div className='grid grid-cols-2 gap-[15px]'>
             <span className='text-white text-[14px] font-light'>Comisiones</span>
             <span className='text-white text-[14px] font-light'>
               {(divisas && divisas[select] && divisas[select2] && (transferencia * divisas['USDT'].compra / divisas[select].venta).toFixed(2)) <= 1000 && divisas[select]['tarifa 1'] + ' ' + select}
@@ -142,7 +170,7 @@ export default function Home() {
               {(divisas && divisas[select] && divisas[select2] && (transferencia * divisas['USDT'].compra / divisas[select].venta).toFixed(2)) <= 100000 && (divisas && divisas[select] && divisas[select2] && (transferencia * divisas['USDT'].compra / divisas[select].venta).toFixed(2)) > 10000 && divisas[select]['tarifa 3'] + ' ' + select}
               {(divisas && divisas[select] && divisas[select2] && (transferencia * divisas['USDT'].compra / divisas[select].venta).toFixed(2)) > 100000 && 'CONTACTESE CON SOPORTE'}
             </span>
-          </div>
+          </div> */}
           <a className='flex justify-center text-[14px] text-white bg-transaparent border-[1px] border-yellow-300 rounded-[5px] px-2 py-2 max-w-[250px] lg:hidden' href="/bottak.apk" download>
             <svg className='pr-[5px]' width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M3.93933 17.086C2.90095 17.0866 2.0572 16.2417 2.05702 15.2035L2.05664 9.43999C2.05627 8.40274 2.89983 7.55805 3.93689 7.55786C4.44108 7.55749 4.9132 7.75305 5.26908 8.10855C5.62495 8.46405 5.8207 8.93692 5.82108 9.43961L5.82052 15.2034C5.82182 15.4505 5.77389 15.6953 5.67954 15.9237C5.58518 16.1521 5.44628 16.3594 5.27095 16.5335C5.09667 16.7092 4.8892 16.8486 4.6606 16.9434C4.432 17.0383 4.18683 17.0868 3.93933 17.086ZM3.93783 8.06355C3.17789 8.06317 2.56195 8.68061 2.56177 9.43999L2.5627 15.203C2.56265 15.5682 2.70761 15.9184 2.96572 16.1768C3.22382 16.4351 3.57395 16.5804 3.93914 16.5807C4.11998 16.5808 4.29905 16.5451 4.46611 16.4759C4.63317 16.4067 4.78495 16.3052 4.91275 16.1772C5.04055 16.0493 5.14188 15.8974 5.21094 15.7303C5.27999 15.5631 5.31543 15.384 5.3152 15.2032V9.43924C5.31481 9.07421 5.16951 8.72428 4.91124 8.46632C4.65297 8.20837 4.30285 8.0635 3.93783 8.06355Z" fill="white" />

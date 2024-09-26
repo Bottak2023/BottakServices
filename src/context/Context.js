@@ -16,6 +16,7 @@ export function UserProvider({ children }) {
 	const [exchange, setExchange] = useState(undefined)
 	const [destinatario, setDestinatario] = useState(undefined)
 	const [destinatarios, setDestinatarios] = useState(undefined)
+	const [wallets, setWallets] = useState(undefined)
 
 	const [enviosDB, setEnviosDB] = useState(undefined)
 	const [cambiosDB, setCambiosDB] = useState(undefined)
@@ -125,7 +126,7 @@ export function UserProvider({ children }) {
 			enviosDB, setEnviosDB,
 			cambiosDB, setCambiosDB,
 			setQRurl, 
-
+			wallets, setWallets,
 			setDestinatario,
 			setUsers,
 			setSelect,
@@ -146,7 +147,7 @@ export function UserProvider({ children }) {
 		fecha, qr, QRurl, divisas, envios,
 		webScann,
 		filter,
-		filterQR, exchange, countries, destinatarios, transactionDB, navItem, comision,
+		filterQR, exchange, countries, destinatarios, transactionDB, navItem, comision,wallets,
 		enviosDB,
 		cambiosDB,time_stamp,
 		notificaciones])

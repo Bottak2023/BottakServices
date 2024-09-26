@@ -8,7 +8,6 @@ import { useState, useEffect } from 'react'
 import { getSpecificData, writeUserData } from '@/firebase/database'
 import { useSearchParams } from 'next/navigation'
 import { generateUUID } from '@/utils/UUIDgenerator'
-import style from '@/components/ModatMSG.module.css'
 
 export default function Modal({ children, theme, button, funcion, alert }) {
     const { nav, setNav, user, userDB, setUserProfile, state, setState, modal, setUserSuccess, setModal } = useUser()
@@ -40,7 +39,7 @@ export default function Modal({ children, theme, button, funcion, alert }) {
             <h3 className='text-center py-10'>Notificaciòn</h3>
             <p>Para: {cliente && cliente !== undefined && cliente.nombre}</p>
             <div className=" text-center">
-                <div className={style.editor}>
+                <div>
                     <TextEditor setValue={handlerTextEditorOnChange} value={textEditor ? textEditor : 'nada'} edit={true} />
                 </div>
                 <br />

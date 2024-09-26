@@ -15,6 +15,8 @@ import { useRouter } from 'next/navigation';
 
 import { WithAuth } from '@/HOCs/WithAuth'
 import { useEffect, useState, useRef } from 'react'
+// import Loader from '@/components/Intro'
+import Loader from '@/components/Loader'
 
 function Home() {
     const { user, userDB, users, setUsers, setUserProfile, setUserSuccess, success, setUserData, postsIMG, setUserPostsIMG, item, setItem, modal, setModal } = useUser()
@@ -73,12 +75,15 @@ function Home() {
         });
     };
 
+    console.log(user)
+
     useEffect(() => {
-        users === undefined && getSpecificData(`/users/`, setUsers)
-    })
+      getSpecificData(`/users/`, setUsers)
+    },[])
 
     return (
         <main className='w-full h-full'>
+            {users === undefined && <Loader/>}
             {profileIMG.length > 0 && <div className='fixed top-0 left-0 h-[100vh] w-[100vw] bg-[#000000c7] z-40' onClick={closeProfileIMG}></div>}
             {modal === 'DELETE' && <Modal theme="Danger" button="Eliminar" funcion={deletConfirm}>Estas por eliminar al siguiente usuario:  {item['nombre']}</Modal>}
             {modal === 'HABILITAR' && <Modal theme="Primary" button="Habilitar" funcion={() => handlerUpdate('habilitado', true)}>Estas por HABILITAR al siguiente usuario:  {item['nombre']}</Modal>}
@@ -90,7 +95,7 @@ function Home() {
             <div className="w-full   relative h-full overflow-auto shadow-2xl p-5 bg-white min-h-[80vh] scroll-smooth" ref={refFirst}>
                 <h3 className='font-medium text-[14px]'>Lista De Usuarios</h3>
                 <br />
-                <input type="text" className='border-b-[1px] text-[14px] outline-none w-[400px]' onChange={onChangeHandler} placeholder='Buscar Usuario por nombre o DNI' />
+                <input type="text" className='border-b-[1px] text-[14px] outline-none w-[400px] text-black' onChange={onChangeHandler} placeholder='Buscar Usuario por nombre o DNI' />
                 <br />
                 <br />
                 <table className="w-full min-w-[1900px] border-[1px] bg-white text-[14px] text-left text-gray-500 border-t-4 border-t-gray-400">
@@ -126,9 +131,9 @@ function Home() {
                             <th scope="col" className="px-8 py-3 text-center">
                                 WhatsApp
                             </th>
-                            <th scope="col" className="px-8 py-3 text-center">
+                            {/* <th scope="col" className="px-8 py-3 text-center">
                                 Notificar
-                            </th>
+                            </th> */}
                             <th scope="col" className="text-center px-3 py-3 ">
                                 Habilitar
                             </th>
@@ -150,6 +155,7 @@ function Home() {
                                     <td className="min-w-[200px] px-3 py-4 font-semibold text-gray-900 ">
                                         {i['nombre']} <br />
                                         <span className='text-[10px]'>{i.uuid}</span>
+                                        <span className='text-[10px]'>{i.email}</span>
                                     </td>
                                     <td className="min-w-[200px] px-3 py-4 font-semibold text-gray-900 ">
                                         {i['apellido']}
@@ -198,10 +204,9 @@ function Home() {
                                             </span>
                                         </div>
                                     </td>
-                                    <td className="px-3 py-4 ">
+                                    {/* <td className="px-3 py-4 ">
                                             <Button theme={"Success"} click={() => router.push(`/Admin/Notificar?uuid=${i.uuid}`)}>Notificar</Button>
-                                 
-                                    </td>
+                                    </td> */}
                                     <td className="px-3 py-4 ">
                                         {(i['habilitado'] === undefined || i['habilitado'] === false)
                                             ? <Button theme={"Danger"} click={() => manage(i, 'HABILITAR')}>Desabilitado</Button>
@@ -222,7 +227,6 @@ function Home() {
                         }
                     </tbody>
                 </table>
-                {success == 'Cargando' && <LoaderBlack />}
             </div>
         </main>
     )

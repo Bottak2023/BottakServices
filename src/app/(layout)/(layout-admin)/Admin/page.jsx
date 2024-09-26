@@ -20,12 +20,12 @@ const cardsDB = [
     url: '/Admin/Cambios',
   },
   {
-    title: 'Tarifas y comisiones',
+    title: 'Divisas y Tarifas',
     img: '/tarifas.png',
     url: '/Admin/Tarifas',
   },
   {
-    title: 'Paises',
+    title: 'Paises, Bancos y Wallets',
     img: '/paises.png',
     url: '/Admin/Paises',
   },
@@ -39,7 +39,7 @@ const cardsDB = [
 function Card({i}) {
   
   return <Link href={i.url} >
-    <div className='w-full sm:min-w-[300px] sm:max-w-[500px] bg-[#7700ff] flex flex-col justify-center items-center rounded-[20px] p-5 mb-[40px] md:mb-0'>
+    <div className='w-full sm:min-w-[300px] sm:max-w-[500px] bg-[#00000086] border border-[#6b6d13b4] flex flex-col justify-center items-center rounded-[20px] p-5 mb-[40px] md:mb-0'>
       <img src={i.img} className='block h-[100px] mb-5' alt={i.title} />
       <Button theme='Primary' >{i.title}</Button>
     </div>

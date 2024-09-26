@@ -342,7 +342,7 @@ export default function Navbar({ children }) {
                 {((enviosDB && enviosDB !== undefined) || (cambiosDB && cambiosDB !== undefined)) && Object.values(enviosDB && enviosDB !== undefined && cambiosDB && cambiosDB !== undefined ? { ...enviosDB, ...cambiosDB } : (enviosDB && enviosDB !== undefined ? enviosDB : (cambiosDB && cambiosDB !== undefined ? cambiosDB : {}))).filter((i) => i.notificaciones !== undefined && i.notificaciones === true).length > 0 ? <ul> {Object.values({ ...enviosDB, ...cambiosDB }).filter((i) => i.notificaciones !== undefined && i.notificaciones === true).sort((a, b) => b.date - a.date).map((i, index) => {
                     return <li className='relative pb-4 pt-2 pr-5 border-b-[1px] border-gray-300 text-black' >
                         <span className='w-full pr-[10px]'>Tu {i.operacion} de dinero de
-                            <b> {i['divisa de envio']} {i.importe}</b>  {i.destinatario !== undefined ? `a ${i.destinatario}, ` : ''}
+                            <b> {i['divisa de envio']} {i['importe neto']}</b>  {i.destinatario !== undefined ? `a ${i.destinatario}, ` : ''}
                             {i.estado == 'En verificación' && <span className={` text-black`}>esta en verificación.</span>}
                             {i.estado == 'Verificado' && <span className={` text-black  bg-blue-100`}>esta VERIFICADO, la transaferencia esta apunto de realizarse.</span>}
                             {i.estado == 'Transfiriendo' && <span className={` text-black  bg-yellow-100`}>'ya se esta transfiriendo.</span>}

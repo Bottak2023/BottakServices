@@ -11,7 +11,7 @@ import { getSpecificData, getSpecificDataEq, listenToSpecificDataEq } from '@/fi
 
 export default function RootLayout({ children }) {
 
-    const { user, userDB, setUserProfile, modal, nav, setNav, userNav, setNavItem, setUserData, divisas, setDivisas, setCountries, setEnviosDB, setCambiosDB, setNotificaciones, setIsSelect, setIsSelect2, setIsSelect3, setIsSelect4, setIsSelect5 } = useUser()
+    const { user, userDB, setUserProfile, modal, nav, setNav, userNav, setNavItem, setWallets, setUserData, divisas, setDivisas, setCountries, setEnviosDB, setCambiosDB, setNotificaciones, setIsSelect, setIsSelect2, setIsSelect3, setIsSelect4, setIsSelect5 } = useUser()
     const router = useRouter()
 
 
@@ -41,6 +41,7 @@ export default function RootLayout({ children }) {
         onAuth(setUserProfile, setUserData)
         getSpecificData('divisas', setDivisas)
         getSpecificData(`/currencies/`, setCountries)
+        getSpecificData(`/wallets/`, setWallets)
     }, [])
     useEffect(() => {
         user && userDB === undefined && getSpecificData(`/users/${user.uid}`, setUserData)
