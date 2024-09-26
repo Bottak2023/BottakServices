@@ -6,6 +6,7 @@ import Input from '@/components/Input'
 import SelectCountry from '@/components/SelectCountry'
 import SelectBank from '@/components/SelectBank'
 import Select from '@/components/Select'
+import { uploadStorage, downloadFile } from '@/firebase/storage'
 
 import Label from '@/components/Label'
 import Loader from '@/components/Loader'
