@@ -85,9 +85,7 @@ function Home() {
                 <div className='w-full border-b-[2px] border-gray-100 col-span-2'>
                     <h3 className=' pb-3 text-white  text-right'>Registrar nuevo Wallet</h3>
                 </div>
-                <div className='lg:hidden'>
-                    <h3 className='text-center pb-3  text-green-400 lg:hidden'>Informacion personal</h3>
-                </div>
+             
                 <div className=' space-y-5'>
                     <Label htmlFor="">Red</Label>
                     <Select name="pais" defaul={Object.values(wallets).map(i => i.network)[0]} arr={Object.values(wallets).map(i => i.network)} click={handlerSelect} uuid='123312'/>
