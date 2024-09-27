@@ -22,7 +22,7 @@ import { getSpecificDataEq, getSpecificData2, writeUserData, removeData } from '
 import Link from 'next/link'
 function Home() {
 
-    const { nav, setNav, user, userDB, setUserProfile, select, wallets, setDestinatario, success, setUserData, postsIMG, setUserPostsIMG, isSelect3, setIsSelect3, isSelect4, setIsSelect4, modal, setModal, destinatario, qr, setQr, QRurl, setQRurl, countries, setEnviosDB, setCambiosDB, setIsSelect5, isSelect5 } = useUser()
+    const { nav, setNav, user, userDB, setUserProfile, select,select2, wallets, setDestinatario, success, setUserData, postsIMG, setUserPostsIMG, isSelect3, setIsSelect3, isSelect4, setIsSelect4, modal, setModal, destinatario, qr, setQr, QRurl, setQRurl, countries, setEnviosDB, setCambiosDB, setIsSelect5, isSelect5 } = useUser()
     const router = useRouter()
 
     const [postImage, setPostImage] = useState(undefined)
@@ -447,7 +447,7 @@ function Home() {
                         {/* verifique sus datos de transaccion a continuación oprima Verificar Transacción */}
                     </div>}
                     {/* {destinatario !== undefined && destinatario['banco de transferencia'] !== undefined &&  */}
-                    {select !== 'USDT'
+                    {select2 === 'USDT'
                         ? <div className=' space-y-5'>
                             {/* <Label htmlFor="">QR bancario para el deposito</Label> */}
 

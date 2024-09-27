@@ -116,7 +116,8 @@ function Home() {
                                 </td>
                                 <td className="px-2 py-2  text-gray-900  border-r border-[#00000040]">
                                     {destinatario['nombre de banco'] && destinatario['nombre de banco']}
-                                    {destinatario['red'] && destinatario['red']}
+                                    {destinatario['red'] && destinatario['red']}cccccdxvvv
+                                    {destinatario['red'] && destinatario['red']}cccccdx
                                 </td>
                             </tr>
                             <tr className=" text-[14px] border-b border-[#00000040] hover:bg-gray-50 " >
