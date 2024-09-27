@@ -452,7 +452,7 @@ function Home() {
                             {/* <Label htmlFor="">QR bancario para el deposito</Label> */}
 
                             <div className=' space-y-5'>
-                                <SelectWallet name="nombre de banco" propHandlerIsSelect={handlerIsSelect4} bg='bg-gray-800' propIsSelect={isSelect4} operation="envio" click={handlerBankSelect} arr={wallets ? Object.values(wallets) : []} />
+                            <SelectBank name="nombre de banco" propHandlerIsSelect={handlerIsSelect4} bg='bg-gray-800' propIsSelect={isSelect4} operation="envio" click={handlerBankSelect} arr={countries[userDB.cca3].countries !== undefined ? Object.values(countries[userDB.cca3].countries) : []} />
                             </div>
                             <Link href='#' className="w-full flex flex-col justify-center items-center" download >
                                 <label className="relative flex flex-col justify-start items-center w-[300px] min-h-[300px] h-auto bg-white border border-gray-300 text-gray-900 text-[12px]  focus:ring-blue-500 focus:border-blue-500 rounded-[10px]" >
