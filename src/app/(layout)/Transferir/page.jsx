@@ -447,7 +447,7 @@ function Home() {
                         {/* verifique sus datos de transaccion a continuación oprima Verificar Transacción */}
                     </div>}
                     {/* {destinatario !== undefined && destinatario['banco de transferencia'] !== undefined &&  */}
-                    {select2 === 'USDT'
+                    {select2 !== 'USDT'
                         ? <div className=' space-y-5'>
                             {/* <Label htmlFor="">QR bancario para el deposito</Label> */}
 
