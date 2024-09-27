@@ -38,7 +38,9 @@ export default function Home() {
     // }
     function save(i) {
         setDestinatario({ ...i, ...state, operacion: pathname })
-        router.push('/ConfirmCambio/')
+        pathname === 'Cambio'
+         ?router.push('/ConfirmCambio/')
+         :router.push('/Confirm/')
     }
     function redirect() {
         setDestinatario({ operacion: pathname })
@@ -89,8 +91,8 @@ export default function Home() {
                     <button className='w-[200px] flex justify-center items-center h-[40px] text-white text-[14px] font-medium bg-[#32CD32] border border-gray-200 rounded-[10px] px-5 cursor-pointer' onClick={redirect}>Nuevo destinatario</button>
                 </div>
                 <br />
-                <table className="w-full min-w-[1000px] border-[1px] bg-white text-[14px] text-left text-gray-500 ">
-                    <thead className="text-[14px] text-white uppercase bg-gray-800">
+                <table className={`w-full ${pathname === 'Envio' ? 'min-w-[1500px]' : 'min-w-[1000px]'} border-[1px] bg-white text-[14px] text-left text-gray-500 `}>
+                    {pathname === 'Cambio' && <thead className="text-[14px] text-white uppercase bg-gray-800">
                         <tr>
                             <th scope="col" className="w-[50px] px-3 py-3">
                                 #
@@ -113,7 +115,7 @@ export default function Home() {
                             <th scope="col" className=" px-3 py-3">
                                 QR
                             </th>
-                           
+
                             <th scope="col" className="text-center px-3 py-3">
                                 Enviar
                             </th>
@@ -121,9 +123,46 @@ export default function Home() {
                                 Eliminar
                             </th> */}
                         </tr>
-                    </thead>
+                    </thead>}
+                    {pathname === 'Envio' && <thead className="text-[14px] text-white uppercase bg-gray-800">
+                        <tr>
+                            <th scope="col" className="w-[50px] px-3 py-3">
+                                #
+                            </th>
+                            <th scope="col" className=" px-3 py-3">
+                                Nombre
+                            </th>
+                            <th scope="col" className="px-3 py-3">
+                                DNI
+                            </th>
+                            <th scope="col" className=" px-3 py-3">
+                                Pais
+                            </th>
+                            <th scope="col" className=" px-3 py-3">
+                                Dirección
+                            </th>
+                            <th scope="col" className="px-3 py-3">
+                                Celular
+                            </th>
+                            <th scope="col" className=" px-3 py-3">
+                                Direccion de billetera
+                            </th>
+                            <th scope="col" className="px-3 py-3">
+                                Red
+                            </th>
+                            <th scope="col" className="px-3 py-3">
+                                QR
+                            </th>
+                            <th scope="col" className="text-center px-3 py-3">
+                                Enviar
+                            </th>
+                            {/* <th scope="col" className="text-center px-3 py-3">
+                                Eliminar
+                            </th> */}
+                        </tr>
+                    </thead>}
                     <tbody>
-                        {pathname === 'Envio' &&userDB && userDB !== undefined && userDB.DestinatarioWallets && userDB.DestinatarioWallets !== undefined && Object.values(userDB.wallets).map((i, index) => {
+                        {pathname === 'Envio' && userDB && userDB !== undefined && userDB.destinatarioWallets && userDB.destinatarioWallets !== undefined && Object.values(userDB.destinatarioWallets).map((i, index) => {
                             return <tr className={`text-[14px] border-b hover:bg-gray-100  ${index % 2 === 0 ? 'bg-gray-100' : 'bg-gray-100'} `} key={index}>
                                 <td className="px-3 py-4  flex text-gray-900 ">
                                     <span className='h-full flex py-2'>{index + 1}</span>
@@ -132,32 +171,32 @@ export default function Home() {
                                     {i['destinatario']}
                                 </td>
                                 <td className="w-32 p-3">
-                                {i['dni']}
+                                    {i['dni']}
                                     {/* <input type="text" name="dni" className='min-w-[100px] text-center p-2 outline-blue-200 rounded-xl' onChange={(e) => onChangeHandler(e, i)} defaultValue={i['dni'] !== undefined ? i['dni'] : 0} /> */}
                                 </td>
                                 <td className="w-32 p-3">
-                                {i['pais']}
+                                    {i['pais']}
                                     {/* <input type="text" name="pais" className='min-w-[100px] text-left p-2 outline-blue-200 rounded-xl' onChange={(e) => onChangeHandler(e, i)} defaultValue={i['pais'] !== undefined ? i['pais'] : 0} /> */}
                                 </td>
                                 <td className="w-32 p-3">
-                                {i['direccion']}
+                                    {i['direccion']}
                                     {/* <input type="text" name="direccion" className='min-w-[100px] text-left p-2 outline-blue-200 rounded-xl' onChange={(e) => onChangeHandler(e, i)} defaultValue={i['direccion'] !== undefined ? i['direccion'] : 0} /> */}
                                 </td>
                                 <td className="w-32 p-3">
-                                {i['celular']}
+                                    {i['celular']}
                                     {/* <input type="text" name="celular" className='min-w-[100px] text-center p-2 outline-blue-200 rounded-xl' onChange={(e) => onChangeHandler(e, i)} defaultValue={i['celular'] !== undefined ? i['celular'] : 0} /> */}
                                 </td>
-                                <td className="w-32 p-3">
-                                {i['direccion de billetera']}
+                                <td className=" p-3">
+                                    {i['direccion de billetera']}
                                     {/* <input type="text" name="cuenta destinatario" className='min-w-[100px] text-center p-2 outline-blue-200 rounded-xl' onChange={(e) => onChangeHandler(e, i)} defaultValue={i['cuenta destinatario'] !== undefined ? i['cuenta destinatario'] : 0} /> */}
                                 </td>
                                 <td className="w-32 p-3">
-                                {i['red']}
+                                    {i['red']}
                                     {/* <input type="text" name="nombre de banco" className='min-w-[100px] text-center p-2 outline-blue-200 rounded-xl' onChange={(e) => onChangeHandler(e, i)} defaultValue={i['nombre de banco'] !== undefined ? i['nombre de banco'] : 0} /> */}
                                 </td>
-                                <td className="w-32 p-4">
-                                        <img src={i.url} className={`h-[100px] w-[100px]`} onClick={() => handlerProfileIMG(i.image3)} alt="Apple Watch" />
-                                    </td>
+                                <td className="w-[150px] p-4">
+                                    <img src={i.url} className={`h-[100px] w-[100px]`} onClick={() => handlerProfileIMG(i.image3)} alt="Apple Watch" />
+                                </td>
                                 <td className="px-3 py-4 w-32 text-center">
                                     <Button theme={"Success"} click={() => save(i)}>Continuar</Button>
                                 </td>
@@ -167,7 +206,7 @@ export default function Home() {
                             </tr>
                         })
                         }
-                               {pathname === 'Cambio' &&userDB && userDB !== undefined && userDB.wallets && userDB.wallets !== undefined && Object.values(userDB.wallets).map((i, index) => {
+                        {pathname === 'Cambio' && userDB && userDB !== undefined && userDB.wallets && userDB.wallets !== undefined && Object.values(userDB.wallets).map((i, index) => {
                             return <tr className={`text-[14px] border-b hover:bg-gray-100  ${index % 2 === 0 ? 'bg-gray-100' : 'bg-gray-100'} `} key={index}>
                                 <td className="px-3 py-4  flex text-gray-900 ">
                                     <span className='h-full flex py-2'>{index + 1}</span>
@@ -176,25 +215,25 @@ export default function Home() {
                                     {userDB.nombre}  {userDB.apellido}
                                 </td>
                                 <td className=" p-3">
-                                {userDB.dni}
+                                    {userDB.dni}
                                     {/* <input type="text" name="dni" className='min-w-[100px] text-center p-2 outline-blue-200 rounded-xl' onChange={(e) => onChangeHandler(e, i)} defaultValue={i['dni'] !== undefined ? i['dni'] : 0} /> */}
                                 </td>
-                                
+
                                 <td className=" p-3">
-                                {userDB.whatsapp}
+                                    {userDB.whatsapp}
                                     {/* <input type="text" name="celular" className='min-w-[100px] text-center p-2 outline-blue-200 rounded-xl' onChange={(e) => onChangeHandler(e, i)} defaultValue={i['celular'] !== undefined ? i['celular'] : 0} /> */}
                                 </td>
                                 <td className="w-32 p-3">
-                                {i['direccion de billetera']}
+                                    {i['direccion de billetera']}
                                     {/* <input type="text" name="cuenta destinatario" className='min-w-[100px] text-center p-2 outline-blue-200 rounded-xl' onChange={(e) => onChangeHandler(e, i)} defaultValue={i['cuenta destinatario'] !== undefined ? i['cuenta destinatario'] : 0} /> */}
                                 </td>
                                 <td className="w-32 p-3">
-                                {i['red']}
+                                    {i['red']}
                                     {/* <input type="text" name="nombre de banco" className='min-w-[100px] text-center p-2 outline-blue-200 rounded-xl' onChange={(e) => onChangeHandler(e, i)} defaultValue={i['nombre de banco'] !== undefined ? i['nombre de banco'] : 0} /> */}
                                 </td>
                                 <td className="w-32 p-4">
-                                        <img src={i.url} className={`h-[100px] w-[100px]`} onClick={() => handlerProfileIMG(i.image3)} alt="Apple Watch" />
-                                    </td>
+                                    <img src={i.url} className={`h-[100px] w-[100px]`} onClick={() => handlerProfileIMG(i.image3)} alt="Apple Watch" />
+                                </td>
                                 <td className="px-3 py-4 w-32 text-center">
                                     <Button theme={"Success"} click={() => save(i)}>Continuar</Button>
                                 </td>

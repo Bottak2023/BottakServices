@@ -49,7 +49,7 @@ export default function handler(req, res) {
             await transporter.sendMail({
                 from: 'info.bottak@gmail.com',
                 to: req.body.email,
-                subject: ` Reporte de transaccion: estado: ${req.body.estado}`,
+                subject: ` Reporte de ${req.body.operacion}: ${req.body.estado}`,
                 // text: req.body.data,
                 html: req.body.data,
 

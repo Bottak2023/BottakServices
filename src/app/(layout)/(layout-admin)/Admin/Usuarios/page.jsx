@@ -99,7 +99,7 @@ function Home() {
                 <br />
                 <br />
                 <table className="w-full min-w-[1900px] border-[1px] bg-white text-[14px] text-left text-gray-500 border-t-4 border-t-gray-400">
-                    <thead className="text-[14px] text-gray-700 uppercase bg-gray-50  ">
+                    <thead className="text-[14px] text-gray-700 uppercase bg-gray-800 text-white  ">
                         <tr>
                             <th scope="col" className="px-3 py-3">
                                 #
@@ -148,7 +148,7 @@ function Home() {
                     <tbody>
                         {users && users !== undefined && Object.values(users).map((i, index) => {
                             return (i['nombre'].toLowerCase().includes(filter.toLowerCase()) || i['dni'].toLowerCase().includes(filter.toLowerCase())) &&
-                                <tr className="bg-white text-[14px] border-b   hover:bg-gray-50 " key={index}>
+                                <tr className="text-[14px] border-b   border-gray-50 bg-gray-200 " key={index}>
                                     <td className="px-3 py-4  flex font-semibold text-gray-900 ">
                                         <span className='h-full flex py-2'>{index + 1}</span>
                                     </td>

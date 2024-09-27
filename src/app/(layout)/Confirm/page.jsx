@@ -124,7 +124,7 @@ function Home() {
                             </tr>
                             <tr className=" text-[14px]  border-b border-[#00000040] hover:bg-gray-50 " >
                                 <td className="px-2 py-2 bg-[#00000020]   font-bold  text-gray-900 ">
-                                    {destinatario['direccion de billetera'] ? 'direccion de billetera' : 'Cuenta de destinatario'}
+                                    {destinatario['direccion de billetera'] ? 'Direccion de billetera' : 'Cuenta de destinatario'}
                                 </td>
                                 <td className="px-2 py-2  text-gray-900  border-r border-[#00000040]">
                                     {destinatario['cuenta destinatario'] && destinatario['cuenta destinatario']}

@@ -70,42 +70,73 @@ function Home() {
     console.log(QRurl)
 
 
-    const datosEnvio =transactionDB
-    ? {
-        'DATOS DE REMITENTE': {
-            Nombre: transactionDB['remitente'],
-            Dni: transactionDB['dni remitente'],
-            Pais: transactionDB['pais remitente'],
-            Wanco: transactionDB['banco remitente'],
-            'Nombre Banco': transactionDB['nombre de banco'],
-            'Cuenta Bancaria': transactionDB['cuenta bancaria'],
-            'Divisa Envio': transactionDB['divisa de envio']
-        },
-        'DATOS DE DESTINATARIO': {
-            Nombre: transactionDB['destinatario'],
-            Dni: transactionDB['dni'],
-            Pais: transactionDB['pais'],
-            Direccion: transactionDB['direccion'],
-            Celular: transactionDB['celular'],
-            'Cuenta Destinatario': transactionDB['cuenta destinatario'],
-            'Nombre Banco': transactionDB['nombre de banco'],
-            'Divisa Receptor': transactionDB['divisa de receptor'],
-            'ID de tracking': transactionDB.uuid
+    const datosEnvio = transactionDB
+        ? {
+            'DATOS DE REMITENTE': transactionDB['divisa de envio'] === 'USDT'
+            ?{
+                Nombre: transactionDB['remitente'],
+                Dni: transactionDB['dni remitente'],
+                Pais: transactionDB['pais remitente'],
+                Red: transactionDB['banco remitente'],
+                'Direccion de wallet': transactionDB['cuenta bancaria'],
+                'Divisa Envio': transactionDB['divisa de envio']
+            }
+            :{
+                Nombre: transactionDB['remitente'],
+                Dni: transactionDB['dni remitente'],
+                Pais: transactionDB['pais remitente'],
+                Banco: transactionDB['banco remitente'],
+                'Cuenta Bancaria': transactionDB['cuenta bancaria'],
+                'Divisa Envio': transactionDB['divisa de envio']
+            },
+            'DATOS DE DESTINATARIO': {
+                Nombre: transactionDB['destinatario'],
+                Dni: transactionDB['dni'],
+                Pais: transactionDB['pais'],
+                Direccion: transactionDB['direccion'],
+                Celular: transactionDB['celular'],
+                'Cuenta Destinatario': transactionDB['cuenta destinatario'],
+                'Nombre Banco': transactionDB['nombre de banco'],
+                'Divisa Receptor': transactionDB['divisa de receptor'],
+                'ID de tracking': transactionDB.uuid
 
-        },
-        'DATOS DE TRANSACCION': {
-            Operacion: transactionDB['operacion'],
-            Importe: transactionDB['importe'],
-            Comision: transactionDB['comision'],
-            Cambio: transactionDB['cambio'],
-            Estado: (transactionDB?.message && transactionDB.message === 'Verificado con Exito') ? 'Verificado' : 'En verificación',
-            Fecha: transactionDB['fecha']
-        },
-        'CUENTA RECEPTORA BOTTAK': {
-            'Banco Transferencia': transactionDB['banco de transferencia']
+            },
+            'DATOS DE DESTINATARIO': transactionDB['red'] && transactionDB['red'] !== undefined
+                ? {
+                    Nombre: transactionDB['destinatario'],
+                    Dni: transactionDB['dni'],
+                    Pais: transactionDB['pais'],
+                    Direccion: transactionDB['direccion'],
+                    Celular: transactionDB['celular'],
+                    'Direccion de billetera': transactionDB['direccion de billetera'],
+                    'Red': transactionDB['red'],
+                    'Divisa Receptor': transactionDB['divisa de receptor'],
+                    'ID de tracking': transactionDB.uuid
+                }
+                : {
+                    Nombre: transactionDB['destinatario'],
+                    Dni: transactionDB['dni'],
+                    Pais: transactionDB['pais'],
+                    Direccion: transactionDB['direccion'],
+                    Celular: transactionDB['celular'],
+                    'Cuenta Destinatario': transactionDB['cuenta destinatario'],
+                    'Nombre Banco': transactionDB['nombre de banco'],
+                    'Divisa Receptor': transactionDB['divisa de receptor'],
+                    'ID de tracking': transactionDB.uuid
+                },
+            'DATOS DE TRANSACCION': {
+                Operacion: transactionDB['operacion'],
+                Importe: transactionDB['importe'],
+                Comision: transactionDB['comision'],
+                Cambio: transactionDB['cambio'],
+                Estado: (transactionDB?.message && transactionDB.message === 'Verificado con Exito') ? 'Verificado' : 'En verificación',
+                Fecha: transactionDB['fecha']
+            },
+            'CUENTA RECEPTORA BOTTAK': {
+                'Banco Transferencia': transactionDB['banco de transferencia']
+            }
         }
-    }
-    :{};
+        : {};
 
 
 
@@ -116,7 +147,17 @@ function Home() {
 
     const datosCambio = transactionDB
         ? {
-            'DATOS DE EMISION': {
+            'DATOS DE EMISION': transactionDB['divisa de usuario'] === 'USDT'
+            ?{
+                Nombre: transactionDB['remitente'],
+                Dni: transactionDB['dni'],
+                Pais: transactionDB['pais'],
+                Celular: transactionDB['whatsapp'],
+                'Red': transactionDB['banco remitente'],
+                'Direccion de wallet': transactionDB['cuenta bancaria'],
+                'Divisa Emision': transactionDB['divisa de usuario']
+            }
+            :{
                 Nombre: transactionDB['remitente'],
                 Dni: transactionDB['dni'],
                 Pais: transactionDB['pais'],
@@ -124,12 +165,19 @@ function Home() {
                 'Banco Emisor': transactionDB['banco remitente'],
                 'Cuenta Emisora': transactionDB['cuenta bancaria'],
                 'Divisa Emision': transactionDB['divisa de usuario']
-            },
-            'DATOS PARA RECEPCIÓN': {
-                'Cuenta Receptora': transactionDB['cuenta destinatario'],
-                'Banco Receptor': transactionDB['nombre de banco'],
-                'Divisa Recepcion': transactionDB['divisa de cambio']
-            },
+            }
+            ,
+            'DATOS PARA RECEPCIÓN': transactionDB['red'] && transactionDB['red'] !== undefined
+                ? {
+                    'Direccion de billetera': transactionDB['direccion de billetera'],
+                    'Cuenta Receptora': transactionDB['red'],
+                    'Divisa Recepcion': transactionDB['divisa de cambio']
+                }
+                : {
+                    'Cuenta Receptora': transactionDB['cuenta destinatario'],
+                    'Banco Receptor': transactionDB['nombre de banco'],
+                    'Divisa Recepcion': transactionDB['divisa de cambio']
+                },
             'DATOS DE TRANSACCION': {
                 Operacion: transactionDB['operacion'],
                 Importe: transactionDB['importe'],
@@ -382,7 +430,7 @@ function Home() {
                     }
 
                 </div>
-                {QRurl !== '' && <InvoicePDF transactionDB={transactionDB.operacion === 'Cambio'?datosCambio :datosEnvio} QRurl={QRurl}></InvoicePDF>
+                {QRurl !== '' && <InvoicePDF transactionDB={transactionDB.operacion === 'Cambio' ? datosCambio : datosEnvio} QRurl={QRurl}></InvoicePDF>
                 }
                 {/* {QRurl !== '' && <InvoicePDF transactionDB={transactionDB}></InvoicePDF>}
     {QRurl !== '' && <button onClick={handleExport} className="relative left-0 right-0 mx-auto mt-4 px-10 py-2  bg-red-500 text-white rounded">

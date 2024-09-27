@@ -77,7 +77,7 @@ function Home() {
         e.stopPropagation()
 
         const uuid = generateUUID()
-        const destinatarioDB = { ["direccion de billetera"]: Object.values(wallets).map(i => i.network)[0], ...destinatario, uuid, operacion: pathname ? pathname : destinatario.operacion }
+        const destinatarioDB = { ["red"]: Object.values(wallets).map(i => i.network)[0], ...destinatario, uuid, operacion: pathname ? pathname : destinatario.operacion }
         setModal('Guardando...')
         const callback = () => {
             redirectHandler(pathname === 'Cambio' ? '/ConfirmCambio' : '/Confirm', destinatarioDB)
@@ -86,7 +86,7 @@ function Home() {
 
         if (pathname === 'Cambio') {
             postImage !== undefined
-                ? uploadStorage(`users/${user.uid}/wallets/${uuid}`, postImage, { ...destinatario, uuid }, callback)
+                ? uploadStorage(`users/${user.uid}/wallets/${uuid}`, postImage, {  red: Object.values(wallets).map(i => i.network)[0],...destinatario, uuid }, callback)
                 : writeUserData(`users/${user.uid}/wallets/${uuid}`, { red: Object.values(wallets).map(i => i.network)[0], ...destinatario, uuid }, setUserSuccess, callback)
 
         }
@@ -94,7 +94,7 @@ function Home() {
 
         if (pathname === 'Envio') {
             postImage !== undefined
-                ? uploadStorage(`users/${user.uid}/destinatarioWallets/${uuid}`, postImage, { ...destinatario, uuid }, callback)
+                ? uploadStorage(`users/${user.uid}/destinatarioWallets/${uuid}`, postImage, { red: Object.values(wallets).map(i => i.network)[0], ...destinatario, uuid }, callback)
                 : writeUserData(`users/${user.uid}/destinatarioWallets/${uuid}`, { red: Object.values(wallets).map(i => i.network)[0], ...destinatario, uuid }, setUserSuccess, callback)
 
         }
@@ -103,7 +103,7 @@ function Home() {
 
 
 
-    console.log(userDB)
+    console.log(destinatario)
     return (
         <div className='md:pl-5'>
             <form className='w-full min-h-[80vh] space-y-6 lg:grid lg:grid-cols-2 lg:gap-5  rounded-[5px] md:max-h-[80vh] overflow-y-auto overflow-x-hidden' onSubmit={save}>
@@ -112,7 +112,7 @@ function Home() {
                     <h3 className=' pb-3 text-white  text-right'>Registrar nuevo Wallet</h3>
                 </div>
 
-           {pathname === 'Envio'  &&     <div>
+           {pathname === 'Envio'  &&     <>
                     <div className=' space-y-5'>
                         <Label htmlFor="">Nombre</Label>
                         <Input type="text" name="destinatario" onChange={onChangeHandler} required />
@@ -128,15 +128,15 @@ function Home() {
 
 
                     </div>
-                    <div className=' space-y-5'>
+                    {/* <div className=' space-y-5'>
                         <Label htmlFor="">Dirección</Label>
                         <Input type="text" name="direccion" onChange={onChangeHandler} required />
-                    </div>
+                    </div> */}
                     <div className=' space-y-5'>
                         <Label htmlFor="">Numero de celular</Label>
                         <Input type="text" name="celular" onChange={onChangeHandler} required />
                     </div>
-                </div>}
+                </>}
 
 
 

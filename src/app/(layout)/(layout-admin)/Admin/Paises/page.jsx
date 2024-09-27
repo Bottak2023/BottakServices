@@ -12,6 +12,7 @@ import Modal from '@/components/Modal'
 import Label from '@/components/Label'
 import Input from '@/components/Input'
 import { useRouter } from 'next/navigation';
+import { generateUUID } from '@/utils/UUIDgenerator';
 
 
 
@@ -133,15 +134,21 @@ export default function Home() {
 
   function saveWallet(e) {
     e.preventDefault()
+
+
+   const uuid =  generateUUID()
     const callback2 = () => {
       getSpecificData(`/wallets/`, setCountries)
       setRouteCountry(null)
     }
     const callback = () => {
-      uploadStorage(`wallets/${e.target[3].value}`, postImageQR, { wallet: e.target[3].value, address: e.target[4].value, network: e.target[5].value }, callback2, 'qrURL')
+      uploadStorage(`wallets/${uuid}`, postImageQR, { wallet: e.target[3].value, address: e.target[4].value, network: e.target[5].value,uuid}, callback2, 'qrURL')
     }
-    uploadStorage(`wallets/${e.target[3].value}`, postImageBank, { wallet: e.target[3].value, address: e.target[4].value, network: e.target[5].value }, callback)
+    uploadStorage(`wallets/${uuid}`, postImageBank, { wallet: e.target[3].value, address: e.target[4].value, network: e.target[5].value,uuid }, callback)
   }
+
+
+
   function manageInputIMGbank(e, name) {
     const file = e.target.files[0]
     setPostImageBank(file)
@@ -215,8 +222,8 @@ export default function Home() {
 
         <table className="w-full overflow-visible min-w-[1700px]  text-[14px] text-left text-gray-500 border-t-4 border-gray-400" >
           {/* <table className="relative w-full overflow-scroll max-w-[800px] h-[50px]  text-[14px] text-left text-gray-500 border-t-4 border-gray-400"> */}
-          <thead className="text-[14px] text-gray-700 uppercase bg-white">
-            <tr>
+          <thead className="text-[14px] text-gray-700 uppercase ">
+            <tr className='  bg-gray-800 text-white'>
               <th scope="col" className=" px-3 py-3">
                 #
               </th>
@@ -246,7 +253,7 @@ export default function Home() {
           </thead>
           <tbody>
             {wallets && wallets !== undefined && Object.values(wallets).map((i, index) => {
-              return<tr className={`text-[14px] border-b hover:bg-gray-100  ${index % 2 === 0 ? '' : ''} `} key={index}>
+              return<tr className={`text-[14px] border-b hover:bg-gray-200  ${index % 2 === 0 ? 'bg-gray-200' : 'bg-gray-200'} `} key={index}>
          
          <td className="px-3 py-4 text-gray-900 ">
                   {index+1}
@@ -320,7 +327,7 @@ export default function Home() {
         <br />
         <table className="w-full overflow-visible min-w-[1700px]  text-[14px] text-left text-gray-500 border-t-4 border-gray-400" >
           {/* <table className="relative w-full overflow-scroll max-w-[800px] h-[50px]  text-[14px] text-left text-gray-500 border-t-4 border-gray-400"> */}
-          <thead className="text-[14px] text-gray-700 uppercase bg-white">
+          <thead className="text-[14px] text-gray-700 uppercase   bg-gray-800 text-white">
             <tr>
               <th scope="col" className=" px-3 py-3">
                 #
@@ -366,7 +373,7 @@ export default function Home() {
           </thead>
           <tbody>
             {countries && countries !== undefined && Object.values(countries).sort(sortArray).map((i, index) => {
-              return i.translation.spa.official !== undefined && i.translation.spa.official.toLowerCase().includes(filter.toLowerCase()) && <tr className={`text-[14px] border-b hover:bg-gray-100  ${index % 2 === 0 ? '' : ''} `} key={index}>
+              return i.translation.spa.official !== undefined && i.translation.spa.official.toLowerCase().includes(filter.toLowerCase()) && <tr className={`text-[14px] border-b border-gray-50 hover:bg-gray-200  ${index % 2 === 0 ? 'bg-gray-200' : 'bg-gray-200'} `} key={index}>
                 <td className="px-3 py-4  flex text-gray-900 ">
                   <span className='h-full flex py-2'>{index + 1}</span>
                 </td>

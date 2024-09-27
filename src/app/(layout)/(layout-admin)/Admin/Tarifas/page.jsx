@@ -574,7 +574,7 @@ export default function Home() {
 
 
         {resP2P && <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-          <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+          <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 ">
             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
               <tr>
                 <th scope="col" class="px-6 py-3">
@@ -630,9 +630,9 @@ export default function Home() {
 
         <br />
         <br />
-        <table className="w-full overflow-visible  text-[14px] text-left text-gray-500 border-t-4 border-gray-400" style={{ minWidth: '2000px' }}>
+        <table className="w-full overflow-visible  text-[14px] text-left text-gray-500 border-t-4 border-gray-400  bg-gray-800 text-white" style={{ minWidth: '2000px' }}>
           {/* <table className="relative w-full overflow-scroll max-w-[800px] h-[50px]  text-[14px] text-left text-gray-500 border-t-4 border-gray-400"> */}
-          <thead className="text-[14px] text-gray-700 uppercase bg-white">
+          <thead className="text-[14px] text-gray-700 uppercase  bg-gray-800 text-white">
             <tr>
               <th scope="col" className=" px-3 py-3">
                 #
@@ -689,7 +689,7 @@ export default function Home() {
           </thead>
           <tbody>
             {divisas && divisas !== undefined && time_stamp !== undefined && Object.values(divisas).map((i, index) => {
-              return i.currency !== undefined && i.currency.toLowerCase().includes(filter.toLowerCase()) && (i.habilitado !== undefined && habilitados && i.habilitado.toString() !== undefined ? i.habilitado.toString().includes(habilitados) : habilitados ? false : true) && <tr className={`text-[14px] border-b hover:bg-gray-100  ${index % 2 === 0 ? 'bg-gray-100' : 'bg-gray-100'} `} key={index}>
+              return i.currency !== undefined && i.currency.toLowerCase().includes(filter.toLowerCase()) && (i.habilitado !== undefined && habilitados && i.habilitado.toString() !== undefined ? i.habilitado.toString().includes(habilitados) : habilitados ? false : true) && <tr className={`text-[14px] border-b  border-gray-50  hover:bg-gray-200  ${index % 2 === 0 ? 'bg-gray-200' : 'bg-gray-200'} `} key={index}>
                 <td className="px-3 py-4  flex text-gray-900 ">
                   <span className='h-full flex py-2'>{index + 1}</span>
                 </td>

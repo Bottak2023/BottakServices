@@ -83,7 +83,7 @@ function closeProfileIMG() {
         <br />
         <br />
         <table className="w-full min-w-[2500px] border-[1px] bg-white text-[14px] text-left text-gray-500 border-t-4 border-t-gray-400">
-          <thead className="text-[14px] text-gray-700 uppercase bg-white">
+          <thead className="text-[14px] text-gray-700 uppercase bg-gray-800 border-gray-50 text-white">
             <tr>
               <th scope="col" className="w-[50px] px-3 py-3">
                 #
@@ -142,63 +142,63 @@ function closeProfileIMG() {
             </tr>
           </thead>
           <tbody>
-            {remesasDB && remesasDB !== undefined && Object.values(remesasDB).sort(sortArray).map((i, index) => {
+            {remesasDB && remesasDB !== undefined && Object.values(remesasDB).map((i, index) => {
               return ((i.dni !== undefined && i.dni.toLowerCase().includes(filter.toLowerCase())) ||
               (i.usuario !== undefined && i.usuario.toLowerCase().includes(filter.toLowerCase()))) &&
-                <tr className={`text-[14px] border-b hover:bg-gray-100  ${index % 2 === 0 ? '' : ''} `} key={index}>
-                  <td className="px-3 py-4  flex  ">
-                    <span className='h-full flex py-2'>{index + 1}</span>
+                <tr className={`text-[14px] border-b border-gray-50 bg-gray-200  ${index % 2 === 0 ? '' : ''} `} key={index}>
+                  <td className="px-3 py-0  flex  ">
+                    <span className='h-full flex py-0'>{index + 1}</span>
                   </td>
                   {/* {console.log(i['estado'])} */}
-                  <td className="min-w-32 px-3 py-4  ">
+                  <td className="min-w-32 px-3 py-0  ">
                     <Select arr={estadoCONST} name='estado' uuid={i.uuid} defaul={i.estado} click={handlerSelect} />
                   </td>
-                  <td className="min-w-32 px-3 py-4  ">
+                  <td className="min-w-32 px-3 py-0  ">
                     {i['usuario']}
                   </td>
-                  <td className="min-w-32 px-3 py-4  ">
+                  <td className="min-w-32 px-3 py-0  ">
                     {i['dni']}
                   </td>
-                  <td className="min-w-32 px-3 py-4  ">
+                  <td className="min-w-32 px-3 py-0  ">
                     {i['pais']}
                   </td>
-                  <td className="min-w-32 px-3 py-4  ">
+                  <td className="min-w-32 px-3 py-0  ">
                     {i['whatsapp']}
                   </td>
-                  <td className="min-w-32 p-3">
+                  <td className="min-w-32 px-2">
                     {i['cuenta bancaria']}
                   </td>
-                  <td className="min-w-32 p-3">
+                  <td className="min-w-32 px-2">
                     {i['banco']}
                   </td>
-                  <td className=" p-3">
+                  <td className=" px-2">
                     {i['divisa de usuario']}
                   </td>
-                  <td className="px-3 py-4  ">
+                  <td className="px-3 py-0  ">
                     {i['importe']}
                   </td>
-                  <td className=" p-3">
+                  <td className=" px-2">
                     {i['divisa de cambio']}
                   </td>
-                  <td className="min-w-32 p-3">
+                  <td className="min-w-32 px-2">
                     {i['cambio']}
                   </td>
-                  <td className="min-w-32 p-3">
+                  <td className="min-w-32 px-2">
                     {i['uuid']}
                   </td>
-                  <td className="min-w-32 p-3">
+                  <td className="min-w-32 px-2">
                     {i['fecha']}
                   </td>
-                  <td className="min-w-32 p-3">
+                  <td className="min-w-32 px-2">
                     {i['cuenta transferidora']}
                   </td>
-                  <td className="min-w-32 p-3">
+                  <td className="min-w-32 px-2">
                     {i['banco de transferencia']}
                   </td>
-                  <td className="min-w-32 p-3">
+                  <td className="min-w-32 px-2">
                     <img src={i.url} className={`${i.url === profileIMG ? 'fixed right-0 left-0 top-0 bottom-0 m-auto portrait:w-[100vw] landscape:h-[100vh] z-50'  : 'h-[150px] w-[150px] object-contain'}`}  onClick={() => handlerProfileIMG(i.url)} alt="" />
                   </td>
-                  <td className="px-3 py-4">
+                  <td className="px-3 py-0">
                     {state && state !== undefined && state[i.uuid] && state[i.uuid] !== undefined
                       ? <Button theme={"Success"} click={() => save(i.uuid)}>Guardar</Button>
                       : <Button theme={"Disable"}>Desabilitado</Button>
