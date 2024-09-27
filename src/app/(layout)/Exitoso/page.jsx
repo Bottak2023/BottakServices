@@ -77,8 +77,8 @@ function Home() {
                 Nombre: transactionDB['remitente'],
                 Dni: transactionDB['dni remitente'],
                 Pais: transactionDB['pais remitente'],
-                Red: transactionDB['banco remitente'],
                 'Direccion de wallet': transactionDB['cuenta bancaria'],
+                Red: transactionDB['banco remitente'],
                 'Divisa Envio': transactionDB['divisa de envio']
             }
             :{
