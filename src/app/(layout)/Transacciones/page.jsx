@@ -184,15 +184,13 @@ export default function Home() {
               <th scope="col" className=" px-3 py-3">
                 Red Bottak
               </th>
-              <th scope="col" className=" px-3 py-3">
-                Actualizar
-              </th>
+            
             </tr>
 
 
           </thead>
           <tbody>
-            {remesasDB && remesasDB !== undefined && Object.values(remesasDB).map((i, index) => {
+          {enviosDB && enviosDB !== undefined &&  Object.values(enviosDB).sort((a,b)=>a.date-b.date).map((i, index) => {
               return i.destinatario.toLowerCase().includes(filter.toLowerCase())  &&
                 (i.estado !== undefined && i.estado.toLowerCase().includes(estado.toLowerCase())) && i.operacion === 'Envio' &&
                 <tr className={`text-[14px] border-b border-gray-50  py-1 transition-all ${index === row ? 'bg-gray-100' : 'bg-gray-200'} ${index % 2 === 0 ? '' : ''} `} key={index} onClick={() => setRow(index)}>
