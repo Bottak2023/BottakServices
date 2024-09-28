@@ -49,7 +49,7 @@ export default function Home() {
                     {((enviosDB && enviosDB !== undefined) || (cambiosDB && cambiosDB !== undefined)) ? <ul> {Object.values(enviosDB && enviosDB !== undefined && cambiosDB && cambiosDB !== undefined ? { ...enviosDB, ...cambiosDB } : (enviosDB && enviosDB !== undefined ? enviosDB : (cambiosDB && cambiosDB !== undefined ? cambiosDB : {}))).sort((a, b) => b.date - a.date).map((i, index) => {
                         return <li className='relative pb-8 border-b-[1px] text-black border-gray-300' >
                             <span className='w-full pr-[10px]'>Tu {i.operacion} de dinero de
-                                <b> {i['divisa de envio']} {i['importe neto']}</b>  {i.destinatario !== undefined ? `a ${i.destinatario}, ` : ''}
+                                <b> {i['importe neto']} {i['divisa de envio']}{`${i['divisa de usuario']} a ${i['divisa de cambio']}`}</b>  {i.destinatario !== undefined ? `a ${i.destinatario}, ` : ''}
                                 {i.estado == 'En verificación' && <span className={` text-black`}>esta en verificación.</span>}
                                 {i.estado == 'Verificado' && <span className={` text-black  bg-blue-100`}>esta VERIFICADO, la transaferencia esta apunto de realizarse.</span>}
                                 {i.estado == 'Transfiriendo' && <span className={` text-black  bg-yellow-100`}>'ya se esta transfiriendo.</span>}
