@@ -138,16 +138,16 @@ function Home() {
                                 Nombre: object['remitente'],
                                 Dni: db['dni remitente'],
                                 Pais: db['pais remitente'],
-                                Celular: transactionDB['whatsapp'],
+                                Celular: db['whatsapp'],
                                 'Direccion de wallet': db['billetera remitente'],
                                 Red: db['red bottak'],
                                 'Divisa Envio': db['divisa de envio']
                             }
                             : {
-                                Nombre: object['remitente'],
+                                Nombre: db['remitente'],
                                 Dni: db['dni remitente'],
                                 Pais: db['pais remitente'],
-                                Celular: transactionDB['whatsapp'],
+                                Celular: db['whatsapp'],
                                 Banco: db['banco remitente'],
                                 'Cuenta Bancaria': db['cuenta bancaria'],
                                 'Divisa Envio': db['divisa de envio']
