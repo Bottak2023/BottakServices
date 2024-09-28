@@ -27,6 +27,7 @@ function Home() {
         e.stopPropagation()
         const db = {
             ...destinatario,
+            whatsapp: userDB.whatsapp,
             remitente: userDB && userDB && `${userDB.nombre} ${userDB.apellido}`,
             nombre: userDB && userDB && userDB.nombre,
             apellido: userDB && userDB && userDB.apellido,

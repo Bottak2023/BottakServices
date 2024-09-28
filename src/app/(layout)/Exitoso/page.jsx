@@ -77,6 +77,7 @@ function Home() {
                     Nombre: transactionDB['remitente'],
                     Dni: transactionDB['dni remitente'],
                     Pais: transactionDB['pais remitente'],
+                    Celular: transactionDB['whatsapp'],
                     'Direccion de wallet': transactionDB['billetera remitente'],
                     Red: transactionDB['red bottak'],
                     'Divisa Envio': transactionDB['divisa de envio']
@@ -85,6 +86,7 @@ function Home() {
                     Nombre: transactionDB['remitente'],
                     Dni: transactionDB['dni remitente'],
                     Pais: transactionDB['pais remitente'],
+                    Celular: transactionDB['whatsapp'],
                     Banco: transactionDB['banco remitente'],
                     'Cuenta Bancaria': transactionDB['cuenta bancaria'],
                     'Divisa Envio': transactionDB['divisa de envio']

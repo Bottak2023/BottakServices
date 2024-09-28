@@ -245,7 +245,7 @@ export default function Home() {
               <th scope="col" className="w-[50px] px-3 py-1">
 
               </th>
-              <th scope="col" colSpan={7} className=" text-center bg-red-500 px-3 py-1" >
+              <th scope="col" colSpan={8} className=" text-center bg-red-500 px-3 py-1" >
                 DATOS DE REMITENTE
               </th>
               <th scope="col" colSpan={9} className=" text-center bg-green-500  px-3 py-1">
@@ -277,6 +277,9 @@ export default function Home() {
               </th>
               <th scope="col" className=" px-3 py-3">
                 Pais remitente
+              </th>
+              <th>
+                Celular
               </th>
               <th scope="col" className=" px-3 py-3">
                 Nombre de banco
@@ -377,6 +380,9 @@ export default function Home() {
                   </td>
                   <td className="min-w-32 px-3 py-0 ">
                     {i['pais remitente']}
+                  </td>
+                  <td className="min-w-32 px-3 py-0 ">
+                    {i['whatsapp']}
                   </td>
                   <td className="min-w-32 px-3 py-0 ">
                     {i['banco remitente']}
