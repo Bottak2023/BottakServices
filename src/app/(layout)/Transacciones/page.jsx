@@ -97,9 +97,7 @@ export default function Home() {
               <th scope="col" colSpan={4} className=" text-center bg-blue-500 px-3 py-1">
                 Cuenta receptora Bottak
               </th>
-              <th scope="col" className="w-[50px] px-3 py-1">
-
-</th>
+            
             </tr>
 
             <tr>

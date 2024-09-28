@@ -161,7 +161,7 @@ function Home() {
                     'Divisa Emision': transactionDB['divisa de usuario']
                 }
             ,
-            'DATOS PARA RECEPCIÓN': transactionDB['red'] && transactionDB['red'] !== undefined
+            'DATOS PARA RECEPCIÓN': transactionDB['divisa de cambio'] === 'USDT'
                 ? {
                     'Direccion de billetera': transactionDB['billetera destinatario'],
                     'Red': transactionDB['red destinatario'],

@@ -194,47 +194,57 @@ function Home() {
                     }
 
                     : {
-                        'DATOS DE EMISION': db['divisa de usuario'] === 'USDT'
-                            ? {
-                                Nombre: object['remitente'],
-                                Dni: db['dni'],
-                                Pais: db['pais'],
-                                Celular: db['whatsapp'],
-                                'Red': db['banco remitente'],
-                                'Direccion de Wallet': db['cuenta bancaria'],
-                                'Divisa Emision': db['divisa de usuario']
-                            }
-                            : {
-                                Nombre: object['remitente'],
-                                Dni: db['dni'],
-                                Pais: db['pais'],
-                                Celular: db['whatsapp'],
-                                'Banco Emisor': db['banco remitente'],
-                                'Cuenta Emisora': db['cuenta bancaria'],
-                                'Divisa Emision': db['divisa de usuario']
+
+                        
+                            'DATOS DE EMISION': transactionDB['divisa de usuario'] === 'USDT'
+                                ? {
+                                    Nombre: object['remitente'],
+                                    Dni: transactionDB['dni'],
+                                    Pais: transactionDB['pais'],
+                                    Celular: transactionDB['whatsapp'],
+                                    'Direccion de wallet': transactionDB['billetera remitente'],
+                                    Red: transactionDB['red bottak'],
+                                    'Divisa Emision': transactionDB['divisa de usuario']
+                                }
+                                : {
+                                    Nombre: object['remitente'],
+                                    Dni: transactionDB['dni'],
+                                    Pais: transactionDB['pais'],
+                                    Celular: transactionDB['whatsapp'],
+                                    'Banco Emisor': transactionDB['banco remitente'],
+                                    'Cuenta Emisora': transactionDB['cuenta bancaria'],
+                                    'Divisa Emision': transactionDB['divisa de usuario']
+                                }
+                            ,
+                            'DATOS PARA RECEPCIÓN': transactionDB['divisa de cambio'] === 'USDT'
+                                ? {
+                                    'Direccion de billetera': transactionDB['billetera destinatario'],
+                                    'Red': transactionDB['red destinatario'],
+                                    'Divisa Recepcion': transactionDB['divisa de cambio']
+                                }
+                                : {
+                                    'Cuenta Receptora': transactionDB['cuenta destinatario'],
+                                    'Banco Receptor': transactionDB['nombre de banco'],
+                                    'Divisa Recepcion': transactionDB['divisa de cambio']
+                                },
+                            'DATOS DE TRANSACCION': {
+                                Operacion: object['operacion'],
+                                Importe: object['importe'],
+                                Comision: transactionDB['comision'],
+                                Cambio: transactionDB['cambio'],
+                                Estado: (data?.message && data.message === 'Verificado con Exito') ? 'Verificado' : 'En verificación',
+                                Fecha: object['fecha'],
+                                'ID de tracking': transactionDB.uuid
+                
                             },
-                        'DATOS PARA RECEPCIÓN': db['red'] && db['red'] !== undefined
-                            ? {
-                                'Direccion de billetera': db['direccion de billetera'],
-                                'Cuenta Receptora': db['red'],
-                                'Divisa Recepcion': db['divisa de cambio']
-                            }
-                            : {
-                                'Cuenta Receptora': db['cuenta destinatario'],
-                                'Banco Receptor': db['nombre de banco'],
-                                'Divisa Recepcion': db['divisa de cambio']
-                            },
-                        'DATOS DE TRANSACCION': {
-                            Operacion: object['operacion'],
-                            Importe: object['importe'],
-                            Comision: db['comision'],
-                            Cambio: db['cambio'],
-                            Estado: (data?.message && data.message === 'Verificado con Exito') ? 'Verificado' : 'En verificación',
-                            Fecha: object['fecha']
-                        },
-                        'CUENTA RECEPTORA BOTTAK': {
-                            'bancoTransferencia': db['banco bottak']
-                        }
+                            'CUENTA RECEPTORA BOTTAK': transactionDB['divisa de usuario'] === 'USDT'
+                                ? {
+                                    'Billetera Bottak': transactionDB['billetera bottak'],
+                                    'Red Bottak': transactionDB['red bottak']
+                                }
+                                : {
+                                    'Banco Bottak': transactionDB['banco bottak'],
+                                    'Cuenta Bottak': transactionDB['cuenta bottak']}
                     };
 
 
