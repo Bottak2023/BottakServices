@@ -92,7 +92,7 @@ export default function Home() {
                 <table className="w-full min-w-[1000px] border-[1px] bg-white text-[14px] text-left text-gray-500 ">
                     <thead className="text-[14px] text-white uppercase bg-gray-800">
                         <tr>
-                            <th colSpan={8}><marquee behavior="" direction="" className='text-red-500 font-medium'>Verifica q tu divisa de destinatario sea admitida, caso contrario se cambiara.</marquee></th>
+                            <th colSpan={9}><marquee behavior="" direction="" className='text-[10px] text-red-500 font-medium'>Verifica q tu divisa de destinatario sea admitida, caso contrario se cambiara.</marquee></th>
                         </tr>
                         <tr>
                             <th scope="col" className="w-[50px] px-3 py-3">
@@ -142,9 +142,12 @@ export default function Home() {
                                 </td>
                                 <td className="w-32 p-3">
                                 {i['pais']} 
-                                {(`${countries?.[i?.cca3]?.habilitado !== undefined && countries[i.cca3].habilitado === true ? <span className='text-green-400'>habilitado </span> :<span className='text-red-500'> inhabilitado</span> }`)}
+                                {countries?.[i?.cca3]?.habilitado !== undefined && countries[i.cca3].habilitado === true ? <span className='text-green-400'>habilitado </span> :<span className='text-red-500'> inhabilitado</span>}
                                 <br />
+                                <p className='text-green-500 text-[10px]'>
                                 {(`${countries?.[i.cca3]?.code}, ${countries?.[i?.cca3]?.divisasPaisDestinatario !== undefined ? 'Divisas: '+countries[i.cca3].divisasPaisDestinatario : ''}`)}
+
+                                </p>
                                     {/* <input type="text" name="pais" className='min-w-[100px] text-left p-2 outline-blue-200 rounded-xl' onChange={(e) => onChangeHandler(e, i)} defaultValue={i['pais'] !== undefined ? i['pais'] : 0} /> */}
                                 </td>
                                 <td className="w-32 p-3">
