@@ -86,8 +86,8 @@ function Home() {
 
         if (pathname === 'Cambio') {
             postImage !== undefined
-                ? uploadStorage(`users/${user.uid}/wallets/${uuid}`, postImage, { 'red destinatario': Object.values(wallets).map(i => i.network)[0], ...destinatario, uuid }, callback)
-                : writeUserData(`users/${user.uid}/wallets/${uuid}`, { 'red destinatario': Object.values(wallets).map(i => i.network)[0], ...destinatario, uuid }, setUserSuccess, callback)
+                ? uploadStorage(`users/${user.uid}/wallets/${uuid}`, postImage, { 'red destinatario': Object.values(wallets).map(i => i.network)[0], ...destinatario, uuid, cca3 }, callback)
+                : writeUserData(`users/${user.uid}/wallets/${uuid}`, { 'red destinatario': Object.values(wallets).map(i => i.network)[0], ...destinatario, uuid, cca3}, setUserSuccess, callback)
 
         }
 
