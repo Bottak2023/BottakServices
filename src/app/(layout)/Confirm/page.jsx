@@ -33,10 +33,11 @@ function Home() {
             ['dni remitente']: userDB && userDB && userDB.dni,
             ['pais remitente']: userDB && userDB && userDB.pais,
             ['divisa de envio']: select,
-            importe: (transferencia * 1 + comision * 1).toFixed(2),
-            comision,
+            importe: `${(transferencia * 1 + comision * 1).toFixed(2)} ${select}`,
+            ['importe neto']: (transferencia * 1).toFixed(2),
+            comision: `${comision} ${select}`,
             ['divisa de receptor']: select2,
-            cambio: divisas && divisas[select] && divisas[select2] && (transferencia * divisas[select2].compra / divisas[select].venta).toFixed(2),
+            cambio: `${divisas && divisas[select] && divisas[select2] && (transferencia * divisas[select2].compra / divisas[select].venta).toFixed(2)} ${select2}`,
             ['user uuid']: user.uid,
             notificaciones: true,
 
@@ -46,7 +47,7 @@ function Home() {
         // writeUserData(`users/${user.uid}/historial/${uuid}`, db, setUserSuccess)
         // writeUserData(`envios/${uuid}`, db, setUserSuccess, callback)
     }
-
+console.log(destinatario)
     useEffect(() => {
         destinatario === undefined && router.replace('/')
     })
@@ -124,11 +125,11 @@ function Home() {
                             </tr>
                             <tr className=" text-[14px]  border-b border-[#00000040] hover:bg-gray-50 " >
                                 <td className="px-2 py-2 bg-[#00000020]   font-bold  text-gray-900 ">
-                                    {destinatario['direccion de billetera'] ? 'Direccion de billetera' : 'Cuenta de destinatario'}
+                                    {destinatario['billetera destinatario'] ? 'Direccion de billetera' : 'Cuenta de destinatario'}
                                 </td>
                                 <td className="px-2 py-2  text-gray-900  border-r border-[#00000040]">
                                     {destinatario['cuenta destinatario'] && destinatario['cuenta destinatario']}
-                                    {destinatario['direccion de billetera'] && destinatario['direccion de billetera']}
+                                    {destinatario['billetera destinatario'] && destinatario['billetera destinatario']}
                                 </td>
                             </tr>
                             <tr className=" text-[14px]  border-b border-[#00000040] hover:bg-gray-50 " >
@@ -137,17 +138,9 @@ function Home() {
                                 </td>
                                 <td className="px-2 py-2  text-gray-900  border-r border-[#00000040]">
                                     {destinatario['nombre de banco'] && destinatario['nombre de banco']}
-                                    {destinatario['red'] && destinatario['red']}
+                                    {destinatario['red destinatario'] && destinatario['red destinatario']}
                                 </td>
                             </tr>
-                            {/* <tr className=" text-[14px] border-b border-[#00000040] hover:bg-gray-50 " >
-                            <td className="px-2 py-2  text-gray-900  border-r border-[#00000040]">
-                                Divisa de envio:
-                            </td>
-                            <td className="px-2 py-2  text-gray-900  border-r border-[#00000040]">
-                                {select}
-                            </td>
-                        </tr> */}
                             <tr className=" text-[14px] border-b border-[#00000040] hover:bg-gray-50 " >
                                 <td className="px-2 py-2 bg-[#00000020]  font-bold  text-gray-900 ">
                                     Importe mas comision
@@ -164,23 +157,12 @@ function Home() {
                                     {comision} {select}
                                 </td>
                             </tr>
-                            {/* <tr className=" text-[14px] border-b border-[#00000040] hover:bg-gray-50 " >
-                            <td className="px-2 py-2  text-gray-900  border-r border-[#00000040]">
-                                Divisa de receptor:
-                            </td>
-                            <td className="px-2 py-2  text-gray-900  border-r border-[#00000040]">
-                                {select2}
-                            </td>
-                        </tr> */}
                             <tr className=" text-[14px] border-b border-[#00000040] hover:bg-gray-50 " >
                                 <td className="px-2 py-2 bg-[#00000020]  font-bold  text-gray-900 ">
                                     Importe neto <br /> con el cambio aplicado para el receptor
                                 </td>
                                 <td className="px-2 py-2  text-gray-900  border-r border-[#00000040] bg-yellow-300">
-
                                     {divisas && divisas[select] && divisas[select2] && (transferencia * divisas[select2].compra / divisas[select].venta).toFixed(2)} {select2} 
-
-                                    {/* {divisas && divisas[select] && divisas[select2] ? divisas && divisas[select] && divisas[select2] && ((transferencia *1 + comision*1) * divisas[select2].venta / divisas[select].venta).toFixed(2) : ''} {select2} */}
                                 </td>
                             </tr>
                             <tr className=" text-[14px] border-b border-[#00000040] hover:bg-gray-50 " >

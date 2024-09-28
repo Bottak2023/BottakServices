@@ -34,10 +34,10 @@ function Home() {
             // ['cuenta bancaria']: userDB['cuenta bancaria'],
             // banco: userDB['banco'],
             ['divisa de usuario']: select,
-            importe: (transferencia * 1 + comision * 1).toFixed(2),
+            importe: `${(transferencia * 1 + comision * 1).toFixed(2)} ${select}`,
             ['importe neto']: (transferencia * 1).toFixed(2),
             ['divisa de cambio']: select2,
-            cambio: divisas && divisas[select] && divisas[select2] && (transferencia * divisas[select2].compra / divisas[select].venta).toFixed(2),
+            cambio: `${divisas && divisas[select] && divisas[select2] && (transferencia * divisas[select2].compra / divisas[select].venta).toFixed(2)} ${select2}`,
             comision,
             operacion: 'Cambio',
             ['user uuid']: user.uid,
@@ -103,11 +103,11 @@ function Home() {
                             </tr>
                             <tr className=" text-[14px]  border-b border-[#00000040] hover:bg-gray-50 " >
                                 <td className="px-2 py-2 bg-[#00000020]   font-bold  text-gray-900 ">
-                                    {destinatario['direccion de billetera'] ? 'direccion de billetera' : 'Cuenta receptora de usuario'}
+                                    {destinatario['billetera destinatario'] ? 'direccion de billetera' : 'Cuenta receptora de usuario'}
                                 </td>
                                 <td className="px-2 py-2  text-gray-900  border-r border-[#00000040]">
                                     {destinatario['cuenta destinatario'] && destinatario['cuenta destinatario']}
-                                    {destinatario['direccion de billetera'] && destinatario['direccion de billetera']}
+                                    {destinatario['billetera destinatario'] && destinatario['billetera destinatario']}
                                 </td>
                             </tr>
                             <tr className=" text-[14px]  border-b border-[#00000040] hover:bg-gray-50 " >

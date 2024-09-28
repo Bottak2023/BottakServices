@@ -15,6 +15,7 @@ import { getDayMonthYear } from '@/utils/date'
 import { generateUUID } from '@/utils/UUIDgenerator'
 import SelectBank from '@/components/SelectBank'
 import SelectWallet from '@/components/SelectWallet'
+import { toPng, toJpeg, toBlob, toPixelData, toSvg } from 'html-to-image';
 
 import ModalINFO from '@/components/ModalINFO'
 import { getSpecificDataEq, getSpecificData2, writeUserData, removeData } from '@/firebase/database'
@@ -22,7 +23,7 @@ import { getSpecificDataEq, getSpecificData2, writeUserData, removeData } from '
 import Link from 'next/link'
 function Home() {
 
-    const { nav, setNav, user, userDB, setUserProfile, select,select2, wallets, setDestinatario, success, setUserData, postsIMG, setUserPostsIMG, isSelect3, setIsSelect3, isSelect4, setIsSelect4, modal, setModal, destinatario, qr, setQr, QRurl, setQRurl, countries, setEnviosDB, setCambiosDB, setIsSelect5, isSelect5 } = useUser()
+    const { nav, setNav, user, userDB, setUserProfile, select, select2, wallets, setDestinatario, success, setUserData, postsIMG, setUserPostsIMG, isSelect3, setIsSelect3, isSelect4, setIsSelect4, modal, setModal, destinatario, qr, setQr, QRurl, setQRurl, countries, setEnviosDB, setCambiosDB, setIsSelect5, isSelect5 } = useUser()
     const router = useRouter()
 
     const [postImage, setPostImage] = useState(undefined)
@@ -44,11 +45,15 @@ function Home() {
         setDestinatario({ ...destinatario, ['banco remitente']: i })
     }
     const handlerWalletSelect2 = (i, db) => {
-        setDestinatario({ ...destinatario, ['banco remitente']: i, ['banco de transferencia']: i })
+        console.log(db)
+        setDestinatario({ ...destinatario, ['billetera bottak']: db.address, ['red bottak']: db.network })
         setWalletQR(db)
     }
+
+
+
     const handlerBankSelect = (i, data) => {
-        setDestinatario({ ...destinatario, ['banco de transferencia']: i })
+        setDestinatario({ ...destinatario, ['banco bottak']: i, ['cuenta bottak']: data['cta bancaria'] })
         setPayDB(data)
     }
     function manageInputIMG(e) {
@@ -123,87 +128,7 @@ function Home() {
 
 
 
-                const botChat = object['operacion'] === 'Envio'
-                    ? ` 
-                ----DATOS DE REMITENTE----\n
-                  Remitente: ${object['remitente']},\n
-                  Dni remitente: ${db['dni remitente']},\n
-                  Pais remitente: ${db['pais remitente']},\n
-                  ${db['divisa de envio'] === 'USDT' ?
-                        `Red: ${db['banco remitente']},\n
-                  Direccion de billetera: ${db['cuenta bancaria']},\n`
-                        : `Banco remitente: ${db['banco remitente']},\n
-                  Cuenta bancaria: ${db['cuenta bancaria']},\n`}
-                  Divisa de envio: ${db['divisa de envio']},\n
 
-                -------DATOS DE DESTINATARIO-------\n
-                ${db['red'] && db['red'] !== undefined
-                        ? `
-                  Destinatario: ${db['destinatario']},\n
-                  DNI destinatario: ${db['dni']},\n
-                  Pais destinatario: ${db['pais']},\n
-                  Direccion: ${db['direccion']},\n
-                  Celular: ${db['celular']},\n
-                  Direccion de billetera: ${db['direccion de billetera']},\n
-                  Red: ${db['red']},\n
-                  Divisa de receptor: ${db['divisa de receptor']},\n`
-                        : `
-                  Destinatario: ${db['destinatario']},\n
-                  DNI destinatario: ${db['dni']},\n
-                  Pais destinatario: ${db['pais']},\n
-                  Direccion: ${db['direccion']},\n
-                  Celular: ${db['celular']},\n
-                  Cuenta destinatario: ${db['cuenta destinatario']},\n
-                  Nombre de banco: ${db['nombre de banco']},\n
-                  Divisa de receptor: ${db['divisa de receptor']},\n`
-                    }
-
-                ------DATOS DE TRANSACCION-----\n
-                  Operacion: ${object['operacion']},\n
-                  Importe: ${object['importe']},\n
-                  Comision: ${db['comision']},\n
-                  Cambio: ${db['cambio']},\n
-                  Estado: ${data?.message && data?.message !== undefined && data.message === 'Verificado con Exito' ? 'Verificado' : 'En verificación'},\n
-                  fecha: ${object['fecha']},\n
-
-                -----CUENTA RECEPTORA BOTTAK-----\n
-                  banco de transferencia: ${db['banco de transferencia']},\n 
-                  `
-                    :
-                    ` 
-                ---------DATOS DE EMISION--------\n
-                  Nombre : ${object['remitente']},\n
-                  Dni: ${db['dni']},\n
-                  Pais: ${db['pais']},\n
-                  Celular: ${db['whatsapp']},\n
-                  ${db['divisa de usuario'] === 'USDT'
-                        ? `Red: ${db['banco remitente']},\n
-                  Direccion de billetera: ${db['cuenta bancaria']},\n`
-                        : `Banco emisor: ${db['banco remitente']},\n
-                  Cuenta emisora: ${db['cuenta bancaria']},\n`}
-                  Divisa de emision: ${db['divisa de usuario']},\n
-
-                ---------DATOS PARA RECEPCIÓN----------\n
-                ${db['red'] && db['red'] !== undefined
-                        ? `Direccion de billetera: ${db['direccion de billetera']},\n
-                  Red: ${db['red']},\n
-                  Divisa de recepción: ${db['divisa de cambio']},\n`
-                        : `Cuenta receptora: ${db['cuenta destinatario']},\n
-                  Banco receptor: ${db['nombre de banco']},\n
-                  Divisa de recepción: ${db['divisa de cambio']},\n`
-                    }
-
-                ---------DATOS DE TRANSACCION---------\n
-                  Operacion: ${object['operacion']},\n
-                  Importe: ${object['importe']},\n
-                  Comision: ${db['comision']},\n
-                  Cambio: ${db['cambio']},\n
-                  Estado: ${data?.message && data?.message !== undefined && data.message === 'Verificado con Exito' ? 'Verificado' : 'En verificación'},\n
-                  fecha: ${object['fecha']},\n
-
-                -------CUENTA RECEPTORA BOTTAK-----\n
-                  banco de transferencia: ${db['banco de transferencia']},\n 
-                  `
 
 
 
@@ -214,8 +139,8 @@ function Home() {
                                 Nombre: object['remitente'],
                                 Dni: db['dni remitente'],
                                 Pais: db['pais remitente'],
-                                Red: db['banco remitente'],
-                                'Direccion de Wallet': db['cuenta bancaria'],
+                                'Direccion de wallet': db['billetera remitente'],
+                                Red: db['red bottak'],
                                 'Divisa Envio': db['divisa de envio']
                             }
                             : {
@@ -226,17 +151,16 @@ function Home() {
                                 'Cuenta Bancaria': db['cuenta bancaria'],
                                 'Divisa Envio': db['divisa de envio']
                             },
-                        'DATOS DE DESTINATARIO': db['red'] && db['red'] !== undefined
+                        'DATOS DE DESTINATARIO': db['divisa de receptor'] === 'USDT'
                             ? {
                                 Nombre: db['destinatario'],
                                 Dni: db['dni'],
                                 Pais: db['pais'],
                                 Direccion: db['direccion'],
                                 Celular: db['celular'],
-                                'Direccion de billetera': db['direccion de billetera'],
-                                'Cuenta Receptora': db['red'],
+                                'Direccion de billetera': db['billetera destinatario'],
+                                'Red': db['red destinatario'],
                                 'Divisa Receptor': db['divisa de receptor'],
-                                'ID de tracking': db.uuid
                             }
                             : {
                                 Nombre: db['destinatario'],
@@ -247,20 +171,29 @@ function Home() {
                                 'Cuenta Destinatario': db['cuenta destinatario'],
                                 'Nombre Banco': db['nombre de banco'],
                                 'Divisa Receptor': db['divisa de receptor'],
-                                'ID de tracking': db.uuid
                             },
                         'DATOS DE TRANSACCION': {
                             Operacion: object['operacion'],
                             Importe: object['importe'],
                             Comision: db['comision'],
-                            Cambio: db['cambio'],
+                            ['Importe detinatario']: db['cambio'],
                             Estado: (data?.message && data.message === 'Verificado con Exito') ? 'Verificado' : 'En verificación',
-                            Fecha: object['fecha']
+                            Fecha: object['fecha'],
+                            'ID de tracking': db.uuid
+
                         },
-                        'CUENTA RECEPTORA BOTTAK': {
-                            'Banco Transferencia': db['banco de transferencia']
-                        }
+                        'CUENTA RECEPTORA BOTTAK': db['divisa de envio'] === 'USDT'
+                            ? {
+                                'Billetera Bottak': db['billetera bottak'],
+                                'Red Bottak': db['red bottak']
+                            }
+                            : {
+                                'Banco Bottak': db['banco bottak'],
+                                'Cuenta Bottak': db['cuenta bottak']
+                            }
+
                     }
+
                     : {
                         'DATOS DE EMISION': db['divisa de usuario'] === 'USDT'
                             ? {
@@ -301,7 +234,7 @@ function Home() {
                             Fecha: object['fecha']
                         },
                         'CUENTA RECEPTORA BOTTAK': {
-                            'bancoTransferencia': db['banco de transferencia']
+                            'bancoTransferencia': db['banco bottak']
                         }
                     };
 
@@ -311,7 +244,7 @@ function Home() {
 
 
 
-                const html = await (`<main style="font-family: Arial, sans-serif; background-color: #f0f0f0; padding: 20px;">
+                const html = (`<main style="font-family: Arial, sans-serif; background-color: #f0f0f0; padding: 20px;">
                         <table style="width: 100%; min-width: 50vw; border-radius: 20px; text-align: left; font-size: 14px; color: #6b7280; background-color: white; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);">
                             <thead style="text-align: center; font-weight: bold; background-color: #4b5563; color: white;">
                                 <tr>
@@ -342,8 +275,12 @@ function Home() {
 
 
 
-                console.log(html)
+                   
 
+
+                const botChat = ` ${(`${Object.entries(datosEmail).map(item => `------${item[0]}---\n${Object.entries(item[1]).map(i => `${i[0]}: ${i[1]}\n`)}`)}  `).replaceAll(',','').replaceAll('  ', ' ')}`
+
+                console.log(botChat)
 
                 await fetch(`/api/bot`, {
                     method: 'POST',
@@ -388,7 +325,7 @@ function Home() {
             ? uploadStorage(`cambios/${uuid}`, postImage, { ...db, fecha, date, uuid, estado: 'En verificación', verificacion: false, email: user.email }, callback)
             : uploadStorage(`envios/${uuid}`, postImage, { ...db, fecha, date, uuid, estado: 'En verificación', verificacion: false, email: user.email }, callback)
     }
-    console.log(walletQR)
+    console.log(payDB)
     return (
         countries[userDB.cca3] !== undefined && countries[userDB.cca3].countries !== undefined
             ? <form className='relative w-full min-h-[80vh] space-y-6 lg:grid lg:grid-cols-2 lg:gap-5 ' onSubmit={(e) => save(e)}>
@@ -410,7 +347,7 @@ function Home() {
                     <SelectBank name="nombre de banco" propHandlerIsSelect={handlerIsSelect5} propIsSelect={isSelect5} operation="envio" click={handlerBankSelect2} arr={countries[userDB.cca3].countries !== undefined ? Object.values(countries[userDB.cca3].countries) : []} />
                 </div>}*/}
                 {select !== 'USDT' && <div className=' space-y-5'>
-                    <Label htmlFor="">Elige tu banco de transferencia</Label>
+                    <Label htmlFor="">Elige tu banco bottak</Label>
                     <SelectBank name="nombre de banco" propHandlerIsSelect={handlerIsSelect5} propIsSelect={isSelect5} operation="envio" click={handlerBankSelect2} arr={countries[userDB.cca3].countries !== undefined ? Object.values(countries[userDB.cca3].countries) : []} />
                 </div>}
                 {select !== 'USDT' && <div className=' space-y-5 max-w-[380px]'>
@@ -419,11 +356,11 @@ function Home() {
                 </div>}
                 {select == 'USDT' && <div className=' space-y-5'>
                     <Label htmlFor="">Elige una wallet de tranferencia</Label>
-                    <SelectWallet name="nombre de banco" propHandlerIsSelect={handlerIsSelect5} propIsSelect={isSelect5} operation="envio" click={handlerWalletSelect2} arr={wallets ? Object.values(wallets) : []} />
+                    <SelectWallet name="billetera bottak" propHandlerIsSelect={handlerIsSelect5} propIsSelect={isSelect5} operation="envio" click={handlerWalletSelect2} arr={wallets ? Object.values(wallets) : []} />
                 </div>}
                 {select == 'USDT' && <div className=' space-y-5 max-w-[380px]'>
                     <Label htmlFor="">Dirección de tu billetera</Label>
-                    <Input type="text" name="cuenta bancaria" onChange={onChangeHandler} required />
+                    <Input type="text" name="billetera remitente" onChange={onChangeHandler} required />
                 </div>}
                 {/* {destinatario !== undefined && destinatario['pais cuenta bancaria'] !== undefined && <> <div className='lg:hidden'>
                     <h3 className='text-center pb-3  text-green-400 lg:hidden'>QR y cuenta para deposito Bancario</h3>
@@ -438,7 +375,7 @@ function Home() {
                 <Input type="text" name="cuenta transferidora" onChange={onChangeHandler} required />
             </div> */}
                 {/* <div className=' space-y-5'>
-                <Label htmlFor="">Titular de banco de transferencia</Label>
+                <Label htmlFor="">Titular de banco bottak</Label>
                 <Input type="text" name="titular de banco" onChange={onChangeHandler} required />
             </div> */}
                 <div className='bg-white  col-span-2  lg:grid lg:grid-cols-2 lg:gap-5 p-1 lg:p-5 place-items-center'>
@@ -446,25 +383,25 @@ function Home() {
                         EFECTUAR TRANSACCION
                         {/* verifique sus datos de transaccion a continuación oprima Verificar Transacción */}
                     </div>}
-                    {/* {destinatario !== undefined && destinatario['banco de transferencia'] !== undefined &&  */}
+                    {/* {destinatario !== undefined && destinatario['banco bottak'] !== undefined &&  */}
                     {select !== 'USDT'
                         ? <div className=' space-y-5'>
                             {/* <Label htmlFor="">QR bancario para el deposito</Label> */}
 
                             <div className=' space-y-5'>
-                            <SelectBank name="nombre de banco" propHandlerIsSelect={handlerIsSelect4} bg='bg-gray-800' propIsSelect={isSelect4} operation="envio" click={handlerBankSelect} arr={countries[userDB.cca3].countries !== undefined ? Object.values(countries[userDB.cca3].countries) : []} />
+                                <SelectBank name="nombre de banco" propHandlerIsSelect={handlerIsSelect4} bg='bg-gray-800' propIsSelect={isSelect4} operation="envio" click={handlerBankSelect} arr={countries[userDB.cca3].countries !== undefined ? Object.values(countries[userDB.cca3].countries) : []} />
                             </div>
                             <Link href='#' className="w-full flex flex-col justify-center items-center" download >
                                 <label className="relative flex flex-col justify-start items-center w-[300px] min-h-[300px] h-auto bg-white border border-gray-300 text-gray-900 text-[12px]  focus:ring-blue-500 focus:border-blue-500 rounded-[10px]" >
-                                    {destinatario?.['banco de transferencia'] && countries && countries[userDB.cca3] && countries[userDB.cca3].countries !== undefined && countries[userDB.cca3].countries[destinatario['banco de transferencia']] !== undefined
-                                        ? <img className=" flex justify-center items-center w-[300px] min-h-[300px] h-auto bg-white text-gray-900 text-[12px]  focus:ring-blue-500 focus:border-blue-500 rounded-[10px]" style={{ objectPosition: 'center' }} src={countries[userDB.cca3].countries[destinatario['banco de transferencia']] !== undefined ? countries[userDB.cca3].countries[destinatario['banco de transferencia']].qrURL : ''} alt="" />
+                                    {destinatario?.['banco bottak'] && countries && countries[userDB.cca3] && countries[userDB.cca3].countries !== undefined && countries[userDB.cca3].countries[destinatario['banco bottak']] !== undefined
+                                        ? <img className=" flex justify-center items-center w-[300px] min-h-[300px] h-auto bg-white text-gray-900 text-[12px]  focus:ring-blue-500 focus:border-blue-500 rounded-[10px]" style={{ objectPosition: 'center' }} src={countries[userDB.cca3].countries[destinatario['banco bottak']] !== undefined ? countries[userDB.cca3].countries[destinatario['banco bottak']].qrURL : ''} alt="" />
                                         : <p className='relative h-full text-[12px] w-full p-5 text-center top-0 bottom-0 my-auto'>Selecciona uno de nuestros bancos para obtener un QR y efectuar su transferencia</p>}
-                                    {countries?.[userDB.cca3]?.countries?.[destinatario?.['banco de transferencia']] !== undefined && destinatario && destinatario.importe}
-                                    {countries?.[userDB.cca3]?.countries?.[destinatario?.['banco de transferencia']] !== undefined && destinatario && destinatario['divisa de envio']}
+                                    {countries?.[userDB.cca3]?.countries?.[destinatario?.['banco bottak']] !== undefined && destinatario && destinatario.importe}
+                                    {countries?.[userDB.cca3]?.countries?.[destinatario?.['banco bottak']] !== undefined && destinatario && destinatario['divisa de envio']}
                                 </label>
                             </Link>
-                            {countries?.[userDB.cca3]?.countries?.[destinatario?.['banco de transferencia']] !== undefined && <span className="block text-black text-center" >Cta. {countries && countries !== undefined && countries[userDB.cca3] !== undefined && countries[userDB.cca3].countries !== undefined && countries[userDB.cca3].countries[destinatario['banco de transferencia']] !== undefined && countries[userDB.cca3].countries[destinatario['banco de transferencia']]['cta bancaria']} <br />
-                                {destinatario !== undefined && destinatario['banco de transferencia'] !== undefined && countries && countries !== undefined && countries[userDB.cca3] !== undefined && countries[userDB.cca3].countries[destinatario['banco de transferencia']] !== undefined && countries[userDB.cca3].countries[destinatario['banco de transferencia']].banco}
+                            {countries?.[userDB.cca3]?.countries?.[destinatario?.['banco bottak']] !== undefined && <span className="block text-black text-center" >Cta. {countries && countries !== undefined && countries[userDB.cca3] !== undefined && countries[userDB.cca3].countries !== undefined && countries[userDB.cca3].countries[destinatario['banco bottak']] !== undefined && countries[userDB.cca3].countries[destinatario['banco bottak']]['cta bancaria']} <br />
+                                {destinatario !== undefined && destinatario['banco bottak'] !== undefined && countries && countries !== undefined && countries[userDB.cca3] !== undefined && countries[userDB.cca3].countries[destinatario['banco bottak']] !== undefined && countries[userDB.cca3].countries[destinatario['banco bottak']].banco}
                             </span>}
                         </div>
                         : <div className=' space-y-5'>
@@ -476,12 +413,12 @@ function Home() {
                                     {walletQR && walletQR !== undefined
                                         ? <img className=" flex justify-center items-center w-[300px] min-h-[300px] h-auto bg-white text-gray-900 text-[12px]  focus:ring-blue-500 focus:border-blue-500 rounded-[10px]" style={{ objectPosition: 'center' }} src={walletQR.qrURL} alt="" />
                                         : <p className='relative h-full text-[12px] w-full p-5 text-center top-0 bottom-0 my-auto'>Selecciona uno de nuestros bancos para obtener un QR y efectuar su transferencia</p>}
-                                    {countries?.[userDB.cca3]?.countries?.[destinatario?.['banco de transferencia']] !== undefined && destinatario && destinatario.importe}
-                                    {countries?.[userDB.cca3]?.countries?.[destinatario?.['banco de transferencia']] !== undefined && destinatario && destinatario['divisa de envio']}
+                                    {countries?.[userDB.cca3]?.countries?.[destinatario?.['banco bottak']] !== undefined && destinatario && destinatario.importe}
+                                    {countries?.[userDB.cca3]?.countries?.[destinatario?.['banco bottak']] !== undefined && destinatario && destinatario['divisa de envio']}
                                 </label>
                             </Link>
-                            {countries?.[userDB.cca3]?.countries?.[destinatario?.['banco de transferencia']] !== undefined && <span className="block text-black text-center" >Cta. {countries && countries !== undefined && countries[userDB.cca3] !== undefined && countries[userDB.cca3].countries !== undefined && countries[userDB.cca3].countries[destinatario['banco de transferencia']] !== undefined && countries[userDB.cca3].countries[destinatario['banco de transferencia']]['cta bancaria']} <br />
-                                {destinatario !== undefined && destinatario['banco de transferencia'] !== undefined && countries && countries !== undefined && countries[userDB.cca3] !== undefined && countries[userDB.cca3].countries[destinatario['banco de transferencia']] !== undefined && countries[userDB.cca3].countries[destinatario['banco de transferencia']].banco}
+                            {countries?.[userDB.cca3]?.countries?.[destinatario?.['banco bottak']] !== undefined && <span className="block text-black text-center" >Cta. {countries && countries !== undefined && countries[userDB.cca3] !== undefined && countries[userDB.cca3].countries !== undefined && countries[userDB.cca3].countries[destinatario['banco bottak']] !== undefined && countries[userDB.cca3].countries[destinatario['banco bottak']]['cta bancaria']} <br />
+                                {destinatario !== undefined && destinatario['banco bottak'] !== undefined && countries && countries !== undefined && countries[userDB.cca3] !== undefined && countries[userDB.cca3].countries[destinatario['banco bottak']] !== undefined && countries[userDB.cca3].countries[destinatario['banco bottak']].banco}
                             </span>}
                         </div>
                     }
@@ -489,7 +426,7 @@ function Home() {
                     <div className='lg:hidden'>
                         <h3 className='text-center pb-3  text-green-400 lg:hidden'>Informacion de transferencia</h3>
                     </div>
-                    {((destinatario !== undefined && destinatario['banco de transferencia'] !== undefined) || walletQR) && <div className=' space-y-5'>
+                    {((destinatario !== undefined && destinatario['banco bottak'] !== undefined) || walletQR) && <div className=' space-y-5'>
                         {/* <Label htmlFor="">Baucher de transferencia</Label> */}
                         <div className="w-full flex justify-center">
                             <label htmlFor="file" className="flex justify-center items-center w-[300px] min-h-[300px] bg-white border border-gray-300 border-dotted text-center text-gray-900 text-[14px] focus:ring-blue-500 focus:border-blue-500 rounded-[10px]" >
@@ -516,3 +453,101 @@ function Home() {
 
 export default WithAuth(Home)
 
+
+
+
+
+
+
+
+
+
+
+
+
+// ----DATOS DE REMITENTE----\n
+// Remitente: ${object['remitente']},\n
+// Dni remitente: ${db['dni remitente']},\n
+// Pais remitente: ${db['pais remitente']},\n
+// ${db['divisa de envio'] === 'USDT' ?
+//                   `Red: ${db['banco remitente']},\n
+// Direccion de billetera: ${db['cuenta bancaria']},\n`
+//                   : `Banco remitente: ${db['banco remitente']},\n
+// Cuenta bancaria: ${db['cuenta bancaria']},\n`}
+// Divisa de envio: ${db['divisa de envio']},\n
+
+// -------DATOS DE DESTINATARIO-------\n
+// ${db['red'] && db['red'] !== undefined
+//                   ? `
+// Destinatario: ${db['destinatario']},\n
+// DNI destinatario: ${db['dni']},\n
+// Pais destinatario: ${db['pais']},\n
+// Direccion: ${db['direccion']},\n
+// Celular: ${db['celular']},\n
+// Direccion de billetera: ${db['direccion de billetera']},\n
+// Red: ${db['red']},\n
+// Divisa de receptor: ${db['divisa de receptor']},\n`
+//                   : `
+// Destinatario: ${db['destinatario']},\n
+// DNI destinatario: ${db['dni']},\n
+// Pais destinatario: ${db['pais']},\n
+// Direccion: ${db['direccion']},\n
+// Celular: ${db['celular']},\n
+// Cuenta destinatario: ${db['cuenta destinatario']},\n
+// Nombre de banco: ${db['nombre de banco']},\n
+// Divisa de receptor: ${db['divisa de receptor']},\n`
+//               }
+
+// ------DATOS DE TRANSACCION-----\n
+// Operacion: ${object['operacion']},\n
+// Importe: ${object['importe']},\n
+// Comision: ${db['comision']},\n
+// Cambio: ${db['cambio']},\n
+// Estado: ${data?.message && data?.message !== undefined && data.message === 'Verificado con Exito' ? 'Verificado' : 'En verificación'},\n
+// fecha: ${object['fecha']},\n
+
+// -----CUENTA RECEPTORA BOTTAK-----\n
+// banco bottak: ${db['banco bottak']},\n 
+
+
+
+
+
+
+
+
+
+// ` 
+// ---------DATOS DE EMISION--------\n
+//   Nombre : ${object['remitente']},\n
+//   Dni: ${db['dni']},\n
+//   Pais: ${db['pais']},\n
+//   Celular: ${db['whatsapp']},\n
+//   ${db['divisa de usuario'] === 'USDT'
+//                     ? `Red: ${db['banco remitente']},\n
+//   Direccion de billetera: ${db['cuenta bancaria']},\n`
+//                     : `Banco emisor: ${db['banco remitente']},\n
+//   Cuenta emisora: ${db['cuenta bancaria']},\n`}
+//   Divisa de emision: ${db['divisa de usuario']},\n
+
+// ---------DATOS PARA RECEPCIÓN----------\n
+// ${db['red'] && db['red'] !== undefined
+//                     ? `Direccion de billetera: ${db['direccion de billetera']},\n
+//   Red: ${db['red']},\n
+//   Divisa de recepción: ${db['divisa de cambio']},\n`
+//                     : `Cuenta receptora: ${db['cuenta destinatario']},\n
+//   Banco receptor: ${db['nombre de banco']},\n
+//   Divisa de recepción: ${db['divisa de cambio']},\n`
+//                 }
+
+// ---------DATOS DE TRANSACCION---------\n
+//   Operacion: ${object['operacion']},\n
+//   Importe: ${object['importe']},\n
+//   Comision: ${db['comision']},\n
+//   Cambio: ${db['cambio']},\n
+//   Estado: ${data?.message && data?.message !== undefined && data.message === 'Verificado con Exito' ? 'Verificado' : 'En verificación'},\n
+//   fecha: ${object['fecha']},\n
+
+// -------CUENTA RECEPTORA BOTTAK-----\n
+//   banco bottak: ${db['banco bottak']},\n 
+//   `

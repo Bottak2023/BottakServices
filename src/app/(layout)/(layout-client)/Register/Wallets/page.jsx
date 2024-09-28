@@ -36,9 +36,9 @@ function Home() {
     }
 
     const handlerCountrySelect = (i, cca3) => {
-        const obj = {...destinatario}
+        const obj = { ...destinatario }
         delete obj['nombre de banco']
-        setDestinatario({...obj, ['pais']: i}) 
+        setDestinatario({ ...obj, ['pais']: i })
         setCca3(cca3)
     }
     const handlerBankSelect = (i) => {
@@ -77,7 +77,7 @@ function Home() {
         e.stopPropagation()
 
         const uuid = generateUUID()
-        const destinatarioDB = { ["red"]: Object.values(wallets).map(i => i.network)[0], ...destinatario, uuid, operacion: pathname ? pathname : destinatario.operacion }
+        const destinatarioDB = { ["red destinatario"]: Object.values(wallets).map(i => i.network)[0], ...destinatario, uuid, operacion: pathname ? pathname : destinatario.operacion }
         setModal('Guardando...')
         const callback = () => {
             redirectHandler(pathname === 'Cambio' ? '/ConfirmCambio' : '/Confirm', destinatarioDB)
@@ -86,16 +86,16 @@ function Home() {
 
         if (pathname === 'Cambio') {
             postImage !== undefined
-                ? uploadStorage(`users/${user.uid}/wallets/${uuid}`, postImage, {  red: Object.values(wallets).map(i => i.network)[0],...destinatario, uuid }, callback)
-                : writeUserData(`users/${user.uid}/wallets/${uuid}`, { red: Object.values(wallets).map(i => i.network)[0], ...destinatario, uuid }, setUserSuccess, callback)
+                ? uploadStorage(`users/${user.uid}/wallets/${uuid}`, postImage, { 'red destinatario': Object.values(wallets).map(i => i.network)[0], ...destinatario, uuid }, callback)
+                : writeUserData(`users/${user.uid}/wallets/${uuid}`, { 'red destinatario': Object.values(wallets).map(i => i.network)[0], ...destinatario, uuid }, setUserSuccess, callback)
 
         }
 
 
         if (pathname === 'Envio') {
             postImage !== undefined
-                ? uploadStorage(`users/${user.uid}/destinatarioWallets/${uuid}`, postImage, { red: Object.values(wallets).map(i => i.network)[0], ...destinatario, uuid }, callback)
-                : writeUserData(`users/${user.uid}/destinatarioWallets/${uuid}`, { red: Object.values(wallets).map(i => i.network)[0], ...destinatario, uuid }, setUserSuccess, callback)
+                ? uploadStorage(`users/${user.uid}/destinatarioWallets/${uuid}`, postImage, { 'red destinatario': Object.values(wallets).map(i => i.network)[0], ...destinatario, uuid }, callback)
+                : writeUserData(`users/${user.uid}/destinatarioWallets/${uuid}`, { 'red destinatario': Object.values(wallets).map(i => i.network)[0], ...destinatario, uuid }, setUserSuccess, callback)
 
         }
 
@@ -112,7 +112,7 @@ function Home() {
                     <h3 className=' pb-3 text-white  text-right'>Registrar nuevo Wallet</h3>
                 </div>
 
-           {pathname === 'Envio'  &&     <>
+                {pathname === 'Envio' && <>
                     <div className=' space-y-5'>
                         <Label htmlFor="">Nombre</Label>
                         <Input type="text" name="destinatario" onChange={onChangeHandler} required />
@@ -128,10 +128,10 @@ function Home() {
 
 
                     </div>
-                    {/* <div className=' space-y-5'>
+                    <div className=' space-y-5'>
                         <Label htmlFor="">Dirección</Label>
                         <Input type="text" name="direccion" onChange={onChangeHandler} required />
-                    </div> */}
+                    </div>
                     <div className=' space-y-5'>
                         <Label htmlFor="">Numero de celular</Label>
                         <Input type="text" name="celular" onChange={onChangeHandler} required />
@@ -143,11 +143,11 @@ function Home() {
 
                 <div className=' space-y-5'>
                     <Label htmlFor="">Red</Label>
-                    <Select name="red" defaul={Object.values(wallets).map(i => i.network)[0]} arr={Object.values(wallets).map(i => i.network)} click={handlerSelect} uuid='123312' />
+                    <Select name="red destinatario" defaul={Object.values(wallets).map(i => i.network)[0]} arr={Object.values(wallets).map(i => i.network)} click={handlerSelect} uuid='123312' />
                 </div>
                 <div className=' space-y-5'>
                     <Label htmlFor="">Direccion de billtera o QR</Label>
-                    <Input type="text" name="direccion de billetera" onChange={onChangeHandler} required />
+                    <Input type="text" name="billetera destinatario" onChange={onChangeHandler} required />
 
                     <div className=' space-y-5'>
                         <div className="w-full flex justify-center">
