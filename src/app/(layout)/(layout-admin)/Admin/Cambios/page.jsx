@@ -20,6 +20,7 @@ export default function Home() {
   const [estado, setEstado] = useState('')
   const refFirst = useRef(null);
   const [profileIMG, setProfileIMG] = useState('')
+  const [row, setRow] = useState(-1)
 
   function onChangeFilter(e) {
     setFilter(e.target.value)
@@ -198,7 +199,7 @@ function closeProfileIMG() {
             {remesasDB && remesasDB !== undefined && Object.values(remesasDB).map((i, index) => {
               return ((i.dni !== undefined && i.dni.toLowerCase().includes(filter.toLowerCase())) ||
               (i.usuario !== undefined && i.usuario.toLowerCase().includes(filter.toLowerCase()))) &&
-                <tr className={`text-[14px] border-b border-gray-50 bg-gray-200  ${index % 2 === 0 ? '' : ''} `} key={index}>
+              <tr className={`text-[14px] border-b border-gray-50  py-1 transition-all ${index === row ? 'bg-gray-100' : 'bg-gray-200'} ${index % 2 === 0 ? '' : ''} `} key={index} onClick={() => setRow(index)}>
                   <td className="px-3 py-0  flex  ">
                     <span className='h-full flex py-0'>{index + 1}</span>
                   </td>
@@ -219,19 +220,40 @@ function closeProfileIMG() {
                     {i['whatsapp']}
                   </td>
                   <td className="min-w-32 px-2">
+                    {i['banco remitente']}
+                  </td>
+                  <td className="min-w-32 px-2">
                     {i['cuenta bancaria']}
                   </td>
                   <td className="min-w-32 px-2">
-                    {i['banco']}
+                    {i['direccion de wallet']}
+                  </td>
+                  <td className="min-w-32 px-2">
+                    {i['red bottak']}
                   </td>
                   <td className=" px-2">
                     {i['divisa de usuario']}
+                  </td>
+                  <td className="min-w-32 px-2">
+                    {i['nombre de banco']}
+                  </td>
+                  <td className="min-w-32 px-2">
+                    {i['cuenta destinatario']}
+                  </td>
+                  <td className="min-w-32 px-2">
+                    {i['billetera destinatario']}
+                  </td>
+                  <td className="min-w-32 px-2">
+                    {i['red destinatario']}
+                  </td>
+                  <td className="min-w-32 px-2">
+                    {i['red destinatario']}
                   </td>
                   <td className="px-3 py-0  ">
                     {i['importe']}
                   </td>
                   <td className=" px-2">
-                    {i['divisa de cambio']}
+                    {i['comision']}
                   </td>
                   <td className="min-w-32 px-2">
                     {i['cambio']}
@@ -243,10 +265,16 @@ function closeProfileIMG() {
                     {i['fecha']}
                   </td>
                   <td className="min-w-32 px-2">
-                    {i['cuenta transferidora']}
+                    {i['banco bottak']}
                   </td>
                   <td className="min-w-32 px-2">
-                    {i['banco de transferencia']}
+                    {i['cuenta bottak']}
+                  </td>
+                  <td className="min-w-32 px-2">
+                    {i['billetera bottak']}
+                  </td>
+                  <td className="min-w-32 px-2">
+                    {i['red bottak']}
                   </td>
                   <td className="min-w-32 px-2">
                     <img src={i.url} className={`${i.url === profileIMG ? 'fixed right-0 left-0 top-0 bottom-0 m-auto portrait:w-[100vw] landscape:h-[100vh] z-50'  : 'h-[150px] w-[150px] object-contain'}`}  onClick={() => handlerProfileIMG(i.url)} alt="" />
