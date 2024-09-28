@@ -233,8 +233,7 @@ export default function Home() {
             })}
           </div>
         </div>
-        <br />
-        <br />
+      
         <table className="w-full min-w-[4300px] border-[1px] bg-white text-[14px] text-left text-gray-500 border-t-4 border-t-gray-400">
           <thead className="text-[14px] text-gray-700 uppercase bg-gray-800 text-white ">
 

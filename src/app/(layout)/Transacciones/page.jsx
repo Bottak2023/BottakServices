@@ -74,10 +74,8 @@ export default function Home() {
                 <br />
                 <input type="text" className='border-b-[1px] text-[14px] outline-none w-[400px]' onChange={onChangeFilter} placeholder='Buscar Destinatario' />
                 <br />
-                <br />
                 <table className="w-full min-w-[4000px] border-[1px] bg-white text-[14px] text-left text-gray-500 border-t-4 border-t-gray-400">
-          <thead className="text-[14px] text-gray-700 uppercase bg-gray-800 text-white ">
-
+          <thead className="text-[14px] uppercase bg-gray-800 text-white ">
             <tr>
               <th scope="col" className="w-[50px] px-3 py-1">
 

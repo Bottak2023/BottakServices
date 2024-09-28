@@ -27,10 +27,10 @@ export default function Home() {
   }
   function handlerProfileIMG(img) {
     setProfileIMG(img)
-}
-function closeProfileIMG() {
-  setProfileIMG('')
-}
+  }
+  function closeProfileIMG() {
+    setProfileIMG('')
+  }
   function sortArray(x, y) {
     if (x.usuario.toLowerCase() < y.usuario.toLowerCase()) { return -1 }
     if (x.usuario.toLowerCase() > y.usuario.toLowerCase()) { return 1 }
@@ -41,7 +41,7 @@ function closeProfileIMG() {
   }
   function save(uuid) {
     setModal('Guardando...')
-    writeUserData(`cambios/${uuid}`, {...state[uuid], notificaciones: true, date: new Date().getTime()}, setUserSuccess, () => { setModal('') })
+    writeUserData(`cambios/${uuid}`, { ...state[uuid], notificaciones: true, date: new Date().getTime() }, setUserSuccess, () => { setModal('') })
   }
   const prev = () => {
     requestAnimationFrame(() => {
@@ -81,8 +81,7 @@ function closeProfileIMG() {
             })}
           </div>
         </div>
-        <br />
-        <br />
+      
         <table className="w-full min-w-[4300px] border-[1px] bg-white text-[14px] text-left text-gray-500 border-t-4 border-t-gray-400">
           <thead className="text-[14px] text-gray-700 uppercase bg-gray-800 text-white ">
 
@@ -107,7 +106,7 @@ function closeProfileIMG() {
               </th>
               <th scope="col" className="w-[50px] px-3 py-1">
 
-</th>
+              </th>
             </tr>
 
             <tr>
@@ -121,13 +120,13 @@ function closeProfileIMG() {
                 Nombre
               </th>
               <th scope="col" className=" px-3 py-3">
-                DNI 
+                DNI
               </th>
               <th scope="col" className=" px-3 py-3">
-                Pais 
+                Pais
               </th>
               <th scope="col" className=" px-3 py-3">
-                Celular 
+                Celular
               </th>
               <th scope="col" className=" px-3 py-3">
                 Nombre de banco
@@ -201,8 +200,8 @@ function closeProfileIMG() {
           <tbody>
             {remesasDB && remesasDB !== undefined && Object.values(remesasDB).map((i, index) => {
               return ((i.dni !== undefined && i.dni.toLowerCase().includes(filter.toLowerCase())) ||
-              (i.usuario !== undefined && i.usuario.toLowerCase().includes(filter.toLowerCase()))) &&
-              <tr className={`text-[14px] border-b border-gray-50  py-1 transition-all ${index === row ? 'bg-gray-100' : 'bg-gray-200'} ${index % 2 === 0 ? '' : ''} `} key={index} onClick={() => setRow(index)}>
+                (i.usuario !== undefined && i.usuario.toLowerCase().includes(filter.toLowerCase()))) &&
+                <tr className={`text-[14px] border-b border-gray-50  py-1 transition-all ${index === row ? 'bg-gray-100' : 'bg-gray-200'} ${index % 2 === 0 ? '' : ''} `} key={index} onClick={() => setRow(index)}>
                   <td className="px-3 py-0  flex  ">
                     <span className='h-full flex py-0'>{index + 1}</span>
                   </td>
@@ -268,7 +267,7 @@ function closeProfileIMG() {
                     {i['uuid']}
                   </td>
                   <td className="min-w-32 px-2">
-                    <img src={i.url} className={`${i.url === profileIMG ? 'fixed right-0 left-0 top-0 bottom-0 m-auto portrait:w-[100vw] landscape:h-[100vh] z-50'  : 'h-[150px] w-[150px] object-contain'}`}  onClick={() => handlerProfileIMG(i.url)} alt="" />
+                    <img src={i.url} className={`${i.url === profileIMG ? 'fixed right-0 left-0 top-0 bottom-0 m-auto portrait:w-[100vw] landscape:h-[100vh] z-50' : 'h-[150px] w-[150px] object-contain'}`} onClick={() => handlerProfileIMG(i.url)} alt="" />
                   </td>
                   <td className="min-w-32 px-2">
                     {i['banco bottak']}
@@ -282,7 +281,7 @@ function closeProfileIMG() {
                   <td className="min-w-32 px-2">
                     {i['red bottak']}
                   </td>
-                 
+
                   <td className="px-3 py-0">
                     {state && state !== undefined && state[i.uuid] && state[i.uuid] !== undefined
                       ? <Button theme={"Success"} click={() => save(i.uuid)}>Guardar</Button>
