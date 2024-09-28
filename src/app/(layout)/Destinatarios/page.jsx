@@ -166,7 +166,9 @@ export default function Home() {
                                     {/* <input type="text" name="nombre de banco" className='min-w-[100px] text-center p-2 outline-blue-200 rounded-xl' onChange={(e) => onChangeHandler(e, i)} defaultValue={i['nombre de banco'] !== undefined ? i['nombre de banco'] : 0} /> */}
                                 </td>
                                 <td className="px-3 py-4 w-32 text-center">
-                                    <Button theme={"Success"} click={() => save(i)}>Continuar</Button>
+                                {i['pais']}{countries?.[i?.cca3]?.envio !== undefined && countries[i.cca3].envio === true ? <Button theme={"Success"} click={() => save(i)}>Continuar</Button>:<Button theme={"Disable"}>inhabilitado</Button>}
+
+                                    
                                 </td>
                                 {/* <td className="px-3 py-4 ">
                                     <Button theme={"Danger"} click={() => manage(i, 'DELETE')}>Eliminar</Button>
