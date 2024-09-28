@@ -37,7 +37,7 @@ export default function App({ propIsSelect, propHandlerIsSelect, click }) {
             {propIsSelect === false && operation === 'envio' && countrie && countrie !== undefined && countrie.translation.spa.common === selectC && countrie['envio'] !== true && <span className=" inline-block text-green-400 text-[14px] font-light p-3">{countrie.translation.spa.common} esta habilitado unicamente para recepciones de dinero</span>}
             <div className={`absolute left-0 top-10 bg-gray-100 flex flex-col justify-start items-center  text-gray-900 text-[14px] rounded-b-xl focus:ring-blue-500 focus:outline-blue-500 w-full   z-30 overflow-y-auto transition-all ${propIsSelect ? 'h-[150px] outline outline-1 outline-gray-300' : 'h-0 overflow-y-hidden'}`} >
                 <ul className="inline-block w-full">
-                    {pathname === '/Register/Destinatario'
+                    {(pathname === '/Register/Destinatario' || pathname ===  'Register/Wallets')
                         ? Object.values(countries).map((i, index) => i[operation === 'recepcion' ? 'envio': 'recepcion'] && i[operation === 'recepcion' ? 'envio': 'recepcion'] !== undefined &&
                             <li className='w-full h-[50px] relative flex justify-start items-center pl-5 pr-10' key={index} onClick={(e) => handlerUserSelect(e, i)}>
                                 <span className="inline-block w-30px] h-[20px]"><img src={i.flagPNG} className="w-[30px] h-[20px]" alt="" /></span>
