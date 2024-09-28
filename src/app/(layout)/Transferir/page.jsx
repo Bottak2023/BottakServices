@@ -105,7 +105,7 @@ function Home() {
                     body: JSON.stringify({
                         "op": "listar",
                         "remitente": object['remitente'],
-                        "importe": object['importe'],
+                        "importe": object['importeTotal'],
                         "user uuid": object['user uuid'],
                         "uuid": object.uuid,
                         "operacionURL": object['operacion'] === 'Envio' ? 'envios' : 'cambios',
