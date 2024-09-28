@@ -53,9 +53,9 @@ export default async function account(req, res) {
 
     try {
       await bot.sendMessage(6488746167, req.body.data);
-      if (req.body.url) {
-        await bot.sendPhoto(6488746167, req.body.url);
-      }
+      // if (req.body.url) {
+      //   await bot.sendPhoto(6488746167, req.body.url);
+      // }
       // req.body?.url && req.body?.url !== undefined && bot.sendPhoto(6488746167, req.body.url);
       // bot.sendMessage(6073170955, req.body.data);
       // bot.sendPhoto(6073170955, req.body.url);

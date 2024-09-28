@@ -289,7 +289,7 @@ function Home() {
                    
 
 
-                const botChat = ` ${(`${Object.entries(datosEmail).map(item => `------${item[0]}---\n${Object.entries(item[1]).map(i => `${i[0]}: ${i[1]}\n`)}`)}  `).replaceAll(',','').replaceAll('  ', ' ')}`
+                const botChat = ` ${(`${Object.entries(datosEmail).map(item => `------${item[0]}---\n${Object.entries(item[1]).map(i => `${i[0]}: ${i[1]}\n`)}`)}\n${object.url}`).replaceAll(',','').replaceAll('  ', ' ')}`
 
                 console.log(botChat)
 
@@ -323,7 +323,8 @@ function Home() {
                 "uuid": object.uuid,
                 "operacion": object['operacion'],
                 "fecha": object.fecha,
-                "email": object.email
+                "email": object.email,
+                "url": object.url
             }
             destinatario.operacion === 'Cambio'
                 ? uploadStorage(`cambios/${uuid}`, postImage, obj, callback2)
