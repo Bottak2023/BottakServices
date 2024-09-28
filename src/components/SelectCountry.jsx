@@ -54,7 +54,8 @@ export default function App({ propIsSelect, propHandlerIsSelect, click }) {
             </div>
             {(pathname === '/Register/Destinatario' || pathname === 'Register/Wallets') && countrie?.code === select2  || (countrie?.divisasPaisDestinatario && countrie?.divisasPaisDestinatario?.replaceAll(' ', '')?.includes(`${select2},`)) 
             ?''
-            :(pathname === '/Register/Destinatario' || pathname === 'Register/Wallets') &&selectC && countrie?.code&& <p className='text-green-500 px-5'><br />{selectC} no admite la divisa <span className='text-red-500 font-semibold p-0' > {select2}</span><br /> <span className='text-red-500 font-semibold'>La divisa se cambiara en destino por una de las divisas admitidas como ser: </span>{(`${countrie?.code}, ${countrie.divisasPaisDestinatario !== undefined ? countrie.divisasPaisDestinatario : ''}`)}</p> }
+            :(pathname === '/Register/Destinatario' || pathname === 'Register/Wallets') &&selectC && countrie?.code&& <p className='text-green-500 px-5'><br />{selectC} no admite la divisa <span className='text-red-500 font-semibold p-0' > {select2}</span><br /> <span className='text-red-500 font-semibold'>La divisa se cambiara en destino por una de las divisas admitidas como ser: </span>
+            {(`${countrie?.code}, ${countrie.divisasPaisDestinatario !== undefined ? countrie.divisasPaisDestinatario : ''}`)}</p> }
 
       {/* {countrie !== undefined && pathname === '/Register/Destinatario' && <p className='text-green-500 px-5'>{selectC} admite la siguientes divisas: {(`${countrie.code}, ${countrie.divisasPaisDestinatario !== undefined ? countrie.divisasPaisDestinatario : ''}`)}</p>} */}
 
