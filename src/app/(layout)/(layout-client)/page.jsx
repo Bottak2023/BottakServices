@@ -113,7 +113,7 @@ function Page() {
         return
       }
       if (divisas?.[select2]?.currency === 'Crypto') {
-        userDB.wallets && userDB.destinatarioWallets !== undefined && Object.keys(userDB.destinatarioWallets).length > 0
+        userDB.destinatarioWallets && userDB.destinatarioWallets !== undefined && Object.keys(userDB.destinatarioWallets).length > 0
           ? router.push('/Wallets?operacion=Envio')
           : router.push('Register/Wallets?operacion=Envio')
       } else {
