@@ -70,7 +70,226 @@ export default function Home() {
                 <input type="text" className='border-b-[1px] text-[14px] outline-none w-[400px]' onChange={onChangeFilter} placeholder='Buscar Destinatario' />
                 <br />
                 <br />
-                <table className="w-full min-w-[2100px] border-[1px] bg-white text-[14px] text-left text-gray-500 border-t-4 border-t-gray-400">
+                <table className="w-full min-w-[4000px] border-[1px] bg-white text-[14px] text-left text-gray-500 border-t-4 border-t-gray-400">
+          <thead className="text-[14px] text-gray-700 uppercase bg-gray-800 text-white ">
+
+            <tr>
+              <th scope="col" className="w-[50px] px-3 py-1">
+
+              </th>
+              <th scope="col" className="w-[50px] px-3 py-1">
+
+              </th>
+              <th scope="col" colSpan={7} className=" text-center bg-red-500 px-3 py-1" >
+                DATOS DE REMITENTE
+              </th>
+              <th scope="col" colSpan={9} className=" text-center bg-green-500  px-3 py-1">
+                DATOS DE DESTINATARIO
+              </th>
+              <th scope="col" colSpan={6} className=" text-center bg-yellow-500 px-3 py-1">
+                DATOS DE TRANSACCION
+              </th>
+              <th scope="col" colSpan={4} className=" text-center bg-blue-500 px-3 py-1">
+                Cuenta receptora Bottak
+              </th>
+              <th scope="col" className="w-[50px] px-3 py-1">
+
+</th>
+            </tr>
+
+            <tr>
+              <th scope="col" className="w-[50px] px-3 py-3">
+                #
+              </th>
+              <th scope="col" className=" px-3 py-3">
+                estado
+              </th>
+              <th scope="col" className=" px-3 py-3">
+                Remitente
+              </th>
+              <th scope="col" className=" px-3 py-3">
+                DNI remitente
+              </th>
+              <th scope="col" className=" px-3 py-3">
+                Pais remitente
+              </th>
+              <th scope="col" className=" px-3 py-3">
+                Nombre de banco
+              </th>
+              <th scope="col" className=" px-3 py-3">
+                Cuenta bancaria
+              </th>
+              <th scope="col" className=" px-3 py-3">
+                Direccion de wallet
+              </th>
+              <th scope="col" className=" px-3 py-3">
+                Red
+              </th>
+              {/* Destinatario */}
+              <th scope="col" className=" px-3 py-3">
+                Destinatario
+              </th >
+              <th scope="col" className=" px-3 py-3">
+                DNI destinatario
+              </th>
+              <th scope="col" className=" px-3 py-3">
+                Pais destinatario
+              </th>
+              <th scope="col" className=" px-3 py-3">
+                Dirección destinatario
+              </th>
+              <th scope="col" className=" px-3 py-3">
+                Celular destinatario
+              </th>
+              <th scope="col" className=" px-3 py-3">
+                Nombre de banco
+              </th>
+              <th scope="col" className=" px-3 py-3">
+                Cuenta bancaria
+              </th>
+              <th scope="col" className=" px-3 py-3">
+                Direccion de wallet
+              </th>
+              <th scope="col" className=" px-3 py-3">
+                Red
+              </th>
+              <th scope="col" className=" px-3 py-3">
+                Importe mas comision
+              </th>
+              <th scope="col" className=" px-3 py-3">
+                Comision
+              </th>
+              <th scope="col" className=" px-3 py-3">
+                Importe destinatario
+              </th>
+              <th scope="col" className=" px-3 py-3">
+                Fecha
+              </th>
+              <th scope="col" className=" px-3 py-3">
+                ID de transacción
+              </th>
+              <th scope="col" className=" px-3 py-3">
+                Baucher
+              </th>
+              <th scope="col" className=" px-3 py-3">
+                Nombre de banco
+              </th>
+              <th scope="col" className=" px-3 py-3">
+                Cuenta bancaria
+              </th>
+              <th scope="col" className=" px-3 py-3">
+                Billetera Bottak
+              </th>
+              <th scope="col" className=" px-3 py-3">
+                Red Bottak
+              </th>
+              <th scope="col" className=" px-3 py-3">
+                Actualizar
+              </th>
+            </tr>
+
+
+          </thead>
+          <tbody>
+            {remesasDB && remesasDB !== undefined && Object.values(remesasDB).map((i, index) => {
+              return i.destinatario.toLowerCase().includes(filter.toLowerCase())  &&
+                (i.estado !== undefined && i.estado.toLowerCase().includes(estado.toLowerCase())) && i.operacion === 'Envio' &&
+                <tr className={`text-[14px] border-b border-gray-50  py-1 transition-all ${index === row ? 'bg-gray-100' : 'bg-gray-200'} ${index % 2 === 0 ? '' : ''} `} key={index} onClick={() => setRow(index)}>
+                  <td className="px-3 py-0 flex  ">
+                    <span className='h-full flex py-0'>{index + 1}</span>
+                  </td>
+                  <td className="min-w-32 px-3 py-0 ">
+                    <Select arr={estadoCONST} name='estado' uuid={i.uuid} defaul={i.estado} click={handlerSelect} />
+                  </td>
+                  <td className="min-w-32 px-3 py-0 ">
+                    {i['remitente']}
+                  </td>
+                  <td className="min-w-32 px-3 py-0 ">
+                    {i['dni remitente']}
+                  </td>
+                  <td className="min-w-32 px-3 py-0 ">
+                    {i['pais remitente']}
+                  </td>
+                  <td className="min-w-32 px-3 py-0 ">
+                    {i['banco remitente']}
+                  </td>
+                  <td className="min-w-32 px-3 py-0 ">
+                    {i['cuenta bancaria']}
+                  </td>
+                  <td className="min-w-32 px-3 py-0 ">
+                    {i['billetera remitente']}
+                  </td>
+                  <td className="min-w-32 px-3 py-0 ">
+                    {i['red bottak']}
+                  </td>
+                  {/* Destinatario */}
+                  <td className="min-w-32 px-3 py-0 ">
+                    {i['destinatario']}
+                  </td>
+                  <td className="min-w-32 px-2">
+                    {i['dni']}
+                  </td>
+                  <td className="min-w-32 px-2">
+                    {i['pais']}
+                  </td>
+                  <td className="min-w-32 px-2">
+                    {i['direccion']}
+                  </td>
+                  <td className="min-w-32 px-2">
+                    {i['celular']}
+                  </td>
+                  <td className="min-w-32 px-2">
+                    {i['nombre de banco']}
+                  </td>
+                  <td className="min-w-32 px-2">
+                    {i['cuenta destinatario']}
+                  </td>
+                  <td className="min-w-32 px-2">
+                    {i['billetera destinatario']}
+                  </td>
+                  <td className="min-w-32 px-2">
+                    {i['red destinatario']}
+                  </td>
+                  {/* Detalles transaccion */}
+                  <td className="px-3 py-0 ">
+                    {i['importe']}
+                  </td>
+                  <td className="min-w-32 px-2">
+                    {i['comision']}
+                  </td>
+                  <td className=" px-2">
+                    {i['cambio']}
+                  </td>
+                  <td className="min-w-32 px-2">
+                    {i['fecha']}
+                  </td>
+                  <td className="min-w-32 px-2">
+                    {i['uuid']}
+                  </td>
+                  <td className="min-w-32 px-2">
+                    <img src={i.url} className={`${i.url === profileIMG ? 'fixed right-0 left-0 top-0 bottom-0 m-auto portrait:w-[100vw] landscape:h-[100vh] z-50' : 'h-[150px] w-[150px] object-contain'}`} onClick={() => handlerProfileIMG(i.url)} alt="" />
+                  </td>
+                  <td className="min-w-32 px-2">
+                    {i['banco bottak']}
+                  </td>
+                  <td className="min-w-32 px-2">
+                    {i['cuenta bottak']}
+                  </td>
+                  <td className="min-w-32 px-2">
+                    {i['billetera bottak']}
+                  </td>
+                  <td className="min-w-32 px-2">
+                    {i['red bottak']}
+                  </td>
+
+
+                 
+                </tr>
+            })
+            }
+          </tbody>
+        </table>
+                {/* <table className="w-full min-w-[2100px] border-[1px] bg-white text-[14px] text-left text-gray-500 border-t-4 border-t-gray-400">
                     <thead className="text-[14px] text-gray-700 uppercase bg-white">
                         <tr>
                             <th scope="col" className="w-[50px] px-3 py-3">
@@ -161,7 +380,7 @@ export default function Home() {
                         })
                         }
                     </tbody>
-                </table>
+                </table> */}
             </div>
         </main>
     )
