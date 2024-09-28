@@ -142,7 +142,7 @@ export default function Home() {
                                 </td>
                                 <td className="w-32 p-3">
                                 {i['pais']} 
-                                {countries?.[i?.cca3]?.habilitado !== undefined && countries[i.cca3].habilitado === true ? <span className='text-green-400'>habilitado </span> :<span className='text-red-500'> inhabilitado</span>}
+                                {countries?.[i?.cca3]?.habilitado !== undefined && countries[i.cca3].habilitado === true ? <span className='text-green-400 text-[10px]'> habilitado </span> :<span className='text-red-500 text-[10px]'> inhabilitado</span>}
                                 <br />
                                 <p className='text-green-500 text-[10px]'>
                                 {(`${countries?.[i.cca3]?.code}, ${countries?.[i?.cca3]?.divisasPaisDestinatario !== undefined ? 'Divisas: '+countries[i.cca3].divisasPaisDestinatario : ''}`)}
