@@ -69,7 +69,7 @@ export default function Home() {
         <input type="text" className='border-b-[1px] text-[14px] outline-none w-[400px]' onChange={onChangeFilter} placeholder='Buscar por remitente, destinatario o DNI' />
         <div className='min-w-[1900px] flex justify-start items-center my-5 '>
           <h3 className="flex pr-12 text-[14px]" htmlFor="">Estado</h3>
-          <div className="grid grid-cols-4 gap-4 w-[700px] ">
+          <div className="grid grid-cols-5 gap-4 w-[800px] ">
             {estadoCONST.map((i, index) => {
               return <Tag theme={estado == i ? 'Primary' : 'Secondary'} click={() => setEstado(estado == i ? '' : i)}>{i}</Tag>
             })}
@@ -97,9 +97,7 @@ export default function Home() {
               <th scope="col" colSpan={4} className=" text-center bg-blue-500 px-3 py-1">
                 Cuenta receptora Bottak
               </th>
-              <th scope="col" className="w-[50px] px-3 py-1">
-
-              </th>
+            
             </tr>
 
             <tr>
@@ -183,9 +181,7 @@ export default function Home() {
               <th scope="col" className=" px-3 py-3">
                 Red Bottak
               </th>
-              <th scope="col" className=" px-3 py-3">
-                Actualizar
-              </th>
+          
             </tr>
 
 
