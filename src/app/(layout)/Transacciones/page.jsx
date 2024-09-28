@@ -20,6 +20,7 @@ export default function Home() {
     const [state, setState] = useState({})
     const refFirst = useRef(null);
     const [row, setRow] = useState(-1)
+    const [profileIMG, setProfileIMG] = useState('')
 
     function onChangeFilter(e) {
         setFilter(e.target.value)
@@ -29,6 +30,9 @@ export default function Home() {
         if (x['translation']['spa']['common'].toLowerCase() > y['translation']['spa']['common'].toLowerCase()) { return 1 }
         return 0
     }
+    function handlerProfileIMG(img) {
+        setProfileIMG(img)
+      }
     function onChangeHandler(e, i) {
         setState({ ...state, [i.cca3]: { ...state[i.cca3], [e.target.name]: e.target.value } })
     }
@@ -196,9 +200,9 @@ export default function Home() {
                   <td className="px-3 py-0 flex  ">
                     <span className='h-full flex py-0'>{index + 1}</span>
                   </td>
-                  <td className="min-w-32 px-3 py-0 ">
-                    <Select arr={estadoCONST} name='estado' uuid={i.uuid} defaul={i.estado} click={handlerSelect} />
-                  </td>
+                  <td className="min-w-32 px-3 py-4  ">
+                                    <span className={`w-full block py-5 px-10 rounded-[10px] ${i.estado == 'En verificación' && 'bg-gray-100'}   ${i.estado == 'Transfiriendo' && 'bg-yellow-300'}   ${i.estado == 'Exitoso' && 'bg-green-400'} ${i.estado == 'Rechazado' && 'bg-red-400'}`}>{i['estado']}</span>
+                                </td>
                   <td className="min-w-32 px-3 py-0 ">
                     {i['remitente']}
                   </td>

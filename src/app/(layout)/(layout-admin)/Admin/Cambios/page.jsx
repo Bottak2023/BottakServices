@@ -82,8 +82,33 @@ function closeProfileIMG() {
         </div>
         <br />
         <br />
-        <table className="w-full min-w-[2500px] border-[1px] bg-white text-[14px] text-left text-gray-500 border-t-4 border-t-gray-400">
-          <thead className="text-[14px] text-gray-700 uppercase bg-gray-800 border-gray-50 text-white">
+        <table className="w-full min-w-[4000px] border-[1px] bg-white text-[14px] text-left text-gray-500 border-t-4 border-t-gray-400">
+          <thead className="text-[14px] text-gray-700 uppercase bg-gray-800 text-white ">
+
+            <tr>
+              <th scope="col" className="w-[50px] px-3 py-1">
+
+              </th>
+              <th scope="col" className="w-[50px] px-3 py-1">
+
+              </th>
+              <th scope="col" colSpan={8} className=" text-center bg-red-500 px-3 py-1" >
+                DATOS DE EMISIÓN
+              </th>
+              <th scope="col" colSpan={5} className=" text-center bg-green-500  px-3 py-1">
+                DATOS PARA RECEPCIÓN
+              </th>
+              <th scope="col" colSpan={6} className=" text-center bg-yellow-500 px-3 py-1">
+                DATOS DE TRANSACCION
+              </th>
+              <th scope="col" colSpan={4} className=" text-center bg-blue-500 px-3 py-1">
+                Cuenta receptora Bottak
+              </th>
+              <th scope="col" className="w-[50px] px-3 py-1">
+
+</th>
+            </tr>
+
             <tr>
               <th scope="col" className="w-[50px] px-3 py-3">
                 #
@@ -92,54 +117,82 @@ function closeProfileIMG() {
                 estado
               </th>
               <th scope="col" className=" px-3 py-3">
-                Usuario
+                Nombre
               </th>
               <th scope="col" className=" px-3 py-3">
-                DNI de usuario
+                DNI 
               </th>
               <th scope="col" className=" px-3 py-3">
-                Pais de usuario
-              </th>
-              <th scope="col" className=" px-3 py-3">
-                Whatsapp de usuario
-              </th>
-              <th scope="col" className=" px-3 py-3">
-                Cuenta de usuario
+                Pais 
               </th>
               <th scope="col" className=" px-3 py-3">
                 Nombre de banco
               </th>
               <th scope="col" className=" px-3 py-3">
-                Divisa de envio
+                Cuenta bancaria
               </th>
               <th scope="col" className=" px-3 py-3">
-                Importe
+                Direccion de wallet
               </th>
               <th scope="col" className=" px-3 py-3">
-                Divisa de cambio
+                Red
               </th>
               <th scope="col" className=" px-3 py-3">
-                Importe con el <br /> cambio aplicado
+                Divisa emisión
+              </th>
+              {/* Destinatario */}
+              <th scope="col" className=" px-3 py-3">
+                Nombre de banco
               </th>
               <th scope="col" className=" px-3 py-3">
-                ID de transaccion
+                Cuenta bancaria
+              </th>
+              <th scope="col" className=" px-3 py-3">
+                Direccion de wallet
+              </th>
+              <th scope="col" className=" px-3 py-3">
+                Red
+              </th>
+              <th scope="col" className=" px-3 py-3">
+                Divisa recepción
+              </th>
+              {/* Transaccion */}
+              <th scope="col" className=" px-3 py-3">
+                Importe mas comision
+              </th>
+              <th scope="col" className=" px-3 py-3">
+                Comision
+              </th>
+              <th scope="col" className=" px-3 py-3">
+                Importe cambio
               </th>
               <th scope="col" className=" px-3 py-3">
                 Fecha
               </th>
               <th scope="col" className=" px-3 py-3">
-                Cuenta de <br /> transferencia
-              </th>
-              <th scope="col" className=" px-3 py-3">
-                Banco de <br /> transferencia
+                ID de transacción
               </th>
               <th scope="col" className=" px-3 py-3">
                 Baucher
               </th>
               <th scope="col" className=" px-3 py-3">
+                Nombre de banco
+              </th>
+              <th scope="col" className=" px-3 py-3">
+                Cuenta bancaria
+              </th>
+              <th scope="col" className=" px-3 py-3">
+                Billetera Bottak
+              </th>
+              <th scope="col" className=" px-3 py-3">
+                Red Bottak
+              </th>
+              <th scope="col" className=" px-3 py-3">
                 Actualizar
               </th>
             </tr>
+
+
           </thead>
           <tbody>
             {remesasDB && remesasDB !== undefined && Object.values(remesasDB).map((i, index) => {

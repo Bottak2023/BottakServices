@@ -147,8 +147,8 @@ function Home() {
                     Dni: transactionDB['dni'],
                     Pais: transactionDB['pais'],
                     Celular: transactionDB['whatsapp'],
-                    'Red': transactionDB['banco remitente'],
-                    'Direccion de wallet': transactionDB['cuenta bancaria'],
+                    'Direccion de wallet': transactionDB['billetera remitente'],
+                    Red: transactionDB['red bottak'],
                     'Divisa Emision': transactionDB['divisa de usuario']
                 }
                 : {
@@ -163,8 +163,8 @@ function Home() {
             ,
             'DATOS PARA RECEPCIÓN': transactionDB['red'] && transactionDB['red'] !== undefined
                 ? {
-                    'Direccion de billetera': transactionDB['direccion de billetera'],
-                    'Cuenta Receptora': transactionDB['red'],
+                    'Direccion de billetera': transactionDB['billetera destinatario'],
+                    'Red': transactionDB['red destinatario'],
                     'Divisa Recepcion': transactionDB['divisa de cambio']
                 }
                 : {
@@ -182,7 +182,7 @@ function Home() {
                 'ID de tracking': transactionDB.uuid
 
             },
-            'CUENTA RECEPTORA BOTTAK': transactionDB['divisa de envio'] === 'USDT'
+            'CUENTA RECEPTORA BOTTAK': transactionDB['divisa de usuario'] === 'USDT'
                 ? {
                     'Billetera Bottak': transactionDB['billetera bottak'],
                     'Red Bottak': transactionDB['red bottak']
