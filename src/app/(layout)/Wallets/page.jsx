@@ -15,7 +15,7 @@ import { useSearchParams } from 'next/navigation'
 
 export default function Home() {
 
-    const { user, userDB, setUserProfile, modal, setModal, users, setUsers, setUserSuccess, success, setUserData, postsIMG, setUserPostsIMG, divisas, setDivisas, item, setItem, exchange, setExchange, destinatario, setDestinatario, transferencia } = useUser()
+    const { user, userDB, setUserProfile, modal, countries, setModal, users, setUsers, setUserSuccess, success, setUserData, postsIMG, setUserPostsIMG, divisas, setDivisas, item, setItem, exchange, setExchange, destinatario, setDestinatario, transferencia } = useUser()
     const router = useRouter()
     const [filter, setFilter] = useState('')
     const [state, setState] = useState({})
