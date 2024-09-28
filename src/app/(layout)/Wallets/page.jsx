@@ -175,7 +175,8 @@ export default function Home() {
                                     {/* <input type="text" name="dni" className='min-w-[100px] text-center p-2 outline-blue-200 rounded-xl' onChange={(e) => onChangeHandler(e, i)} defaultValue={i['dni'] !== undefined ? i['dni'] : 0} /> */}
                                 </td>
                                 <td className="w-32 p-3">
-                                    {i['pais']}
+                                    {i['pais']}{countries?.[i?.cca3]?.envio !== undefined && countries[i.cca3].envio === true ? <span className='text-green-400 text-[10px] py-2 px-3 rounded-[5px] bg-gray-800 inline-block'> habilitado: USDT</span> :<span className='text-red-400 text-[10px]  py-2 px-3 rounded-[5px] bg-gray-800 inline-block'> inhabilitado</span>}
+
                                     {/* <input type="text" name="pais" className='min-w-[100px] text-left p-2 outline-blue-200 rounded-xl' onChange={(e) => onChangeHandler(e, i)} defaultValue={i['pais'] !== undefined ? i['pais'] : 0} /> */}
                                 </td>
                                 <td className="w-32 p-3">
@@ -198,7 +199,9 @@ export default function Home() {
                                     <img src={i.url} className={`h-[100px] w-[100px]`} onClick={() => handlerProfileIMG(i.image3)} alt="Apple Watch" />
                                 </td>
                                 <td className="px-3 py-4 w-32 text-center">
-                                    <Button theme={"Success"} click={() => save(i)}>Continuar</Button>
+                                    {/* <Button theme={"Success"} click={() => save(i)}>Continuar</Button> */}
+                                    {countries?.[i?.cca3]?.envio !== undefined && countries[i.cca3].envio === true ? <Button theme={"Success"} click={() => save(i)}>Continuar</Button>:<Button theme={"Disable"}>inhabilitado</Button>}
+
                                 </td>
                                 {/* <td className="px-3 py-4 ">
                                     <Button theme={"Danger"} click={() => manage(i, 'DELETE')}>Eliminar</Button>

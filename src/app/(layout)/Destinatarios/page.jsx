@@ -167,8 +167,6 @@ export default function Home() {
                                 </td>
                                 <td className="px-3 py-4 w-32 text-center">
                                 {countries?.[i?.cca3]?.envio !== undefined && countries[i.cca3].envio === true ? <Button theme={"Success"} click={() => save(i)}>Continuar</Button>:<Button theme={"Disable"}>inhabilitado</Button>}
-
-                                    
                                 </td>
                                 {/* <td className="px-3 py-4 ">
                                     <Button theme={"Danger"} click={() => manage(i, 'DELETE')}>Eliminar</Button>
