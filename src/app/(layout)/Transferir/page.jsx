@@ -180,7 +180,7 @@ function Home() {
                             Estado: (data?.message && data.message === 'Verificado con Exito') ? 'Verificado' : 'En verificación',
                             Fecha: object['fecha'],
                             'ID de tracking': db.uuid
-
+      
                         },
                         'CUENTA RECEPTORA BOTTAK': db['divisa de envio'] === 'USDT'
                             ? {
