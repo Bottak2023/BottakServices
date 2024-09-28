@@ -15,7 +15,6 @@ import { getDayMonthYear } from '@/utils/date'
 import { generateUUID } from '@/utils/UUIDgenerator'
 import SelectBank from '@/components/SelectBank'
 import SelectWallet from '@/components/SelectWallet'
-import { toPng, toJpeg, toBlob, toPixelData, toSvg } from 'html-to-image';
 
 import ModalINFO from '@/components/ModalINFO'
 import { getSpecificDataEq, getSpecificData2, writeUserData, removeData } from '@/firebase/database'
