@@ -141,12 +141,12 @@ export default function Home() {
                                     {/* <input type="text" name="dni" className='min-w-[100px] text-center p-2 outline-blue-200 rounded-xl' onChange={(e) => onChangeHandler(e, i)} defaultValue={i['dni'] !== undefined ? i['dni'] : 0} /> */}
                                 </td>
                                 <td className="w-32 p-3">
-                                {i['pais']}{countries?.[i?.cca3]?.habilitado !== undefined && countries[i.cca3].habilitado === true ? <span className='text-green-400 text-[10px] py-2 px-3 rounded-[5px] bg-gray-800 inline-block'> habilitado </span> :<span className='text-red-500 text-[10px]  py-2 px-3 rounded-[5px] bg-gray-800 inline-block'> inhabilitado</span>}
+                                {i['pais']}{countries?.[i?.cca3]?.habilitado !== undefined && countries[i.cca3].habilitado === true ? <span className='text-green-400 text-[10px] py-2 px-3 rounded-[5px] bg-gray-800 inline-block'> habilitado: {countries[i.cca3].divisasPaisDestinatario}</span> :<span className='text-red-500 text-[10px]  py-2 px-3 rounded-[5px] bg-gray-800 inline-block'> inhabilitado</span>}
                                 <br />
-                                <p className='text-green-500 text-[10px]'>
-                                {(`${countries?.[i.cca3]?.code}, ${countries?.[i?.cca3]?.divisasPaisDestinatario !== undefined ? 'Divisas: '+countries[i.cca3].divisasPaisDestinatario : ''}`)}
+                
+                                {/* {(`${countries?.[i.cca3]?.code}, ${countries?.[i?.cca3]?.divisasPaisDestinatario !== undefined ? 'Divisas: '+countries[i.cca3].divisasPaisDestinatario : ''}`)} */}
 
-                                </p>
+                                
                                     {/* <input type="text" name="pais" className='min-w-[100px] text-left p-2 outline-blue-200 rounded-xl' onChange={(e) => onChangeHandler(e, i)} defaultValue={i['pais'] !== undefined ? i['pais'] : 0} /> */}
                                 </td>
                                 <td className="w-32 p-3">
