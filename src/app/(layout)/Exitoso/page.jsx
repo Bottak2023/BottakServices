@@ -117,7 +117,7 @@ function Home() {
                 Importe: transactionDB['importe'],
                 Comision: transactionDB['comision'],
                 ['Importe detinatario']: transactionDB['cambio'],
-                Estado: (transactionDB?.message && transactionDB.message === 'Verificado con Exito') ? 'Verificado' : 'En verificación',
+                Estado: transactionDB.estado,
                 Fecha: transactionDB['fecha'],
                 'ID de tracking': transactionDB.uuid
 
@@ -179,7 +179,7 @@ function Home() {
                 Importe: transactionDB['importe'],
                 Comision: transactionDB['comision'],
                 Cambio: transactionDB['cambio'],
-                Estado: (transactionDB?.message && transactionDB.message === 'Verificado con Exito') ? 'Verificado' : 'En verificación',
+                Estado: transactionDB.estado,
                 Fecha: transactionDB['fecha'],
                 'ID de tracking': transactionDB.uuid
 
