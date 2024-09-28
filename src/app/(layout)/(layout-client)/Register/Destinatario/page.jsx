@@ -62,7 +62,7 @@ function Home() {
             redirectHandler('/Confirm', destinatarioDB)
             setModal('')
         }
-        writeUserData(`users/${user.uid}/destinatarios/${uuid}`, { ...destinatario, uuid }, setUserSuccess, callback)
+        writeUserData(`users/${user.uid}/destinatarios/${uuid}`, { ...destinatario, uuid, cca3 }, setUserSuccess, callback)
     }
     return (
         <div className='md:pl-5'>
