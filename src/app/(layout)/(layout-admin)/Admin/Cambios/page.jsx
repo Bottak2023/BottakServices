@@ -126,9 +126,9 @@ function closeProfileIMG() {
               <th scope="col" className=" px-3 py-3">
                 Pais 
               </th>
-              {/* <th scope="col" className=" px-3 py-3">
+              <th scope="col" className=" px-3 py-3">
                 Celular 
-              </th> */}
+              </th>
               <th scope="col" className=" px-3 py-3">
                 Nombre de banco
               </th>
@@ -219,9 +219,9 @@ function closeProfileIMG() {
                   <td className="min-w-32 px-3 py-0  ">
                     {i['pais']}
                   </td>
-                  {/* <td className="min-w-32 px-3 py-0  ">
+                  <td className="min-w-32 px-3 py-0  ">
                     {i['whatsapp']}
-                  </td> */}
+                  </td>
                   <td className="min-w-32 px-2">
                     {i['banco remitente']}
                   </td>
@@ -262,10 +262,13 @@ function closeProfileIMG() {
                     {i['cambio']}
                   </td>
                   <td className="min-w-32 px-2">
+                    {i['fecha']}
+                  </td>
+                  <td className="min-w-32 px-2">
                     {i['uuid']}
                   </td>
                   <td className="min-w-32 px-2">
-                    {i['fecha']}
+                    <img src={i.url} className={`${i.url === profileIMG ? 'fixed right-0 left-0 top-0 bottom-0 m-auto portrait:w-[100vw] landscape:h-[100vh] z-50'  : 'h-[150px] w-[150px] object-contain'}`}  onClick={() => handlerProfileIMG(i.url)} alt="" />
                   </td>
                   <td className="min-w-32 px-2">
                     {i['banco bottak']}
@@ -279,9 +282,7 @@ function closeProfileIMG() {
                   <td className="min-w-32 px-2">
                     {i['red bottak']}
                   </td>
-                  <td className="min-w-32 px-2">
-                    <img src={i.url} className={`${i.url === profileIMG ? 'fixed right-0 left-0 top-0 bottom-0 m-auto portrait:w-[100vw] landscape:h-[100vh] z-50'  : 'h-[150px] w-[150px] object-contain'}`}  onClick={() => handlerProfileIMG(i.url)} alt="" />
-                  </td>
+                 
                   <td className="px-3 py-0">
                     {state && state !== undefined && state[i.uuid] && state[i.uuid] !== undefined
                       ? <Button theme={"Success"} click={() => save(i.uuid)}>Guardar</Button>
