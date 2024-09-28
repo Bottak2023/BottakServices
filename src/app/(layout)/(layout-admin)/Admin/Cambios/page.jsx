@@ -99,7 +99,7 @@ function closeProfileIMG() {
               <th scope="col" colSpan={5} className=" text-center bg-green-500  px-3 py-1">
                 DATOS PARA RECEPCIÓN
               </th>
-              <th scope="col" colSpan={7} className=" text-center bg-yellow-500 px-3 py-1">
+              <th scope="col" colSpan={6} className=" text-center bg-yellow-500 px-3 py-1">
                 DATOS DE TRANSACCION
               </th>
               <th scope="col" colSpan={4} className=" text-center bg-blue-500 px-3 py-1">
