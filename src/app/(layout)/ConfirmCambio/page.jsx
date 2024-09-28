@@ -38,7 +38,7 @@ function Home() {
             ['importe neto']: (transferencia * 1).toFixed(2),
             ['divisa de cambio']: select2,
             cambio: `${divisas && divisas[select] && divisas[select2] && (transferencia * divisas[select2].compra / divisas[select].venta).toFixed(2)} ${select2}`,
-            comision,
+            comision: `${comision} ${select}`,
             operacion: 'Cambio',
             ['user uuid']: user.uid,
             notificaciones: true,
