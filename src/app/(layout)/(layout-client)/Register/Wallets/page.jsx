@@ -94,8 +94,8 @@ function Home() {
 
         if (pathname === 'Envio') {
             postImage !== undefined
-                ? uploadStorage(`users/${user.uid}/destinatarioWallets/${uuid}`, postImage, { 'red destinatario': Object.values(wallets).map(i => i.network)[0], ...destinatario, uuid }, callback)
-                : writeUserData(`users/${user.uid}/destinatarioWallets/${uuid}`, { 'red destinatario': Object.values(wallets).map(i => i.network)[0], ...destinatario, uuid }, setUserSuccess, callback)
+                ? uploadStorage(`users/${user.uid}/destinatarioWallets/${uuid}`, postImage, { 'red destinatario': Object.values(wallets).map(i => i.network)[0], ...destinatario, uuid, cca3}, callback)
+                : writeUserData(`users/${user.uid}/destinatarioWallets/${uuid}`, { 'red destinatario': Object.values(wallets).map(i => i.network)[0], ...destinatario, uuid, cca3 }, setUserSuccess, callback)
 
         }
 
