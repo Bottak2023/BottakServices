@@ -171,7 +171,7 @@ function Home() {
                                 'Cuenta Destinatario': db['cuenta destinatario'],
                                 'Nombre Banco': db['nombre de banco'],
                                 'Divisa Receptor': db['divisa de receptor'],
-                            },
+                            },      
                         'DATOS DE TRANSACCION': {
                             Operacion: object['operacion'],
                             Importe: object['importe'],
