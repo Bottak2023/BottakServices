@@ -7,8 +7,8 @@ import React, { useState, useEffect } from "react";
 import { useUser } from '@/context/Context'
 
 export default function App({ placeholder, value, onChange, propHandlerSelect, propSelect, propIsSelect, propHandlerIsSelect, defaultValue }) {
-  const { userDB, currency, setCurrency, setUserSuccess, select, setSelect, select2, setSelect2, setComision, transferencia, setTransferencia, success, setuserSuccess, divisas, setDivisas, isSelect, setIsSelect, isSelect2, setIsSelect2, } = useUser()
-
+  const { userDB, currency, setCurrency, countries, setUserSuccess, select, setSelect, select2, setSelect2, setComision, transferencia, setTransferencia, success, setuserSuccess, divisas, setDivisas, isSelect, setIsSelect, isSelect2, setIsSelect2, } = useUser()
+ 
   // const [currency, setCurrency] = useState("BOB");
   // const [select, setSelect] = useState('BOB')
   // const [isSelect, setIsSelect] = useState(false)
