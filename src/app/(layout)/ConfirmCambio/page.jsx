@@ -35,6 +35,7 @@ function Home() {
             // banco: userDB['banco'],
             ['divisa de usuario']: select,
             importe: `${(transferencia * 1 + comision * 1).toFixed(2)} ${select}`,
+            importeTotal: (transferencia * 1 + comision * 1).toFixed(2),
             ['importe neto']: (transferencia * 1).toFixed(2),
             ['divisa de cambio']: select2,
             cambio: `${divisas && divisas[select] && divisas[select2] && (transferencia * divisas[select2].compra / divisas[select].venta).toFixed(2)} ${select2}`,

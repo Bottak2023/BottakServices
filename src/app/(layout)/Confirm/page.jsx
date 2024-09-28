@@ -35,6 +35,7 @@ function Home() {
             ['pais remitente']: userDB && userDB && userDB.pais,
             ['divisa de envio']: select,
             importe: `${(transferencia * 1 + comision * 1).toFixed(2)} ${select}`,
+            importeTotal: (transferencia * 1 + comision * 1).toFixed(2),
             ['importe neto']: (transferencia * 1).toFixed(2),
             comision: `${comision} ${select}`,
             ['divisa de receptor']: select2,
