@@ -147,7 +147,7 @@ function Home() {
                     </thead>
                     <tbody>
                         {users && users !== undefined && Object.values(users).map((i, index) => {
-                            return (i['nombre'].toLowerCase().includes(filter.toLowerCase()) || i['dni'].toLowerCase().includes(filter.toLowerCase())) &&
+                            return (i?.['nombre']?.toLowerCase()?.includes(filter?.toLowerCase()) || i['dni']?.toLowerCase()?.includes?.(filter?.toLowerCase())) &&
                                 <tr className="text-[14px] border-b   border-gray-50 bg-gray-200 " key={index}>
                                     <td className="px-3 py-4  flex font-semibold text-gray-900 ">
                                         <span className='h-full flex py-2'>{index + 1}</span>
