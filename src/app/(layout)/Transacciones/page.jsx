@@ -19,6 +19,7 @@ export default function Home() {
     const [filter, setFilter] = useState('')
     const [state, setState] = useState({})
     const refFirst = useRef(null);
+    const [row, setRow] = useState(-1)
 
     function onChangeFilter(e) {
         setFilter(e.target.value)
@@ -42,7 +43,7 @@ export default function Home() {
         requestAnimationFrame(() => {
             const scrollLeft = refFirst.current.scrollLeft;
             
-            const itemWidth = screen.width - 50
+            const itemWidth = screen.width - screen.width/2
             refFirst.current.scrollLeft = scrollLeft - itemWidth;
         });
     };
@@ -50,7 +51,7 @@ export default function Home() {
         requestAnimationFrame(() => {
             const scrollLeft = refFirst.current.scrollLeft;
             
-            const itemWidth = screen.width - 50
+            const itemWidth = screen.width - screen.width/2
 
             refFirst.current.scrollLeft = scrollLeft + itemWidth;
         });
