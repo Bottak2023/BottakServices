@@ -83,7 +83,7 @@ function closeProfileIMG() {
         </div>
         <br />
         <br />
-        <table className="w-full min-w-[4000px] border-[1px] bg-white text-[14px] text-left text-gray-500 border-t-4 border-t-gray-400">
+        <table className="w-full min-w-[4300px] border-[1px] bg-white text-[14px] text-left text-gray-500 border-t-4 border-t-gray-400">
           <thead className="text-[14px] text-gray-700 uppercase bg-gray-800 text-white ">
 
             <tr>
@@ -93,7 +93,7 @@ function closeProfileIMG() {
               <th scope="col" className="w-[50px] px-3 py-1">
 
               </th>
-              <th scope="col" colSpan={8} className=" text-center bg-red-500 px-3 py-1" >
+              <th scope="col" colSpan={9} className=" text-center bg-red-500 px-3 py-1" >
                 DATOS DE EMISIÓN
               </th>
               <th scope="col" colSpan={5} className=" text-center bg-green-500  px-3 py-1">
@@ -229,7 +229,7 @@ function closeProfileIMG() {
                     {i['cuenta bancaria']}
                   </td>
                   <td className="min-w-32 px-2">
-                    {i['direccion de wallet']}
+                    {i['billetera remitente']}
                   </td>
                   <td className="min-w-32 px-2">
                     {i['red bottak']}
