@@ -191,8 +191,7 @@ export default function Home() {
           </thead>
           <tbody>
           {enviosDB && enviosDB !== undefined &&  Object.values(enviosDB).sort((a,b)=>a.date-b.date).map((i, index) => {
-              return i.destinatario.toLowerCase().includes(filter.toLowerCase())  &&
-                (i.estado !== undefined && i.estado.toLowerCase().includes(estado.toLowerCase())) && i.operacion === 'Envio' &&
+              return i.destinatario.toLowerCase().includes(filter.toLowerCase()) &&
                 <tr className={`text-[14px] border-b border-gray-50  py-1 transition-all ${index === row ? 'bg-gray-100' : 'bg-gray-200'} ${index % 2 === 0 ? '' : ''} `} key={index} onClick={() => setRow(index)}>
                   <td className="px-3 py-0 flex  ">
                     <span className='h-full flex py-0'>{index + 1}</span>
