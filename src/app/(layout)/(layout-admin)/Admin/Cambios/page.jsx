@@ -39,10 +39,135 @@ export default function Home() {
   function handlerSelect(name, i, uuid) {
     setState({ ...state, [uuid]: { [name]: i } })
   }
-  function save(uuid) {
+ 
+
+
+
+
+
+
+  function save(i, uuid) {
+    async function callback(obj) {
+
+      const object = { ...i, ...obj }
+
+
+
+
+
+
+    const datosEmail = {
+
+        
+            'DATOS DE EMISION': object['divisa de usuario'] === 'USDT'
+                ? {
+                    Nombre: object['remitente'],
+                    Dni: object['dni'],
+                    Pais: object['pais'],
+                    Celular: object['whatsapp'],
+                    'Direccion de wallet': object['billetera remitente'],
+                    Red: object['red bottak'],
+                    'Divisa Emision': object['divisa de usuario']
+                }
+                : {
+                    Nombre: object['remitente'],
+                    Dni: object['dni'],
+                    Pais: object['pais'],
+                    Celular: object['whatsapp'],
+                    'Banco Emisor': object['banco remitente'],
+                    'Cuenta Emisora': object['cuenta bancaria'],
+                    'Divisa Emision': object['divisa de usuario']
+                }
+            ,
+            'DATOS PARA RECEPCIÓN': object['divisa de cambio'] === 'USDT'
+                ? {
+                    'Direccion de billetera': object['billetera destinatario'],
+                    'Red': object['red destinatario'],
+                    'Divisa Recepcion': object['divisa de cambio']
+                }
+                : {
+                    'Cuenta Receptora': object['cuenta destinatario'],
+                    'Banco Receptor': object['nombre de banco'],
+                    'Divisa Recepcion': object['divisa de cambio']
+                },
+            'DATOS DE TRANSACCION': {
+                Operacion: object['operacion'],
+                Importe: object['importe'],
+                Comision: object['comision'],
+                Cambio: object['cambio'],
+                Estado: object['estado'],
+                Fecha: object['fecha'],
+                'ID de tracking': object.uuid
+
+            },
+            'CUENTA RECEPTORA BOTTAK': object['divisa de usuario'] === 'USDT'
+                ? {
+                    'Billetera Bottak': object['billetera bottak'],
+                    'Red Bottak': object['red bottak']
+                }
+                : {
+                    'Banco Bottak': object['banco bottak'],
+                    'Cuenta Bottak': object['cuenta bottak']}
+    };
+
+const html = (`<main style="font-family: Arial, sans-serif; background-color: #f0f0f0; padding: 20px;">
+        <table style="width: 100%; min-width: 50vw; border-radius: 20px; text-align: left; font-size: 14px; color: #6b7280; background-color: white; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);">
+            <thead style="text-align: center; font-weight: bold; background-color: #4b5563; color: white;">
+                <tr>
+                    <th colspan="2" style="padding: 15px;">
+                        Baucher de transacción <br />
+                    </th>
+                </tr>
+            </thead>
+      ${(`     <tbody>
+${Object.entries(datosEmail).map(item => `
+    <tr style="background-color: rgba(0, 0, 0, 0.1);">
+        <td colspan="2" style="padding: 15px; font-weight: bold; background-color: #4b5563;  color: white;">
+            ${item[0]}
+        </td>
+    </tr>
+${Object.entries(item[1]).map(i => `<tr style="background-color: white; border-bottom: 1px solid #e5e7eb;">
+            <td style="padding: 15px; background-color: rgba(0, 0, 0, 0.1); font-weight: bold; color: #1f2937;">
+                ${i[0]}
+            </td>
+            <td style="padding: 15px; color: #1f2937;">
+                ${i[1]}
+            </td>
+    </tr>`)}
+`)}  
+</tbody>`).replaceAll('</tr>,', '</tr>')}
+</table>
+</main>`)
+
+const botChat = ` ${(`${Object.entries(datosEmail).map(item => `------${item[0]}---\n${Object.entries(item[1]).map(i => `${i[0]}: ${i[1]}\n`)}`)}\n${object.url}`).replaceAll(',','').replaceAll('  ', ' ')}`
+
+      await fetch(`/api/sendEmail`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ data: html, estado: object['estado'], email: user.email,operacion: object['operacion'] })
+      })
+      await fetch(`/api/bot`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ data: botChat, url: object.url }),
+      })
+      setModal('')
+    }
+
     setModal('Guardando...')
-    writeUserData(`cambios/${uuid}`, { ...state[uuid], notificaciones: true, date: new Date().getTime() }, setUserSuccess, () => { setModal('') })
+    writeUserData(`cambios/${uuid}`, { ...state[uuid], notificaciones: true, date: new Date().getTime() }, setUserSuccess, callback)
   }
+
+
+
+
+
+
+
   const prev = () => {
     requestAnimationFrame(() => {
       const scrollLeft = refFirst.current.scrollLeft;

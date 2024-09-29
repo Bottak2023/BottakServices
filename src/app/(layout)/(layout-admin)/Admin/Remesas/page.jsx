@@ -138,47 +138,111 @@ export default function Home() {
 
 
 
-      const botChat = ` 
-      --REPORTE ${(object['estado']).toUpperCase()}
-  ---DATOS REGISTRO DE REMITENTE---\n
-    Remitente: ${object['remitente']},\n
-    Dni remitente: ${object['dni remitente']},\n
-    Pais remitente: ${object['pais remitente']},\n
-    Banco remitente: ${object['banco remitente']},\n
-    Divisa de envio: ${object['divisa de envio']},\n
-  
-  -------DATOS DESTINATARIO-------\n
-    Destinatario: ${object['destinatario']},\n
-    DNI destinatario: ${object['dni']},\n
-    Pais destinatario: ${object['pais']},\n
-    Direccion: ${object['direccion']},\n
-    Celular: ${object['celular']},\n
-    Cuenta destinatario: ${object['cuenta destinatario']},\n
-    Nombre de banco: ${object['nombre de banco']},\n
-    Divisa de receptor: ${object['divisa de receptor']},\n
-  
-    ---DATOS DE TRANSACCION GENERALES---\n
-    Operacion: ${object['operacion']},\n
-    Importe: ${object['importe']},\n
-    Comision: ${object['comision']},\n
-    Cambio: ${object['cambio']},\n
-    Estado: ${object['estado']},\n
-    fecha: ${object['fecha']},\n
-  
-    ---DATOS DE TRANSACCION REMITENTE---\n
-    Pais cuenta bancaria: ${object['pais cuenta bancaria']},\n
-    Nombre de banco: ${object['nombre de banco']},\n
-    Cuenta bancaria: ${object['cuenta bancaria']},\n
-  
-    ---DATOS DE TRANSACCION BOTTAK---\n
-    banco de transferencia: ${object['banco de transferencia']},\n 
-    `
+
+
+
+    const datosEmail =  {
+        'DATOS DE REMITENTE': object['divisa de envio'] === 'USDT'
+            ? {
+                Nombre: object['remitente'],
+                Dni: object['dni remitente'],
+                Pais: object['pais remitente'],
+                Celular: object['whatsapp'],
+                'Direccion de wallet': object['billetera remitente'],
+                Red: object['red bottak'],
+                'Divisa Envio': object['divisa de envio']
+            }
+            : {
+                Nombre: object['remitente'],
+                Dni: object['dni remitente'],
+                Pais: object['pais remitente'],
+                Celular: object['whatsapp'],
+                Banco: object['banco remitente'],
+                'Cuenta Bancaria': object['cuenta bancaria'],
+                'Divisa Envio': object['divisa de envio']
+            },
+        'DATOS DE DESTINATARIO': object['divisa de receptor'] === 'USDT'
+            ? {
+                Nombre: object['destinatario'],
+                Dni: object['dni'],
+                Pais: object['pais'],
+                Direccion: object['direccion'],
+                Celular: object['celular'],
+                'Direccion de billetera': object['billetera destinatario'],
+                'Red': object['red destinatario'],
+                'Divisa Receptor': object['divisa de receptor'],
+            }
+            : {
+                Nombre: object['destinatario'],
+                Dni: object['dni'],
+                Pais: object['pais'],
+                Direccion: object['direccion'],
+                Celular: object['celular'],
+                'Cuenta Destinatario': object['cuenta destinatario'],
+                'Nombre Banco': object['nombre de banco'],
+                'Divisa Receptor': object['divisa de receptor'],
+            },      
+        'DATOS DE TRANSACCION': {
+            Operacion: object['operacion'],
+            Importe: object['importe'],
+            Comision: object['comision'],
+            ['Importe detinatario']: object['cambio'],
+            Estado: (data?.message && data.message === 'Verificado con Exito') ? 'Verificado' : 'En verificación',
+            Fecha: object['fecha'],
+            'ID de tracking': object.uuid
+
+        },
+        'CUENTA RECEPTORA BOTTAK': object['divisa de envio'] === 'USDT'
+            ? {
+                'Billetera Bottak': object['billetera bottak'],
+                'Red Bottak': object['red bottak']
+            }
+            : {
+                'Banco Bottak': object['banco bottak'],
+                'Cuenta Bottak': object['cuenta bottak']
+            }
+
+    }
+
+    
+
+const html = (`<main style="font-family: Arial, sans-serif; background-color: #f0f0f0; padding: 20px;">
+        <table style="width: 100%; min-width: 50vw; border-radius: 20px; text-align: left; font-size: 14px; color: #6b7280; background-color: white; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);">
+            <thead style="text-align: center; font-weight: bold; background-color: #4b5563; color: white;">
+                <tr>
+                    <th colspan="2" style="padding: 15px;">
+                        Baucher de transacción <br />
+                    </th>
+                </tr>
+            </thead>
+      ${(`     <tbody>
+${Object.entries(datosEmail).map(item => `
+    <tr style="background-color: rgba(0, 0, 0, 0.1);">
+        <td colspan="2" style="padding: 15px; font-weight: bold; background-color: #4b5563;  color: white;">
+            ${item[0]}
+        </td>
+    </tr>
+${Object.entries(item[1]).map(i => `<tr style="background-color: white; border-bottom: 1px solid #e5e7eb;">
+            <td style="padding: 15px; background-color: rgba(0, 0, 0, 0.1); font-weight: bold; color: #1f2937;">
+                ${i[0]}
+            </td>
+            <td style="padding: 15px; color: #1f2937;">
+                ${i[1]}
+            </td>
+    </tr>`)}
+`)}  
+</tbody>`).replaceAll('</tr>,', '</tr>')}
+</table>
+</main>`)
+
+const botChat = ` ${(`${Object.entries(datosEmail).map(item => `------${item[0]}---\n${Object.entries(item[1]).map(i => `${i[0]}: ${i[1]}\n`)}`)}\n${object.url}`).replaceAll(',','').replaceAll('  ', ' ')}`
+
       await fetch(`/api/sendEmail`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ data: botChat, estado: object['estado'], email: user.email })
+        body: JSON.stringify({ data: html, estado: object['estado'], email: user.email,operacion: object['operacion'] })
       })
       await fetch(`/api/bot`, {
         method: 'POST',
