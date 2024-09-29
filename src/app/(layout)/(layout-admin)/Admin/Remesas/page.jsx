@@ -187,7 +187,7 @@ export default function Home() {
             Importe: object['importe'],
             Comision: object['comision'],
             ['Importe detinatario']: object['cambio'],
-            Estado: (data?.message && data.message === 'Verificado con Exito') ? 'Verificado' : 'En verificación',
+            Estado: object['estado'],
             Fecha: object['fecha'],
             'ID de tracking': object.uuid
 

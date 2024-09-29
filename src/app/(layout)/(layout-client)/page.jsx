@@ -198,9 +198,9 @@ function Page() {
             <NavInit mobile={false} />
             <marquee behavior="" direction="" className='max-w-[370px] text-green-500'>{
               userDB && userDB !== undefined && countries && countries !== undefined
-                ? countries?.[userDB?.cca3]?.recepcion === true && countries[userDB.cca3]?.envio === true
+                ? countries?.[userDB?.cca3]?.recepcion === true && countries?.[userDB.cca3]?.envio === true
                   ? `Estas transaccionando desde ${userDB.pais}`
-                  : (countries?.[userDB?.cca3]?.recepcion === true || countries[userDB.cca3]?.envio === true)
+                  : (countries?.[userDB?.cca3]?.recepcion === true || countries?.[userDB.cca3]?.envio === true)
                     ? <p className='text-red-500 font-semibold'>{userDB.pais} solo puede {countries?.[userDB?.cca3]?.recepcion === true ? 'recepcionar' : 'enviar'} divisas</p>
                     : <p className='text-red-500 font-semibold'>{userDB.pais} no esta habilitado para transaccionar</p>
                 : <p className='text-red-500 font-semibold'>Registrate para transaccionar</p>}
