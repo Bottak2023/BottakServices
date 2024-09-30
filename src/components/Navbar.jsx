@@ -204,7 +204,7 @@ export default function Navbar({ children }) {
                 <li className="hidden sm:inline-block">
                     <Link href="/" className='text-[12px] font-bold sm:text-[12px] sm:font-normal text-white py-5 cursor-pointer'>INICIO</Link>
                 </li>
-                {userDB && userDB.rol && (userDB.rol === 'Admin' || userDB.rol === 'Cliente') && <li className="sm:hidden" onClick={(e) => handlerNavItem(e, 'Mi cuenta')}>
+                {userDB && <li className="sm:hidden" onClick={(e) => handlerNavItem(e, 'Mi cuenta')}>
                     <h3 className='text-[12px] font-bold sm:text-[12px] sm:font-normal text-white py-5 cursor-pointer'>MI CUENTA</h3>
                     <div className={`relative sm:absolute sm:top-[80px] sm:right-[20px]  sm:w-[300px]  sm:bg-black  grid grid-cols-2 gap-[20px]  rounded-2xl z-20  ${navItem === 'Mi cuenta' ? 'h-auto sm:p-[20px]' : 'h-auto sm:h-0 sm:overflow-hidden'}`}>
 
@@ -271,7 +271,7 @@ export default function Navbar({ children }) {
                         </Link>
                     </div>
                 </li>
-                {userDB && userDB.rol && (userDB.rol === 'Admin' || userDB.rol === 'Cliente') &&
+                {userDB && 
                     <li className="hidden sm:inline-block" onClick={(e) => handlerNavItem(e, 'Mi cuenta')}>
                         <h3 className='text-[12px] font-bold sm:text-[12px] sm:font-normal text-white py-5 cursor-pointer'>MI CUENTA</h3>
                         <div className={`relative sm:absolute sm:top-[80px] sm:right-[20px]  sm:w-[300px]  sm:bg-black  grid grid-cols-2 gap-[20px]  rounded-2xl z-20  ${navItem === 'Mi cuenta' ? 'h-auto sm:p-[20px]' : 'h-auto sm:h-0 sm:overflow-hidden'}`}>
