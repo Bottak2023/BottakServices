@@ -24,6 +24,7 @@ export default function Home() {
   const [postImage, setPostImage] = useState({})
   const [urlPostImage, setUrlPostImage] = useState({})
   const refFirst = useRef(null);
+  const [row, setRow] = useState(-1)
 
   function onChangeFilter(e) {
     setFilter(e.target.value)
@@ -120,8 +121,8 @@ export default function Home() {
         <br />
         <table className="w-full overflow-visible min-w-[500px]  text-[14px] text-left text-gray-500 border-t-4 border-gray-400" >
           {/* <table className="relative w-full overflow-scroll max-w-[800px] h-[50px]  text-[14px] text-left text-gray-500 border-t-4 border-gray-400"> */}
-          <thead className="text-[14px] text-gray-700 uppercase bg-white">
-            <tr>
+          <thead className="text-[14px] uppercase bg-gray-800 text-white">
+          <tr>
               <th scope="col" className=" px-3 py-3">
                 #
               </th>
@@ -152,7 +153,8 @@ export default function Home() {
           <tbody>
             {countries && countries !== undefined && Object.values(countries).sort(sortArray).map((i, index) => {
               return i['translation']['spa']['common'] !== undefined && i['translation']['spa']['common'].toLowerCase().includes(filter.toLowerCase()) &&
-               ((i['recepcion'] !== undefined && i['recepcion'] !== false && i['recepcion'] !== null) || (i['envio'] !== undefined && i['envio'] !== false && i['envio'] !== null)) && <tr className={`text-[14px] border-b hover:bg-gray-100  ${index % 2 === 0 ? '' : ''} `} key={index}>
+               ((i['recepcion'] !== undefined && i['recepcion'] !== false && i['recepcion'] !== null) || (i['envio'] !== undefined && i['envio'] !== false && i['envio'] !== null)) && 
+               <tr className={`text-[14px] border-b border-gray-50  py-1 transition-all ${index === row ? 'bg-gray-100' : 'bg-gray-200'} ${index % 2 === 0 ? '' : ''} `} key={index} onClick={() => setRow(index)}>
                 <td className="px-3 py-4  flex text-gray-900 ">
                   <span className='h-full flex py-2'>{index + 1}</span>
                 </td>
