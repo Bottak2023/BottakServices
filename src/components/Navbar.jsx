@@ -226,7 +226,10 @@ export default function Navbar({ children }) {
                                 <Notificaciones />
                                 Notificaciones
                             </Link>
-                            {user !== null && user !== undefined
+                       
+
+                        </>}
+                        {user !== null && user !== undefined
                                 ? <button className="flex flex-col justify-between items-center bg-[#FFF500] text-[12px]  text-center font-medium   px-3 py-3 rounded-[15px] hover:bg-gray-100 sm:hover:bg-transparent border-[2px] border-[#FFF500] sm:hover:text-yellow-300 text-black" onClick={signOutHandler}>
                                     <Logout />
                                     Cerrar sesión
@@ -237,7 +240,10 @@ export default function Navbar({ children }) {
                                 </Link>
                             }
 
-                        </>}
+
+
+
+
                     </div>
                 </li>}
                 <li onClick={(e) => handlerNavItem(e, 'Servicios')}>
@@ -288,7 +294,10 @@ export default function Navbar({ children }) {
                                     <Notificaciones />
                                     Notificaciones
                                 </Link>
-                                {user !== null && user !== undefined
+                         
+
+                            </>}
+       {user !== null && user !== undefined
                                     ? <button className="flex flex-col justify-between items-center bg-[#FFF500] text-[12px]  text-center font-medium   px-3 py-3 rounded-[15px] hover:bg-gray-100 sm:hover:bg-transparent border-[2px] border-[#FFF500] sm:hover:text-yellow-300 text-black" onClick={signOutHandler}>
                                         <Logout />
                                         Cerrar sesión
@@ -299,7 +308,7 @@ export default function Navbar({ children }) {
                                     </Link>
                                 }
 
-                            </>}
+
                         </div>
                     </li>}
                 <li onClick={(e) => handlerNavItem(e, 'Acerca')}>
