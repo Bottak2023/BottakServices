@@ -87,7 +87,7 @@ export default function Button({ styled, name, change }) {
 //       <div className={`lg:grid lg:grid-cols-2 w-full lg:w-full lg:px-[5vw] lg:h-screen flex flex-col justify-between h-[750px] pb-5`} style={{ gridTemplateColumns: '40% 60%' }}>
 //         <div className={`flex flex-col justify-center items-center h-[300px] lg:h-auto  `}>
 //           <img src="/logo.svg" className={`h-[200px] w-[200px] ${style.logo}`} alt="User" />
-//           <h1 className='text-[#FFF500] text-[14px] font-light'>Cambios App</h1>
+//           <h1 className='text-[#FFF500] text-[14px] font-light'>Bottak</h1>
 //           <h3 className='text-white text-[14px] font-light'>Tus transferencias mas faciles y seguras</h3>
 //           <div className='py-12 hidden lg:block'>
 //             <NavInit mobile={false} />

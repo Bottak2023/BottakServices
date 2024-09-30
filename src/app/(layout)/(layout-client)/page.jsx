@@ -182,7 +182,7 @@ function Page() {
         <NavInit mobile={true} />
         <div className={`flex flex-col justify-center items-center h-[300px] lg:h-auto lg:hidden `}>
           <img src="/logo.svg" className={`h-[150px] w-[150px] ${style.logo}`} alt="User" />
-          <h1 className='text-[#FFF500] text-[14px] font-light'>Cambios App</h1>
+          <h1 className='text-[#FFF500] text-[14px] font-light'>Bottak</h1>
           <h3 className='text-white text-[14px] font-light'>Tus transferencias mas faciles y seguras</h3>
           <br />
           <div className='hidden lg:grid lg:grid-cols-2 lg:grid-gap-2 w-full '>

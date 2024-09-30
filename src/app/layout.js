@@ -8,7 +8,7 @@ const inter = Montserrat({ subsets: ['latin'] })
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="es">
       <head>
         <link rel="icon" href="/favicon.png" />
         <link rel='manifest' href='/manifest.json' />
@@ -17,7 +17,7 @@ export default function RootLayout({ children }) {
         <meta name="msapplication-navbutton-color" content="black" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black" />
         <meta name="description" content="Remesas y cambios de divisas" />
-        <meta name="keywords" content="Bottak, bottak.lat, Remesas y cambios de divisas" />
+        <meta name="keywords" content="Bottak, bottak.lat                                                        u  , Remesas y cambios de divisas" />
         <meta name="author" content="Bottak.lat" />
         <title>Bottak</title>
       </head>

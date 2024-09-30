@@ -208,7 +208,7 @@ const botChat = ` ${(`${Object.entries(datosEmail).map(item => `------${item[0]}
         </div>
       
         <table className="w-full min-w-[4300px] border-[1px] bg-white text-[14px] text-left text-gray-500 border-t-4 border-t-gray-400">
-          <thead className="text-[14px] text-gray-700 uppercase bg-gray-800 text-white ">
+          <thead className="text-[14px] uppercase bg-gray-800 text-white ">
 
             <tr>
               <th scope="col" className="w-[50px] px-3 py-1">
