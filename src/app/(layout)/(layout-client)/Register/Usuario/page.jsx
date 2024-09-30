@@ -42,7 +42,7 @@ function Home() {
             getSpecificData(`/users/${user.uid}`, setUserData)
             setModal('')
         }
-        writeUserData(`users/${user.uid}`, {email: user.email, data}, setUserSuccess, callback)
+        writeUserData(`users/${user.uid}`, {email: user.email, ...data}, setUserSuccess, callback)
         transferencia ? router.replace('/') : router.replace('/')
     }
     return (
