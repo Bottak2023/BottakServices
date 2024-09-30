@@ -7,7 +7,7 @@ import style from '@/app/(layout)/style.module.css'
 export default function Button({ mobile }) {
 
 
-    const { nav, setNav, user, userDB, setUserProfile, state, setState, setUserSuccess, success, setUserData, postsIMG, setUserPostsIMG, modal, setModal, transferencia } = useUser()
+    const { nav, setNav, user, userDB, setUserProfile, state,setSelect2, setState, setUserSuccess, success, setUserData, postsIMG, setUserPostsIMG, modal, setModal, transferencia } = useUser()
   const router = useRouter()
 
     const pathname = usePathname()
@@ -15,6 +15,7 @@ export default function Button({ mobile }) {
 
     function handlerMode(e, data) {
         setState(data)
+        setSelect2('USDT')
         router.push(data)
         console.log('click')
       }

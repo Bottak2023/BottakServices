@@ -19,7 +19,7 @@ export default function Button({ theme, click, children }) {
             break
         case 'Primary':
             return <span
-                class={`w-[100%] bg-[#0064FA] text-white text-[14px] text-center font-medium px-2.5 py-0.5 my-1  rounded-full rounded-br-2xl  
+                class={`w-[100%] bg-yellow-500 text-black text-[14px] text-center font-medium px-2.5 py-0.5 my-1  rounded-full rounded-br-2xl  
                 border border-gray-400`}
                 onClick={click}
             >

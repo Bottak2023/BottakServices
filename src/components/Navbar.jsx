@@ -144,7 +144,7 @@ export default function Navbar({ children }) {
                     backgroundPosition: 'center ',
                     backgroundSize: 'cover',
                 }}>
-                    <div className="absolute top-0 w-screen  flex flex-wrap items-center justify-between mx-auto p-[10px] z-50" style={{
+                    <div className="absolute top-0 w-screen  flex flex-wrap items-center justify-between mx-auto p-[10px] z-30" style={{
                         backgroundImage: 'linear-gradient(#000000c7, #000000c7)',
                     }}>
                         <Link href='/' className="flex items-center">
@@ -199,7 +199,7 @@ export default function Navbar({ children }) {
                     </div>
                 </div>
             </nav>
-            <ul className={`fixed h-[100vh]   top-0 pt-[60px] w-[100vw]  sm:max-w-[500px] z-20 px-[30px]  sm:flex  sm:items-center sm:justify-between sm:h-[70px] sm:min-h-auto sm:pt-[10px] sm:z-50  ${nav ? 'left-0 ' : 'left-[-100vw] sm:left-auto sm:right-[70px]'}`} style={{ transition: 'all .02s linear' }} onClick={(e) => e.stopPropagation()} >
+            <ul className={`fixed h-[100vh]   top-0 pt-[60px] w-[100vw]  sm:max-w-[500px] z-20 px-[30px]  sm:flex  sm:items-center sm:justify-between sm:h-[70px] sm:min-h-auto sm:pt-[10px] sm:z-40  ${nav ? 'left-0 ' : 'left-[-100vw] sm:left-auto sm:right-[70px]'}`} style={{ transition: 'all .02s linear' }} onClick={(e) => e.stopPropagation()} >
 
                 <li className="hidden sm:inline-block">
                     <Link href="/" className='text-[12px] font-bold sm:text-[12px] sm:font-normal text-white py-5 cursor-pointer'>INICIO</Link>
