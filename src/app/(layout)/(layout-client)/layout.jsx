@@ -38,7 +38,7 @@ export default function Home({ children }) {
 
   return (
     <main className='  relative w-full  h-full' onClick={(e) => mainClick(e)}>
-      {modal.includes('El minimo') && <ModalINFO theme={'Danger'} alert={false} button="Aceptar" funcion={() => setModal('')} close={true}>{modal}</ModalINFO>}
+      {modal.includes('El minimo') && <ModalINFO theme={'Danger'} alert={false} button="Aceptar" funcion={() => setModal('')} close={true}>{modal} USDT</ModalINFO>}
       <div className={`lg:grid lg:grid-cols-2 w-full lg:w-full lg:px-[5vw] flex flex-col min-h-full justify-between  pb-5`} style={{ gridTemplateColumns: '40% 60%' }}>
         <div className={`lg:flex flex-col justify-center items-center h-[300px] lg:h-auto hidden `}>
           <img src="/logo.svg" className={`h-[200px] w-[200px] ${style.logo}`} alt="User" />
