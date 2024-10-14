@@ -223,7 +223,7 @@ function Home() {
                                         <Button theme={"Danger"} click={() => manage(i, 'DELETE')}>Eliminar</Button>
                                     </td>
                                 </tr>
-                        })
+                        })  
                         }
                     </tbody>
                 </table>
