@@ -96,10 +96,10 @@ export default function Home() {
                                     1 USDT
                                 </td>
                                 <td className="min-w-32 p-4 text-center">
-                                    {i['compra'] !== undefined ? i['compra'] + ' % de ' + i.code: '-----'} 
+                                    {i['compra'] !== undefined ? i['compra'] + i.code: '-----'} 
                                 </td>
                                 <td className="min-w-32 p-4 text-center">
-                                    {i['venta'] !== undefined ? i['venta'] + ' % de ' + i.code: '-----'}
+                                    {i['venta'] !== undefined ? i['venta'] + i.code: '-----'}
                                 </td>
                                 <td className="min-w-32 p-4 text-center">
                                     {i['tarifa 1'] !== undefined ? i['tarifa 1'] + ' % de ' + i.code: '-----'}

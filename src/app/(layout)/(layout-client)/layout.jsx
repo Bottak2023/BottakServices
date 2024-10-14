@@ -10,12 +10,13 @@ import NavInit from '@/components/NavInit'
 import Error from '@/components/Error'
 import { useRouter } from 'next/navigation';
 import { usePathname } from 'next/navigation'
+import ModalINFO from '@/components/ModalINFO'
 
 import style from '@/app/(layout)/style.module.css'
 
 export default function Home({ children }) {
 
-  const { user, userDB, setUserProfile, setUserSuccess, success, setUserData, postsIMG, setUserPostsIMG, transferencia, divisas, setDivisas, select, setSelect, select2, setSelect2, isSelect, setIsSelect, isSelect2, setIsSelect2, setIsSelect3, setIsSelect4 } = useUser()
+  const { user, userDB, setUserProfile, setUserSuccess, success, setUserData,modal,setModal, postsIMG, setUserPostsIMG, transferencia, divisas, setDivisas, select, setSelect, select2, setSelect2, isSelect, setIsSelect, isSelect2, setIsSelect2, setIsSelect3, setIsSelect4 } = useUser()
   const router = useRouter()
   const pathname = usePathname()
 
@@ -37,6 +38,7 @@ export default function Home({ children }) {
 
   return (
     <main className='  relative w-full  h-full' onClick={(e) => mainClick(e)}>
+      {modal.includes('El minimo') && <ModalINFO theme={'Danger'} alert={false} button="Aceptar" funcion={() => setModal('')} close={true}>{modal}</ModalINFO>}
       <div className={`lg:grid lg:grid-cols-2 w-full lg:w-full lg:px-[5vw] flex flex-col min-h-full justify-between  pb-5`} style={{ gridTemplateColumns: '40% 60%' }}>
         <div className={`lg:flex flex-col justify-center items-center h-[300px] lg:h-auto hidden `}>
           <img src="/logo.svg" className={`h-[200px] w-[200px] ${style.logo}`} alt="User" />

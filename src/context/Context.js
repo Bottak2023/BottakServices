@@ -31,6 +31,7 @@ export function UserProvider({ children }) {
 	const [select2, setSelect2] = useState('USDT')
 	const [select3, setSelect3] = useState('USA')
 	const [countries, setCountries] = useState("BOL");
+	const [tarifas, setTarifas] = useState(undefined);
 
 	const [isSelect, setIsSelect] = useState(false)
 	const [isSelect2, setIsSelect2] = useState(false)
@@ -101,6 +102,7 @@ export function UserProvider({ children }) {
 			webcamRef1, item, setItem,
 			webcamRef2,
 			webcamRef3,
+			tarifas, setTarifas,
 			time_stamp, setTime_stamp,
 			notificaciones, setNotificaciones,
 			navItem, setNavItem,
@@ -146,7 +148,7 @@ export function UserProvider({ children }) {
 		webcamRef3,
 		fecha, qr, QRurl, divisas, envios,
 		webScann,
-		filter,
+		filter, tarifas,
 		filterQR, exchange, countries, destinatarios, transactionDB, navItem, comision,wallets,
 		enviosDB,
 		cambiosDB,time_stamp,

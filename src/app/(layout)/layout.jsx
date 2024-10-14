@@ -11,7 +11,7 @@ import { getSpecificData, getSpecificDataEq, listenToSpecificDataEq } from '@/fi
 
 export default function RootLayout({ children }) {
 
-    const { user, userDB, setUserProfile, modal, nav, setNav, userNav, setNavItem, setWallets, setUserData, divisas, setDivisas, setCountries, setEnviosDB, setCambiosDB, setNotificaciones, setIsSelect, setIsSelect2, setIsSelect3, setIsSelect4, setIsSelect5 } = useUser()
+    const { user, userDB, setUserProfile, modal, nav, setNav, userNav, setTarifas, setNavItem, setWallets, setUserData, divisas, setDivisas, setCountries, setEnviosDB, setCambiosDB, setNotificaciones, setIsSelect, setIsSelect2, setIsSelect3, setIsSelect4, setIsSelect5 } = useUser()
     const router = useRouter()
 
 
@@ -42,12 +42,14 @@ export default function RootLayout({ children }) {
         getSpecificData('divisas', setDivisas)
         getSpecificData(`/currencies/`, setCountries)
         getSpecificData(`/wallets/`, setWallets)
+        getSpecificData(`/tarifas/`, setTarifas)
     }, [])
     useEffect(() => {
         user && userDB === undefined && getSpecificData(`/users/${user.uid}`, setUserData)
         user && user !== undefined && listenToSpecificDataEq(`/envios/`, 'user uuid', user.uid, setEnviosDB)
         user && user !== undefined && listenToSpecificDataEq(`/cambios/`, 'user uuid', user.uid, setCambiosDB)
     }, [user, userDB])
+    
     console.log(userDB)
     return (
         user !== undefined && userDB !== undefined && divisas !== undefined && <>
