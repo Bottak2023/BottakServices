@@ -164,6 +164,9 @@ function writeUserData(rute, object, setUserSuccess, callback) {
 async function removeData(rute, setUserSuccess, callback) {
   await remove(ref(db, rute))
     .then(() => {
+      console.log('delete')
+      console.log(rute)
+
       setUserSuccess !== null ? setUserSuccess('save') : ''
       callback !== null ? callback() : ''
     })

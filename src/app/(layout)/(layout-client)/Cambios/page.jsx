@@ -13,7 +13,7 @@ import { WithAuth } from '@/HOCs/WithAuth'
 import { useRouter, usePathname } from 'next/navigation';
 
 export default function Home() {
-  const { nav, setNav, user, userDB, setUserProfile, comision, select, setSelect, select2, setSelect2, isSelect, setIsSelect, isSelect2, setIsSelect2, state, setState, setUserSuccess, success, setUserData, postsIMG, setUserPostsIMG, modal, setModal, setTransferencia, transferencia, divisas, setDivisas } = useUser()
+  const { nav, setNav, user, userDB, setUserProfile, comision,setComision, tarifas, select, setSelect, select2, setSelect2, isSelect, setIsSelect, isSelect2, setIsSelect2, state, setState, setUserSuccess, success, setUserData, postsIMG, setUserPostsIMG, modal, setModal, setTransferencia, transferencia, divisas, setDivisas } = useUser()
   const pathname = usePathname()
   const router = useRouter()
 
@@ -86,7 +86,10 @@ export default function Home() {
       router.push('/Register')
       return
     }
-
+    if (((transferencia * divisas['USDT'].compra / divisas[select].venta).toFixed(2)) < tarifas.tarifa_1_min && ((transferencia * divisas['USDT'].compra / divisas[select].venta).toFixed(2)) <= tarifas.tarifa_1_max) {
+      setModal(`INFO: El minimo de cambio debe ser mayor o equvalente a ${tarifas.tarifa_1_min}`)
+      return
+    }
     if ((divisas && divisas[select] && divisas[select2] && (transferencia * divisas['USDT'].compra / divisas[select].venta).toFixed(2)) > 100000) {
       window.open('https://api.whatsapp.com/send?phone=+59177455743&text=Hola%20BOTTAK,%20necesito%20hacer%20una%20transacci%C3%B3n...', '_blank')
       return
@@ -111,9 +114,22 @@ export default function Home() {
     user && userDB === undefined && getSpecificData(`/users/${user.uid}`, setUserData)
   }, [user, userDB])
 
+  useEffect(() => {
+    if (transferencia === '') {
+      setTransferencia(tarifas?.tarifa_1_min)
+      if (divisas && divisas[select] && divisas[select2] && tarifas?.tarifa_1_min && tarifas?.tarifa_1_max) {
 
+        (tarifas?.tarifa_1_min * divisas['USDT'].compra / divisas[select].venta).toFixed(2) <= tarifas.tarifa_1_max * 1 && ((tarifas?.tarifa_1_min * divisas['USDT'].compra / divisas[select].venta).toFixed(2)) >= tarifas.tarifa_1_min * 1 && setComision((divisas[select]['tarifa 1'] * tarifas?.tarifa_1_min / 100).toFixed(2));
+        (tarifas?.tarifa_1_min * divisas['USDT'].compra / divisas[select].venta).toFixed(2) <= tarifas.tarifa_2_max * 1 && ((tarifas?.tarifa_1_min * divisas['USDT'].compra / divisas[select].venta).toFixed(2)) >= tarifas.tarifa_2_min * 1 && setComision((divisas[select]['tarifa 2'] * tarifas?.tarifa_1_min / 100).toFixed(2));
+        (tarifas?.tarifa_1_min * divisas['USDT'].compra / divisas[select].venta).toFixed(2) <= tarifas.tarifa_3_max * 1 && ((tarifas?.tarifa_1_min * divisas['USDT'].compra / divisas[select].venta).toFixed(2)) >= tarifas.tarifa_3_min * 1 && setComision((divisas[select]['tarifa 3'] * tarifas?.tarifa_1_min / 100).toFixed(2));
+        ((tarifas?.tarifa_1_min * divisas['USDT'].compra / divisas[select].venta).toFixed(2)) > tarifas.tarifa_3_max * 1 && setComision('CONTACTESE CON SOPORTE');
+
+      }
+    }
+  }, [])
   return (
     <>
+
       <NavInit mobile={true} />
       <div className={`flex flex-col justify-center items-center h-[300px] lg:h-auto lg:hidden `}>
         <img src="/logo.svg" className={`h-[200px] w-[200px] ${style.logo}`} alt="User" />
@@ -159,7 +175,7 @@ export default function Home() {
           <div className='grid grid-cols-2 gap-[15px]'>
             <span className='text-white text-[14px] font-light'>Comisiones</span>
             <span className='text-white text-[14px] font-light'>
-              {comision} {select}
+              {comision} {comision !== 'CONTACTESE CON SOPORTE' ? select: ''}
             </span>
           </div>
           {/* <div className='grid grid-cols-2 gap-[15px]'>
@@ -187,74 +203,3 @@ export default function Home() {
 }
 
 
-
-
-// // const res = await fetch('http://localhost:3000/api')
-// const res = await fetch('/api', {
-//   method: 'POST',
-//   body: JSON.stringify({
-//     type: 'Cambio de Divisa',
-//     amount: transferencia,
-//     comision: 0
-//   }),
-//   headers: new Headers({
-//     'Content-Type': 'application/json; charset=UTF-8'
-//   })
-// })
-// const data = await res.json()
-// console.log(data)
-
-// console.log(data.url)
-// window.open(data.url, "_self")
-// return
-// console.log('click')
-// if (user == null && user == undefined) {
-//   console.log('signup')
-//   setModal('registrate')
-//   return
-// }
-
-// if (user && userDB == null) {
-//   console.log('registrate')
-
-
-//   router.push('/Register')
-//   return
-// }
-
-// if (user && userDB) {
-
-//   console.log('Destinatario')
-//   router.push('/Register/Destinatario')
-//   return
-// }
-
-
-
-
-
-
-
-
-{/* <dir>
-                <Button theme='Secondary'>   Iniciar Sesión   </Button >
-                <Button theme='secondary'>   registrate   </Button >
-            </dir> */}
-
-
-
-
-
-
-{/* <p className='text-white underline'>Politicas De Servicio</p> */ }
-{/*   {success == 'AccountNonExist' && <Error>Cuenta inexistente</Error>}
-      {success == 'Complete' && <Error>Complete el formulario</Error>} */}
-
-{     /*{success == false && <Error>ERROR: verifique e intente nuevamente</Error>}
-        {success == 'complete' && <Error>Llene todo el formulario</Error>} */}
-//   <div className="">
-//     <div className='grid grid-cols-2 gap-[15px]'><span className='text-white'>Tasa de cambio aplicado</span><span className='text-white'>1$ = 697 BOB</span></div>
-//     <div className='grid grid-cols-2 gap-[15px]'><span className='text-white'>Comisiones</span><span className='text-white'>5 $</span></div>
-//     <div className='grid grid-cols-2 gap-[15px]'><span className='text-white'>Pagas</span><span className='text-white'>0 $</span></div>
-//   </div>
-//   <br />

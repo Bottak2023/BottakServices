@@ -3,6 +3,7 @@
 import Button from '@/components/Button'
 import Subtitle from '@/components/Subtitle'
 import Modal from '@/components/Modal'
+import ModalINFO from '@/components/ModalINFO'
 
 // import ModalMSG from '@/components/ModalMSG'
 import { writeUserData, getSpecificData, removeData } from '@/firebase/database'
@@ -85,11 +86,11 @@ function Home() {
         <main className='w-full h-full'>
             {users === undefined && <Loader/>}
             {profileIMG.length > 0 && <div className='fixed top-0 left-0 h-[100vh] w-[100vw] bg-[#000000c7] z-40' onClick={closeProfileIMG}></div>}
-            {modal === 'DELETE' && <Modal theme="Danger" button="Eliminar" funcion={deletConfirm}>Estas por eliminar al siguiente usuario:  {item['nombre']}</Modal>}
-            {modal === 'HABILITAR' && <Modal theme="Primary" button="Habilitar" funcion={() => handlerUpdate('habilitado', true)}>Estas por HABILITAR al siguiente usuario:  {item['nombre']}</Modal>}
-            {modal === 'DESABILITAR' && <Modal theme="Danger" button="Desabilitar" funcion={() => handlerUpdate('habilitado', false)}>Estas por DESABILITAR al siguiente usuario:  {item['nombre']}</Modal>}
-            {modal === 'BLOQUEAR' && <Modal theme="Primary" button="Habilitar" funcion={() => handlerUpdate('bloqueado', true)}>Estas por BLOQUEAR al siguiente usuario:  {item['nombre']}</Modal>}
-            {modal === 'DESBLOQUEAR' && <Modal theme="Danger" button="Desabilitar" funcion={() => handlerUpdate('bloqueado', false)}>Estas por DESBLOQUEAR al siguiente usuario:  {item['nombre']}</Modal>}
+            {modal === 'DELETE' && <ModalINFO close={true}  theme="Danger" button="Eliminar" funcion={deletConfirm}>Estas por eliminar al siguiente usuario:  {item['nombre']}</ModalINFO>}
+            {modal === 'HABILITAR' && <ModalINFO close={true}  theme="Success" button="Habilitar" funcion={() => handlerUpdate('habilitado', true)}>Estas por HABILITAR al siguiente usuario:  {item['nombre']}</ModalINFO>}
+            {modal === 'DESABILITAR' && <ModalINFO close={true}  theme="Danger" button="Desabilitar" funcion={() => handlerUpdate('habilitado', false)}>Estas por DESABILITAR al siguiente usuario:  {item['nombre']}</ModalINFO>}
+            {modal === 'BLOQUEAR' && <ModalINFO close={true}  theme="Success" button="Habilitar" funcion={() => handlerUpdate('bloqueado', true)}>Estas por BLOQUEAR al siguiente usuario:  {item['nombre']}</ModalINFO>}
+            {modal === 'DESBLOQUEAR' && <ModalINFO close={true}  theme="Danger" button="Desabilitar" funcion={() => handlerUpdate('bloqueado', false)}>Estas por DESBLOQUEAR al siguiente usuario:  {item['nombre']}</ModalINFO>}
             <button className='fixed text-[20px] text-gray-500 h-[50px] w-[50px] rounded-full inline-block left-[0px] top-0 bottom-0 my-auto bg-[#00000010] z-20 lg:left-[20px]' onClick={prev}>{'<'}</button>
             <button className='fixed text-[20px] text-gray-500 h-[50px] w-[50px] rounded-full inline-block right-[0px] top-0 bottom-0 my-auto bg-[#00000010] z-20 lg:right-[20px]' onClick={next}>{'>'}</button>
             <div className="w-full   relative h-full overflow-auto shadow-2xl p-5 bg-white min-h-[80vh] scroll-smooth" ref={refFirst}>
@@ -98,7 +99,7 @@ function Home() {
                 <input type="text" className='border-b-[1px] text-[14px] outline-none w-[400px] text-black' onChange={onChangeHandler} placeholder='Buscar Usuario por nombre o DNI' />
                 <br />
                 <br />
-                <table className="w-full min-w-[1900px] border-[1px] bg-white text-[14px] text-left text-gray-500 border-t-4 border-t-gray-400">
+                <table className="w-full min-w-[2000px] border-[1px] bg-white text-[14px] text-left text-gray-500 border-t-4 border-t-gray-400">
                     <thead className="text-[14px] text-gray-700 uppercase bg-gray-800 text-white  ">
                         <tr>
                             <th scope="col" className="px-3 py-3">
@@ -215,7 +216,7 @@ function Home() {
                                     </td>
                                     <td className="px-3 py-4 ">
                                         {(i['bloqueado'] === undefined || i['bloqueado'] === false)
-                                            ? <Button theme={"Success"} click={() => manage(i, 'BLOQUEAR')}>No bloqueado</Button>
+                                            ? <Button theme={"Success"} click={() => manage(i, 'BLOQUEAR')}>No_bloqueado</Button>
                                             : <Button theme={"Danger"} click={() => manage(i, 'DESBLOQUEAR')}>Bloqueado</Button>
                                         }
                                     </td>
@@ -223,12 +224,12 @@ function Home() {
                                         <Button theme={"Danger"} click={() => manage(i, 'DELETE')}>Eliminar</Button>
                                     </td>
                                 </tr>
-                        })  
+                        })
                         }
                     </tbody>
                 </table>
             </div>
-        </main>     
+        </main>
     )
 }
 

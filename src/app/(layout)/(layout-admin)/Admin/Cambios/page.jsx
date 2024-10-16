@@ -1,6 +1,6 @@
 'use client';
 import { useUser } from '@/context/Context'
-import { getSpecificData, writeUserData } from '@/firebase/database'
+import { getSpecificData, writeUserData , removeData} from '@/firebase/database'
 import { useState, useEffect, useRef } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -10,6 +10,7 @@ import Loader from '@/components/Loader'
 import Modal from '@/components/Modal'
 import Select from '@/components/Select'
 import { estado as estadoCONST } from '@/constants/'
+import ModalINFO from '@/components/ModalINFO'
 
 export default function Home() {
 
@@ -21,6 +22,7 @@ export default function Home() {
   const refFirst = useRef(null);
   const [profileIMG, setProfileIMG] = useState('')
   const [row, setRow] = useState(-1)
+  const [selectDB, setSelectDB] = useState([])
 
   function onChangeFilter(e) {
     setFilter(e.target.value)
@@ -162,8 +164,43 @@ const botChat = ` ${(`${Object.entries(datosEmail).map(item => `------${item[0]}
     writeUserData(`cambios/${uuid}`, { ...state[uuid], notificaciones: true, date: new Date().getTime() }, setUserSuccess, callback)
   }
 
+  function handlerSelect(e) {
+    if (e.target.checked) {
+        if (e.target.name === 'ALL') {
+            let arr = Object.values(remesasDB).map(i => i.uuid)
+            setSelectDB(arr)
+            return
+        }
+        setSelectDB([...selectDB, e.target.name])
+    } else {
+        if (e.target.name === 'ALL') {
+            setSelectDB([])
+            return
+        }
+        const data = selectDB.filter(i => i !== e.target.name)
+        setSelectDB(data)
+    }
+}
+
+function eliminarSelectDB() {
+    setModal('DELETE')
+}
+
+function confirmEliminarSelectDB() {
+
+    const callback = (close) => {
+        console.log(close)
+        setRow(-1)
+        close && getSpecificData(`/cambios/`, setRemesasDB, () => { setModal(''); setSelectDB([]) })
+    }
 
 
+    selectDB.map((i, index) => {
+        removeData(`cambios/${i}`, setUserSuccess, () => callback(selectDB.length - 1 === index))
+    })
+
+
+}
 
 
 
@@ -191,15 +228,22 @@ const botChat = ` ${(`${Object.entries(datosEmail).map(item => `------${item[0]}
       {modal === 'Save' && <Modal funcion={saveConfirm}>Estas por modificar la tasa de cambio de:  {item['currency']}</Modal>}
       {modal === 'Disable' && <Modal funcion={disableConfirm}>Estas por {item.habilitado !== undefined && item.habilitado !== false ? 'DESABILITAR' : 'HABILITAR'} el siguiente item:  {item['currency']}</Modal>}
       {profileIMG.length > 0 && <div className='fixed top-0 left-0 h-[100vh] w-[100vw] bg-[#000000c7] z-40' onClick={closeProfileIMG}></div>}
-
+      {modal === 'DELETE' && <ModalINFO theme="Danger" button="Eliminar" funcion={confirmEliminarSelectDB} close={true}>
+        Estas por eliminar los siguientes cambios de usuario e importe: <br />
+        <div className='text-left pl-5'>
+          {Object.values(remesasDB).map((i) => selectDB.includes(i.uuid) && <> {i['usuario']}:__{i['importe']} <br /></>)}
+        </div>
+      </ModalINFO>}
       <button className='fixed text-[20px] text-gray-500 h-[50px] w-[50px] rounded-full inline-block left-[0px] top-0 bottom-0 my-auto bg-[#00000010] z-20 lg:left-[20px]' onClick={prev}>{'<'}</button>
       <button className='fixed text-[20px] text-gray-500 h-[50px] w-[50px] rounded-full inline-block right-[0px] top-0 bottom-0 my-auto bg-[#00000010] z-20 lg:right-[20px]' onClick={next}>{'>'}</button>
       <div className="w-full   relative h-full overflow-auto shadow-2xl p-5 bg-white min-h-[80vh] scroll-smooth" ref={refFirst}>
         <h3 className='font-medium text-[14px]'>Cambios</h3>
         <br />
         <input type="text" className='border-b-[1px] text-[14px] outline-none w-[400px]' onChange={onChangeFilter} placeholder='Buscar por remitente, destinatario o DNI' />
-        <div className='min-w-[1900px] flex justify-start items-center my-5 '>
-          <h3 className="flex pr-12 text-[14px]" htmlFor="">Estado</h3>
+        <div className='min-w-[1900px] flex justify-start items-center my-5 h-[40px]'>
+        {selectDB.length > 0 && <button className='w-[200px] flex justify-center items-center h-[40px] mr-5 text-white text-[14px] font-medium bg-red-500 border border-gray-200 rounded-[10px] px-5 cursor-pointer' onClick={eliminarSelectDB}>Eliminar</button>}
+
+          <h3 className="flex pr-12 text-[14px] text-black" htmlFor="">Estado</h3>
           <div className="grid grid-cols-5 gap-4 w-[800px] ">
             {estadoCONST.map((i, index) => {
               return <Tag theme={estado == i ? 'Primary' : 'Secondary'} click={() => setEstado(estado == i ? '' : i)}>{i}</Tag>
@@ -235,7 +279,9 @@ const botChat = ` ${(`${Object.entries(datosEmail).map(item => `------${item[0]}
             </tr>
 
             <tr>
-              <th scope="col" className="w-[50px] px-3 py-3">
+              <th scope="col" className="w-[100px] px-3 py-3">
+              <input type="checkbox" className='border-none mr-5 inline' onChange={handlerSelect} name={`ALL`} />
+
                 #
               </th>
               <th scope="col" className=" px-3 py-3">
@@ -328,6 +374,8 @@ const botChat = ` ${(`${Object.entries(datosEmail).map(item => `------${item[0]}
                 (i.usuario !== undefined && i.usuario.toLowerCase().includes(filter.toLowerCase()))) &&
                 <tr className={`text-[14px] border-b border-gray-50  py-1 transition-all ${index === row ? 'bg-gray-100' : 'bg-gray-200'} ${index % 2 === 0 ? '' : ''} `} key={index} onClick={() => setRow(index)}>
                   <td className="px-3 py-0  flex  ">
+                  <input type="checkbox" className='border-none mr-5' checked={selectDB.includes(i.uuid)} onChange={handlerSelect} name={i.uuid} />
+
                     <span className='h-full flex py-0'>{index + 1}</span>
                   </td>
                   {/* {console.log(i['estado'])} */}

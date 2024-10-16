@@ -10,6 +10,7 @@ import Loader from '@/components/Loader'
 import Modal from '@/components/Modal'
 import { useRouter } from 'next/navigation';
 import { useSearchParams } from 'next/navigation'
+import ModalINFO from '@/components/ModalINFO'
 
 
 
@@ -21,6 +22,7 @@ export default function Home() {
     const [state, setState] = useState({})
     const [temporal, setTemporal] = useState(undefined)
     const refFirst = useRef(null);
+    const [selectDB, setSelectDB] = useState([])
 
     const searchParams = useSearchParams()
     const pathname = searchParams.get('operacion')
@@ -54,6 +56,36 @@ export default function Home() {
         }
         await removeData(`users/${user.uuid}/destinatarios/${item.uuid}`, setUserSuccess, callback)
     }
+    function handlerSelect(e) {
+        if (e.target.checked) {
+            if (e.target.name === 'ALL') {
+                let arr = Object.values(userDB.destinatarioWallets).map(i => i.uuid)
+                setSelectDB(arr)
+                return
+            }
+            setSelectDB([...selectDB, e.target.name])
+        } else {
+            if (e.target.name === 'ALL') {
+                setSelectDB([])
+                return
+            }
+            const data = selectDB.filter(i => i !== e.target.name)
+            setSelectDB(data)
+        }
+    }
+    function eliminarSelectDB() {
+        setModal('DELETE')
+    }
+
+    function confirmEliminarSelectDB() {
+        const callback = (close) => {
+            console.log(close)
+            close && getSpecificData(`/users/${user.uid}`, setUserData, () => { setModal(''); setSelectDB([]) })
+        }
+        selectDB.map((i, index) => {
+            removeData(`users/${user.uid}/destinatarios/${i}`, setUserSuccess, () => callback(selectDB.length - 1 === index))
+        })
+    }
     const prev = () => {
         requestAnimationFrame(() => {
             const scrollLeft = refFirst.current.scrollLeft;
@@ -78,15 +110,23 @@ export default function Home() {
             {modal === 'Guardando...' && <Loader> {modal} </Loader>}
             {modal === 'Save' && <Modal funcion={saveConfirm}>Estas por modificar la tasa de cambio de:  {item['currency']}</Modal>}
             {modal === 'Disable' && <Modal funcion={disableConfirm}>Estas por {item.habilitado !== undefined && item.habilitado !== false ? 'DESABILITAR' : 'HABILITAR'} el siguiente item:  {item['currency']}</Modal>}
-            {modal === 'DELETE' && <Modal theme="Danger" button="Eliminar" funcion={deletConfirm}>Estas por eliminar al siguiente destinatario:  {item['destinatario']}</Modal>}
+            {/* {modal === 'DELETE' && <Modal theme="Danger" button="Eliminar" funcion={deletConfirm}>Estas por eliminar al siguiente destinatario:  {item['destinatario']}</Modal>} */}
+            {modal === 'DELETE' && <ModalINFO theme="Danger" button="Eliminar" funcion={confirmEliminarSelectDB} close={true}>
+                Estas por eliminar los siguientes destinatarios: <br />
+                <div className='text-left pl-5'>
+                    {Object.values(userDB.destinatarios).map((i) => selectDB.includes(i.uuid) && <> {i['destinatario']}:___{i['cuenta destinatario']} <br /></>)}
+                </div>
+            </ModalINFO>}
+       
             <button className='fixed text-[20px] text-gray-500 h-[50px] w-[50px] rounded-full inline-block left-[0px] top-0 bottom-0 my-auto bg-[#00000010] z-20 lg:left-[20px]' onClick={prev}>{'<'}</button>
             <button className='fixed text-[20px] text-gray-500 h-[50px] w-[50px] rounded-full inline-block right-[0px] top-0 bottom-0 my-auto bg-[#00000010] z-20 lg:right-[20px]' onClick={next}>{'>'}</button>
             <div className="w-full   relative h-full overflow-auto shadow-2xl p-5 bg-white min-h-[80vh] scroll-smooth" ref={refFirst}>
                 <h3 className='font-medium text-[14px]'>Destinatarios</h3>
                 <br />
-                <div className="w-[405px] grid grid-cols-2 gap-[5px]" >
+                <div className="w-[605px] grid grid-cols-3 gap-[5px]" >
                     <input type="text" className='border-b-[1px] text-[14px] text-black outline-none w-[200px]' onChange={onChangeFilter} placeholder='Buscar Destinatario' />
                     <button className='w-[200px] flex justify-center items-center h-[40px] text-white text-[14px] font-medium bg-[#32CD32] border border-gray-200 rounded-[10px] px-5 cursor-pointer' onClick={redirect}>Nuevo destinatario</button>
+                    {selectDB.length > 0 && <button className='w-[200px] flex justify-center items-center h-[40px] text-white text-[14px] font-medium bg-red-500 border border-gray-200 rounded-[10px] px-5 cursor-pointer' onClick={eliminarSelectDB}>Eliminar</button>}
                 </div>
                 <br />
                 <table className="w-full min-w-[1000px] border-[1px] bg-white text-[14px] text-left text-gray-500 ">
@@ -96,6 +136,7 @@ export default function Home() {
                         </tr>
                         <tr>
                             <th scope="col" className="w-[50px] px-3 py-2">
+                                <input type="checkbox" className='border-none mr-5 inline' onChange={handlerSelect} name={`ALL`} />
                                 #
                             </th>
                             <th scope="col" className=" px-3 py-2">
@@ -131,42 +172,43 @@ export default function Home() {
                         {userDB && userDB !== undefined && userDB.destinatarios && userDB.destinatarios !== undefined && Object.values(userDB.destinatarios).map((i, index) => {
                             return i.destinatario.toLowerCase().includes(filter.toLowerCase()) && <tr className={`text-[14px] border-b hover:bg-gray-100  ${index % 2 === 0 ? 'bg-gray-100' : 'bg-gray-100'} `} key={index}>
                                 <td className="px-3 py-4  flex text-gray-900 ">
+                                    <input type="checkbox" className='border-none mr-5' checked={selectDB.includes(i.uuid)} onChange={handlerSelect} name={i.uuid} />
                                     <span className='h-full flex py-2'>{index + 1}</span>
                                 </td>
                                 <td className="px-3 py-4 text-gray-900 ">
                                     {i['destinatario']}
                                 </td>
                                 <td className="w-32 p-3">
-                                {i['dni']}
+                                    {i['dni']}
                                     {/* <input type="text" name="dni" className='min-w-[100px] text-center p-2 outline-blue-200 rounded-xl' onChange={(e) => onChangeHandler(e, i)} defaultValue={i['dni'] !== undefined ? i['dni'] : 0} /> */}
                                 </td>
                                 <td className="w-32 p-3">
-                                {i['pais']}{countries?.[i?.cca3]?.envio !== undefined && countries[i.cca3].envio === true ? <span className='text-green-400 text-[10px] py-2 px-3 rounded-[5px] bg-gray-800 inline-block'> habilitado: {countries?.[i.cca3]?.code} {countries?.[i.cca3].divisasPaisDestinatario}</span> :<span className='text-red-400 text-[10px]  py-2 px-3 rounded-[5px] bg-gray-800 inline-block'> inhabilitado</span>}
-                                <br />
-                
-                                {/* {(`${countries?.[i.cca3]?.code}, ${countries?.[i?.cca3]?.divisasPaisDestinatario !== undefined ? 'Divisas: '+countries[i.cca3].divisasPaisDestinatario : ''}`)} */}
+                                    {i['pais']}{countries?.[i?.cca3]?.envio !== undefined && countries[i.cca3].envio === true ? <span className='text-green-400 text-[10px] py-2 px-3 rounded-[5px] bg-gray-800 inline-block'> habilitado: {countries?.[i.cca3]?.code} {countries?.[i.cca3].divisasPaisDestinatario}</span> : <span className='text-red-400 text-[10px]  py-2 px-3 rounded-[5px] bg-gray-800 inline-block'> inhabilitado</span>}
+                                    <br />
 
-                                
+                                    {/* {(`${countries?.[i.cca3]?.code}, ${countries?.[i?.cca3]?.divisasPaisDestinatario !== undefined ? 'Divisas: '+countries[i.cca3].divisasPaisDestinatario : ''}`)} */}
+
+
                                     {/* <input type="text" name="pais" className='min-w-[100px] text-left p-2 outline-blue-200 rounded-xl' onChange={(e) => onChangeHandler(e, i)} defaultValue={i['pais'] !== undefined ? i['pais'] : 0} /> */}
                                 </td>
                                 <td className=" p-3">
-                                {i['direccion']}
+                                    {i['direccion']}
                                     {/* <input type="text" name="direccion" className='min-w-[100px] text-left p-2 outline-blue-200 rounded-xl' onChange={(e) => onChangeHandler(e, i)} defaultValue={i['direccion'] !== undefined ? i['direccion'] : 0} /> */}
                                 </td>
                                 <td className="w-32 p-3">
-                                {i['celular']}
+                                    {i['celular']}
                                     {/* <input type="text" name="celular" className='min-w-[100px] text-center p-2 outline-blue-200 rounded-xl' onChange={(e) => onChangeHandler(e, i)} defaultValue={i['celular'] !== undefined ? i['celular'] : 0} /> */}
                                 </td>
                                 <td className="w-32 p-3">
-                                {i['cuenta destinatario']}
+                                    {i['cuenta destinatario']}
                                     {/* <input type="text" name="cuenta destinatario" className='min-w-[100px] text-center p-2 outline-blue-200 rounded-xl' onChange={(e) => onChangeHandler(e, i)} defaultValue={i['cuenta destinatario'] !== undefined ? i['cuenta destinatario'] : 0} /> */}
                                 </td>
                                 <td className="w-32 p-3">
-                                {i['nombre de banco']}
+                                    {i['nombre de banco']}
                                     {/* <input type="text" name="nombre de banco" className='min-w-[100px] text-center p-2 outline-blue-200 rounded-xl' onChange={(e) => onChangeHandler(e, i)} defaultValue={i['nombre de banco'] !== undefined ? i['nombre de banco'] : 0} /> */}
                                 </td>
                                 <td className="px-3 py-4 w-32 text-center">
-                                {countries?.[i?.cca3]?.envio !== undefined && countries[i.cca3].envio === true ? <Button theme={"Success"} click={() => save(i)}>Continuar</Button>:<Button theme={"Disable"}>inhabilitado</Button>}
+                                    {countries?.[i?.cca3]?.envio !== undefined && countries[i.cca3].envio === true ? <Button theme={"Success"} click={() => save(i)}>Continuar</Button> : <Button theme={"Disable"}>inhabilitado</Button>}
                                 </td>
                                 {/* <td className="px-3 py-4 ">
                                     <Button theme={"Danger"} click={() => manage(i, 'DELETE')}>Eliminar</Button>

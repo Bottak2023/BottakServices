@@ -1,6 +1,6 @@
 'use client';
 import { useUser } from '@/context/Context'
-import { getSpecificData, writeUserData } from '@/firebase/database'
+import { getSpecificData, writeUserData, removeData } from '@/firebase/database'
 import { useState, useEffect, useRef } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -10,6 +10,7 @@ import Loader from '@/components/Loader'
 import Modal from '@/components/Modal'
 import Select from '@/components/Select'
 import { estado as estadoCONST } from '@/constants/'
+import ModalINFO from '@/components/ModalINFO'
 
 export default function Home() {
 
@@ -21,6 +22,7 @@ export default function Home() {
   const refFirst = useRef(null);
   const [profileIMG, setProfileIMG] = useState('')
   const [row, setRow] = useState(-1)
+  const [selectDB, setSelectDB] = useState([])
 
   function onChangeFilter(e) {
     setFilter(e.target.value)
@@ -74,72 +76,72 @@ export default function Home() {
 
 
 
-    const datosEmail =  {
+      const datosEmail = {
         'DATOS DE REMITENTE': object['divisa de envio'] === 'USDT'
-            ? {
-                Nombre: object['remitente'],
-                Dni: object['dni remitente'],
-                Pais: object['pais remitente'],
-                Celular: object['whatsapp'],
-                'Direccion de wallet': object['billetera remitente'],
-                Red: object['red bottak'],
-                'Divisa Envio': object['divisa de envio']
-            }
-            : {
-                Nombre: object['remitente'],
-                Dni: object['dni remitente'],
-                Pais: object['pais remitente'],
-                Celular: object['whatsapp'],
-                Banco: object['banco remitente'],
-                'Cuenta Bancaria': object['cuenta bancaria'],
-                'Divisa Envio': object['divisa de envio']
-            },
+          ? {
+            Nombre: object['remitente'],
+            Dni: object['dni remitente'],
+            Pais: object['pais remitente'],
+            Celular: object['whatsapp'],
+            'Direccion de wallet': object['billetera remitente'],
+            Red: object['red bottak'],
+            'Divisa Envio': object['divisa de envio']
+          }
+          : {
+            Nombre: object['remitente'],
+            Dni: object['dni remitente'],
+            Pais: object['pais remitente'],
+            Celular: object['whatsapp'],
+            Banco: object['banco remitente'],
+            'Cuenta Bancaria': object['cuenta bancaria'],
+            'Divisa Envio': object['divisa de envio']
+          },
         'DATOS DE DESTINATARIO': object['divisa de receptor'] === 'USDT'
-            ? {
-                Nombre: object['destinatario'],
-                Dni: object['dni'],
-                Pais: object['pais'],
-                Direccion: object['direccion'],
-                Celular: object['celular'],
-                'Direccion de billetera': object['billetera destinatario'],
-                'Red': object['red destinatario'],
-                'Divisa Receptor': object['divisa de receptor'],
-            }
-            : {
-                Nombre: object['destinatario'],
-                Dni: object['dni'],
-                Pais: object['pais'],
-                Direccion: object['direccion'],
-                Celular: object['celular'],
-                'Cuenta Destinatario': object['cuenta destinatario'],
-                'Nombre Banco': object['nombre de banco'],
-                'Divisa Receptor': object['divisa de receptor'],
-            },      
+          ? {
+            Nombre: object['destinatario'],
+            Dni: object['dni'],
+            Pais: object['pais'],
+            Direccion: object['direccion'],
+            Celular: object['celular'],
+            'Direccion de billetera': object['billetera destinatario'],
+            'Red': object['red destinatario'],
+            'Divisa Receptor': object['divisa de receptor'],
+          }
+          : {
+            Nombre: object['destinatario'],
+            Dni: object['dni'],
+            Pais: object['pais'],
+            Direccion: object['direccion'],
+            Celular: object['celular'],
+            'Cuenta Destinatario': object['cuenta destinatario'],
+            'Nombre Banco': object['nombre de banco'],
+            'Divisa Receptor': object['divisa de receptor'],
+          },
         'DATOS DE TRANSACCION': {
-            Operacion: object['operacion'],
-            Importe: object['importe'],
-            Comision: object['comision'],
-            ['Importe detinatario']: object['cambio'],
-            Estado: object['estado'],
-            Fecha: object['fecha'],
-            'ID de tracking': object.uuid
+          Operacion: object['operacion'],
+          Importe: object['importe'],
+          Comision: object['comision'],
+          ['Importe detinatario']: object['cambio'],
+          Estado: object['estado'],
+          Fecha: object['fecha'],
+          'ID de tracking': object.uuid
 
         },
         'CUENTA RECEPTORA BOTTAK': object['divisa de envio'] === 'USDT'
-            ? {
-                'Billetera Bottak': object['billetera bottak'],
-                'Red Bottak': object['red bottak']
-            }
-            : {
-                'Banco Bottak': object['banco bottak'],
-                'Cuenta Bottak': object['cuenta bottak']
-            }
+          ? {
+            'Billetera Bottak': object['billetera bottak'],
+            'Red Bottak': object['red bottak']
+          }
+          : {
+            'Banco Bottak': object['banco bottak'],
+            'Cuenta Bottak': object['cuenta bottak']
+          }
 
-    }
+      }
 
-    
 
-const html = (`<main style="font-family: Arial, sans-serif; background-color: #f0f0f0; padding: 20px;">
+
+      const html = (`<main style="font-family: Arial, sans-serif; background-color: #f0f0f0; padding: 20px;">
         <table style="width: 100%; min-width: 50vw; border-radius: 20px; text-align: left; font-size: 14px; color: #6b7280; background-color: white; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);">
             <thead style="text-align: center; font-weight: bold; background-color: #4b5563; color: white;">
                 <tr>
@@ -168,14 +170,14 @@ ${Object.entries(item[1]).map(i => `<tr style="background-color: white; border-b
 </table>
 </main>`)
 
-const botChat = ` ${(`${Object.entries(datosEmail).map(item => `------${item[0]}---\n${Object.entries(item[1]).map(i => `${i[0]}: ${i[1]}\n`)}`)}\n${object.url}`).replaceAll(',','').replaceAll('  ', ' ')}`
+      const botChat = ` ${(`${Object.entries(datosEmail).map(item => `------${item[0]}---\n${Object.entries(item[1]).map(i => `${i[0]}: ${i[1]}\n`)}`)}\n${object.url}`).replaceAll(',', '').replaceAll('  ', ' ')}`
 
       await fetch(`/api/sendEmail`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ data: html, estado: object['estado'], email: user.email,operacion: object['operacion'] })
+        body: JSON.stringify({ data: html, estado: object['estado'], email: user.email, operacion: object['operacion'] })
       })
       await fetch(`/api/bot`, {
         method: 'POST',
@@ -190,6 +192,51 @@ const botChat = ` ${(`${Object.entries(datosEmail).map(item => `------${item[0]}
     setModal('Guardando...')
     writeUserData(`envios/${uuid}`, { ...state[uuid], notificaciones: true, date: new Date().getTime() }, setUserSuccess, callback)
   }
+
+
+  function handlerSelect(e) {
+    if (e.target.checked) {
+      if (e.target.name === 'ALL') {
+        let arr = Object.values(remesasDB).map(i => i.uuid)
+        setSelectDB(arr)
+        return
+      }
+      setSelectDB([...selectDB, e.target.name])
+    } else {
+      if (e.target.name === 'ALL') {
+        setSelectDB([])
+        return
+      }
+      const data = selectDB.filter(i => i !== e.target.name)
+      setSelectDB(data)
+    }
+  }
+
+  function eliminarSelectDB() {
+    setModal('DELETE')
+  }
+
+  function confirmEliminarSelectDB() {
+
+    const callback = (close) => {
+      console.log(close)
+      setRow(-1)
+      close && getSpecificData(`/envios/`, setRemesasDB, () => { setModal(''); setSelectDB([]) })
+    }
+
+
+    selectDB.map((i, index) => {
+      removeData(`envios/${i}`, setUserSuccess, () => callback(selectDB.length - 1 === index))
+    })
+
+
+  }
+
+
+
+
+
+
   const prev = () => {
     requestAnimationFrame(() => {
       const scrollLeft = refFirst.current.scrollLeft;
@@ -215,22 +262,34 @@ const botChat = ` ${(`${Object.entries(datosEmail).map(item => `------${item[0]}
       {modal === 'Guardando...' && <Loader> {modal} </Loader>}
       {modal === 'Save' && <Modal funcion={saveConfirm}>Estas por modificar la tasa de cambio de:  {item['currency']}</Modal>}
       {modal === 'Disable' && <Modal funcion={disableConfirm}>Estas por {item.habilitado !== undefined && item.habilitado !== false ? 'DESABILITAR' : 'HABILITAR'} el siguiente item:  {item['currency']}</Modal>}
+      {modal === 'DELETE' && <ModalINFO theme="Danger" button="Eliminar" funcion={confirmEliminarSelectDB} close={true}>
+        Estas por eliminar las siguientes remesas de remitente e importe: <br />
+        <div className='text-left pl-5'>
+          {Object.values(remesasDB).map((i) => selectDB.includes(i.uuid) && <> {i['remitente']}:__{i['importe']} <br /></>)}
+        </div>
+      </ModalINFO>}
+
+
       {profileIMG.length > 0 && <div className='fixed top-0 left-0 h-[100vh] w-[100vw] bg-[#000000c7] z-40' onClick={closeProfileIMG}></div>}
       <button className='fixed text-[20px] text-gray-500 h-[50px] w-[50px] rounded-full inline-block left-[0px] top-0 bottom-0 my-auto bg-[#00000010] z-20 lg:left-[20px]' onClick={prev}>{'<'}</button>
       <button className='fixed text-[20px] text-gray-500 h-[50px] w-[50px] rounded-full inline-block right-[0px] top-0 bottom-0 my-auto bg-[#00000010] z-20 lg:right-[20px]' onClick={next}>{'>'}</button>
       <div className="w-full   relative h-full overflow-auto shadow-2xl p-5 bg-white min-h-[80vh] scroll-smooth" ref={refFirst}>
-        <h3 className='font-medium text-[14px]'>Remesas</h3>
+        <h3 className='font-medium text-[14px] text-black'>Remesas</h3>
         <br />
         <input type="text" className='border-b-[1px] text-[14px] outline-none w-[400px]' onChange={onChangeFilter} placeholder='Buscar por remitente, destinatario o DNI' />
-        <div className='min-w-[1900px] flex justify-start items-center my-5 '>
-          <h3 className="flex pr-12 text-[14px]" htmlFor="">Estado</h3>
+        <div className='min-w-[1900px] flex justify-start items-center my-5 h-[40px]'>
+          
+        {selectDB.length > 0 && <button className='w-[200px] flex justify-center items-center h-[40px] mr-5 text-white text-[14px] font-medium bg-red-500 border border-gray-200 rounded-[10px] px-5 cursor-pointer' onClick={eliminarSelectDB}>Eliminar</button>}
+
+          <h3 className="flex pr-12 text-[14px] text-black" htmlFor="">Estado</h3>
           <div className="grid grid-cols-5 gap-4 w-[800px] ">
             {estadoCONST.map((i, index) => {
               return <Tag theme={estado == i ? 'Primary' : 'Secondary'} click={() => setEstado(estado == i ? '' : i)}>{i}</Tag>
             })}
           </div>
+
         </div>
-      
+
         <table className="w-full min-w-[4300px] border-[1px] bg-white text-[14px] text-left text-gray-500 border-t-4 border-t-gray-400">
           <thead className="text-[14px] text-gray-700 uppercase bg-gray-800 text-white ">
 
@@ -255,11 +314,13 @@ const botChat = ` ${(`${Object.entries(datosEmail).map(item => `------${item[0]}
               </th>
               <th scope="col" className="w-[50px] px-3 py-1">
 
-</th>
+              </th>
             </tr>
 
             <tr>
-              <th scope="col" className="w-[50px] px-3 py-3">
+              <th scope="col" className="w-[100px] px-3 py-3">
+                <input type="checkbox" className='border-none mr-5 inline' onChange={handlerSelect} name={`ALL`} />
+
                 #
               </th>
               <th scope="col" className=" px-3 py-3">
@@ -363,6 +424,8 @@ const botChat = ` ${(`${Object.entries(datosEmail).map(item => `------${item[0]}
                 (i.estado !== undefined && i.estado.toLowerCase().includes(estado.toLowerCase())) && i.operacion === 'Envio' &&
                 <tr className={`text-[14px] border-b border-gray-50  py-1 transition-all ${index === row ? 'bg-gray-100' : 'bg-gray-200'} ${index % 2 === 0 ? '' : ''} `} key={index} onClick={() => setRow(index)}>
                   <td className="px-3 py-0 flex  ">
+                    <input type="checkbox" className='border-none mr-5' checked={selectDB.includes(i.uuid)} onChange={handlerSelect} name={i.uuid} />
+
                     <span className='h-full flex py-0'>{index + 1}</span>
                   </td>
                   <td className="min-w-32 px-3 py-0 ">

@@ -7,7 +7,7 @@ import React, { useState, useEffect } from "react";
 import { useUser } from '@/context/Context'
 
 export default function App({ placeholder, value, onChange, propHandlerSelect, propSelect, propIsSelect, propHandlerIsSelect, defaultValue }) {
-  const { userDB, currency, setCurrency, countries, setUserSuccess, select, setSelect, select2, setSelect2, setComision, transferencia, setTransferencia, success, setuserSuccess, divisas, setDivisas, isSelect, setIsSelect, isSelect2, setIsSelect2, } = useUser()
+  const { userDB, currency, setCurrency, countries, setUserSuccess, tarifas, select, setSelect, select2, setSelect2, setComision, transferencia, setTransferencia, success, setuserSuccess, divisas, setDivisas, isSelect, setIsSelect, isSelect2, setIsSelect2, } = useUser()
  
   // const [currency, setCurrency] = useState("BOB");
   // const [select, setSelect] = useState('BOB')
@@ -36,10 +36,10 @@ export default function App({ placeholder, value, onChange, propHandlerSelect, p
   const handlerOnChange = (e) => {
     onChange == 'Transference' && setTransferencia((e.target.value * 1).toFixed(2));
 
-    (divisas && divisas[select] && divisas[select2] && (e.target.value * divisas['USDT'].compra / divisas[select].venta).toFixed(2)) <= 1000 && setComision((divisas[select]['tarifa 1'] * e.target.value / 100).toFixed(2));
-    (divisas && divisas[select] && divisas[select2] && (e.target.value * divisas['USDT'].compra / divisas[select].venta).toFixed(2)) <= 10000 && (divisas && divisas[select] && divisas[select2] && (e.target.value * divisas['USDT'].compra / divisas[select].venta).toFixed(2)) > 1000 && setComision((divisas[select]['tarifa 2'] * e.target.value / 100).toFixed(2));
-    (divisas && divisas[select] && divisas[select2] && (e.target.value * divisas['USDT'].compra / divisas[select].venta).toFixed(2)) <= 100000 && (divisas && divisas[select] && divisas[select2] && (e.target.value * divisas['USDT'].compra / divisas[select].venta).toFixed(2)) > 10000 && setComision((divisas[select]['tarifa 3'] * e.target.value / 100).toFixed(2));
-    (divisas && divisas[select] && divisas[select2] && (e.target.value * divisas['USDT'].compra / divisas[select].venta).toFixed(2)) > 100000 && setComision('CONTACTESE CON SOPORTE');
+    (e.target.value * divisas['USDT'].compra / divisas[select].venta).toFixed(2) <= tarifas.tarifa_1_max * 1 && ((e.target.value * divisas['USDT'].compra / divisas[select].venta).toFixed(2)) >= tarifas.tarifa_1_min * 1 && setComision((divisas[select]['tarifa 1'] * e.target.value / 100).toFixed(2));
+    (e.target.value * divisas['USDT'].compra / divisas[select].venta).toFixed(2) <= tarifas.tarifa_2_max * 1 && ((e.target.value * divisas['USDT'].compra / divisas[select].venta).toFixed(2)) >= tarifas.tarifa_2_min * 1 && setComision((divisas[select]['tarifa 2'] * e.target.value / 100).toFixed(2));
+    (e.target.value * divisas['USDT'].compra / divisas[select].venta).toFixed(2) <= tarifas.tarifa_3_max * 1 && ((e.target.value * divisas['USDT'].compra / divisas[select].venta).toFixed(2)) >= tarifas.tarifa_3_min * 1 && setComision((divisas[select]['tarifa 3'] * e.target.value / 100).toFixed(2));
+    ((e.target.value * divisas['USDT'].compra / divisas[select].venta).toFixed(2)) > tarifas.tarifa_3_max * 1 && setComision('CONTACTESE CON SOPORTE');
 
   }
   useEffect(() => {
