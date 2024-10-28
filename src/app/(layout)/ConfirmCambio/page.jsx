@@ -57,7 +57,7 @@ function Home() {
         <div className='w-full'>
             {modal === 'Guardando...' && <Loader> {modal} </Loader>}
             {destinatario !== undefined && transferencia !== '' && <div className='relative left-0 right-0 mx-0   rounded-[20px]'>
-                <div className="relative sm:left-0 sm:right-0 mx-auto  w-full overflow-y-auto sm:w-[500px] sm:max-h-[87vh] lg:w-[70%] lg:min-w-auto text-[14px] text-gray-500 bg-gradient-to-tr from-gray-100 to-gray-300 rounded-[5px] p-5">
+                <div className="relative sm:left-0 sm:right-0 mx-auto  w-full overflow-y-auto sm:w-[500px] sm:max-h-[87vh] lg:w-[70%] lg:min-w-auto text-[14px] text-gray-500 bg-gradient-to-tr from-gray-100 to-gray-300 rounded-[5px]  p-0 md:p-5">
 
                     <table className='w-full' >
                         <thead className="w-full text-[14px] text-gray-900 uppercase bg-gray-50">
@@ -193,7 +193,7 @@ function Home() {
                                 </td>
                             </tr>
 
-                            <tr className=" text-[14px] border-b border-[#00000040] hover:bg-gray-50 " >
+                            <tr className=" text-[14px] border-b border-[#00000040] hover:bg-gray-50  bg-transparent md:bg-gray-50" >
                                 <td className="px-2 py-2 font-bold  text-gray-900 ">
                                     <div className='flex justify-center pt-5'>
                                         <Button theme={"Disable"} click={() => router.back()}>Atras</Button>
