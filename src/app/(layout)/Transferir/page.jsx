@@ -376,25 +376,25 @@ function Home() {
                 <Label htmlFor="">Titular de banco bottak</Label>
                 <Input type="text" name="titular de banco" onChange={onChangeHandler} required />
             </div> */}
-                <div className='bg-gradient-to-tr from-gray-400 to-gray-200  col-span-2  lg:grid lg:grid-cols-2 lg:gap-5 p-1 lg:p-5 justify-items-center'>
+                <div className='bg-transparent md:bg-gradient-to-tr from-gray-400 to-gray-200  col-span-2  lg:grid lg:grid-cols-2 lg:gap-5 p-1 lg:p-5 justify-items-center'>
                     {<div className='text-center w-full col-span-2 bg-gray-800 text-white py-5 mb-5' >
                        {select !== 'USDT' ?'Indica tu banco y tu numero de cuenta desde la cual haras la transferencia': 'Indica tu billetera y su direccion desde la cual haras la transferencia'}
                         {/* verifique sus datos de transaccion a continuación oprima Verificar Transacción */}
                     </div>}
-                    {select !== 'USDT' && <div className='p-5  md:p-0  space-y-5 w-full max-w-[380px] '>
+                    {select !== 'USDT' && <div className='py-5  md:py-0  space-y-5 w-full max-w-[380px] '>
                         <Label htmlFor="">Elige tu banco</Label>
                         <SelectBank name="nombre de banco" bg='bg-gray-50  border-gray-400' propHandlerIsSelect={handlerIsSelect5} propIsSelect={isSelect5} operation="envio" click={handlerBankSelect2} arr={countries[userDB.cca3].countries !== undefined ? Object.values(countries[userDB.cca3].countries) : []} />
                     </div>}
-                    {select !== 'USDT' && <div className='p-5  md:p-0   space-y-5 w-full max-w-[380px] '>
+                    {select !== 'USDT' && <div className='py-5  md:py-0   space-y-5 w-full max-w-[380px] '>
                         <Label htmlFor="">Numero de tu cuenta bancaria</Label>
                         <Input type="text" name="cuenta bancaria" onChange={onChangeHandler} required />
                     </div>}
 
-                    {select == 'USDT' && <div className='p-5  md:p-0   w-full max-w-[380px] space-y-5'>
+                    {select == 'USDT' && <div className='py-5  md:py-0   w-full max-w-[380px] space-y-5'>
                         <Label htmlFor="">Elige una wallet de tranferencia</Label>
                         <SelectWallet name="billetera bottak" bg='bg-gray-50 border-gray-400'  propHandlerIsSelect={handlerIsSelect5} propIsSelect={isSelect5} operation="envio" click={handlerWalletSelect2} arr={wallets ? Object.values(wallets) : []} />
                     </div>}
-                    {select == 'USDT' && <div className='p-5  md:p-0   space-y-5 w-full max-w-[380px]'>
+                    {select == 'USDT' && <div className='py-5  md:py-0   space-y-5 w-full max-w-[380px]'>
                         <Label htmlFor="">Dirección de tu billetera</Label>
                         <Input type="text" name="billetera remitente" onChange={onChangeHandler} required />
                     </div>}
@@ -406,7 +406,7 @@ function Home() {
 
                     {/* {destinatario !== undefined && destinatario['banco bottak'] !== undefined &&  */}
                     {select !== 'USDT'
-                        ? <div className='p-5  md:p-0   space-y-5'>
+                        ? <div className='py-5  md:py-0   space-y-5'>
                             {/* <Label htmlFor="">QR bancario para el deposito</Label> */}
                             <Label htmlFor="">QR para transferencia</Label>
 
@@ -426,7 +426,7 @@ function Home() {
                                 {destinatario !== undefined && destinatario['banco bottak'] !== undefined && countries && countries !== undefined && countries[userDB.cca3] !== undefined && countries[userDB.cca3].countries[destinatario['banco bottak']] !== undefined && countries[userDB.cca3].countries[destinatario['banco bottak']].banco}
                             </span>}
                         </div>
-                        : <div className=' space-y-5 p-5  md:p-0  '>
+                        : <div className=' space-y-5 py-5  md:py-0  '>
                             <Label htmlFor="">QR para transferencia</Label>
 
 
@@ -446,7 +446,7 @@ function Home() {
                     }
 
                 
-                    {((destinatario !== undefined && destinatario['banco bottak'] !== undefined) || walletQR) && <div className=' p-5  md:p-0  space-y-5'>
+                    {((destinatario !== undefined && destinatario['banco bottak'] !== undefined) || walletQR) && <div className=' py-5  md:py-0  space-y-5'>
                         <Label htmlFor="">Subir baucher</Label>
 
                         {/* <Label htmlFor="">Baucher de transferencia</Label> */}
@@ -460,7 +460,7 @@ function Home() {
                     </div>}
 
 
-                    {countries[userDB.cca3] !== undefined && countries[userDB.cca3].countries !== undefined && <div className='p-5  md:p-0  flex w-full justify-around items-end col-span-2'>
+                    {countries[userDB.cca3] !== undefined && countries[userDB.cca3].countries !== undefined && <div className='py-5  md:py-0  flex w-full justify-around items-end col-span-2'>
                         <Button type='submit' theme='Success' >Verificar Transacción</Button>
                         {/* <Button type='button' theme='Success' click={validateTransaction} >Verificar Transacció</Button> */}
                     </div>}
