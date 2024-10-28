@@ -122,11 +122,16 @@ export default function Home() {
 
             <h3 className='font-bold text-[14px] text-white uppercase'> {pathname === 'Cambio' ? 'Registro de wallets' : 'Registro de destinatarios'}</h3>
             <br />
-            <div className="w-[615px] grid grid-cols-3 gap-[5px]" >
-                <input type="text" className='border-b-[1px] border-white px-5 text-[14px] bg-transparent text-white outline-none w-[200px] placeholder:text-gray-300 ' onChange={onChangeFilter} placeholder='Buscar Destinatario' />
-                <button className='w-[200px] flex justify-center items-center h-[40px] text-white text-[14px] font-medium bg-[#32CD32] border border-gray-200 rounded-[10px] px-5 cursor-pointer' onClick={redirect}>Nuevo destinatario</button>
-                {selectDB.length > 0 && <button className='w-[200px] flex justify-center items-center h-[40px] text-white text-[14px] font-medium bg-red-500 border border-gray-200 rounded-[10px] px-5 cursor-pointer' onClick={eliminarSelectDB}>Eliminar</button>}
-            </div>
+            <div className="w-full md:w-[615px] flex justify-between md:grid md:grid-cols-2 gap-[5px] " >
+                <input type="text" className='border-b-[1px] border-white px-5 text-[14px] bg-transparent text-white outline-none w-[170px] md:w-[200px] placeholder:text-gray-300 ' onChange={onChangeFilter} placeholder='Buscar Destinatario' />
+                
+                {selectDB.length > 0 
+                ? <button className='w-[200px] flex justify-center items-center h-[40px] text-white text-[14px] font-medium bg-red-500 border border-gray-200 rounded-[10px] px-5 cursor-pointer' onClick={eliminarSelectDB}>Eliminar</button>
+                :            <button className='w-[200px] md:w-[200px] flex justify-center items-center h-[40px] text-white text-[14px] font-medium bg-[#32CD32] border border-gray-200 rounded-[10px] px-5 cursor-pointer' onClick={redirect}>Nuevo destinatario</button>
+
+            }
+            
+                </div>
                 <br />
 
             <div className="w-full   relative h-full overflow-auto shadow-2xl md-transparent bg-white  min-h-[80vh] scroll-smooth" ref={refFirst}>
