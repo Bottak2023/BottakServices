@@ -514,6 +514,10 @@ export default function Home() {
                   <Label htmlFor="">Network</Label>
                   <Input type="text" name="network" defValue={'network'} require />
                 </div>
+                <div className='space-y-5'>
+                  <Label htmlFor="">Link de pago</Label>
+                  <Input type="text" name="link de pago" defValue={'link de pago'} require />
+                </div>
               </div>
 
               <div className='flex w-full justify-around'>
@@ -586,6 +590,10 @@ export default function Home() {
                 <div className='space-y-5'>
                   <Label htmlFor="">Dominio App</Label>
                   <Input type="text" name="dominio" defValue={'dominio'} require />
+                </div>
+                <div className='space-y-5'>
+                  <Label htmlFor="">Link de pago</Label>
+                  <Input type="text" name="link de pago" defValue={'link de pago'} require />
                 </div>
               </div>
 

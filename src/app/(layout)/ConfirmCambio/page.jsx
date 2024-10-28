@@ -57,7 +57,7 @@ function Home() {
         <div className='w-full'>
             {modal === 'Guardando...' && <Loader> {modal} </Loader>}
             {destinatario !== undefined && transferencia !== '' && <div className='relative left-0 right-0 mx-0   rounded-[20px]'>
-                <div className="relative sm:left-0 sm:right-0 mx-auto  w-full overflow-y-auto sm:w-[500px] sm:max-h-[87vh] lg:w-[70%] lg:min-w-auto text-[14px] text-gray-500 bg-white rounded-[5px] p-5">
+                <div className="relative sm:left-0 sm:right-0 mx-auto  w-full overflow-y-auto sm:w-[500px] sm:max-h-[87vh] lg:w-[70%] lg:min-w-auto text-[14px] text-gray-500 bg-gradient-to-tr from-gray-100 to-gray-300 rounded-[5px] p-5">
 
                     <table className='w-full' >
                         <thead className="w-full text-[14px] text-gray-900 uppercase bg-gray-50">
@@ -69,24 +69,29 @@ function Home() {
                             </tr>
                         </thead>
                         <tbody>
+                            <tr className=" text-[14px] bg-gray-800 border-b" >
+                                <td scope="col" colSpan="2" className="px-3 py-3  font-bold text-[14px] text-white  ">
+                                    DATOS DE EMISION
+                                </td>
+                            </tr>
                             <tr className=" text-[14px] border-b border-[#00000040] hover:bg-gray-50 " >
-                                <td className="px-2 py-2 flex flex-col bg-[#00000020] font-bold text-[14px] text-gray-900 ">
-                                    Usuario
+                                <td className="px-2 py-2 flex flex-col bg-gray-300 font-bold text-[14px] text-gray-900 ">
+                                    Nombre
                                 </td>
                                 <td className="px-2 py-2  text-gray-900  border-r border-[#00000040] ">
                                     {userDB && userDB && userDB.nombre}
                                 </td>
                             </tr>
                             <tr className=" text-[14px] border-b border-[#00000040] hover:bg-gray-50 " >
-                                <td className="px-2 py-2 flex flex-col bg-[#00000020] font-bold text-[14px] text-gray-900 ">
-                                    DNI de usuario                            </td>
+                                <td className="px-2 py-2 flex flex-col bg-gray-300 font-bold text-[14px] text-gray-900 ">
+                                    DNI                           </td>
                                 <td className="px-2 py-2  text-gray-900  border-r border-[#00000040]">
                                     {userDB && userDB && userDB.dni}
                                 </td>
                             </tr>
                             <tr className=" text-[14px] border-b border-[#00000040] hover:bg-gray-50 " >
-                                <td className="px-2 py-2 flex flex-col bg-[#00000020] font-bold text-[14px] text-gray-900 ">
-                                    Pais de usuario
+                                <td className="px-2 py-2 flex flex-col bg-gray-300 font-bold text-[14px] text-gray-900 ">
+                                    Pais
                                 </td>
                                 <td className="px-2 py-2  text-gray-900  border-r border-[#00000040]">
                                     {userDB && userDB && userDB.pais}
@@ -95,15 +100,29 @@ function Home() {
 
 
                             <tr className=" text-[14px] border-b border-[#00000040] hover:bg-gray-50 " >
-                                <td className="px-2 py-2 flex flex-col bg-[#00000020] font-bold text-[14px] text-gray-900 ">
-                                    Celular de usuario
+                                <td className="px-2 py-2 flex flex-col bg-gray-300 font-bold text-[14px] text-gray-900 ">
+                                    Celular
                                 </td>
                                 <td className="px-2 py-2  text-gray-900  border-r border-[#00000040]">
                                     {userDB && userDB && userDB.whatsapp}
                                 </td>
                             </tr>
                             <tr className=" text-[14px]  border-b border-[#00000040] hover:bg-gray-50 " >
-                                <td className="px-2 py-2 bg-[#00000020]   font-bold  text-gray-900 ">
+                                <td className="px-2 py-2 bg-gray-300   font-bold  text-gray-900 ">
+                                    Divisa de emision
+                                </td>
+                                <td className="px-2 py-2  text-gray-900  border-r border-[#00000040]">
+                                    {select2}
+                                </td>
+                            </tr>
+
+                            <tr className=" text-[14px] bg-gray-800 border-b" >
+                                <td scope="col" colSpan="2" className="px-3 py-3  font-bold text-[14px] text-white  ">
+                                    DATOS PARA RECEPCIÓN
+                                </td>
+                            </tr>
+                            <tr className=" text-[14px]  border-b border-[#00000040] hover:bg-gray-50 " >
+                                <td className="px-2 py-2 bg-gray-300   font-bold  text-gray-900 ">
                                     {destinatario['billetera destinatario'] ? 'direccion de billetera' : 'Cuenta receptora de usuario'}
                                 </td>
                                 <td className="px-2 py-2  text-gray-900  border-r border-[#00000040]">
@@ -111,8 +130,11 @@ function Home() {
                                     {destinatario['billetera destinatario'] && destinatario['billetera destinatario']}
                                 </td>
                             </tr>
+
+
+
                             <tr className=" text-[14px]  border-b border-[#00000040] hover:bg-gray-50 " >
-                                <td className="px-2 py-2 bg-[#00000020]   font-bold  text-gray-900 ">
+                                <td className="px-2 py-2 bg-gray-300   font-bold  text-gray-900 ">
                                     {destinatario['red destinatario'] ? 'Red' : 'Banco receptor de usuario'}
                                 </td>
                                 <td className="px-2 py-2  text-gray-900  border-r border-[#00000040]">
@@ -120,8 +142,31 @@ function Home() {
                                     {destinatario['red destinatario'] && destinatario['red destinatario']}
                                 </td>
                             </tr>
+                            <tr className=" text-[14px]  border-b border-[#00000040] hover:bg-gray-50 " >
+                                <td className="px-2 py-2 bg-gray-300   font-bold  text-gray-900 ">
+                                    Divisa de recepción
+                                </td>
+                                <td className="px-2 py-2  text-gray-900  border-r border-[#00000040]">
+                                    {select2}
+                                </td>
+                            </tr>
+                            <tr className=" text-[14px] bg-gray-800 border-b" >
+                                <td scope="col" colSpan="2" className="px-3 py-3  font-bold text-[14px] text-white  ">
+                                    DATOS DE TRANSACCION
+                                </td>
+                            </tr>
+
                             <tr className=" text-[14px] border-b border-[#00000040] hover:bg-gray-50 " >
-                                <td className="px-2 py-2 bg-[#00000020]  font-bold  text-gray-900 ">
+                                <td className="px-2 py-2 bg-gray-300  font-bold  text-gray-900 ">
+                                    Operacion
+                                </td>
+                                <td className="px-2 py-2  text-gray-900  border-r border-[#00000040]">
+                                    {destinatario.operacion}
+                                </td>
+                            </tr>
+
+                            <tr className=" text-[14px] border-b border-[#00000040] hover:bg-gray-50 " >
+                                <td className="px-2 py-2 bg-gray-300  font-bold  text-gray-900 ">
                                     Importe mas comision
                                 </td>
                                 <td className="px-2 py-2  text-gray-900  border-r border-[#00000040]">
@@ -129,7 +174,7 @@ function Home() {
                                 </td>
                             </tr>
                             <tr className=" text-[14px] border-b border-[#00000040] hover:bg-gray-50 " >
-                                <td className="px-2 py-2 bg-[#00000020]  font-bold  text-gray-900 ">
+                                <td className="px-2 py-2 bg-gray-300  font-bold  text-gray-900 ">
                                     comision
                                 </td>
                                 <td className="px-2 py-2  text-gray-900  border-r border-[#00000040]">
@@ -138,7 +183,7 @@ function Home() {
                             </tr>
 
                             <tr className=" text-[14px] border-b border-[#00000040] hover:bg-gray-50 " >
-                                <td className="px-2 py-2 bg-[#00000020]  font-bold  text-gray-900 ">
+                                <td className="px-2 py-2 bg-gray-300  font-bold  text-gray-900 ">
                                     Importe neto a recibir <br /> con el cambio aplicado
                                 </td>
                                 <td className="px-2 py-2  text-gray-900  border-r border-[#00000040] bg-yellow-300">
@@ -147,14 +192,7 @@ function Home() {
 
                                 </td>
                             </tr>
-                            <tr className=" text-[14px] border-b border-[#00000040] hover:bg-gray-50 " >
-                                <td className="px-2 py-2 bg-[#00000020]  font-bold  text-gray-900 ">
-                                    Operacion
-                                </td>
-                                <td className="px-2 py-2  text-gray-900  border-r border-[#00000040]">
-                                    {destinatario.operacion}
-                                </td>
-                            </tr>
+
                             <tr className=" text-[14px] border-b border-[#00000040] hover:bg-gray-50 " >
                                 <td className="px-2 py-2 font-bold  text-gray-900 ">
                                     <div className='flex justify-center pt-5'>
@@ -170,112 +208,7 @@ function Home() {
                     </table>
 
 
-                    {/* <table className="relative sm:left-0 sm:right-0 mx-auto lg:left-auto lg:right-auto w-full overflow-hidden sm:w-[500px] lg:min-w-auto text-[14px] text-left text-gray-500 bg-white rounded-[20px]" style={{ height: '100px' }}>
-                    <thead className="w-full text-[14px] text-gray-700 uppercase bg-gray-50">
-                        <tr className="w-full text-[14px] text-center font-semibold border-b hover:bg-gray-50 ">
-                            <th></th>
-                            <th className='px-2 py-2 text-left'>Datos</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr className=" text-[14px] border-b hover:bg-gray-50 " >
-                            <td className="px-2 py-2 flex flex-col text-[14px] text-gray-700 ">
-                                Usuario
-                            </td>
-                            <td className="px-2 py-2  text-gray-900 ">
-                                {userDB && userDB && userDB.nombre}
-                            </td>
-                        </tr>
-                        <tr className=" text-[14px] border-b hover:bg-gray-50 " >
-                            <td className="px-2 py-2 flex flex-col text-[14px] text-gray-700 ">
-                                DNI de usuario
-                            </td>
-                            <td className="px-2 py-2  text-gray-900 ">
-                                {userDB && userDB && userDB.dni}
-                            </td>
-                        </tr>
-                        <tr className=" text-[14px] border-b hover:bg-gray-50 " >
-                            <td className="px-2 py-2 flex flex-col text-[14px] text-gray-700 ">
-                                Pais de usuario
-                            </td>
-                            <td className="px-2 py-2  text-gray-900 ">
-                                {userDB && userDB && userDB.pais}
-                            </td>
-                        </tr>
-                        <tr className=" text-[14px] border-b hover:bg-gray-50 " >
-                            <td className="px-2 py-2 flex flex-col text-[14px] text-gray-700 ">
-                                Whatsapp de usuario
-                            </td>
-                            <td className="px-2 py-2  text-gray-900 ">
-                                {userDB && userDB && userDB.whatsapp}
-                            </td>
-                        </tr>
-                        <tr className=" text-[14px] border-b hover:bg-gray-50 " >
-                            <td className="px-2 py-2  text-gray-900 ">
-                                Cuenta de usuario
-                            </td>
-                            <td className="px-2 py-2  text-gray-900 ">
-                                {userDB && userDB['cuenta bancaria']}
-                            </td>
-                        </tr>
-                        <tr className=" text-[14px] border-b hover:bg-gray-50 " >
-                            <td className="px-2 py-2  text-gray-900 ">
-                                Nombre de banco
-                            </td>
-                            <td className="px-2 py-2  text-gray-900 ">
-                                {userDB && userDB['banco']}
-                            </td>
-                        </tr>
-                        <tr className=" text-[14px] border-b hover:bg-gray-50 " >
-                            <td className="px-2 py-2  text-gray-900 ">
-                                Divisa de envio
-                            </td>
-                            <td className="px-2 py-2  text-gray-900 ">
-                                {select}
-                            </td>
-                        </tr>
-                        <tr className=" text-[14px] border-b hover:bg-gray-50 " >
-                            <td className="px-2 py-2  text-gray-900 ">
-                                Importe mas comision
-                            </td>
-                            <td className="px-2 py-2  text-gray-900 ">
-                                {transferencia + comision} {select}
-                            </td>
-                        </tr>
-                        <tr className=" text-[14px] border-b hover:bg-gray-50 " >
-                            <td className="px-2 py-2  text-gray-900 ">
-                                Comision
-                            </td>
-                            <td className="px-2 py-2  text-gray-900 ">
-                                {comision} {select}
-                            </td>
-                        </tr>
-                        <tr className=" text-[14px] border-b hover:bg-gray-50 " >
-                            <td className="px-2 py-2  text-gray-900 ">
-                                Divisa de cambio
-                            </td>
-                            <td className="px-2 py-2  text-gray-900 ">
-                                {select2}
-                            </td>
-                        </tr>
-                        <tr className=" text-[14px] border-b hover:bg-gray-50 " >
-                            <td className="px-2 py-2  text-gray-900 ">
-                                Importe mas comision con el cambio aplicado
-                            </td>
-                            <td className="px-2 py-2  text-gray-900 ">
-                                {divisas && divisas[select] && divisas[select2] ? divisas && divisas[select] && divisas[select2] && ((transferencia + comision) * divisas[select2].venta / divisas[select].venta).toFixed(2) : ''}
-                            </td>
-                        </tr>
-                        <tr className=" text-[14px] border-b hover:bg-gray-50 " >
-                            <td className="px-2 py-2  text-gray-900 ">
-                                Operacion
-                            </td>
-                            <td className="px-2 py-2  text-gray-900 ">
-                                Cambio
-                            </td>
-                        </tr>
-                    </tbody>
-                </table> */}
+
                 </div>
 
 

@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation';
 import { useState, inputRef } from 'react'
 
 
-export default function Button({ click, type, name, onChange, reference, minLength, pattern, placeholder, styled, title, required }) {
+export default function Button({ click, type, name, onChange, reference, minLength, pattern, placeholder, styled, title, required, bg}) {
 
     const router = useRouter()
     const [showPassword, setShowPassword] = useState(false)
@@ -21,7 +21,7 @@ export default function Button({ click, type, name, onChange, reference, minLeng
             <input
                 type={type == 'password' && showPassword == true ? 'text' : type}
                 name={name}
-                className={`bg-gray-50 border border-gray-300  text-gray-900 text-[14px] shadow-2xl text-center rounded-xl focus:ring-blue-500 focus:border-blue-500 block w-[100%] p-3 ${styled}`}
+                className={` bg-gray-50 border border-gray-400  text-gray-900 text-[14px] shadow-2xl text-center rounded-xl focus:ring-blue-500 focus:border-blue-500 block w-[100%] p-3 ${styled}`}
                 // className="bg-gray-50 border border-gray-300 text-gray-900 text-[14px] rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3
                 //  dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 onChange={onChange}

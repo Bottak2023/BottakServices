@@ -22,11 +22,11 @@ export default function App({ propIsSelect, propHandlerIsSelect, operation, clic
     }
 
     return (
-        <div className={`relative w-full sm:max-w-[380px] ${bg ? bg:'bg-transparent'} border border-gray-300 text-gray-900 text-[14px] rounded-xl focus:ring-blue-500 focus:border-blue-500 block p-0 `} >
+        <div className={`relative w-full sm:max-w-[380px] ${bg ? bg:'bg-transparent border-gray-300'} border  text-gray-900 text-[14px] rounded-xl focus:ring-blue-500 focus:border-blue-500 block p-0 `} >
             <div className='relative w-full bg-transparent flex justify-between items-center'>
-                <span className=" w-full text-gray-100 p-3 " onClick={(e) => handlerIsSelect(e)}>{select}</span>
+                <span className={` w-full p-3 ${bg ? 'text-black':'text-white'}`} onClick={(e) => handlerIsSelect(e)}>{select}</span>
                 <span className='w-[auto] flex items-center rounded-[20px] '><img src={flag} className="max-w-[50px] h-[30px]" alt="" /></span>
-                <span className={propIsSelect ? 'text-white text-center w-[10%] right-5 rotate-[270deg] p-3 ' : 'text-white text-center w-[10%] right-5 rotate-90 p-3 '} onClick={(e) => handlerIsSelect(e)}>{'>'}</span>
+                <span className={`${bg ? 'text-black':'text-white'} ${propIsSelect ? ' text-center w-[10%] right-5 rotate-[270deg] p-3 ' : ' text-center w-[10%] right-5 rotate-90 p-3 '}`} onClick={(e) => handlerIsSelect(e)}>{'>'}</span>
             </div>
             {propIsSelect === false && operation === 'recepcion' && countrie && countrie !== undefined && countrie.translation.spa.common === select && countrie['envio'] !== true && <span className=" inline-block text-green-400 text-[14px] font-light p-3">{countrie.translation.spa.common} esta habilitado unicamente para recepciones de dinero</span>}
             <div className={`absolute left-0 top-10 bg-gray-100 flex flex-col justify-start items-center  text-gray-900 text-[14px] rounded-b-xl focus:ring-blue-500 focus:outline-blue-500 w-full   z-30 overflow-y-auto transition-all ${propIsSelect ? 'h-[150px] outline outline-1 outline-gray-300' : 'h-0 overflow-y-hidden'}`} >

@@ -120,16 +120,18 @@ export default function Home() {
        
             <button className='fixed text-[20px] text-gray-500 h-[50px] w-[50px] rounded-full inline-block left-[0px] top-0 bottom-0 my-auto bg-[#00000010] z-20 lg:left-[20px]' onClick={prev}>{'<'}</button>
             <button className='fixed text-[20px] text-gray-500 h-[50px] w-[50px] rounded-full inline-block right-[0px] top-0 bottom-0 my-auto bg-[#00000010] z-20 lg:right-[20px]' onClick={next}>{'>'}</button>
-            <div className="w-full   relative h-full overflow-auto shadow-2xl p-5 bg-white min-h-[80vh] scroll-smooth" ref={refFirst}>
-                <h3 className='font-medium text-[14px]'>Destinatarios</h3>
+            <div className="w-full   relative h-full overflow-auto shadow-2xl p-5 bg-gradient-to-tl from-gray-400 to-gray-100   min-h-[80vh] scroll-smooth" ref={refFirst}>
+                <h3 className=' text-[14px] text-black uppercase font-bold flex'>Registro de destinatarios
+                     {/* <img src="/icons/question.svg" className='w-5 h-5'/> */}
+                     </h3>
                 <br />
-                <div className="w-[605px] grid grid-cols-3 gap-[5px]" >
-                    <input type="text" className='border-b-[1px] text-[14px] text-black outline-none w-[200px]' onChange={onChangeFilter} placeholder='Buscar Destinatario' />
+                <div className="w-[620px] grid grid-cols-3 gap-[10px]" >
+                    <input type="text" className='border-b-[1px] border-black px-5 text-[14px] bg-transparent text-gray-800 outline-none w-[200px]  placeholder:text-gray-700 ' onChange={onChangeFilter} placeholder='Buscar Destinatario' />
                     <button className='w-[200px] flex justify-center items-center h-[40px] text-white text-[14px] font-medium bg-[#32CD32] border border-gray-200 rounded-[10px] px-5 cursor-pointer' onClick={redirect}>Nuevo destinatario</button>
                     {selectDB.length > 0 && <button className='w-[200px] flex justify-center items-center h-[40px] text-white text-[14px] font-medium bg-red-500 border border-gray-200 rounded-[10px] px-5 cursor-pointer' onClick={eliminarSelectDB}>Eliminar</button>}
                 </div>
                 <br />
-                <table className="w-full min-w-[1000px] border-[1px] bg-white text-[14px] text-left text-gray-500 ">
+                <table className="w-full min-w-[1000px] border-[1px] bg-gray-300 text-[14px] text-left text-gray-500 shadow">
                     <thead className="text-[14px] text-white uppercase bg-gray-800">
                         <tr>
                             <th colSpan={9}><marquee behavior="" direction="" className='text-[10px] text-red-500 font-medium pt-2'>Verifica q tu divisa de destinatario sea admitida, caso contrario se cambiara.</marquee></th>
@@ -137,7 +139,7 @@ export default function Home() {
                         <tr>
                             <th scope="col" className="w-[50px] px-3 py-2">
                                 <input type="checkbox" className='border-none mr-5 inline' onChange={handlerSelect} name={`ALL`} />
-                                #
+                                
                             </th>
                             <th scope="col" className=" px-3 py-2">
                                 Nombre

@@ -86,7 +86,7 @@ export default function Home() {
       router.push('/Register')
       return
     }
-    if (((transferencia * divisas['USDT'].compra / divisas[select].venta).toFixed(2)) < tarifas.tarifa_1_min && ((transferencia * divisas['USDT'].compra / divisas[select].venta).toFixed(2)) <= tarifas.tarifa_1_max) {
+    if (((transferencia * divisas['USDT'].compra / divisas[select].venta).toFixed(2)) *1< tarifas.tarifa_1_min) {
       setModal(`INFO: El minimo de cambio debe ser mayor o equvalente a ${tarifas.tarifa_1_min}`)
       return
     }

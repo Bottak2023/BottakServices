@@ -126,8 +126,10 @@ function Page() {
       router.push('/Register')
       return
     }
-    console.log((((transferencia * divisas['USDT'].compra / divisas[select].venta).toFixed(2)) < tarifas.tarifa_1_min))
-    if (((transferencia * divisas['USDT'].compra / divisas[select].venta).toFixed(2)) < tarifas.tarifa_1_min) {
+    console.log((((transferencia * divisas['USDT'].compra / divisas[select].venta).toFixed(2))))
+
+    console.log((tarifas.tarifa_1_min))
+    if (((transferencia * divisas['USDT'].compra / divisas[select].venta).toFixed(2)) *1 < tarifas.tarifa_1_min) {
       setModal(`INFO: El minimo de envio debe ser mayor o equvalente a ${tarifas.tarifa_1_min}`)
       return
     }
