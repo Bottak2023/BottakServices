@@ -122,7 +122,7 @@ export default function Home() {
 
             <h3 className='font-bold text-[14px] text-white uppercase'> {pathname === 'Cambio' ? 'Registro de wallets' : 'Registro de destinatarios'}</h3>
             <br />
-            <div className="w-full md:w-[615px] flex justify-between md:grid md:grid-cols-2 gap-[5px] " >
+            <div className="w-full md:w-[405px] flex justify-between md:grid md:grid-cols-2 gap-[5px] " >
                 <input type="text" className='border-b-[1px] border-white px-5 text-[14px] bg-transparent text-white outline-none w-[170px] md:w-[200px] placeholder:text-gray-300 ' onChange={onChangeFilter} placeholder='Buscar Destinatario' />
                 
                 {selectDB.length > 0 

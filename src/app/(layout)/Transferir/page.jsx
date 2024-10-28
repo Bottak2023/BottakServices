@@ -376,8 +376,8 @@ function Home() {
                 <Label htmlFor="">Titular de banco bottak</Label>
                 <Input type="text" name="titular de banco" onChange={onChangeHandler} required />
             </div> */}
-                <div className='bg-transparent md:bg-gradient-to-tr from-gray-400 to-gray-200  col-span-2  lg:grid lg:grid-cols-2 lg:gap-5 p-1 lg:p-5 justify-items-center'>
-                    {<div className='text-center w-full col-span-2 bg-gray-800 text-white py-5 mb-5' >
+                <div className='bg-transparent md:bg-gradient-to-tl from-[#191919be] to-[#23232343]  col-span-2  lg:grid lg:grid-cols-2 lg:gap-5 p-1 lg:p-5 justify-items-center'>
+                    {<div className='text-center w-full col-span-2 bg-gray-800 text-green-500 font-bold border border-gray-500 py-5 mb-5' >
                        {select !== 'USDT' ?'Indica tu banco y tu numero de cuenta desde la cual haras la transferencia': 'Indica tu billetera y su direccion desde la cual haras la transferencia'}
                         {/* verifique sus datos de transaccion a continuación oprima Verificar Transacción */}
                     </div>}
@@ -399,7 +399,7 @@ function Home() {
                         <Input type="text" name="billetera remitente" onChange={onChangeHandler} required />
                     </div>}
                
-                    {<div className='text-center w-full col-span-2 bg-gray-800 text-white py-5 mb-5 mt-[20px] md:mt-0' >
+                    {<div className='text-center w-full col-span-2 bg-gray-800 border border-gray-500 text-green-500 font-bold  py-5 mb-5 mt-[20px] md:mt-0' >
                         EFECTUAR TRANSACCION
                         {/* verifique sus datos de transaccion a continuación oprima Verificar Transacción */}
                     </div>}
