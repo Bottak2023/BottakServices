@@ -341,42 +341,12 @@ function Home() {
     console.log(payDB)
     return (
         countries[userDB.cca3] !== undefined && countries[userDB.cca3].countries !== undefined
-            ? <form className='relative w-full min-h-[80vh] space-y-6 lg:grid lg:grid-cols-2 lg:gap-5 ' onSubmit={(e) => save(e)}>
+            ? <form className='relative left-0 right-0  md:bg-gradient-to-tl from-gray-100 to-gray-400  mx-auto w-full  max-w-[700px]  min-h-[80vh] space-y-6 ' onSubmit={(e) => save(e)}>
                 {modal === 'Validando...' && <Loader> {modal} </Loader>}
                 {modal.length > 5 && <Loader>{modal}</Loader>}
 
-                {/* <div className='w-full  col-span-2'>
-                    <h3 className=' pb-3 text-white border-gray-100 border-b-[2px] text-right'>Datos Bancarios De Transacción</h3>
-                </div>
-                <div className='lg:hidden'>
-                    <h3 className='text-center pb-3  text-green-400 lg:hidden'>Datos de cuenta remitente</h3>
-                </div> */}
-                {/* <div className=' space-y-5'>
-                    <Label htmlFor="">Pais de mi cuenta bancaria</Label>
-                    <SelectCountry name="pais cuenta bancaria" propHandlerIsSelect={handlerIsSelect} propIsSelect={isSelect3} operation="recepcion" click={handlerCountrySelect} />
-                </div> 
-                {destinatario !== undefined && destinatario['pais cuenta bancaria'] !== undefined && <div className=' space-y-5'>
-                    <Label htmlFor="">Nombre de mi banco</Label>
-                    <SelectBank name="nombre de banco" propHandlerIsSelect={handlerIsSelect5} propIsSelect={isSelect5} operation="envio" click={handlerBankSelect2} arr={countries[userDB.cca3].countries !== undefined ? Object.values(countries[userDB.cca3].countries) : []} />
-                </div>}*/}
 
-                {/* {destinatario !== undefined && destinatario['pais cuenta bancaria'] !== undefined && <> <div className='lg:hidden'>
-                    <h3 className='text-center pb-3  text-green-400 lg:hidden'>QR y cuenta para deposito Bancario</h3>
-                </div>
-                    <div className=' space-y-5'>
-                        <Label htmlFor="">Elige una banco para deposito QR</Label>
-                        <SelectBank name="nombre de banco" propHandlerIsSelect={handlerIsSelect4} propIsSelect={isSelect4} operation="envio" click={handlerBankSelect} arr={countries[destinatario.cca3].countries !== undefined ? Object.values(countries[destinatario.cca3].countries) : []} />
-                    </div>
-                </>} */}
-                {/* <div className=' space-y-5'>
-                <Label htmlFor="">Numero de cuenta transferidora</Label>
-                <Input type="text" name="cuenta transferidora" onChange={onChangeHandler} required />
-            </div> */}
-                {/* <div className=' space-y-5'>
-                <Label htmlFor="">Titular de banco bottak</Label>
-                <Input type="text" name="titular de banco" onChange={onChangeHandler} required />
-            </div> */}
-                <div className='bg-transparent md:bg-gradient-to-tl from-[#191919be] to-[#23232343]  col-span-2  lg:grid lg:grid-cols-2 lg:gap-5 p-1 lg:p-5 justify-items-center'>
+                <div className='bg-transparent col-span-2 p-1 lg:p-5 justify-items-center'>
                     <div className='text-center w-full col-span-2 text-green-500 font-bold py-5 mb-5  md:flex md:justify.center' >
                         <h3 className='font-bold text-[14px] text-white uppercase flex items-center'>
                             <div className='bg-gray-950 text-white border border-green-500 h-[40px] w-[40px] rounded-full flex justify-center items-center mr-3'>
@@ -390,33 +360,38 @@ function Home() {
 
 
 
-
-
-                    {select !== 'USDT' && <div className='py-5  md:py-0  space-y-5 w-full max-w-[380px] '>
-                        <Label htmlFor="">Elige tu banco</Label>
-                        <SelectBank name="nombre de banco" bg='bg-gray-50  border-gray-400' propHandlerIsSelect={handlerIsSelect5} propIsSelect={isSelect5} operation="envio" click={handlerBankSelect2} arr={countries[userDB.cca3].countries !== undefined ? Object.values(countries[userDB.cca3].countries) : []} />
-                    </div>}
-                    {select !== 'USDT' && <div className='py-5  md:py-0   space-y-5 w-full max-w-[380px] '>
-                        <Label htmlFor="">Numero de tu cuenta bancaria</Label>
-                        <Input type="text" name="cuenta bancaria" onChange={onChangeHandler} required />
-                    </div>}
-
-                    {select == 'USDT' && <div className='py-5  md:py-0   w-full max-w-[380px] space-y-5'>
-                        <Label htmlFor="">Elige una wallet de tranferencia</Label>
-                        <SelectWallet name="billetera bottak" bg='bg-gray-50 border-gray-400' propHandlerIsSelect={handlerIsSelect5} propIsSelect={isSelect5} operation="envio" click={handlerWalletSelect2} arr={wallets ? Object.values(wallets) : []} />
-                    </div>}
-                    {select == 'USDT' && <div className='py-5  md:py-0   space-y-5 w-full max-w-[380px]'>
-                        <Label htmlFor="">Dirección de tu billetera</Label>
-                        <Input type="text" name="billetera remitente" onChange={onChangeHandler} required />
-                    </div>}
-
-                    {/* {<div className='text-center w-full col-span-2 bg-gray-800 border border-gray-500 text-green-500 font-bold  py-5 mb-5 mt-[20px] md:mt-0' >
-                        EFECTUAR TRANSACCION
-                    </div>} */}
+                    <div className=' md:bg-gradient-to-tl from-[#ffffff] to-[#ffffffb1] shadow rounded-[10px] relative left-0 right-0 mx-auto w-full space-y-6 lg:grid lg:grid-cols-2 lg:gap-x-5 lg:px-5 lg:mb-10  lg:place-items-end'>
 
 
 
-                    <div className='text-center w-full col-span-2 text-green-500 font-bold py-5 mb-5 md:flex md:justify.center' >
+                        {select !== 'USDT' && <div className='py-5  md:py-0  space-y-5 w-full max-w-[380px] '>
+                            <Label htmlFor="">Elige tu banco</Label>
+                            <SelectBank name="nombre de banco" bg='bg-gray-50  border-gray-400' propHandlerIsSelect={handlerIsSelect5} propIsSelect={isSelect5} operation="envio" click={handlerBankSelect2} arr={countries[userDB.cca3].countries !== undefined ? Object.values(countries[userDB.cca3].countries) : []} />
+                        </div>}
+                        {select !== 'USDT' && <div className='py-5  md:py-0   space-y-5 w-full max-w-[380px] '>
+                            <Label htmlFor="">Numero de tu cuenta bancaria</Label>
+                            <Input type="text" name="cuenta bancaria" onChange={onChangeHandler} required />
+                        </div>}
+
+                        {select == 'USDT' && <div className='py-5  md:py-0   w-full max-w-[380px] space-y-5'>
+                            <Label htmlFor="">Elige una wallet de tranferencia</Label>
+                            <SelectWallet name="billetera bottak" bg='bg-gray-50 border-gray-400' propHandlerIsSelect={handlerIsSelect5} propIsSelect={isSelect5} operation="envio" click={handlerWalletSelect2} arr={wallets ? Object.values(wallets) : []} />
+                        </div>}
+                        {select == 'USDT' && <div className='py-5  md:py-0   space-y-5 w-full max-w-[380px]'>
+                            <Label htmlFor="">Dirección de tu billetera</Label>
+                            <Input type="text" name="billetera remitente" onChange={onChangeHandler} required />
+                        </div>}
+
+                    </div>
+
+
+
+
+
+
+
+
+                    <div className='text-center w-full col-span-2 text-green-500 font-bold py-5 mb-5 lg:mb-0 md:flex md:justify.center' >
                         <h3 className='font-bold text-[14px] text-white uppercase flex items-center'>
                             <div className='bg-gray-950 text-white border border-green-500 h-[40px] w-[40px] rounded-full flex justify-center items-center mr-3'>
                                 3
@@ -427,62 +402,65 @@ function Home() {
                         </h3>
                     </div>
 
+                    <div className='  relative left-0 right-0 mx-auto w-full lg:mb-10 space-y-6 lg:grid lg:grid-cols-2 lg:gap-x-5 lg:p-0  lg:place-items-end'>
 
-                    {/* {destinatario !== undefined && destinatario['banco bottak'] !== undefined &&  */}
-                    {select !== 'USDT'
-                        ? <div className='py-5  md:py-0   space-y-5'>
-                            {/* <Label htmlFor="">QR bancario para el deposito</Label> */}
-                            <Label htmlFor="">QR para transferencia</Label>
+                        {/* {destinatario !== undefined && destinatario['banco bottak'] !== undefined &&  */}
+                        {select !== 'USDT'
+                            ? <div className='py-5 shadow md:py-0 md:bg-[#000000b6]  space-y-5'>
+                                {/* <Label htmlFor="">QR bancario para el deposito</Label> */}
+                                <Label htmlFor="">QR para transferencia</Label>
 
-                            {/* <div className=' space-y-5'>
+                                {/* <div className=' space-y-5'>
                                 <SelectBank name="nombre de banco" propHandlerIsSelect={handlerIsSelect4} bg='bg-white' propIsSelect={isSelect4} operation="envio" click={handlerBankSelect} arr={countries[userDB.cca3].countries !== undefined ? Object.values(countries[userDB.cca3].countries) : []} />
                             </div> */}
-                            <Link href='#' className="w-full flex flex-col justify-center items-center" download >
-                                <label className="relative flex flex-col justify-start items-center w-[300px] min-h-[300px] h-auto bg-white border border-gray-400 text-gray-900 text-[12px]  focus:ring-blue-500 focus:border-blue-500 rounded-[10px]" >
-                                    {destinatario?.['banco bottak'] && countries && countries[userDB.cca3] && countries[userDB.cca3].countries !== undefined && countries[userDB.cca3].countries[destinatario['banco bottak']] !== undefined
-                                        ? <img className=" flex justify-center items-center w-[300px] min-h-[300px] h-auto bg-white text-gray-900 text-[12px]  focus:ring-blue-500 focus:border-blue-500 rounded-[10px]" style={{ objectPosition: 'center' }} src={countries[userDB.cca3].countries[destinatario['banco bottak']] !== undefined ? countries[userDB.cca3].countries[destinatario['banco bottak']].qrURL : ''} alt="" />
-                                        : <p className='relative h-full text-[12px] w-full p-5 text-center top-0 bottom-0 my-auto'>Selecciona uno de nuestros bancos para obtener un QR y efectuar su transferencia</p>}
-                                    {countries?.[userDB.cca3]?.countries?.[destinatario?.['banco bottak']] !== undefined && destinatario && destinatario.importe}
-                                    {countries?.[userDB.cca3]?.countries?.[destinatario?.['banco bottak']] !== undefined && destinatario && destinatario['divisa de envio']}
+                                <Link href='#' className="w-full flex flex-col justify-center items-center" download >
+                                    <label className="relative flex flex-col justify-start items-center w-[300px] min-h-[300px] h-auto bg-white border border-gray-400 text-gray-900 text-[12px]  focus:ring-blue-500 focus:border-blue-500 rounded-[10px]" >
+                                        {destinatario?.['banco bottak'] && countries && countries[userDB.cca3] && countries[userDB.cca3].countries !== undefined && countries[userDB.cca3].countries[destinatario['banco bottak']] !== undefined
+                                            ? <img className=" flex justify-center items-center w-[300px] min-h-[300px] h-auto bg-white text-gray-900 text-[12px]  focus:ring-blue-500 focus:border-blue-500 rounded-[10px]" style={{ objectPosition: 'center' }} src={countries[userDB.cca3].countries[destinatario['banco bottak']] !== undefined ? countries[userDB.cca3].countries[destinatario['banco bottak']].qrURL : ''} alt="" />
+                                            : <p className='relative h-full text-[12px] w-full p-5 text-center top-0 bottom-0 my-auto'>Selecciona uno de nuestros bancos para obtener un QR y efectuar su transferencia</p>}
+                                        {countries?.[userDB.cca3]?.countries?.[destinatario?.['banco bottak']] !== undefined && destinatario && destinatario.importe}
+                                        {countries?.[userDB.cca3]?.countries?.[destinatario?.['banco bottak']] !== undefined && destinatario && destinatario['divisa de envio']}
+                                    </label>
+                                </Link>
+                                {countries?.[userDB.cca3]?.countries?.[destinatario?.['banco bottak']] !== undefined && <span className="block text-black text-center" >Cta. {countries && countries !== undefined && countries[userDB.cca3] !== undefined && countries[userDB.cca3].countries !== undefined && countries[userDB.cca3].countries[destinatario['banco bottak']] !== undefined && countries[userDB.cca3].countries[destinatario['banco bottak']]['cta bancaria']} <br />
+                                    {destinatario !== undefined && destinatario['banco bottak'] !== undefined && countries && countries !== undefined && countries[userDB.cca3] !== undefined && countries[userDB.cca3].countries[destinatario['banco bottak']] !== undefined && countries[userDB.cca3].countries[destinatario['banco bottak']].banco}
+                                </span>}
+                            </div>
+                            : <div className=' space-y-5 shadow py-5  md:py-0  '>
+                                <Label htmlFor="">QR para transferencia</Label>
+
+
+                                <Link href='#' className="w-full flex flex-col justify-center items-center" download >
+                                    <label className="relative flex flex-col justify-start items-center w-[300px] min-h-[300px] h-auto bg-white border border-gray-400 text-gray-900 text-[12px]  focus:ring-blue-500 focus:border-blue-500 rounded-[10px]" >
+                                        {walletQR && walletQR !== undefined
+                                            ? <img className=" flex justify-center items-center w-[300px] min-h-[300px] h-auto bg-white text-gray-900 text-[12px]  focus:ring-blue-500 focus:border-blue-500 rounded-[10px]" style={{ objectPosition: 'center' }} src={walletQR.qrURL} alt="" />
+                                            : <p className='relative h-full text-[12px] w-full p-5 text-center top-0 bottom-0 my-auto'>Selecciona uno de nuestros bancos para obtener un QR y efectuar su transferencia</p>}
+                                        {countries?.[userDB.cca3]?.countries?.[destinatario?.['banco bottak']] !== undefined && destinatario && destinatario.importe}
+                                        {countries?.[userDB.cca3]?.countries?.[destinatario?.['banco bottak']] !== undefined && destinatario && destinatario['divisa de envio']}
+                                    </label>
+                                </Link>
+                                {countries?.[userDB.cca3]?.countries?.[destinatario?.['banco bottak']] !== undefined && <span className="block text-black text-center" >Cta. {countries && countries !== undefined && countries[userDB.cca3] !== undefined && countries[userDB.cca3].countries !== undefined && countries[userDB.cca3].countries[destinatario['banco bottak']] !== undefined && countries[userDB.cca3].countries[destinatario['banco bottak']]['cta bancaria']} <br />
+                                    {destinatario !== undefined && destinatario['banco bottak'] !== undefined && countries && countries !== undefined && countries[userDB.cca3] !== undefined && countries[userDB.cca3].countries[destinatario['banco bottak']] !== undefined && countries[userDB.cca3].countries[destinatario['banco bottak']].banco}
+                                </span>}
+                            </div>
+                        }
+
+
+                        {/* {((destinatario !== undefined && destinatario['banco bottak'] !== undefined) || walletQR) && <div className=' py-5  md:py-0  space-y-5'> */}
+                        {<div className=' py-5  md:py-0  space-y-5'>
+
+                            <Label htmlFor="">Subir baucher</Label>
+
+                            {/* <Label htmlFor="">Baucher de transferencia</Label> */}
+                            <div className="w-full flex justify-center">
+                                <label htmlFor="file" className="flex justify-center items-center w-[300px] min-h-[300px] bg-white border border-gray-400  text-center text-gray-900 text-[14px] focus:ring-blue-500 focus:border-blue-500 rounded-[10px]" >
+                                    {urlPostImage !== undefined ? <img className="flex justify-center items-center w-[300px] min-h-[300px] bg-white border border-gray-400 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 rounded-[10px]" style={{ objectPosition: 'center' }} src={urlPostImage} alt="" />
+                                        : 'Subir baucher'}
                                 </label>
-                            </Link>
-                            {countries?.[userDB.cca3]?.countries?.[destinatario?.['banco bottak']] !== undefined && <span className="block text-black text-center" >Cta. {countries && countries !== undefined && countries[userDB.cca3] !== undefined && countries[userDB.cca3].countries !== undefined && countries[userDB.cca3].countries[destinatario['banco bottak']] !== undefined && countries[userDB.cca3].countries[destinatario['banco bottak']]['cta bancaria']} <br />
-                                {destinatario !== undefined && destinatario['banco bottak'] !== undefined && countries && countries !== undefined && countries[userDB.cca3] !== undefined && countries[userDB.cca3].countries[destinatario['banco bottak']] !== undefined && countries[userDB.cca3].countries[destinatario['banco bottak']].banco}
-                            </span>}
-                        </div>
-                        : <div className=' space-y-5 py-5  md:py-0  '>
-                            <Label htmlFor="">QR para transferencia</Label>
-
-
-                            <Link href='#' className="w-full flex flex-col justify-center items-center" download >
-                                <label className="relative flex flex-col justify-start items-center w-[300px] min-h-[300px] h-auto bg-white border border-gray-400 text-gray-900 text-[12px]  focus:ring-blue-500 focus:border-blue-500 rounded-[10px]" >
-                                    {walletQR && walletQR !== undefined
-                                        ? <img className=" flex justify-center items-center w-[300px] min-h-[300px] h-auto bg-white text-gray-900 text-[12px]  focus:ring-blue-500 focus:border-blue-500 rounded-[10px]" style={{ objectPosition: 'center' }} src={walletQR.qrURL} alt="" />
-                                        : <p className='relative h-full text-[12px] w-full p-5 text-center top-0 bottom-0 my-auto'>Selecciona uno de nuestros bancos para obtener un QR y efectuar su transferencia</p>}
-                                    {countries?.[userDB.cca3]?.countries?.[destinatario?.['banco bottak']] !== undefined && destinatario && destinatario.importe}
-                                    {countries?.[userDB.cca3]?.countries?.[destinatario?.['banco bottak']] !== undefined && destinatario && destinatario['divisa de envio']}
-                                </label>
-                            </Link>
-                            {countries?.[userDB.cca3]?.countries?.[destinatario?.['banco bottak']] !== undefined && <span className="block text-black text-center" >Cta. {countries && countries !== undefined && countries[userDB.cca3] !== undefined && countries[userDB.cca3].countries !== undefined && countries[userDB.cca3].countries[destinatario['banco bottak']] !== undefined && countries[userDB.cca3].countries[destinatario['banco bottak']]['cta bancaria']} <br />
-                                {destinatario !== undefined && destinatario['banco bottak'] !== undefined && countries && countries !== undefined && countries[userDB.cca3] !== undefined && countries[userDB.cca3].countries[destinatario['banco bottak']] !== undefined && countries[userDB.cca3].countries[destinatario['banco bottak']].banco}
-                            </span>}
-                        </div>
-                    }
-
-
-                    {((destinatario !== undefined && destinatario['banco bottak'] !== undefined) || walletQR) && <div className=' py-5  md:py-0  space-y-5'>
-                        <Label htmlFor="">Subir baucher</Label>
-
-                        {/* <Label htmlFor="">Baucher de transferencia</Label> */}
-                        <div className="w-full flex justify-center">
-                            <label htmlFor="file" className="flex justify-center items-center w-[300px] min-h-[300px] bg-white border border-gray-400  text-center text-gray-900 text-[14px] focus:ring-blue-500 focus:border-blue-500 rounded-[10px]" >
-                                {urlPostImage !== undefined ? <img className="flex justify-center items-center w-[300px] min-h-[300px] bg-white border border-gray-400 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 rounded-[10px]" style={{ objectPosition: 'center' }} src={urlPostImage} alt="" />
-                                    : 'Subir baucher'}
-                            </label>
-                            <input className="hidden" id='file' name='name' onChange={manageInputIMG} accept=".jpg, .jpeg, .png, .mp4, webm" type="file" required />
-                        </div>
-                    </div>}
-
+                                <input className="hidden" id='file' name='name' onChange={manageInputIMG} accept=".jpg, .jpeg, .png, .mp4, webm" type="file" required />
+                            </div>
+                        </div>}
+                    </div>
 
                     {countries[userDB.cca3] !== undefined && countries[userDB.cca3].countries !== undefined && <div className='py-5  md:py-0  flex w-full justify-around items-end col-span-2'>
                         <Button type='submit' theme='Success' >Verificar Transacción</Button>
