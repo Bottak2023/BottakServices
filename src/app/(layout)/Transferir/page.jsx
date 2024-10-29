@@ -360,7 +360,7 @@ function Home() {
 
 
 
-                    <div className=' md:bg-gradient-to-tl from-[#ffffff] to-[#ffffffb1] shadow rounded-[10px] relative left-0 right-0 mx-auto w-full space-y-6 lg:grid lg:grid-cols-2 lg:gap-x-5 lg:px-5 lg:mb-10  lg:place-items-end'>
+                    <div className=' md:bg-gradient-to-tl from-[#ffffff] to-[#ffffffb1] shadow rounded-[10px] relative left-0 right-0 mx-auto w-full space-y-6 lg:grid lg:grid-cols-2 lg:gap-x-5 lg:py-5 lg:mb-10  lg:place-items-end'>
 
 
 
