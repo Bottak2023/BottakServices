@@ -121,11 +121,11 @@ export default function Home() {
             <button className='fixed text-[20px] text-gray-500 h-[50px] w-[50px] rounded-full inline-block right-[0px] top-0 bottom-0 my-auto bg-[#00000010] z-20 lg:right-[20px]' onClick={next}>{'>'}</button>
 
             <h3 className='font-bold text-[14px] text-white uppercase flex items-center'>
-                <div className='bg-gray-950 text-white border border-green-500 h-[40px] w-[40px] rounded-full flex justify-center items-center mr-5'>
+                <div className='bg-gray-950 text-white border border-green-500 h-[40px] w-[40px] rounded-full flex justify-center items-center mr-3'>
                     1
                 </div>
                 <p className='bg-gray-950 text-white underline  underline-offset-8  decoration-green-500  px-5 py-2 rounded-[10px]  border border-green-500'>
-                    {pathname === 'Cambio' ? 'Registro de wallets' : 'Registro de destinatarios'}
+                    {pathname === 'Cambio' ? 'Registro de wallets' : 'Seleccionar destinatario'}
                 </p>
             </h3>
             <br />
