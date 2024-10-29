@@ -64,7 +64,7 @@ export default function App({ placeholder, value, onChange, propHandlerSelect, p
           value={value && divisas && divisas[select] && divisas[select2] && (transferencia * divisas[select2].compra / divisas[select].venta).toFixed(2)}
           defaultValue={defaultValue}
           required />
-        <span className=" w-[15%] text-gray-100 p-3 " onClick={(e) => handlerIsSelect(e)}>{propSelect}</span>
+        <span className=" w-[15%] text-gray-100 py-3 text-center" onClick={(e) => handlerIsSelect(e)}>{propSelect}</span>
         <span className='w-[auto] flex items-center rounded-[20px] '><img src={divisas && divisas[propSelect] && divisas[propSelect].flagPNG} className="w-[50px] h-[30px]" alt="" /></span>
         {/* <span className='w-[auto] flex items.center rounded-[20px] '><CurrencyFlag currency={propSelect} size="xl" /></span> */}
         <span className={propIsSelect ? 'text-white text-center w-[10%] right-5 rotate-[270deg] p-3 ' : 'text-white text-center w-[10%] right-5 rotate-90 p-3 '} onClick={(e) => handlerIsSelect(e)}>{'>'}</span>
