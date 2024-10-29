@@ -128,25 +128,29 @@ export default function Home() {
             </ModalINFO>}
             <button className='fixed text-[20px] text-gray-500 h-[50px] w-[50px] rounded-full inline-block left-[0px] top-0 bottom-0 my-auto bg-[#00000010] z-20 lg:left-[20px]' onClick={prev}>{'<'}</button>
             <button className='fixed text-[20px] text-gray-500 h-[50px] w-[50px] rounded-full inline-block right-[0px] top-0 bottom-0 my-auto bg-[#00000010] z-20 lg:right-[20px]' onClick={next}>{'>'}</button>
-            <div className="w-full   relative h-full overflow-auto shadow-2xl p-5 bg-gradient-to-tr from-gray-100 to-gray-300  min-h-[80vh] scroll-smooth" ref={refFirst}>
-                <h3 className='font-bold text-[14px] text-white uppercase flex items-center'>
-                    <div className='bg-gray-950 text-white border border-green-500 h-[40px] w-[40px] rounded-full flex justify-center items-center mr-3'>
-                        1
-                    </div>
-                    <p className='bg-gray-950 text-white underline  underline-offset-8  decoration-green-500  px-3 py-2 rounded-[10px]  border border-green-500'>
-                        Seleccionar Bancos
-                    </p>
-                </h3>
-                <br />
-                <div className="w-[615px] grid grid-cols-3 gap-[10px]" >
-                    <input type="text" className='border-b-[1px] border-black px-5 text-[14px] bg-transparent text-gray-800 outline-none w-[200px]  placeholder:text-gray-700 ' onChange={onChangeFilter} placeholder='Buscar Destinatario' />
-                    <button className='w-[200px] flex justify-center items-center h-[40px] text-white text-[14px] font-medium bg-[#32CD32] border border-gray-200 rounded-[10px] px-5 cursor-pointer' onClick={redirect}>Nuevo Banco</button>
-                    {selectDB.length > 0 && <button className='w-[200px] flex justify-center items-center h-[40px] text-white text-[14px] font-medium bg-red-500 border border-gray-200 rounded-[10px] px-5 cursor-pointer' onClick={eliminarSelectDB}>Eliminar</button>}
 
+            <h3 className='font-bold text-[14px] text-white uppercase flex items-center'>
+                <div className='bg-gray-950 text-white border border-green-500 h-[40px] w-[40px] rounded-full flex justify-center items-center mr-3'>
+                    1
+                </div>
+                <p className='bg-gray-950 text-white underline  underline-offset-8  decoration-green-500  px-3 py-2 rounded-[10px]  border border-green-500'>
+                    Seleccionar Bancos
+                </p>
+            </h3>
+            <br />
+            <div className="w-full   relative h-full overflow-auto shadow-2xl bg-transparent  min-h-[70vh] scroll-smooth" ref={refFirst}>
 
+                <div className="w-full md:w-[405px] flex justify-between md:grid md:grid-cols-2 gap-[5px] " >
+                    <input type="text" className='border-b-[1px] border-white px-3 text-[14px] bg-transparent text-white outline-none w-[170px] md:w-[200px] placeholder:text-gray-300 ' onChange={onChangeFilter} placeholder='Buscar Destinatario' />
 
+                    {selectDB.length > 0
+                        ? <button className='w-[200px] flex justify-center items-center h-[40px] text-white text-[14px] font-medium bg-red-500 border border-gray-200 rounded-[10px] px-5 cursor-pointer' onClick={eliminarSelectDB}>Eliminar</button>
+                        : <button className='w-[200px] md:w-[200px] flex justify-center items-center h-[40px] text-white text-[14px] font-medium bg-[#32CD32] border border-gray-200 rounded-[10px] px-5 cursor-pointer' onClick={redirect}>Crear destinatario</button>
+
+                    }
 
                 </div>
+
                 <br />
                 <table className="w-full min-w-[1000px] border-[1px] bg-white text-[14px] text-left text-gray-500 ">
                     <thead className="text-[14px] text-white uppercase bg-gray-800">

@@ -141,7 +141,7 @@ export default function Home() {
             </div>
             <br />
 
-            <div className="w-full   relative h-full overflow-auto shadow-2xl md-transparent bg-white  min-h-[80vh] scroll-smooth" ref={refFirst}>
+            <div className="w-full   relative h-full overflow-auto shadow-2xl md-transparent bg-white  min-h-[70vh] scroll-smooth" ref={refFirst}>
 
                 <table className={`w-full ${pathname === 'Envio' ? 'min-w-[1500px]' : 'min-w-[1000px]'} border-[1px] bg-white text-[14px] text-left text-gray-500 `}>
                     {pathname === 'Cambio' && <thead className="text-[14px] text-white uppercase bg-gray-800">
