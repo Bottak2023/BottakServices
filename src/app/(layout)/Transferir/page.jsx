@@ -382,8 +382,8 @@ function Home() {
                             <div className='bg-gray-950 text-white border border-green-500 h-[40px] w-[40px] rounded-full flex justify-center items-center mr-3'>
                                 2
                             </div>
-                            <p className='bg-gray-950 text-white underline  underline-offset-8  decoration-green-500  px-3 py-2 rounded-[10px]  border border-green-500'>
-                                {select !== 'USDT' ? 'Indica tu banco y tu numero de cuenta de transferencia' : 'Indica tu billetera y direccion de transferencia'}
+                            <p className='bg-gray-950 text-white text-left underline  underline-offset-8  decoration-green-500  px-3 py-2 rounded-[10px]  border border-green-500'>
+                                {select !== 'USDT' ? 'Indica tu banco y tu numero de cuenta \nde transferencia' : 'Indica tu billetera y direccion \nde transferencia'}
                             </p>
                         </h3>
                     </div>
