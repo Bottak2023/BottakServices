@@ -47,7 +47,7 @@ export default function Home() {
     function handlerSelect(e) {
         if (e.target.checked) {
             if (e.target.name === 'ALL') {
-                let arr = Object.values(userDB.destinatarioWallets).map(i => i.uuid)
+                let arr = pathname === 'Cambio' ? Object.values(userDB.wallets).map(i => i.uuid) : Object.values(userDB.destinatarioWallets).map(i => i.uuid)
                 setSelectDB(arr)
                 return
             }
@@ -130,7 +130,7 @@ export default function Home() {
             </h3>
             <br />
             <div className="w-full md:w-[405px] flex justify-between md:grid md:grid-cols-2 gap-[5px] " >
-                <input type="text" className='border-b-[1px] border-white px-3 text-[14px] bg-transparent text-white outline-none w-[170px] md:w-[200px] placeholder:text-gray-300 ' onChange={onChangeFilter} placeholder={pathname === 'Cambio'?'Buscar Wallet' :'Buscar Destinatario'} />
+                <input type="text" className='border-b-[1px] border-white px-3 text-[14px] bg-transparent text-white outline-none w-[170px] md:w-[200px] placeholder:text-gray-300 ' onChange={onChangeFilter} placeholder={pathname === 'Cambio' ? 'Buscar Wallet' : 'Buscar Destinatario'} />
 
                 {selectDB.length > 0
                     ? <button className='w-[200px] flex justify-center items-center h-[40px] text-white text-[14px] font-medium bg-red-500 border border-gray-200 rounded-[10px] px-5 cursor-pointer' onClick={eliminarSelectDB}>Eliminar</button>
