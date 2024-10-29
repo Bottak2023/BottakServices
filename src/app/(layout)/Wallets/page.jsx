@@ -125,7 +125,7 @@ export default function Home() {
                     1
                 </div>
                 <p className='bg-gray-950 text-white underline  underline-offset-8  decoration-green-500  px-3 py-2 rounded-[10px]  border border-green-500'>
-                    {pathname === 'Cambio' ? 'Registro de wallets' : 'Seleccionar destinatario'}
+                    {pathname === 'Cambio' ? 'Seleccionar wallet' : 'Seleccionar destinatario'}
                 </p>
             </h3>
             <br />
@@ -134,7 +134,7 @@ export default function Home() {
 
                 {selectDB.length > 0
                     ? <button className='w-[200px] flex justify-center items-center h-[40px] text-white text-[14px] font-medium bg-red-500 border border-gray-200 rounded-[10px] px-5 cursor-pointer' onClick={eliminarSelectDB}>Eliminar</button>
-                    : <button className='w-[200px] md:w-[200px] flex justify-center items-center h-[40px] text-white text-[14px] font-medium bg-[#32CD32] border border-gray-200 rounded-[10px] px-5 cursor-pointer' onClick={redirect}>Crear destinatario</button>
+                    : <button className='w-[200px] md:w-[200px] flex justify-center items-center h-[40px] text-white text-[14px] font-medium bg-[#32CD32] border border-gray-200 rounded-[10px] px-5 cursor-pointer' onClick={redirect}>{pathname === 'Cambio' ? 'Nuevo wallet' : 'Nuevo destinatario'}</button>
 
                 }
 

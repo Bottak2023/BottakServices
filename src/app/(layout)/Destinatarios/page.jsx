@@ -132,17 +132,20 @@ export default function Home() {
                     </p>
                 </h3>
                 <br /> 
-            <div className="w-full   relative h-full overflow-auto shadow-2xl p-5 bg-transparent   min-h-[70vh] scroll-smooth" ref={refFirst}>
-           
-                <div className="w-full md:w-[405px] flex justify-between md:grid md:grid-cols-2 gap-[5px] " >
+
+         <div className="w-full md:w-[405px] flex justify-between md:grid md:grid-cols-2 gap-[5px] " >
                     <input type="text" className='border-b-[1px] border-white px-3 text-[14px] bg-transparent text-white outline-none w-[170px] md:w-[200px] placeholder:text-gray-300 ' onChange={onChangeFilter} placeholder='Buscar Destinatario' />
                     {selectDB.length > 0
                         ? <button className='w-[200px] flex justify-center items-center h-[40px] text-white text-[14px] font-medium bg-red-500 border border-gray-200 rounded-[10px] px-5 cursor-pointer' onClick={eliminarSelectDB}>Eliminar</button>
-                        : <button className='w-[200px] md:w-[200px] flex justify-center items-center h-[40px] text-white text-[14px] font-medium bg-[#32CD32] border border-gray-200 rounded-[10px] px-5 cursor-pointer' onClick={redirect}>Crear destinatario</button>
+                        : <button className='w-[200px] md:w-[200px] flex justify-center items-center h-[40px] text-white text-[14px] font-medium bg-[#32CD32] border border-gray-200 rounded-[10px] px-5 cursor-pointer' onClick={redirect}>Nuevo destinatario</button>
 
                     }
                 </div>
                 <br />
+
+            <div className="w-full   relative h-full overflow-auto shadow-2xl p-5 bg-white bg-transparent   min-h-[70vh] scroll-smooth" ref={refFirst}>
+           
+       
                 <table className="w-full min-w-[1000px] border-[1px] bg-gray-300 text-[14px] text-left text-gray-500 shadow">
                     <thead className="text-[14px] text-white uppercase bg-gray-800">
                         <tr>
