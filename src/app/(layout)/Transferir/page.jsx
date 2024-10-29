@@ -377,15 +377,17 @@ function Home() {
                 <Input type="text" name="titular de banco" onChange={onChangeHandler} required />
             </div> */}
                 <div className='bg-transparent md:bg-gradient-to-tl from-[#191919be] to-[#23232343]  col-span-2  lg:grid lg:grid-cols-2 lg:gap-5 p-1 lg:p-5 justify-items-center'>
-                    
-                    <h3 className='font-bold text-[14px] text-white uppercase flex items-center'>
-                        <div className='bg-gray-950 text-white border border-green-500 h-[40px] w-[40px] rounded-full flex justify-center items-center mr-3'>
-                            3
-                        </div>
-                        <p className='bg-gray-950 text-white underline  underline-offset-8  decoration-green-500  px-3 py-2 rounded-[10px]  border border-green-500'>
-                        {select !== 'USDT' ? 'Indica tu banco y tu numero de cuenta desde la cual haras la transferencia' : 'Indica tu billetera y su direccion desde la cual haras la transferencia'}
-                        </p>
-                    </h3>
+                    <div className='text-center w-full col-span-2 text-green-500 font-bold py-5 mb-5  flex justify.center' >
+                        <h3 className='font-bold text-[14px] text-white uppercase flex items-center'>
+                            <div className='bg-gray-950 text-white border border-green-500 h-[40px] w-[40px] rounded-full flex justify-center items-center mr-3'>
+                                2
+                            </div>
+                            <p className='bg-gray-950 text-white underline  underline-offset-8  decoration-green-500  px-3 py-2 rounded-[10px]  border border-green-500'>
+                                {select !== 'USDT' ? 'Indica tu banco y tu numero de cuenta desde la cual haras la transferencia' : 'Indica tu billetera y su direccion desde la cual haras la transferencia'}
+                            </p>
+                        </h3>
+                    </div>
+
 
 
 
@@ -412,14 +414,19 @@ function Home() {
                         EFECTUAR TRANSACCION
                     </div>} */}
 
-                    <h3 className='font-bold text-[14px] text-white uppercase flex items-center'>
-                        <div className='bg-gray-950 text-white border border-green-500 h-[40px] w-[40px] rounded-full flex justify-center items-center mr-3'>
-                            3
-                        </div>
-                        <p className='bg-gray-950 text-white underline  underline-offset-8  decoration-green-500  px-3 py-2 rounded-[10px]  border border-green-500'>
-                            EFECTUAR TRANSACCION
-                        </p>
-                    </h3>
+
+
+                    <div className='text-center w-full col-span-2 text-green-500 font-bold py-5 mb-5 flex justify.center' >
+                        <h3 className='font-bold text-[14px] text-white uppercase flex items-center'>
+                            <div className='bg-gray-950 text-white border border-green-500 h-[40px] w-[40px] rounded-full flex justify-center items-center mr-3'>
+                                3
+                            </div>
+                            <p className='bg-gray-950 text-white underline  underline-offset-8  decoration-green-500  px-3 py-2 rounded-[10px]  border border-green-500'>
+                                EFECTUAR TRANSACCION
+                            </p>
+                        </h3>
+                    </div>
+
 
                     {/* {destinatario !== undefined && destinatario['banco bottak'] !== undefined &&  */}
                     {select !== 'USDT'
