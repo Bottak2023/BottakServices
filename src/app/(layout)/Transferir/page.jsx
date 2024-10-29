@@ -341,7 +341,7 @@ function Home() {
     console.log(payDB)
     return (
         countries[userDB.cca3] !== undefined && countries[userDB.cca3].countries !== undefined
-            ? <form className='relative left-0 right-0  md:bg-gradient-to-tl from-gray-100 to-gray-400  mx-auto w-full  max-w-[700px]  min-h-[80vh] space-y-6 ' onSubmit={(e) => save(e)}>
+            ? <form className='relative left-0 right-0  md:bg-gradient-to-tl from-gray-100 to-gray-300  mx-auto w-full  max-w-[700px]  min-h-[80vh] space-y-6 ' onSubmit={(e) => save(e)}>
                 {modal === 'Validando...' && <Loader> {modal} </Loader>}
                 {modal.length > 5 && <Loader>{modal}</Loader>}
 
@@ -360,7 +360,7 @@ function Home() {
 
 
 
-                    <div className=' md:bg-gradient-to-tl from-[#ffffff] to-[#ffffffb1] shadow rounded-[10px] relative left-0 right-0 mx-auto w-full space-y-6 lg:grid lg:grid-cols-2 lg:gap-x-5 lg:py-5 lg:mb-10  lg:place-items-end'>
+                    <div className=' md:bg-gradient-to-tl from-[#ffffff] to-[#ffffffb1] shadow rounded-[10px] relative left-0 right-0 mx-auto w-full space-y-6 lg:grid lg:grid-cols-2 lg:gap-x-5 lg:p-5 lg:mb-10  lg:place-items-end'>
 
 
 
