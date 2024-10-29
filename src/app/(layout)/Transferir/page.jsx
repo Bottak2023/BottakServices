@@ -402,11 +402,11 @@ function Home() {
                         </h3>
                     </div>
 
-                    <div className='  relative left-0 right-0 mx-auto w-full lg:mb-10 space-y-6 lg:grid lg:grid-cols-2 lg:gap-x-5 lg:p-0  lg:place-items-end'>
+                    <div className='  relative left-0 right-0 mx-auto w-full lg:mb-10 space-y-6 lg:grid lg:grid-cols-2 lg:gap-x-5 lg:p-0  lg:place-items-start'>
 
                         {/* {destinatario !== undefined && destinatario['banco bottak'] !== undefined &&  */}
                         {select !== 'USDT'
-                            ? <div className='py-5 shadow md:py-0 md:bg-[#000000b6]  space-y-5'>
+                            ? <div className='py-5 shadow md:py-0  space-y-5'>
                                 {/* <Label htmlFor="">QR bancario para el deposito</Label> */}
                                 <Label htmlFor="">QR para transferencia</Label>
 
@@ -418,15 +418,21 @@ function Home() {
                                         {destinatario?.['banco bottak'] && countries && countries[userDB.cca3] && countries[userDB.cca3].countries !== undefined && countries[userDB.cca3].countries[destinatario['banco bottak']] !== undefined
                                             ? <img className=" flex justify-center items-center w-[300px] min-h-[300px] h-auto bg-white text-gray-900 text-[12px]  focus:ring-blue-500 focus:border-blue-500 rounded-[10px]" style={{ objectPosition: 'center' }} src={countries[userDB.cca3].countries[destinatario['banco bottak']] !== undefined ? countries[userDB.cca3].countries[destinatario['banco bottak']].qrURL : ''} alt="" />
                                             : <p className='relative h-full text-[12px] w-full p-5 text-center top-0 bottom-0 my-auto'>Selecciona uno de nuestros bancos para obtener un QR y efectuar su transferencia</p>}
-                                        {countries?.[userDB.cca3]?.countries?.[destinatario?.['banco bottak']] !== undefined && destinatario && destinatario.importe}
-                                        {countries?.[userDB.cca3]?.countries?.[destinatario?.['banco bottak']] !== undefined && destinatario && destinatario['divisa de envio']}
+                                        {/* {destinatario && destinatario.importe}
+                                        {destinatario && destinatario['divisa de envio']} */}
                                     </label>
                                 </Link>
-                                {countries?.[userDB.cca3]?.countries?.[destinatario?.['banco bottak']] !== undefined && <span className="block text-black text-center" >Cta. {countries && countries !== undefined && countries[userDB.cca3] !== undefined && countries[userDB.cca3].countries !== undefined && countries[userDB.cca3].countries[destinatario['banco bottak']] !== undefined && countries[userDB.cca3].countries[destinatario['banco bottak']]['cta bancaria']} <br />
-                                    {destinatario !== undefined && destinatario['banco bottak'] !== undefined && countries && countries !== undefined && countries[userDB.cca3] !== undefined && countries[userDB.cca3].countries[destinatario['banco bottak']] !== undefined && countries[userDB.cca3].countries[destinatario['banco bottak']].banco}
-                                </span>}
+                                {countries?.[userDB.cca3]?.countries?.[destinatario?.['banco bottak']] !== undefined &&
+                                    <div className='text-black text-center text-[12px] border border-gray-400 rounded-[10px] bg-white p-3 shadow-black'>
+                                        Importe:  {destinatario && destinatario.importe} <br />
+                                        Cta. {countries && countries !== undefined && countries[userDB.cca3] !== undefined && countries[userDB.cca3].countries !== undefined && countries[userDB.cca3].countries[destinatario['banco bottak']] !== undefined && countries[userDB.cca3].countries[destinatario['banco bottak']]['cta bancaria']} <br />
+                                        Banco: {destinatario !== undefined && destinatario['banco bottak'] !== undefined && countries && countries !== undefined && countries[userDB.cca3] !== undefined && countries[userDB.cca3].countries[destinatario['banco bottak']] !== undefined && countries[userDB.cca3].countries[destinatario['banco bottak']].banco} <br />
+                                        {countries?.[userDB.cca3]?.countries?.[destinatario?.['banco bottak']]['link de pago'] && <p>
+                                            Link de pago: <Link target='_blank'  href={countries?.[userDB.cca3]?.countries?.[destinatario?.['banco bottak']]['link de pago']} className='underline text-blue-500' >{countries?.[userDB.cca3]?.countries?.[destinatario?.['banco bottak']]['link de pago']}</Link>
+                                        </p>}
+                                    </div>}
                             </div>
-                            : <div className=' space-y-5 shadow py-5  md:py-0  '>
+                            : <div className=' space-y-5  py-5  md:py-0  '>
                                 <Label htmlFor="">QR para transferencia</Label>
 
 
@@ -435,19 +441,26 @@ function Home() {
                                         {walletQR && walletQR !== undefined
                                             ? <img className=" flex justify-center items-center w-[300px] min-h-[300px] h-auto bg-white text-gray-900 text-[12px]  focus:ring-blue-500 focus:border-blue-500 rounded-[10px]" style={{ objectPosition: 'center' }} src={walletQR.qrURL} alt="" />
                                             : <p className='relative h-full text-[12px] w-full p-5 text-center top-0 bottom-0 my-auto'>Selecciona uno de nuestros bancos para obtener un QR y efectuar su transferencia</p>}
-                                        {countries?.[userDB.cca3]?.countries?.[destinatario?.['banco bottak']] !== undefined && destinatario && destinatario.importe}
-                                        {countries?.[userDB.cca3]?.countries?.[destinatario?.['banco bottak']] !== undefined && destinatario && destinatario['divisa de envio']}
                                     </label>
                                 </Link>
-                                {countries?.[userDB.cca3]?.countries?.[destinatario?.['banco bottak']] !== undefined && <span className="block text-black text-center" >Cta. {countries && countries !== undefined && countries[userDB.cca3] !== undefined && countries[userDB.cca3].countries !== undefined && countries[userDB.cca3].countries[destinatario['banco bottak']] !== undefined && countries[userDB.cca3].countries[destinatario['banco bottak']]['cta bancaria']} <br />
-                                    {destinatario !== undefined && destinatario['banco bottak'] !== undefined && countries && countries !== undefined && countries[userDB.cca3] !== undefined && countries[userDB.cca3].countries[destinatario['banco bottak']] !== undefined && countries[userDB.cca3].countries[destinatario['banco bottak']].banco}
-                                </span>}
+
+                                {walletQR && walletQR !== undefined && <div className='text-black text-center text-[12px] border border-gray-400 rounded-[10px] bg-white p-3 shadow-black'>
+
+                                    {walletQR && walletQR !== undefined && destinatario && <p>Importe: {destinatario.importe}</p>}
+                                    {walletQR && walletQR !== undefined && <p>Direccion: {walletQR['address']}</p>}
+                                    {walletQR && walletQR !== undefined && <p>Red: {walletQR['network']}</p>}
+                                    {walletQR && walletQR !== undefined && walletQR['link de pago'] && <p>
+                                        Link de pago: <Link target='_blank' href={walletQR && walletQR !== undefined && walletQR['link de pago']} className='underline text-blue-500' >{walletQR && walletQR !== undefined && walletQR['link de pago']}</Link>
+                                    </p>}
+
+                                </div>}
+
                             </div>
                         }
 
 
                         {/* {((destinatario !== undefined && destinatario['banco bottak'] !== undefined) || walletQR) && <div className=' py-5  md:py-0  space-y-5'> */}
-                        {<div className=' py-5  md:py-0  space-y-5'>
+                        {<div className=' py-5  md:py-0  space-y-5 h-full'>
 
                             <Label htmlFor="">Subir baucher</Label>
 
@@ -459,6 +472,7 @@ function Home() {
                                 </label>
                                 <input className="hidden" id='file' name='name' onChange={manageInputIMG} accept=".jpg, .jpeg, .png, .mp4, webm" type="file" required />
                             </div>
+
                         </div>}
                     </div>
 

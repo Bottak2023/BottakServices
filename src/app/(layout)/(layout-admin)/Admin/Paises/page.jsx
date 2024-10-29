@@ -71,13 +71,13 @@ export default function Home() {
     setModal('Guardando...')
     writeUserData(`currencies/${item.cca3}`, { [operacion]: item[operacion] === undefined || item[operacion] === false ? true : false }, setUserSuccess, callback)
   }
-  
+
   function disableConfirm2(operacion) {
     function callback() {
       getSpecificData('wallets', setWallets, () => { setModal('') })
     }
     setModal('Guardando...')
-    writeUserData(`wallets/${item.wallet}`, { [operacion]: item[operacion] === undefined || item[operacion] === false ? true : false }, setUserSuccess, callback)
+    writeUserData(`wallets/${item.uuid}`, { [operacion]: item[operacion] === undefined || item[operacion] === false ? true : false }, setUserSuccess, callback)
   }
   async function saveConfirm() {
 
@@ -119,14 +119,19 @@ export default function Home() {
   }
   function saveBank(e) {
     e.preventDefault()
+    setModal('Guardando...')
+
     const callback2 = () => {
       getSpecificData(`/currencies/`, setCountries)
       setRouteCountry(null)
+      setModal('')
+      setUrlPostImageBank({})
+      setUrlPostImageQR({})
     }
     const callback = () => {
-      uploadStorage(`currencies/${routeCountry.cca3}/countries/${e.target[3].value}`, postImageQR, { banco: e.target[3].value, ['cta bancaria']: e.target[4].value, dominio: e.target[5].value }, callback2, 'qrURL')
+      uploadStorage(`currencies/${routeCountry.cca3}/countries/${e.target[3].value}`, postImageQR, { banco: e.target[3].value, ['cta bancaria']: e.target[4].value, dominio: e.target[5].value, ['link de pago']: e.target[6].value, }, callback2, 'qrURL')
     }
-    uploadStorage(`currencies/${routeCountry.cca3}/countries/${e.target[3].value}`, postImageBank, { banco: e.target[3].value, ['cta bancaria']: e.target[4].value, dominio: e.target[5].value }, callback)
+    uploadStorage(`currencies/${routeCountry.cca3}/countries/${e.target[3].value}`, postImageBank, { banco: e.target[3].value, ['cta bancaria']: e.target[4].value, dominio: e.target[5].value, ['link de pago']: e.target[6].value,}, callback)
   }
 
 
@@ -135,16 +140,20 @@ export default function Home() {
   function saveWallet(e) {
     e.preventDefault()
 
-
-   const uuid =  generateUUID()
+    setModal('Guardando...')
+    const uuid = generateUUID()
     const callback2 = () => {
-      getSpecificData(`/wallets/`, setCountries)
+      getSpecificData(`/wallets/`, setWallets)
       setRouteCountry(null)
+      setModal('')
+      setUrlPostImageBank({})
+      setUrlPostImageQR({})
+
     }
     const callback = () => {
-      uploadStorage(`wallets/${uuid}`, postImageQR, { wallet: e.target[3].value, address: e.target[4].value, network: e.target[5].value,uuid}, callback2, 'qrURL')
+      uploadStorage(`wallets/${uuid}`, postImageQR, { wallet: e.target[3].value, address: e.target[4].value, network: e.target[5].value, ['link de pago']: e.target[6].value, uuid }, callback2, 'qrURL')
     }
-    uploadStorage(`wallets/${uuid}`, postImageBank, { wallet: e.target[3].value, address: e.target[4].value, network: e.target[5].value,uuid }, callback)
+    uploadStorage(`wallets/${uuid}`, postImageBank, { wallet: e.target[3].value, address: e.target[4].value, network: e.target[5].value, ['link de pago']: e.target[6].value, uuid }, callback)
   }
 
 
@@ -175,6 +184,15 @@ export default function Home() {
     }
     removeData(`${bankDB.route}`, setUserSuccess, callback)
   }
+
+  function handlerDelete(i) {
+    const callback = () => {
+      //   getSpecificData(`//`, setCountries)
+      //   setModal('')
+    }
+    removeData(`/wallets/${i}`, setUserSuccess, callback)
+  }
+
   const prev = () => {
     requestAnimationFrame(() => {
       const scrollLeft = refFirst.current.scrollLeft;
@@ -196,24 +214,21 @@ export default function Home() {
       {modal === 'Save' && <Modal funcion={saveConfirm}>Estas por modificar los datos de la siguiente divisa:  {item['currency'].toUpperCase()}</Modal>}
       {modal === 'recepcion' && <Modal funcion={() => disableConfirm('recepcion')}>Estas por {item.recepcion !== undefined && item.recepcion !== false ? 'DESABILITAR' : 'HABILITAR'} la RECEPCIÓN para el siguiente pais:  {item['currency']}</Modal>}
       {modal === 'envio' && <Modal funcion={() => disableConfirm('envio')}>Estas por {item.envio !== undefined && item.envio !== false ? 'DESABILITAR' : 'HABILITAR'} el ENVIO para el siguiente pais:   {item['currency']}</Modal>}
-     
+
       {modal === 'recepcionCRYPTO' && <Modal funcion={() => disableConfirm2('recepcion')}>Estas por {item.recepcion !== undefined && item.recepcion !== false ? 'DESABILITAR' : 'HABILITAR'} la RECEPCIÓN para el siguiente wallet:  {item['wallet']}</Modal>}
       {modal === 'envioCRYPTO' && <Modal funcion={() => disableConfirm2('envio')}>Estas por {item.envio !== undefined && item.envio !== false ? 'DESABILITAR' : 'HABILITAR'} el ENVIO para el siguiente wallet:   {item['wallet']}</Modal>}
-     
-     
+
+
       {modal === 'DELETE' && bankDB !== null && <Modal theme="Danger" button="Eliminar" funcion={deletConfirmBank}>Estas por eliminar al siguiente banco:  {bankDB['banco']}</Modal>}
 
       <button className='fixed text-[20px] text-gray-500 h-[50px] w-[50px] rounded-full inline-block left-[0px] top-0 bottom-0 my-auto bg-[#00000010] z-20 lg:left-[20px]' onClick={prev}>{'<'}</button>
       <button className='fixed text-[20px] text-gray-500 h-[50px] w-[50px] rounded-full inline-block right-[0px] top-0 bottom-0 my-auto bg-[#00000010] z-20 lg:right-[20px]' onClick={next}>{'>'}</button>
 
       <div className="w-full   relative h-full overflow-auto shadow-2xl p-5 bg-white min-h-[80vh] scroll-smooth" ref={refFirst}>
-        <div className='w-full flex justify-between'>
-          <h3 className='font-medium text-[14px]'>Lista de Wallets</h3>
+        <div className='w-full flex justify-between mb-5'>
+          <h3 className='font-medium text-[14px] text-black'>Lista de Wallets</h3>
 
           <Button theme={"Success"} click={() => handlerAddWallet('WALLET')}>Wallet +</Button>
-
-
-
         </div>
 
 
@@ -234,13 +249,16 @@ export default function Home() {
                 Deposit Address
               </th>
               <th scope="col" className=" px-3 py-3">
+                Link de pago
+              </th>
+              <th scope="col" className=" px-3 py-3">
                 Network
               </th>
               <th scope="col" className="text-center px-3 py-3">
-                Icon
+                QR
               </th>
               <th scope="col" className="text-center px-3 py-3">
-                QR
+                Icon
               </th>
               <th scope="col" className="text-center px-3 py-3">
                 Recepción
@@ -248,37 +266,37 @@ export default function Home() {
               <th scope="col" className="text-center px-3 py-3">
                 Envio
               </th>
-           
+              <th scope="col" className="text-center px-3 py-3">
+                Eliminar
+              </th>
             </tr>
           </thead>
           <tbody>
             {wallets && wallets !== undefined && Object.values(wallets).map((i, index) => {
-              return<tr className={`text-[14px] border-b hover:bg-gray-200  ${index % 2 === 0 ? 'bg-gray-200' : 'bg-gray-200'} `} key={index}>
-         
-         <td className="px-3 py-4 text-gray-900 ">
-                  {index+1}
+              return <tr className={`text-[14px] border-b hover:bg-gray-200  ${index % 2 === 0 ? 'bg-gray-200' : 'bg-gray-200'} `} key={index}>
+
+                <td className="px-3 py-4 text-gray-900 ">
+                  {index + 1}
                 </td>
-                 <td className="px-3 py-4 text-gray-900 ">
+                <td className="px-3 py-4 text-gray-900 ">
                   {i.wallet}
                 </td>
                 <td className="px-3 py-4 text-gray-900 ">
                   {i.address}
                 </td>
                 <td className="px-3 py-4 text-gray-900 ">
+                  {i['link de pago']}
+                </td>
+                <td className="px-3 py-4 text-gray-900 ">
                   {i.network}
                 </td>
                 <td className=" px-3 py-4 text-gray-900 text-center">
-                    <img src={i.url} className='w-[100px] hover:scale-[100vw]  left-0 right-0 mx-auto' alt="Subir QR" />
+                  <img src={i.url} className='w-[100px] hover:scale-[100vw]  left-0 right-0 mx-auto' alt="Subir QR" />
                 </td>
                 <td className=" px-3 py-4 text-gray-900 text-center">
-                    <img src={i.qrURL} className='w-[50px] left-0 right-0 mx-auto' alt="Subir QR" />
+                  <img src={i.qrURL} className='w-[50px] left-0 right-0 mx-auto' alt="Subir QR" />
                 </td>
-                {/* <td className="w-[50px]  px-3 py-4">
-                  <Button theme={"Success"} click={() => handlerAdd(i, 'BANCO')}>Banco +</Button>
-                </td>
-                <td className="w-[50px]  px-3 py-4">
-                  <Button theme={"Success"} click={() => handlerAdd(i, 'WALLET')}>Wallet +</Button>
-                </td> */}
+
                 <td className="w-[50px] px-3 py-4">
                   {i.recepcion !== undefined && i.recepcion !== false
                     ? <Button theme={"Success"} click={() => manage(i, 'Desabilitar', 'recepcionCRYPTO')}>Habilitado</Button>
@@ -291,18 +309,12 @@ export default function Home() {
                     : <Button theme={"Danger"} click={() => manage(i, 'Habilitar', 'envioCRYPTO')}>Desabilitado</Button>
                   }
                 </td>
-                {/* <td className="w-[200px] p-4">
-                  <input type="text" name="divisasPaisRemitente" className='w-[200px]  p-2 outline-blue-200 rounded-xl' onChange={(e) => onChangeHandler(e, i)} defaultValue={i['divisasPaisRemitente'] !== undefined ? i['divisasPaisRemitente'] : 'Ninguna...'} />
-                </td>
-                <td className="w-[200px] p-4">
-                  <input type="text" name="divisasPaisDestinatario" className='w-[200px]  p-2 outline-blue-200 rounded-xl' onChange={(e) => onChangeHandler(e, i)} defaultValue={i['divisasPaisDestinatario'] !== undefined ? i['divisasPaisDestinatario'] : 'Ninguna...'} />
-                </td> */}
-                {/* <td className="w-[50px] px-3 py-4">
-                  {(state && state[i.cca3] !== undefined) || (postImage && postImage[i.cca3] !== undefined)
-                    ? <Button theme={"Success"} click={() => save(i)}>Guardar</Button>
-                    : <Button theme={"Disable"} >Disable</Button>
+                <td className="w-[50px] px-3 py-4">
+                  {i.envio === true && i.recepcion === true
+                    ? <Button theme={"Disable"}>Disable</Button>
+                    : <Button theme={"Danger"} click={() => handlerDelete(i.uuid)}>Eliminar</Button>
                   }
-                </td> */}
+                </td>
               </tr>
             })
             }
@@ -320,9 +332,9 @@ export default function Home() {
 
 
 
-        <h3 className='font-medium text-[14px] pt-[30px]'>Lista de paises, operaciones y bancos habilitados</h3>
+        <h3 className='font-medium text-[14px] pt-[30px] text-black'>Lista de paises, operaciones y bancos habilitados</h3>
         <br />
-        <input type="text" className='border-b-[1px] text-[14px] outline-none w-[400px]' onChange={onChangeFilter} placeholder='Buscar Pais' />
+        <input type="text" className='border-b-[1px] text-[14px] outline-none w-[400px] text-black' onChange={onChangeFilter} placeholder='Buscar Pais' />
         <br />
         <br />
         <table className="w-full overflow-visible min-w-[1700px]  text-[14px] text-left text-gray-500 border-t-4 border-gray-400" >
@@ -451,7 +463,7 @@ export default function Home() {
 
 
         {routeCountry?.categoria === 'WALLET'
-          && <div className='fixed top-0 left-0 w-full h-full flex justify-center items-center p-5 z-50 bg-[#000000C7]'>
+          && <div className='fixed top-0 left-0 w-full h-full flex justify-center items-center p-5 z-30 bg-[#000000C7]'>
             <form className='relative p-5 bg-white w-full max-w-[800px] shadow-2xl rounded-[20px]' onSubmit={saveWallet} >
               <button type="button" className="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-[14px] w-8 h-8 ml-auto inline-flex justify-center items-center  dark:hover:text-white" onClick={() => setRouteCountry(null)}>
                 <svg className="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
@@ -459,7 +471,7 @@ export default function Home() {
                 </svg>
                 <span className="sr-only">Close modal</span>
               </button>
-              <h3 className='text-center text-[16px] pb-3 font-bold'>Agregar Wallet</h3>
+              <h3 className='text-center text-[16px] pb-3 font-bold text-black'>Agregar Wallet</h3>
               {/* <h3 className='text-center text-[16px] pb-3'>{countries[routeCountry.cca3].translation.spa.common}</h3> */}
 
 
@@ -528,7 +540,7 @@ export default function Home() {
         }
 
         {routeCountry?.categoria === 'BANCO'
-          && <div className='fixed top-0 left-0 w-full h-full flex justify-center items-center p-5 z-50 bg-[#000000C7]'>
+          && <div className='fixed top-0 left-0 w-full h-full flex justify-center items-center p-5 z-30 bg-[#000000C7]'>
             <form className='relative p-5 bg-white w-full max-w-[800px] shadow-2xl rounded-[20px]' onSubmit={saveBank} >
               <button type="button" className="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-[14px] w-8 h-8 ml-auto inline-flex justify-center items-center  dark:hover:text-white" onClick={() => setRouteCountry(null)}>
                 <svg className="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
