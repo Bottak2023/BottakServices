@@ -383,7 +383,10 @@ function Home() {
                                 2
                             </div>
                             <p className='bg-gray-950 text-white text-left underline  underline-offset-8  decoration-green-500  px-3 py-2 rounded-[10px]  border border-green-500'>
-                                {select !== 'USDT' ? 'Indica tu banco y tu numero de cuenta \nde transferencia' : 'Indica tu billetera y direccion \nde transferencia'}
+                                {select !== 'USDT' ? 'Indica tu banco y tu numero de cuenta' : 'Indica tu billetera y direccion'}
+                                <br />
+                                {select !== 'USDT' ? 'de transferencia' : 'de transferencia'}
+
                             </p>
                         </h3>
                     </div>
