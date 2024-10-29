@@ -377,10 +377,19 @@ function Home() {
                 <Input type="text" name="titular de banco" onChange={onChangeHandler} required />
             </div> */}
                 <div className='bg-transparent md:bg-gradient-to-tl from-[#191919be] to-[#23232343]  col-span-2  lg:grid lg:grid-cols-2 lg:gap-5 p-1 lg:p-5 justify-items-center'>
-                    {<div className='text-center w-full col-span-2 bg-gray-800 text-green-500 font-bold border border-gray-500 py-5 mb-5' >
-                       {select !== 'USDT' ?'Indica tu banco y tu numero de cuenta desde la cual haras la transferencia': 'Indica tu billetera y su direccion desde la cual haras la transferencia'}
-                        {/* verifique sus datos de transaccion a continuación oprima Verificar Transacción */}
-                    </div>}
+                    
+                    <h3 className='font-bold text-[14px] text-white uppercase flex items-center'>
+                        <div className='bg-gray-950 text-white border border-green-500 h-[40px] w-[40px] rounded-full flex justify-center items-center mr-3'>
+                            3
+                        </div>
+                        <p className='bg-gray-950 text-white underline  underline-offset-8  decoration-green-500  px-3 py-2 rounded-[10px]  border border-green-500'>
+                        {select !== 'USDT' ? 'Indica tu banco y tu numero de cuenta desde la cual haras la transferencia' : 'Indica tu billetera y su direccion desde la cual haras la transferencia'}
+                        </p>
+                    </h3>
+
+
+
+
                     {select !== 'USDT' && <div className='py-5  md:py-0  space-y-5 w-full max-w-[380px] '>
                         <Label htmlFor="">Elige tu banco</Label>
                         <SelectBank name="nombre de banco" bg='bg-gray-50  border-gray-400' propHandlerIsSelect={handlerIsSelect5} propIsSelect={isSelect5} operation="envio" click={handlerBankSelect2} arr={countries[userDB.cca3].countries !== undefined ? Object.values(countries[userDB.cca3].countries) : []} />
@@ -392,17 +401,25 @@ function Home() {
 
                     {select == 'USDT' && <div className='py-5  md:py-0   w-full max-w-[380px] space-y-5'>
                         <Label htmlFor="">Elige una wallet de tranferencia</Label>
-                        <SelectWallet name="billetera bottak" bg='bg-gray-50 border-gray-400'  propHandlerIsSelect={handlerIsSelect5} propIsSelect={isSelect5} operation="envio" click={handlerWalletSelect2} arr={wallets ? Object.values(wallets) : []} />
+                        <SelectWallet name="billetera bottak" bg='bg-gray-50 border-gray-400' propHandlerIsSelect={handlerIsSelect5} propIsSelect={isSelect5} operation="envio" click={handlerWalletSelect2} arr={wallets ? Object.values(wallets) : []} />
                     </div>}
                     {select == 'USDT' && <div className='py-5  md:py-0   space-y-5 w-full max-w-[380px]'>
                         <Label htmlFor="">Dirección de tu billetera</Label>
                         <Input type="text" name="billetera remitente" onChange={onChangeHandler} required />
                     </div>}
-               
-                    {<div className='text-center w-full col-span-2 bg-gray-800 border border-gray-500 text-green-500 font-bold  py-5 mb-5 mt-[20px] md:mt-0' >
+
+                    {/* {<div className='text-center w-full col-span-2 bg-gray-800 border border-gray-500 text-green-500 font-bold  py-5 mb-5 mt-[20px] md:mt-0' >
                         EFECTUAR TRANSACCION
-                        {/* verifique sus datos de transaccion a continuación oprima Verificar Transacción */}
-                    </div>}
+                    </div>} */}
+
+                    <h3 className='font-bold text-[14px] text-white uppercase flex items-center'>
+                        <div className='bg-gray-950 text-white border border-green-500 h-[40px] w-[40px] rounded-full flex justify-center items-center mr-3'>
+                            3
+                        </div>
+                        <p className='bg-gray-950 text-white underline  underline-offset-8  decoration-green-500  px-3 py-2 rounded-[10px]  border border-green-500'>
+                            EFECTUAR TRANSACCION
+                        </p>
+                    </h3>
 
                     {/* {destinatario !== undefined && destinatario['banco bottak'] !== undefined &&  */}
                     {select !== 'USDT'
@@ -445,7 +462,7 @@ function Home() {
                         </div>
                     }
 
-                
+
                     {((destinatario !== undefined && destinatario['banco bottak'] !== undefined) || walletQR) && <div className=' py-5  md:py-0  space-y-5'>
                         <Label htmlFor="">Subir baucher</Label>
 

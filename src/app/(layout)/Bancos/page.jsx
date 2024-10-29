@@ -129,7 +129,14 @@ export default function Home() {
             <button className='fixed text-[20px] text-gray-500 h-[50px] w-[50px] rounded-full inline-block left-[0px] top-0 bottom-0 my-auto bg-[#00000010] z-20 lg:left-[20px]' onClick={prev}>{'<'}</button>
             <button className='fixed text-[20px] text-gray-500 h-[50px] w-[50px] rounded-full inline-block right-[0px] top-0 bottom-0 my-auto bg-[#00000010] z-20 lg:right-[20px]' onClick={next}>{'>'}</button>
             <div className="w-full   relative h-full overflow-auto shadow-2xl p-5 bg-gradient-to-tr from-gray-100 to-gray-300  min-h-[80vh] scroll-smooth" ref={refFirst}>
-                <h3 className='font-bold text-[14px] uppercase text-black'>registro de bancos</h3>
+                <h3 className='font-bold text-[14px] text-white uppercase flex items-center'>
+                    <div className='bg-gray-950 text-white border border-green-500 h-[40px] w-[40px] rounded-full flex justify-center items-center mr-3'>
+                        1
+                    </div>
+                    <p className='bg-gray-950 text-white underline  underline-offset-8  decoration-green-500  px-3 py-2 rounded-[10px]  border border-green-500'>
+                        Seleccionar Bancos
+                    </p>
+                </h3>
                 <br />
                 <div className="w-[615px] grid grid-cols-3 gap-[10px]" >
                     <input type="text" className='border-b-[1px] border-black px-5 text-[14px] bg-transparent text-gray-800 outline-none w-[200px]  placeholder:text-gray-700 ' onChange={onChangeFilter} placeholder='Buscar Destinatario' />
@@ -180,8 +187,8 @@ export default function Home() {
                         {userDB && userDB !== undefined && userDB.bancos && userDB.bancos !== undefined && Object.values(userDB.bancos).map((i, index) => {
                             return i['nombre de banco'].toLowerCase().includes(filter.toLowerCase()) && <tr className={`text-[14px] border-b hover:bg-gray-100  ${index % 2 === 0 ? 'bg-gray-100' : 'bg-gray-100'} `} key={index}>
                                 <td className="px-3 py-4  flex text-gray-900 ">
-                                <input type="checkbox" className='border-none mr-5' checked={selectDB.includes(i.uuid)} onChange={handlerSelect} name={i.uuid} />
-                                <span className='h-full flex py-2'>{index + 1}</span>
+                                    <input type="checkbox" className='border-none mr-5' checked={selectDB.includes(i.uuid)} onChange={handlerSelect} name={i.uuid} />
+                                    <span className='h-full flex py-2'>{index + 1}</span>
                                 </td>
                                 <td className="px-3 py-4 text-gray-900 ">
                                     {userDB.nombre}  {userDB.apellido}

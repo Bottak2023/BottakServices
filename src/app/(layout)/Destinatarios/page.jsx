@@ -121,8 +121,13 @@ export default function Home() {
             <button className='fixed text-[20px] text-gray-500 h-[50px] w-[50px] rounded-full inline-block left-[0px] top-0 bottom-0 my-auto bg-[#00000010] z-20 lg:left-[20px]' onClick={prev}>{'<'}</button>
             <button className='fixed text-[20px] text-gray-500 h-[50px] w-[50px] rounded-full inline-block right-[0px] top-0 bottom-0 my-auto bg-[#00000010] z-20 lg:right-[20px]' onClick={next}>{'>'}</button>
             <div className="w-full   relative h-full overflow-auto shadow-2xl p-5 bg-gradient-to-tl from-gray-400 to-gray-100   min-h-[80vh] scroll-smooth" ref={refFirst}>
-                <h3 className=' text-[14px]  uppercase bg-gray-800 text-green-500 font-bold'>Registro de destinatarios
-                    {/* <img src="/icons/question.svg" className='w-5 h-5'/> */}
+                <h3 className='font-bold text-[14px] text-white uppercase flex items-center'>
+                    <div className='bg-gray-950 text-white border border-green-500 h-[40px] w-[40px] rounded-full flex justify-center items-center mr-3'>
+                        1
+                    </div>
+                    <p className='bg-gray-950 text-white underline  underline-offset-8  decoration-green-500  px-3 py-2 rounded-[10px]  border border-green-500'>
+                        {pathname === 'Cambio' ? 'Registro de wallets' : 'Seleccionar destinatario'}
+                    </p>
                 </h3>
                 <br />
                 <div className="w-[620px] grid grid-cols-3 gap-[10px]" >
