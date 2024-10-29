@@ -143,7 +143,7 @@ export default function Home() {
                 </div>
                 <br />
 
-            <div className="w-full   relative h-full overflow-auto shadow-2xl p-5 bg-white bg-transparent   min-h-[70vh] scroll-smooth" ref={refFirst}>
+            <div className="w-full   relative h-full overflow-auto shadow-2xl p-5 bg-white   min-h-[70vh] scroll-smooth" ref={refFirst}>
            
        
                 <table className="w-full min-w-[1000px] border-[1px] bg-gray-300 text-[14px] text-left text-gray-500 shadow">
