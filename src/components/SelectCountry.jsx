@@ -60,7 +60,7 @@ export default function App({ propIsSelect, propHandlerIsSelect, click }) {
       {/* {countrie !== undefined && pathname === '/Register/Destinatario' && <p className='text-green-500 px-5'>{selectC} admite la siguientes divisas: {(`${countrie.code}, ${countrie.divisasPaisDestinatario !== undefined ? countrie.divisasPaisDestinatario : ''}`)}</p>} */}
 
 
-            {/* {countrie !== undefined && pathname === '/Register/Destinatario' && <p className='text-green-500 p-5'>Si el pais no admite la divisa q seleccionaste se cambiara</p>}  */}
+            {/* {countrie !== undefined && pathname === '/Register/Destinatario' && <p className='text-green-500 p-5'>Si el pais no admite la divisa que seleccionaste se cambiara</p>}  */}
 
 
         </div>

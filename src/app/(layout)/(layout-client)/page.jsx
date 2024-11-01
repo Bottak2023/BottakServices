@@ -130,7 +130,7 @@ function Page() {
 
     console.log((tarifas.tarifa_1_min))
     if (((transferencia * divisas['USDT'].compra / divisas[select].venta).toFixed(2)) *1 < tarifas.tarifa_1_min) {
-      setModal(`INFO: El minimo de envio debe ser mayor o equvalente a ${tarifas.tarifa_1_min}`)
+      setModal(`INFO: El minimo de envio debe ser mayor o equivalente a ${tarifas.tarifa_1_min}`)
       return
     }
     if (comision === 'CONTACTESE CON SOPORTE') {
@@ -270,10 +270,8 @@ function Page() {
               <span className='text-white text-[14px] font-light'>Tasa de cambio </span>
               <span className='text-white text-[14px] font-light'>
                 {divisas && divisas !== undefined && divisas[select2] && divisas[select2] !== undefined && select2 && select2 !== undefined && (divisas[select2].venta / divisas[select2].venta).toFixed(2)} {select2}
-
                 =
-
-                {divisas && divisas !== undefined && divisas[select] && divisas[select] !== undefined && select && select !== undefined && (divisas[select].compra / divisas[select2].compra).toFixed(2)} {select}
+                {divisas && divisas !== undefined && divisas[select] && divisas[select] !== undefined && select && select !== undefined && (divisas[select].venta / divisas[select2].venta).toFixed(2)} {select}
 
               </span>
             </div>

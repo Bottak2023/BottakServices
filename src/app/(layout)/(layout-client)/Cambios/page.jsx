@@ -137,7 +137,7 @@ export default function Home() {
       return
     }
     if (((transferencia * divisas['USDT'].compra / divisas[select].venta).toFixed(2)) * 1 < tarifas.tarifa_1_min) {
-      setModal(`INFO: El minimo de cambio debe ser mayor o equvalente a ${tarifas.tarifa_1_min}`)
+      setModal(`INFO: El minimo de cambio debe ser mayor o equivalente a ${tarifas.tarifa_1_min}`)
       return
     }
     if ((divisas && divisas[select] && divisas[select2] && (transferencia * divisas['USDT'].compra / divisas[select].venta).toFixed(2)) > 100000) {
@@ -219,8 +219,8 @@ export default function Home() {
             <span className='text-white text-[14px] font-light'>
               {divisas && divisas !== undefined && divisas[select2] && divisas[select2] !== undefined && select2 && select2 !== undefined && (divisas[select2].venta / divisas[select2].venta).toFixed(2)} {select2}
               =
-              {divisas && divisas !== undefined && divisas[select] && divisas[select] !== undefined && select && select !== undefined && (divisas[select].compra / divisas[select2].compra).toFixed(2)} {select}
-            </span>
+              {divisas && divisas !== undefined && divisas[select] && divisas[select] !== undefined && select && select !== undefined && (divisas[select].venta / divisas[select2].venta).toFixed(2)} {select}
+              </span>
           </div>
           <div className='grid grid-cols-2 gap-[15px]'>
             <span className='text-white text-[14px] font-light'>Comisiones</span>

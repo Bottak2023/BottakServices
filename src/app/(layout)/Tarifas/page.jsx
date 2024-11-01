@@ -1,6 +1,6 @@
 'use client';
 import { useUser } from '@/context/Context'
-import { useEffect, useState, useRef  } from 'react'
+import { useEffect, useState, useRef } from 'react'
 
 export default function Home() {
 
@@ -19,21 +19,21 @@ export default function Home() {
     }
     const prev = () => {
         requestAnimationFrame(() => {
-          const scrollLeft = refFirst.current.scrollLeft;
-          
-          const itemWidth = screen.width - 50
-          refFirst.current.scrollLeft = scrollLeft - itemWidth;
+            const scrollLeft = refFirst.current.scrollLeft;
+
+            const itemWidth = screen.width - 50
+            refFirst.current.scrollLeft = scrollLeft - itemWidth;
         });
-      };
-      const next = () => {
+    };
+    const next = () => {
         requestAnimationFrame(() => {
-          const scrollLeft = refFirst.current.scrollLeft;
-          
-          const itemWidth = screen.width - 50
-          console.log(itemWidth)
-          refFirst.current.scrollLeft = scrollLeft + itemWidth;
+            const scrollLeft = refFirst.current.scrollLeft;
+
+            const itemWidth = screen.width - 50
+            console.log(itemWidth)
+            refFirst.current.scrollLeft = scrollLeft + itemWidth;
         });
-      };
+    };
     return (
         <main className='w-full h-full'>
             <button className='fixed text-[20px] text-gray-500 h-[50px] w-[50px] rounded-full inline-block left-[0px] top-0 bottom-0 my-auto bg-[#00000010] z-20 lg:left-[20px]' onClick={prev}>{'<'}</button>
@@ -67,50 +67,50 @@ export default function Home() {
                             </th>
                             <th scope="col" className="text-center px-3 py-3">
                                 Tarifa de Envio<br />
-                                1 - 1000 USDT
+                                {tarifas.tarifa_1_min} USD - {tarifas.tarifa_1_max} USD
                             </th>
                             <th scope="col" className="text-center px-3 py-3">
                                 Tarifa de Envio <br />
-                                10 000 - 100 000 USDT
+                                {tarifas.tarifa_2_min} USD - {tarifas.tarifa_2_max} USD
                             </th>
                             <th scope="col" className="text-center px-3 py-3">
                                 Tarifa de Envio<br />
-                                100 000 - ... USDT
+                                {tarifas.tarifa_3_min} USD - {tarifas.tarifa_3_max} USD
                             </th>
                         </tr>
                     </thead>
                     <tbody>
-                        {divisas && divisas !== undefined && Object.values(divisas).filter((i)=> i.currency !== undefined &&  i.habilitado !== undefined && i.habilitado === true).sort(sortArray).map((i, index) => {
-                            return (i.currency.toLowerCase().includes(filter.toLowerCase()) || i.code.toLowerCase().includes(filter.toLowerCase())) && 
-                            <tr className={`text-[14px] border-b border-gray-50  py-1 transition-all ${index === row ? 'bg-gray-100' : 'bg-gray-200'} ${index % 2 === 0 ? '' : ''} `} key={index} onClick={() => setRow(index)}>
-                                <td className="px-3 py-4  flex text-gray-900 ">
-                                    <span className='h-full flex py-2'>{index + 1}</span>
-                                </td>
-                                <td className="px-3 py-4 text-gray-900 ">
-                                    {i.currency === 'Crypto'?`${i.currency} ${i.code}`:i.currency}
-                                </td>
-                                <td className="px-3 py-4 text-gray-900 ">
-                                    {i.code}
-                                </td>
-                                <td className="px-3 py-4 text-gray-900 ">
-                                    1 USDT
-                                </td>
-                                <td className="min-w-32 p-4 text-center">
-                                    {i['compra'] !== undefined ? i['compra'] + i.code: '-----'} 
-                                </td>
-                                <td className="min-w-32 p-4 text-center">
-                                    {i['venta'] !== undefined ? i['venta'] + i.code: '-----'}
-                                </td>
-                                <td className="min-w-32 p-4 text-center">
-                                    {i['tarifa 1'] !== undefined ? i['tarifa 1'] + ' % de ' + i.code: '-----'}
-                                </td>
-                                <td className="min-w-32 p-4 text-center">
-                                    {i['tarifa 2'] !== undefined ? i['tarifa 2'] + ' % de ' + i.code: '-----'}
-                                </td>
-                                <td className="min-w-32 p-4 text-center">
-                                    {i['tarifa 3'] !== undefined ? i['tarifa 3'] + ' % de ' + i.code: '-----'}
-                                </td>
-                            </tr>
+                        {divisas && divisas !== undefined && Object.values(divisas).filter((i) => i.currency !== undefined && i.habilitado !== undefined && i.habilitado === true).sort(sortArray).map((i, index) => {
+                            return (i.currency.toLowerCase().includes(filter.toLowerCase()) || i.code.toLowerCase().includes(filter.toLowerCase())) &&
+                                <tr className={`text-[14px] border-b border-gray-50  py-1 transition-all ${index === row ? 'bg-gray-100' : 'bg-gray-200'} ${index % 2 === 0 ? '' : ''} `} key={index} onClick={() => setRow(index)}>
+                                    <td className="px-3 py-4  flex text-gray-900 ">
+                                        <span className='h-full flex py-2'>{index + 1}</span>
+                                    </td>
+                                    <td className="px-3 py-4 text-gray-900 ">
+                                        {i.currency === 'Crypto' ? `${i.currency} ${i.code}` : i.currency}
+                                    </td>
+                                    <td className="px-3 py-4 text-gray-900 ">
+                                        {i.code}
+                                    </td>
+                                    <td className="px-3 py-4 text-gray-900 ">
+                                        1 USDT
+                                    </td>
+                                    <td className="min-w-32 p-4 text-center">
+                                        {i['compra'] !== undefined ? i['compra'] + i.code : '-----'}
+                                    </td>
+                                    <td className="min-w-32 p-4 text-center">
+                                        {i['venta'] !== undefined ? i['venta'] + i.code : '-----'}
+                                    </td>
+                                    <td className="min-w-32 p-4 text-center">
+                                        {i['tarifa 1'] !== undefined ? i['tarifa 1'] + ' % de ' + i.code : '-----'}
+                                    </td>
+                                    <td className="min-w-32 p-4 text-center">
+                                        {i['tarifa 2'] !== undefined ? i['tarifa 2'] + ' % de ' + i.code : '-----'}
+                                    </td>
+                                    <td className="min-w-32 p-4 text-center">
+                                        {i['tarifa 3'] !== undefined ? i['tarifa 3'] + ' % de ' + i.code : '-----'}
+                                    </td>
+                                </tr>
                         })
                         }
                     </tbody>

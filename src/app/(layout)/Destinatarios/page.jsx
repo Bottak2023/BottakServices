@@ -149,7 +149,7 @@ export default function Home() {
                 <table className="w-full min-w-[1000px] border-[1px] bg-gray-300 text-[14px] text-left text-gray-500 shadow">
                     <thead className="text-[14px] text-white uppercase bg-gray-800">
                         <tr>
-                            <th colSpan={9}><marquee behavior="" direction="" className='text-[10px] text-red-500 font-medium pt-2'>Verifica q tu divisa de destinatario sea admitida, caso contrario se cambiara.</marquee></th>
+                            <th colSpan={9}><marquee behavior="" direction="" className='text-[10px] text-red-500 font-medium pt-2'>Verifica que tu divisa de destinatario sea admitida, caso contrario se cambiara.</marquee></th>
                         </tr>
                         <tr>
                             <th scope="col" className="w-[100px] px-3 py-3">

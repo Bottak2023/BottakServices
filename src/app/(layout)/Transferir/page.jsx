@@ -18,6 +18,7 @@ import SelectWallet from '@/components/SelectWallet'
 
 import ModalINFO from '@/components/ModalINFO'
 import { getSpecificDataEq, getSpecificData2, writeUserData, removeData } from '@/firebase/database'
+import { ChatIcon, PhoneIcon, ClipboardDocumentCheckIcon, FolderPlusIcon, CurrencyDollarIcon, DocumentTextIcon, UserCircleIcon, ChatBubbleLeftEllipsisIcon } from '@heroicons/react/24/solid';
 
 import Link from 'next/link'
 function Home() {
@@ -339,6 +340,43 @@ function Home() {
             : uploadStorage(`envios/${uuid}`, postImage, { ...db, fecha, date, uuid, estado: 'En verificación', verificacion: false, email: user.email }, callback)
     }
     console.log(payDB)
+
+
+
+
+
+    const TextWithCopy = ({ keys, value }) => {
+        const [copied, setCopied] = useState(false);
+
+        const copyToClipboard = (textToCopy) => {
+            navigator.clipboard.writeText(textToCopy).then(() => {
+                setCopied(textToCopy);
+                setTimeout(() => setCopied(false), 3000); // Ocultar el mensaje después de 2 segundos
+            });
+        };
+
+        return (
+            <div className="relative flex ">
+                <p className='text-black flex'>
+                    {keys}:{' '}
+                    <span onClick={() => copyToClipboard(value)} className="cursor-pointer flex pl-1">
+                        {value}
+                        <ClipboardDocumentCheckIcon className="h-4 w-4 fill-green-400  pl-1" />
+                    </span>
+                </p>
+                {copied === value && (
+                    <p className="absolute top-2 w-[150px] text-green-500 flex items-center shadow-sm rounded-[5px] py-1 px-2 shadow-[#979797] bg-white z-30">
+                        <ClipboardDocumentCheckIcon className="h-4 w-4 fill-green-400 mr-1" />
+                        Texto Copiado!
+                    </p>
+                )}
+            </div>
+        );
+    };
+
+
+
+
     return (
         countries[userDB.cca3] !== undefined && countries[userDB.cca3].countries !== undefined
             ? <form className='relative left-0 right-0  md:bg-gradient-to-tl from-gray-100 to-gray-300  mx-auto w-full  max-w-[700px]  min-h-[80vh] space-y-6 ' onSubmit={(e) => save(e)}>
@@ -422,15 +460,48 @@ function Home() {
                                         {destinatario && destinatario['divisa de envio']} */}
                                     </label>
                                 </Link>
+
+
+                                {/* <div className='text-black text-center text-[12px] border border-gray-400 rounded-[10px] bg-white p-3 shadow-black'>
+                                    Importe:   {destinatario && destinatario.importe} <br />
+                                    Cta. {countries && countries !== undefined && countries[userDB.cca3] !== undefined && countries[userDB.cca3].countries !== undefined && countries[userDB.cca3].countries[destinatario['banco bottak']] !== undefined && countries[userDB.cca3].countries[destinatario['banco bottak']]['cta bancaria']} <br />
+                                    Banco: {destinatario !== undefined && destinatario['banco bottak'] !== undefined && countries && countries !== undefined && countries[userDB.cca3] !== undefined && countries[userDB.cca3].countries[destinatario['banco bottak']] !== undefined && countries[userDB.cca3].countries[destinatario['banco bottak']].banco} <br />
+                                    {countries?.[userDB.cca3]?.countries?.[destinatario?.['banco bottak']]['link de pago'] && <p>
+                                        Link de pago: <Link target='_blank' href={countries?.[userDB.cca3]?.countries?.[destinatario?.['banco bottak']]['link de pago']} className='underline text-blue-500' >{countries?.[userDB.cca3]?.countries?.[destinatario?.['banco bottak']]['link de pago']}</Link>
+                                    </p>}
+                                </div> */}
+
                                 {countries?.[userDB.cca3]?.countries?.[destinatario?.['banco bottak']] !== undefined &&
-                                    <div className='text-black text-center text-[12px] border border-gray-400 rounded-[10px] bg-white p-3 shadow-black'>
-                                        Importe:  {destinatario && destinatario.importe} <br />
-                                        Cta. {countries && countries !== undefined && countries[userDB.cca3] !== undefined && countries[userDB.cca3].countries !== undefined && countries[userDB.cca3].countries[destinatario['banco bottak']] !== undefined && countries[userDB.cca3].countries[destinatario['banco bottak']]['cta bancaria']} <br />
-                                        Banco: {destinatario !== undefined && destinatario['banco bottak'] !== undefined && countries && countries !== undefined && countries[userDB.cca3] !== undefined && countries[userDB.cca3].countries[destinatario['banco bottak']] !== undefined && countries[userDB.cca3].countries[destinatario['banco bottak']].banco} <br />
-                                        {countries?.[userDB.cca3]?.countries?.[destinatario?.['banco bottak']]['link de pago'] && <p>
-                                            Link de pago: <Link target='_blank'  href={countries?.[userDB.cca3]?.countries?.[destinatario?.['banco bottak']]['link de pago']} className='underline text-blue-500' >{countries?.[userDB.cca3]?.countries?.[destinatario?.['banco bottak']]['link de pago']}</Link>
-                                        </p>}
-                                    </div>}
+
+
+                                    <div className='text-black text-center text-[12px] border border-gray-400 rounded-[10px] bg-white p-3 shadow-black flex flex-col items-center'>
+                                        {walletQR && walletQR !== undefined && destinatario &&
+                                            <TextWithCopy
+                                                keys={'Importe'}
+                                                value={destinatario.importe}
+                                            />
+                                        }
+                                        {countries && countries !== undefined && countries[userDB.cca3] !== undefined && countries[userDB.cca3].countries !== undefined && countries[userDB.cca3].countries[destinatario['banco bottak']] !== undefined && countries[userDB.cca3].countries[destinatario['banco bottak']]['cta bancaria'] &&
+                                            <TextWithCopy
+                                                keys={'Cta'}
+                                                value={countries[userDB.cca3].countries[destinatario['banco bottak']]['cta bancaria']}
+                                            />
+                                        }
+                                        {destinatario !== undefined && destinatario['banco bottak'] !== undefined && countries && countries !== undefined && countries[userDB.cca3] !== undefined && countries[userDB.cca3].countries[destinatario['banco bottak']] !== undefined && countries[userDB.cca3].countries[destinatario['banco bottak']].banco &&
+                                            <TextWithCopy
+                                                keys={'Banco'}
+                                                value={countries[userDB.cca3].countries[destinatario['banco bottak']].banco }
+                                            />
+                                        }
+                                      {countries?.[userDB.cca3]?.countries?.[destinatario?.['banco bottak']]['link de pago'] && <p>
+                                        Link de pago: <Link target='_blank' href={countries?.[userDB.cca3]?.countries?.[destinatario?.['banco bottak']]['link de pago']} className='underline text-blue-500' >{countries?.[userDB.cca3]?.countries?.[destinatario?.['banco bottak']]['link de pago']}</Link>
+                                    </p>}
+
+                                    </div>
+
+
+
+                                }
                             </div>
                             : <div className=' space-y-5  py-5  md:py-0  '>
                                 <Label htmlFor="">QR para transferencia</Label>
@@ -444,11 +515,25 @@ function Home() {
                                     </label>
                                 </Link>
 
-                                {walletQR && walletQR !== undefined && <div className='text-black text-center text-[12px] border border-gray-400 rounded-[10px] bg-white p-3 shadow-black'>
-
-                                    {walletQR && walletQR !== undefined && destinatario && <p>Importe: {destinatario.importe}</p>}
-                                    {walletQR && walletQR !== undefined && <p>Direccion: {walletQR['address']}</p>}
-                                    {walletQR && walletQR !== undefined && <p>Red: {walletQR['network']}</p>}
+                                {walletQR && walletQR !== undefined && <div className='text-black text-center text-[12px] border border-gray-400 rounded-[10px] bg-white p-3 shadow-black flex flex-col items-center'>
+                                    {walletQR && walletQR !== undefined && destinatario &&
+                                        <TextWithCopy
+                                            keys={'Importe'}
+                                            value={destinatario.importe}
+                                        />
+                                    }
+                                    {walletQR && walletQR !== undefined &&
+                                        <TextWithCopy
+                                            keys={'Direccion'}
+                                            value={walletQR['address']}
+                                        />
+                                    }
+                                    {walletQR && walletQR !== undefined &&
+                                        <TextWithCopy
+                                            keys={'Red'}
+                                            value={walletQR['network']}
+                                        />
+                                    }
                                     {walletQR && walletQR !== undefined && walletQR['link de pago'] && <p>
                                         Link de pago: <Link target='_blank' href={walletQR && walletQR !== undefined && walletQR['link de pago']} className='underline text-blue-500' >{walletQR && walletQR !== undefined && walletQR['link de pago']}</Link>
                                     </p>}
