@@ -18,7 +18,7 @@ import { generateUUID } from '@/utils/UUIDgenerator';
 
 export default function Home() {
 
-  const { user, userDB, setUserProfile, modal, setModal, users, setUsers, setUserSuccess, wallets, setWallets, success, setUserData, postsIMG, setUserPostsIMG, setCountries, item, setItem, exchange, setExchange, countries } = useUser()
+  const { user, userDB, setUserProfile, modal, setModal, users, setUsers, setUserSuccess, routeCountry, setRouteCountry, wallets, setWallets, success, setUserData, postsIMG, setUserPostsIMG, setCountries, item, setItem, exchange, setExchange, countries } = useUser()
   const router = useRouter()
   const [filter, setFilter] = useState('')
   const [state, setState] = useState({})
@@ -28,7 +28,6 @@ export default function Home() {
   const refFirst = useRef(null);
 
   const [bankDB, setBankDB] = useState(null)
-  const [routeCountry, setRouteCountry] = useState(null)
   const [bank, setBank] = useState(null)
 
   const [postImageBank, setPostImageBank] = useState({})
@@ -104,11 +103,11 @@ export default function Home() {
 
     return
   }
-  function manageInputIMG(e, name) {
-    const file = e.target.files[0]
-    setPostImage({ ...postImage, [name]: file })
-    setUrlPostImage({ ...urlPostImage, [name]: URL.createObjectURL(file) })
-  }
+  // function manageInputIMG(e, name) {
+  //   const file = e.target.files[0]
+  //   setPostImage({ ...postImage, [name]: file })
+  //   setUrlPostImage({ ...urlPostImage, [name]: URL.createObjectURL(file) })
+  // }
 
 
   function handlerAdd(i, categoria) {
@@ -117,22 +116,22 @@ export default function Home() {
   function handlerAddWallet(categoria) {
     setRouteCountry({ categoria })
   }
-  function saveBank(e) {
-    e.preventDefault()
-    setModal('Guardando...')
+  // function saveBank(e) {
+  //   e.preventDefault()
+  //   setModal('Guardando...')
 
-    const callback2 = () => {
-      getSpecificData(`/currencies/`, setCountries)
-      setRouteCountry(null)
-      setModal('')
-      setUrlPostImageBank({})
-      setUrlPostImageQR({})
-    }
-    const callback = () => {
-      uploadStorage(`currencies/${routeCountry.cca3}/countries/${e.target[3].value}`, postImageQR, { banco: e.target[3].value, ['cta bancaria']: e.target[4].value, dominio: e.target[5].value, ['link de pago']: e.target[6].value, }, callback2, 'qrURL')
-    }
-    uploadStorage(`currencies/${routeCountry.cca3}/countries/${e.target[3].value}`, postImageBank, { banco: e.target[3].value, ['cta bancaria']: e.target[4].value, dominio: e.target[5].value, ['link de pago']: e.target[6].value,}, callback)
-  }
+  //   const callback2 = () => {
+  //     getSpecificData(`/currencies/`, setCountries)
+  //     setRouteCountry(null)
+  //     setModal('')
+  //     setUrlPostImageBank({})
+  //     setUrlPostImageQR({})
+  //   }
+  //   const callback = () => {
+  //     uploadStorage(`currencies/${routeCountry.cca3}/countries/${e.target[3].value}`, postImageQR, { banco: e.target[3].value, ['cta bancaria']: e.target[4].value, dominio: e.target[5].value, ['link de pago']: e.target[6].value, }, callback2, 'qrURL')
+  //   }
+  //   uploadStorage(`currencies/${routeCountry.cca3}/countries/${e.target[3].value}`, postImageBank, { banco: e.target[3].value, ['cta bancaria']: e.target[4].value, dominio: e.target[5].value, ['link de pago']: e.target[6].value, }, callback)
+  // }
 
 
 
@@ -225,8 +224,8 @@ export default function Home() {
       <button className='fixed text-[20px] text-gray-500 h-[50px] w-[50px] rounded-full inline-block right-[0px] top-0 bottom-0 my-auto bg-[#00000010] z-20 lg:right-[20px]' onClick={next}>{'>'}</button>
 
       <div className="w-full   relative h-full overflow-auto shadow-2xl p-5 bg-white min-h-[80vh] scroll-smooth" ref={refFirst}>
-        <div className='w-full flex justify-between mb-5'>
-          <h3 className='font-medium text-[14px] text-black'>Lista de Wallets</h3>
+      <div className='w-full  flex flex-col md:flex-row justify-between mb-5'>
+      <h3 className='font-medium text-[14px] text-black pb-5 md:pb-0'>Lista de Wallets</h3>
 
           <Button theme={"Success"} click={() => handlerAddWallet('WALLET')}>Wallet +</Button>
         </div>
@@ -235,7 +234,7 @@ export default function Home() {
 
 
 
-        <table className="w-full overflow-visible min-w-[1700px]  text-[14px] text-left text-gray-500 border-t-4 border-gray-400" >
+        <table className="w-full overflow-visible min-w-[1500px]  text-[14px] text-left text-gray-500 border-t-4 border-gray-400" >
           {/* <table className="relative w-full overflow-scroll max-w-[800px] h-[50px]  text-[14px] text-left text-gray-500 border-t-4 border-gray-400"> */}
           <thead className="text-[14px] text-gray-700 uppercase ">
             <tr className='  bg-gray-800 text-white'>
@@ -281,10 +280,10 @@ export default function Home() {
                 <td className="px-3 py-4 text-gray-900 ">
                   {i.wallet}
                 </td>
-                <td className="px-3 py-4 text-gray-900 ">
+                <td className="px-3 py-4 w-[200px] text-gray-900 text-ellipsis overflow-hidden ">
                   {i.address}
                 </td>
-                <td className="px-3 py-4 text-gray-900 ">
+                <td className="px-3 py-4 w-[200px] text-gray-900 text-ellipsis overflow-hidden">
                   {i['link de pago']}
                 </td>
                 <td className="px-3 py-4 text-gray-900 ">
@@ -337,7 +336,7 @@ export default function Home() {
         <input type="text" className='border-b-[1px] text-[14px] outline-none w-[400px] text-black' onChange={onChangeFilter} placeholder='Buscar Pais' />
         <br />
         <br />
-        <table className="w-full overflow-visible min-w-[1700px]  text-[14px] text-left text-gray-500 border-t-4 border-gray-400" >
+        <table className="w-full overflow-visible min-w-[1500px]  text-[14px] text-left text-gray-500 border-t-4 border-gray-400" >
           {/* <table className="relative w-full overflow-scroll max-w-[800px] h-[50px]  text-[14px] text-left text-gray-500 border-t-4 border-gray-400"> */}
           <thead className="text-[14px] text-gray-700 uppercase   bg-gray-800 text-white">
             <tr>
@@ -360,9 +359,9 @@ export default function Home() {
               <th scope="col" className="text-center px-3 py-3">
                 QR de cobro
               </th> */}
-              <th scope="col" className="text-center px-3 py-3">
-                Bancos admitidos
-              </th>
+              {/* <th scope="col" className="text-center px-3 py-3">
+                Wallets +
+              </th> */}
               <th scope="col" className="text-center px-3 py-3">
                 Banco +
               </th>
@@ -407,8 +406,8 @@ export default function Home() {
                     <input id={`img${index}`} type="file" onChange={(e) => manageInputIMG(e, i.cca3)} className='hidden' accept='image/*' />
                   </label>
                 </td> */}
-                <td className="w-[600px] px-3 py-4 text-gray-900 ">
-                  {i.countries !== undefined && Object.values(i.countries).map((e, index) => <div className='flex items-center justify-between border-b-[1px] border-gray-400 py-2'>
+                {/*  <td className="w-[200px] px-3 py-4 text-gray-900 ">
+                 {i.countries !== undefined && Object.values(i.countries).map((e, index) => <div className='flex items-center justify-between border-b-[1px] border-gray-400 py-2'>
                     <img src={e.url} className='w-[30px]' alt="Subir QR" />
                     <img src={e.qrURL} className='w-[30px]' alt="Subir QR" />
                     <span className='inline-block  pl-[10px]'>{e.banco}</span>
@@ -418,9 +417,15 @@ export default function Home() {
                       <path fill="#f44336" d="M44,24c0,11-9,20-20,20S4,35,4,24S13,4,24,4S44,13,44,24z"></path><line x1="16.9" x2="31.1" y1="16.9" y2="31.1" fill="none" stroke="#fff" stroke-miterlimit="10" stroke-width="4"></line><line x1="31.1" x2="16.9" y1="16.9" y2="31.1" fill="none" stroke="#fff" stroke-miterlimit="10" stroke-width="4"></line>
                     </svg>
                   </div>)}
-                </td>
-                <td className="w-[50px]  px-3 py-4">
-                  <Button theme={"Success"} click={() => handlerAdd(i, 'BANCO')}>Banco +</Button>
+                  <Link href={`/Admin/Paises/AddAccount?cca3=${i.cca3}&cuenta=WALLET`}>
+                    <Button theme={"Success"}>Admin Wallets</Button>
+                  </Link>
+                </td> */}
+                <td className="w-[200px]  px-3 py-4">
+                  <Link href={`/Admin/Paises/AddAccount?cca3=${i.cca3}&cuenta=BANCO`}>
+                    <Button theme={"Success"}  click={() => handlerAdd(i, 'BANCO')}>Admin Bancos</Button>
+                  </Link>
+                  {/* <Button theme={"Success"} click={() => handlerAdd(i, 'BANCO')}>Banco +</Button> */}
                 </td>
                 <td className="w-[50px] px-3 py-4">
                   {i.recepcion !== undefined && i.recepcion !== false
@@ -539,7 +544,7 @@ export default function Home() {
           </div>
         }
 
-        {routeCountry?.categoria === 'BANCO'
+        {/* {routeCountry?.categoria === 'BANCO'
           && <div className='fixed top-0 left-0 w-full h-full flex justify-center items-center p-5 z-30 bg-[#000000C7]'>
             <form className='relative p-5 bg-white w-full max-w-[800px] shadow-2xl rounded-[20px]' onSubmit={saveBank} >
               <button type="button" className="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-[14px] w-8 h-8 ml-auto inline-flex justify-center items-center  dark:hover:text-white" onClick={() => setRouteCountry(null)}>
@@ -614,7 +619,7 @@ export default function Home() {
               </div>
             </form>
           </div>
-        }
+        } */}
 
 
 

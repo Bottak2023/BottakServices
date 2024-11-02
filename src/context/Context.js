@@ -9,6 +9,7 @@ export function UserProvider({ children }) {
 	const [user, setUser] = useState(undefined)
 	const [users, setUsers] = useState(undefined)
 	const [userDB, setUserDB] = useState(undefined)     
+	const [routeCountry, setRouteCountry] = useState(null)
 
 	const [time_stamp, setTime_stamp] = useState(undefined)
 	const [divisas, setDivisas] = useState(undefined)
@@ -128,6 +129,7 @@ export function UserProvider({ children }) {
 			enviosDB, setEnviosDB,
 			cambiosDB, setCambiosDB,
 			setQRurl, 
+			routeCountry, setRouteCountry,
 			wallets, setWallets,
 			setDestinatario,
 			setUsers,
@@ -152,7 +154,7 @@ export function UserProvider({ children }) {
 		filterQR, exchange, countries, destinatarios, transactionDB, navItem, comision,wallets,
 		enviosDB,
 		cambiosDB,time_stamp,
-		notificaciones])
+		notificaciones, routeCountry])
 
 
 	return (
