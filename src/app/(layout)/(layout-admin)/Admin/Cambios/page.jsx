@@ -383,7 +383,7 @@ function confirmEliminarSelectDB() {
           <tbody>
             {remesasDB && remesasDB !== undefined && Object.values(remesasDB).map((i, index) => {
               return ((i.dni !== undefined && i.dni.toLowerCase().includes(filter.toLowerCase())) ||
-                (i.usuario !== undefined && i.usuario.toLowerCase().includes(filter.toLowerCase()))) &&
+                (i.usuario !== undefined && i.usuario.toLowerCase().includes(filter.toLowerCase()))) && i.fecha.includes(filterDate) &&
                 <tr className={`text-[14px] border-b border-gray-50  py-1 transition-all ${index === row ? 'bg-gray-100' : 'bg-gray-200'} ${index % 2 === 0 ? '' : ''} `} key={index} onClick={() => setRow(index)}>
                   <td className="px-3 py-0  flex  ">
                   <input type="checkbox" className='border-none mr-5' checked={selectDB.includes(i.uuid)} onChange={handlerSelect} name={i.uuid} />
