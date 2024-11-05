@@ -489,6 +489,12 @@ function Home() {
                                                 value={pagosQR['cta bancaria']}
                                             />
                                         }
+                                         {pagosQR && pagosQR !== undefined && destinatario &&
+                                            <TextWithCopy
+                                                keys={'Banco'}
+                                                value={pagosQR.banco}
+                                            />
+                                        }
                                         {destinatario !== undefined && destinatario['banco bottak'] !== undefined && countries && countries !== undefined && countries[userDB.cca3] !== undefined && countries[userDB.cca3].countries[destinatario['banco bottak']] !== undefined && countries[userDB.cca3].countries[destinatario['banco bottak']].banco &&
                                             <TextWithCopy
                                                 keys={'Banco'}
