@@ -472,7 +472,8 @@ function Home() {
                                     </p>}
                                 </div> */}
 
-                                {countries?.[userDB.cca3]?.countries?.[destinatario?.['banco bottak']] !== undefined &&
+                                {console.log(pagosQR)}
+                                {pagosQR && pagosQR !== undefined && destinatario &&
 
 
                                     <div className='text-black text-center text-[12px] border border-gray-400 rounded-[10px] bg-white p-3 shadow-black flex flex-col items-center'>
@@ -482,20 +483,20 @@ function Home() {
                                                 value={destinatario.importe}
                                             />
                                         }
-                                        {countries && countries !== undefined && countries[userDB.cca3] !== undefined && countries[userDB.cca3].countries !== undefined && countries[userDB.cca3].countries[destinatario['banco bottak']] !== undefined && countries[userDB.cca3].countries[destinatario['banco bottak']]['cta bancaria'] &&
+                                        {pagosQR['cta bancaria'] &&
                                             <TextWithCopy
                                                 keys={'Cta'}
-                                                value={countries[userDB.cca3].countries[destinatario['banco bottak']]['cta bancaria']}
+                                                value={pagosQR['cta bancaria']}
                                             />
                                         }
                                         {destinatario !== undefined && destinatario['banco bottak'] !== undefined && countries && countries !== undefined && countries[userDB.cca3] !== undefined && countries[userDB.cca3].countries[destinatario['banco bottak']] !== undefined && countries[userDB.cca3].countries[destinatario['banco bottak']].banco &&
                                             <TextWithCopy
                                                 keys={'Banco'}
-                                                value={countries[userDB.cca3].countries[destinatario['banco bottak']].banco}
+                                                value={pagosQR.banco}
                                             />
                                         }
-                                        {countries?.[userDB.cca3]?.countries?.[destinatario?.['banco bottak']]['link de pago'] && <p>
-                                            Link de pago: <Link target='_blank' href={countries?.[userDB.cca3]?.countries?.[destinatario?.['banco bottak']]['link de pago']} className='underline text-blue-500' >{countries?.[userDB.cca3]?.countries?.[destinatario?.['banco bottak']]['link de pago']}</Link>
+                                        {pagosQR['link de pago'] && <p>
+                                            Link de pago: <Link target='_blank' href={pagosQR['link de pago']} className='underline text-blue-500' >{pagosQR['link de pago']}</Link>
                                         </p>}
 
                                     </div>
