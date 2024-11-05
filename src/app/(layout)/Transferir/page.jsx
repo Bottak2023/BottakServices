@@ -451,10 +451,10 @@ function Home() {
 
                                 {/* <div className=' space-y-5'>
                                 <SelectBank name="nombre de banco" propHandlerIsSelect={handlerIsSelect4} bg='bg-white' propIsSelect={isSelect4} operation="envio" click={handlerBankSelect} arr={countries[userDB.cca3].countries !== undefined ? Object.values(countries[userDB.cca3].countries) : []} />
-                            </div> */}
+                                </div> */}
                                 <Link href='#' className="w-full flex flex-col justify-center items-center" download >
                                     <label className="relative flex flex-col justify-start items-center w-[300px] min-h-[300px] h-auto bg-white border border-gray-400 text-gray-900 text-[12px]  focus:ring-blue-500 focus:border-blue-500 rounded-[10px]" >
-                                        { pagosQR && pagosQR !== undefined 
+                                        {pagosQR && pagosQR !== undefined
                                             ? <img className=" flex justify-center items-center w-[300px] min-h-[300px] h-auto bg-white text-gray-900 text-[12px]  focus:ring-blue-500 focus:border-blue-500 rounded-[10px]" style={{ objectPosition: 'center' }} src={pagosQR.qrURL} alt="" />
                                             : <p className='relative h-full text-[12px] w-full p-5 text-center top-0 bottom-0 my-auto'>Selecciona uno de nuestros bancos para obtener un QR y efectuar su transferencia</p>}
                                         {/* {destinatario && destinatario.importe}
@@ -476,7 +476,7 @@ function Home() {
 
 
                                     <div className='text-black text-center text-[12px] border border-gray-400 rounded-[10px] bg-white p-3 shadow-black flex flex-col items-center'>
-                                        {walletQR && walletQR !== undefined && destinatario &&
+                                        {pagosQR && pagosQR !== undefined && destinatario &&
                                             <TextWithCopy
                                                 keys={'Importe'}
                                                 value={destinatario.importe}
@@ -491,12 +491,12 @@ function Home() {
                                         {destinatario !== undefined && destinatario['banco bottak'] !== undefined && countries && countries !== undefined && countries[userDB.cca3] !== undefined && countries[userDB.cca3].countries[destinatario['banco bottak']] !== undefined && countries[userDB.cca3].countries[destinatario['banco bottak']].banco &&
                                             <TextWithCopy
                                                 keys={'Banco'}
-                                                value={countries[userDB.cca3].countries[destinatario['banco bottak']].banco }
+                                                value={countries[userDB.cca3].countries[destinatario['banco bottak']].banco}
                                             />
                                         }
-                                      {countries?.[userDB.cca3]?.countries?.[destinatario?.['banco bottak']]['link de pago'] && <p>
-                                        Link de pago: <Link target='_blank' href={countries?.[userDB.cca3]?.countries?.[destinatario?.['banco bottak']]['link de pago']} className='underline text-blue-500' >{countries?.[userDB.cca3]?.countries?.[destinatario?.['banco bottak']]['link de pago']}</Link>
-                                    </p>}
+                                        {countries?.[userDB.cca3]?.countries?.[destinatario?.['banco bottak']]['link de pago'] && <p>
+                                            Link de pago: <Link target='_blank' href={countries?.[userDB.cca3]?.countries?.[destinatario?.['banco bottak']]['link de pago']} className='underline text-blue-500' >{countries?.[userDB.cca3]?.countries?.[destinatario?.['banco bottak']]['link de pago']}</Link>
+                                        </p>}
 
                                     </div>
 
