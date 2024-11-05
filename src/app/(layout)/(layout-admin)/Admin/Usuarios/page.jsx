@@ -91,8 +91,8 @@ function Home() {
             {modal === 'DESABILITAR' && <ModalINFO close={true}  theme="Danger" button="Desabilitar" funcion={() => handlerUpdate('habilitado', false)}>Estas por DESABILITAR al siguiente usuario:  {item['nombre']}</ModalINFO>}
             {modal === 'BLOQUEAR' && <ModalINFO close={true}  theme="Success" button="Habilitar" funcion={() => handlerUpdate('bloqueado', true)}>Estas por BLOQUEAR al siguiente usuario:  {item['nombre']}</ModalINFO>}
             {modal === 'DESBLOQUEAR' && <ModalINFO close={true}  theme="Danger" button="Desabilitar" funcion={() => handlerUpdate('bloqueado', false)}>Estas por DESBLOQUEAR al siguiente usuario:  {item['nombre']}</ModalINFO>}
-            <button className='fixed text-[20px] text-gray-500 h-[50px] w-[50px] rounded-full inline-block left-[0px] top-0 bottom-0 my-auto bg-[#00000010] z-20 lg:left-[20px]' onClick={prev}>{'<'}</button>
-            <button className='fixed text-[20px] text-gray-500 h-[50px] w-[50px] rounded-full inline-block right-[0px] top-0 bottom-0 my-auto bg-[#00000010] z-20 lg:right-[20px]' onClick={next}>{'>'}</button>
+            <button className='fixed text-[20px] text-gray-500 h-[50px] w-[50px] rounded-full inline-block left-[0px] top-0 bottom-0 my-auto bg-[#00000010] z-20 lg:left-[20px] hover:bg-[#00000060] transition-all' onClick={prev}>{'<'}</button>
+            <button className='fixed text-[20px] text-gray-500 h-[50px] w-[50px] rounded-full inline-block right-[0px] top-0 bottom-0 my-auto bg-[#00000010] z-20 lg:right-[20px]  hover:bg-[#00000060] transition-all' onClick={next}>{'>'}</button>
             <div className="w-full   relative h-full overflow-auto shadow-2xl p-5 bg-white min-h-[80vh] scroll-smooth" ref={refFirst}>
                 <h3 className='font-medium text-[14px]'>Lista De Usuarios</h3>
                 <br />

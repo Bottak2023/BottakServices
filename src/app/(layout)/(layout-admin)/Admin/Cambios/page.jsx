@@ -11,6 +11,7 @@ import Modal from '@/components/Modal'
 import Select from '@/components/Select'
 import { estado as estadoCONST } from '@/constants/'
 import ModalINFO from '@/components/ModalINFO'
+import { formatearFechaInput } from '@/utils/date'
 
 export default function Home() {
 
@@ -23,6 +24,7 @@ export default function Home() {
   const [profileIMG, setProfileIMG] = useState('')
   const [row, setRow] = useState(-1)
   const [selectDB, setSelectDB] = useState([])
+  const [filterDate, setFilterDate] = useState('')
 
   function onChangeFilter(e) {
     setFilter(e.target.value)
@@ -44,7 +46,14 @@ export default function Home() {
  
 
 
-
+  function onChangeFilterDate(e) {
+    console.log(e)
+    if (e.target.value !== '') {
+      setFilterDate(formatearFechaInput(e.target.value))
+    } else {
+      setFilterDate('')
+    }
+  }
 
 
 
@@ -239,7 +248,10 @@ function confirmEliminarSelectDB() {
       <div className="w-full   relative h-full overflow-auto shadow-2xl p-5 bg-white min-h-[80vh] scroll-smooth" ref={refFirst}>
         <h3 className='font-medium text-[14px]'>Cambios</h3>
         <br />
-        <input type="text" className='border-b-[1px] text-[14px] outline-none w-[400px]' onChange={onChangeFilter} placeholder='Buscar por remitente, destinatario o DNI' />
+        <label htmlFor="" className='text-black text-[14px] pr-5 font-medium'>Filtrar: </label>
+        <input type="date" className='border-b-[1px] text-[14px] outline-none w-[150px] text-black pr-5' onChange={onChangeFilterDate} placeholder='Buscar por remitente, destinatario o DNI' />
+        <input type="text" className='border-b-[1px] text-[14px] outline-none w-[400px] text-black' onChange={onChangeFilter} placeholder='Buscar por remitente, destinatario o DNI' />
+
         <div className='min-w-[1900px] flex justify-start items-center my-5 h-[40px]'>
         {selectDB.length > 0 && <button className='w-[200px] flex justify-center items-center h-[40px] mr-5 text-white text-[14px] font-medium bg-red-500 border border-gray-200 rounded-[10px] px-5 cursor-pointer' onClick={eliminarSelectDB}>Eliminar</button>}
 

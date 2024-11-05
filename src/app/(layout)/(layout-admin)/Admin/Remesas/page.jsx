@@ -11,7 +11,7 @@ import Modal from '@/components/Modal'
 import Select from '@/components/Select'
 import { estado as estadoCONST } from '@/constants/'
 import ModalINFO from '@/components/ModalINFO'
-
+import { formatearFechaInput } from '@/utils/date'
 export default function Home() {
 
   const { user, userDB, setUserProfile, modal, setModal, users, setUsers, setUserSuccess, success, setUserData, postsIMG, setUserPostsIMG, divisas, setDivisas, item, setItem, exchange, setExchange, destinatario, setDestinatario } = useUser()
@@ -23,6 +23,7 @@ export default function Home() {
   const [profileIMG, setProfileIMG] = useState('')
   const [row, setRow] = useState(-1)
   const [selectDB, setSelectDB] = useState([])
+  const [filterDate, setFilterDate] = useState('')
 
   function onChangeFilter(e) {
     setFilter(e.target.value)
@@ -41,25 +42,6 @@ export default function Home() {
   function handlerSelect(name, i, uuid) {
     setState({ ...state, [uuid]: { [name]: i } })
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -232,9 +214,16 @@ ${Object.entries(item[1]).map(i => `<tr style="background-color: white; border-b
 
   }
 
+  function onChangeFilterDate(e) {
+    console.log(e)
+    if (e.target.value !== '') {
+      setFilterDate(formatearFechaInput(e.target.value))
+    } else {
+      setFilterDate('')
+    }
+  }
 
-
-
+console.log(filterDate)
 
 
   const prev = () => {
@@ -276,12 +265,17 @@ ${Object.entries(item[1]).map(i => `<tr style="background-color: white; border-b
       <div className="w-full   relative h-full overflow-auto shadow-2xl p-5 bg-white min-h-[80vh] scroll-smooth" ref={refFirst}>
         <h3 className='font-medium text-[14px] text-black'>Remesas</h3>
         <br />
-        <input type="text" className='border-b-[1px] text-[14px] outline-none w-[400px]' onChange={onChangeFilter} placeholder='Buscar por remitente, destinatario o DNI' />
-        <div className='min-w-[1900px] flex justify-start items-center my-5 h-[40px]'>
-          
-        {selectDB.length > 0 && <button className='w-[200px] flex justify-center items-center h-[40px] mr-5 text-white text-[14px] font-medium bg-red-500 border border-gray-200 rounded-[10px] px-5 cursor-pointer' onClick={eliminarSelectDB}>Eliminar</button>}
+        <label htmlFor="" className='text-black text-[14px] pr-5 font-medium'>Filtrar: </label>
+        <input type="date" className='border-b-[1px] text-[14px] outline-none w-[150px] text-black pr-5' onChange={onChangeFilterDate} placeholder='Buscar por remitente, destinatario o DNI' />
+        <input type="text" className='border-b-[1px] text-[14px] outline-none w-[400px] text-black' onChange={onChangeFilter} placeholder='Buscar por remitente, destinatario o DNI' />
 
-          <h3 className="flex pr-12 text-[14px] text-black" htmlFor="">Estado</h3>
+
+
+        <div className='min-w-[1900px] flex justify-start items-center my-5 h-[40px]'>
+
+          {selectDB.length > 0 && <button className='w-[200px] flex justify-center items-center h-[40px] mr-5 text-white text-[14px] font-medium bg-red-500 border border-gray-200 rounded-[10px] px-5 cursor-pointer' onClick={eliminarSelectDB}>Eliminar</button>}
+
+          <h3 className="text-black text-[14px] pr-2 font-medium" htmlFor="">Estado</h3>
           <div className="grid grid-cols-5 gap-4 w-[800px] ">
             {estadoCONST.map((i, index) => {
               return <Tag theme={estado == i ? 'Primary' : 'Secondary'} click={() => setEstado(estado == i ? '' : i)}>{i}</Tag>
@@ -421,7 +415,7 @@ ${Object.entries(item[1]).map(i => `<tr style="background-color: white; border-b
                 (i.remitente !== undefined && i.remitente.toLowerCase().includes(filter.toLowerCase())) ||
                 (i.dni !== undefined && i.dni.toLowerCase().includes(filter.toLowerCase())) ||
                 (i['dni remitente'] !== undefined && i['dni remitente'].toLowerCase().includes(filter.toLowerCase()))) &&
-                (i.estado !== undefined && i.estado.toLowerCase().includes(estado.toLowerCase())) && i.operacion === 'Envio' &&
+                (i.estado !== undefined && i.estado.toLowerCase().includes(estado.toLowerCase())) && i.operacion === 'Envio' && i.fecha.includes(filterDate) &&
                 <tr className={`text-[14px] border-b border-gray-50  py-1 transition-all ${index === row ? 'bg-gray-100' : 'bg-gray-200'} ${index % 2 === 0 ? '' : ''} `} key={index} onClick={() => setRow(index)}>
                   <td className="px-3 py-0 flex  ">
                     <input type="checkbox" className='border-none mr-5' checked={selectDB.includes(i.uuid)} onChange={handlerSelect} name={i.uuid} />

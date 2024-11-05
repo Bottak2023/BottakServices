@@ -43,6 +43,7 @@ function Home() {
     }
     const handlerBankSelect2 = (i, data) => {
         setDestinatario({ ...destinatario, ['banco remitente']: i, ['banco bottak']: i, ['cuenta bottak']: data['cta bancaria'] })
+        setPagosQR(data)
     }
     const handlerWalletSelect2 = (i, db) => {
         console.log(db)
@@ -339,7 +340,7 @@ function Home() {
             ? uploadStorage(`cambios/${uuid}`, postImage, { ...db, fecha, date, uuid, estado: 'En verificación', verificacion: false, email: user.email }, callback)
             : uploadStorage(`envios/${uuid}`, postImage, { ...db, fecha, date, uuid, estado: 'En verificación', verificacion: false, email: user.email }, callback)
     }
-    console.log(payDB)
+    console.log(destinatario)
 
 
 
@@ -453,8 +454,8 @@ function Home() {
                             </div> */}
                                 <Link href='#' className="w-full flex flex-col justify-center items-center" download >
                                     <label className="relative flex flex-col justify-start items-center w-[300px] min-h-[300px] h-auto bg-white border border-gray-400 text-gray-900 text-[12px]  focus:ring-blue-500 focus:border-blue-500 rounded-[10px]" >
-                                        {destinatario?.['banco bottak'] && countries && countries[userDB.cca3] && countries[userDB.cca3].countries !== undefined && countries[userDB.cca3].countries[destinatario['banco bottak']] !== undefined
-                                            ? <img className=" flex justify-center items-center w-[300px] min-h-[300px] h-auto bg-white text-gray-900 text-[12px]  focus:ring-blue-500 focus:border-blue-500 rounded-[10px]" style={{ objectPosition: 'center' }} src={countries[userDB.cca3].countries[destinatario['banco bottak']] !== undefined ? countries[userDB.cca3].countries[destinatario['banco bottak']].qrURL : ''} alt="" />
+                                        { pagosQR && pagosQR !== undefined 
+                                            ? <img className=" flex justify-center items-center w-[300px] min-h-[300px] h-auto bg-white text-gray-900 text-[12px]  focus:ring-blue-500 focus:border-blue-500 rounded-[10px]" style={{ objectPosition: 'center' }} src={pagosQR.qrURL} alt="" />
                                             : <p className='relative h-full text-[12px] w-full p-5 text-center top-0 bottom-0 my-auto'>Selecciona uno de nuestros bancos para obtener un QR y efectuar su transferencia</p>}
                                         {/* {destinatario && destinatario.importe}
                                         {destinatario && destinatario['divisa de envio']} */}

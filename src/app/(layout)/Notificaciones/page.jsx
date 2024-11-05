@@ -92,8 +92,8 @@ export default function Home() {
                     {Object.values(userDB.destinatarios).map((i) => selectDB.includes(i.uuid) && <> {i['destinatario']}:___{i['cuenta destinatario']} <br /></>)}
                 </div> */}
             </ModalINFO>}
-            <button className='fixed text-[20px] text-gray-500 h-[50px] w-[50px] rounded-full inline-block left-[0px] top-0 bottom-0 my-auto bg-[#00000010] z-20 lg:left-[20px]' onClick={prev}>{'<'}</button>
-            <button className='fixed text-[20px] text-gray-500 h-[50px] w-[50px] rounded-full inline-block right-[0px] top-0 bottom-0 my-auto bg-[#00000010] z-20 lg:right-[20px]' onClick={next}>{'>'}</button>
+            <button className='fixed text-[20px] text-gray-500 h-[50px] w-[50px] rounded-full inline-block left-[0px] top-0 bottom-0 my-auto bg-[#00000010] z-20 lg:left-[20px] hover:bg-[#00000060] transition-all' onClick={prev}>{'<'}</button>
+            <button className='fixed text-[20px] text-gray-500 h-[50px] w-[50px] rounded-full inline-block right-[0px] top-0 bottom-0 my-auto bg-[#00000010] z-20 lg:right-[20px]  hover:bg-[#00000060] transition-all' onClick={next}>{'>'}</button>
             <div className="w-full   relative h-full overflow-auto shadow-2xl md:p-2 bg-gray-200 min-h-[80vh] scroll-smooth" ref={refFirst}>
                 <h3 className='font-bold text-[16px] flex items-center justify-between text-white px-5 py-2 border-t-[5px] border-gray-200 bg-gray-800 border-b'>
                     <div>

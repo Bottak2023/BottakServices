@@ -19,7 +19,7 @@ import { getDayMonthYear2 } from '@/utils/date'
 
 export default function Home() {
 
-  const { user, userDB, setTime_stamp, time_stamp, setUserProfile, modal, setModal, tarifas, setTarifas, users, setUsers, setUserSuccess, success, setUserData, postsIMG, setUserPostsIMG, divisas, setDivisas, item, setItem, exchange, setExchange, } = useUser()
+  const { user, userDB, setTime_stamp, time_stamp,  setUserProfile, modal, setModal, tarifas, setTarifas, users, setUsers, setUserSuccess, success, setUserData, postsIMG, setUserPostsIMG, divisas, setDivisas, item, setItem, exchange, setExchange, } = useUser()
   const router = useRouter()
   const [filter, setFilter] = useState('')
   const [state, setState] = useState({})
