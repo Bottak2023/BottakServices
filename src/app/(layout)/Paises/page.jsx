@@ -133,15 +133,15 @@ export default function Home() {
                 Divisa <br/>
                 Code
               </th>
-              <th scope="col" className="text-center px-3 py-3">
+              {/* <th scope="col" className="text-center px-3 py-3">
                 Cuenta de cobro
-              </th>
+              </th> */}
               <th scope="col" className="text-center px-3 py-3">
-                Banco de cobro
+                Banco intermedio
               </th>
-              <th scope="col" className="text-center px-3 py-3">
+              {/* <th scope="col" className="text-center px-3 py-3">
                 QR de cobro
-              </th>
+              </th> */}
               <th scope="col" className="text-center px-3 py-3">
                 Recepción
               </th>
@@ -164,17 +164,18 @@ export default function Home() {
                 <td className="px-3 py-4 text-gray-900 ">
                 {i.code}
                 </td>
-                <td className="px-3 py-4 text-gray-900 ">
+                {/* <td className="px-3 py-4 text-gray-900 ">
                   <input type="text" name="cuenta de cobro"  className='min-w-[100px] text-center p-2 outline-blue-200 rounded-xl' onChange={(e) => onChangeHandler(e, i)} defaultValue={i['cuenta de cobro'] !== undefined ? i['cuenta de cobro'] : 0} disabled />
-                </td>
+                </td> */}
                 <td className="px-3 py-4 text-gray-900 ">
                   <input type="text" name="banco de cobro" className='min-w-[100px] text-center p-2 outline-blue-200 rounded-xl' onChange={(e) => onChangeHandler(e, i)} defaultValue={i['banco de cobro'] !== undefined ? i['banco de cobro'] : 0} disabled />
                 </td>
-                <td className="px-3 py-4 text-gray-900 ">
+                {/* <td className="px-3 py-4 text-gray-900 ">
                   <label >
                     <img src={urlPostImage[i.cca3] ? urlPostImage[i.cca3] : i.url} alt="Sin QR" />
                   </label>
-                </td>
+                </td>}
+                 */}
                 <td className="px-3 py-4">
                   {i.recepcion !== undefined && i.recepcion !== false
                     ? <Button theme={"Success"} >Habilitado</Button>
