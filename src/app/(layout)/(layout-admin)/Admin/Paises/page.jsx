@@ -338,7 +338,7 @@ export default function Home() {
         <br />
         <table className="w-full overflow-visible min-w-[1700px]  text-[14px] text-left text-gray-500 border-t-4 border-gray-400" >
           {/* <table className="relative w-full overflow-scroll max-w-[800px] h-[50px]  text-[14px] text-left text-gray-500 border-t-4 border-gray-400"> */}
-          <thead className="text-[14px] text-gray-700 uppercase   bg-gray-800 text-white">
+          <thead className="text-[14px] text-gray-700 uppercase   bg-gray-800 text-white sticky top-[80px]">
             <tr>
               <th scope="col" className=" px-3 py-3">
                 #

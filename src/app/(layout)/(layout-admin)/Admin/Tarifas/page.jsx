@@ -550,7 +550,7 @@ export default function Home() {
       {modal === 'Disable' && <Modal funcion={disableConfirm}>Estas por {item.habilitado !== undefined && item.habilitado !== false ? 'DESABILITAR' : 'HABILITAR'} el siguiente item:  {item['currency']}</Modal>}
 
       <GetP2Pinterval></GetP2Pinterval>
-      <div className="w-full   relative h-full overflow-auto shadow-2xl p-5 bg-gray-300 min-h-[80vh] scroll-smooth">
+      <div className="w-full   relative h-full overflow-auto shadow-2xl  p-2 md:p-5 bg-gray-300 min-h-[80vh] scroll-smooth">
         <button className='fixed text-[20px] text-gray-500 h-[50px] w-[50px] rounded-full inline-block left-[0px] top-0 bottom-0 my-auto bg-[#00000010] z-20 lg:left-[20px]' onClick={prev}>{'<'}</button>
         <button className='fixed text-[20px] text-gray-500 h-[50px] w-[50px] rounded-full inline-block right-[0px] top-0 bottom-0 my-auto bg-[#00000010] z-20 lg:right-[20px]' onClick={next}>{'>'}</button>
 

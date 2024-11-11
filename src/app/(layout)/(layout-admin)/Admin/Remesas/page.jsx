@@ -267,7 +267,7 @@ ${Object.entries(item[1]).map(i => `<tr style="background-color: white; border-b
 
         <div className='w-[100%] overflow-x-auto p-3 md:p-5'>
 
-          <div className='min-w-[500px]'>
+          <div className='min-w-[1000px]'>
             <h3 className='font-medium text-[14px] text-black'>Remesas</h3>
             <br />
             <label htmlFor="" className='text-black text-[14px] pr-5 font-medium'>Filtrar: </label>
