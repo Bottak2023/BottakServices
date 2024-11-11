@@ -272,7 +272,7 @@ ${Object.entries(item[1]).map(i => `<tr style="background-color: white; border-b
             <br />
             <label htmlFor="" className='text-black text-[14px] pr-5 font-medium'>Filtrar: </label>
             <input type="date" className='border-b-[1px] text-[14px] outline-none w-[150px] text-black pr-5  mr-5 rounded-[5px] p-1 border-[1px] border-gray-400' onChange={onChangeFilterDate} placeholder='Buscar por remitente, destinatario o DNI' />
-            <input type="text" className='border-b-[1px] text-[14px] outline-none w-[400px] text-black  rounded-[5px] p-1 border-[1px] border-gray-400' onChange={onChangeFilter} placeholder='Buscar por remitente, destinatario o DNI' />
+            <input type="text" className='++++++++' onChange={onChangeFilter} placeholder='Buscar por remitente, destinatario o DNI' />
             <div className='min-w-[500px] flex justify-start items-center my-5 h-[40px]'>
 
               {selectDB.length > 0 && <button className='w-[200px] flex justify-center items-center h-[40px] mr-5 text-white text-[14px] font-medium bg-red-500 border border-gray-200 rounded-[10px] px-5 cursor-pointer' onClick={eliminarSelectDB}>Eliminar</button>}

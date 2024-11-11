@@ -223,9 +223,9 @@ export default function Home() {
       <button className='fixed text-[20px] text-gray-500 h-[50px] w-[50px] rounded-full inline-block left-[0px] top-0 bottom-0 my-auto bg-[#00000010] z-20 lg:left-[20px]' onClick={prev}>{'<'}</button>
       <button className='fixed text-[20px] text-gray-500 h-[50px] w-[50px] rounded-full inline-block right-[0px] top-0 bottom-0 my-auto bg-[#00000010] z-20 lg:right-[20px]' onClick={next}>{'>'}</button>
 
-      <div className="w-full   relative h-full overflow-auto shadow-2xl p-5 bg-white min-h-[80vh] scroll-smooth" ref={refFirst}>
-      <div className='w-full  flex flex-col md:flex-row justify-between mb-5'>
-      <h3 className='font-medium text-[14px] text-black pb-5 md:pb-0'>Lista de Wallets</h3>
+      <div className="w-full   relative h-full overflow-auto shadow-2xl p-5 bg-gray-300 min-h-[80vh] scroll-smooth" ref={refFirst}>
+        <div className='w-full  flex flex-col md:flex-row justify-between mb-5'>
+          <h3 className='font-medium text-[14px] text-black pb-5 md:pb-0'>Lista de Wallets</h3>
 
           <Button theme={"Success"} click={() => handlerAddWallet('WALLET')}>Wallet +</Button>
         </div>
@@ -234,7 +234,7 @@ export default function Home() {
 
 
 
-        <table className="w-full overflow-visible min-w-[1500px]  text-[14px] text-left text-gray-500 border-t-4 border-gray-400" >
+        <table className="w-full overflow-visible min-w-[1700px]  text-[14px] text-left text-gray-500 border-t-4 border-gray-400" >
           {/* <table className="relative w-full overflow-scroll max-w-[800px] h-[50px]  text-[14px] text-left text-gray-500 border-t-4 border-gray-400"> */}
           <thead className="text-[14px] text-gray-700 uppercase ">
             <tr className='  bg-gray-800 text-white'>
@@ -333,10 +333,10 @@ export default function Home() {
 
         <h3 className='font-medium text-[14px] pt-[30px] text-black'>Lista de paises, operaciones y bancos habilitados</h3>
         <br />
-        <input type="text" className='border-b-[1px] text-[14px] outline-none w-[400px] text-black' onChange={onChangeFilter} placeholder='Buscar Pais' />
+        <input type="text" className='border-b-[1px] text-[14px] outline-none w-[400px] text-black  rounded-[5px] p-1 border-[1px] border-gray-400' onChange={onChangeFilter} placeholder='Buscar Pais' />
         <br />
         <br />
-        <table className="w-full overflow-visible min-w-[1500px]  text-[14px] text-left text-gray-500 border-t-4 border-gray-400" >
+        <table className="w-full overflow-visible min-w-[1700px]  text-[14px] text-left text-gray-500 border-t-4 border-gray-400" >
           {/* <table className="relative w-full overflow-scroll max-w-[800px] h-[50px]  text-[14px] text-left text-gray-500 border-t-4 border-gray-400"> */}
           <thead className="text-[14px] text-gray-700 uppercase   bg-gray-800 text-white">
             <tr>
@@ -423,7 +423,7 @@ export default function Home() {
                 </td> */}
                 <td className="w-[200px]  px-3 py-4">
                   <Link href={`/Admin/Paises/AddAccount?cca3=${i.cca3}&cuenta=BANCO`}>
-                    <Button theme={"Success"}  click={() => handlerAdd(i, 'BANCO')}>Admin Bancos</Button>
+                    <Button theme={"Success"} click={() => handlerAdd(i, 'BANCO')}>Admin Bancos</Button>
                   </Link>
                   {/* <Button theme={"Success"} click={() => handlerAdd(i, 'BANCO')}>Banco +</Button> */}
                 </td>
@@ -439,11 +439,11 @@ export default function Home() {
                     : <Button theme={"Danger"} click={() => manage(i, 'Habilitar', 'envio')}>Desabilitado</Button>
                   }
                 </td>
-                <td className="w-[200px] p-4">
-                  <input type="text" name="divisasPaisRemitente" className='w-[200px]  p-2 outline-blue-200 rounded-xl' onChange={(e) => onChangeHandler(e, i)} defaultValue={i['divisasPaisRemitente'] !== undefined ? i['divisasPaisRemitente'] : 'Ninguna...'} />
+                <td className="w-[300px] p-4">
+                  <input type="text" name="divisasPaisRemitente" className='w-[300px]  p-2 outline-blue-200 rounded-xl' onChange={(e) => onChangeHandler(e, i)} defaultValue={i['divisasPaisRemitente'] !== undefined ? i['divisasPaisRemitente'] : 'Ninguna...'} />
                 </td>
-                <td className="w-[200px] p-4">
-                  <input type="text" name="divisasPaisDestinatario" className='w-[200px]  p-2 outline-blue-200 rounded-xl' onChange={(e) => onChangeHandler(e, i)} defaultValue={i['divisasPaisDestinatario'] !== undefined ? i['divisasPaisDestinatario'] : 'Ninguna...'} />
+                <td className="w-[300px] p-4">
+                  <input type="text" name="divisasPaisDestinatario" className='w-[300px]  p-2 outline-blue-200 rounded-xl' onChange={(e) => onChangeHandler(e, i)} defaultValue={i['divisasPaisDestinatario'] !== undefined ? i['divisasPaisDestinatario'] : 'Ninguna...'} />
                 </td>
                 <td className="w-[50px] px-3 py-4">
                   {(state && state[i.cca3] !== undefined) || (postImage && postImage[i.cca3] !== undefined)
