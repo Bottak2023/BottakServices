@@ -19,7 +19,7 @@ import { getDayMonthYear2 } from '@/utils/date'
 
 export default function Home() {
 
-  const { user, userDB, setTime_stamp, time_stamp,  setUserProfile, modal, setModal, tarifas, setTarifas, users, setUsers, setUserSuccess, success, setUserData, postsIMG, setUserPostsIMG, divisas, setDivisas, item, setItem, exchange, setExchange, } = useUser()
+  const { user, userDB, setTime_stamp, time_stamp, setUserProfile, modal, setModal, tarifas, setTarifas, users, setUsers, setUserSuccess, success, setUserData, postsIMG, setUserPostsIMG, divisas, setDivisas, item, setItem, exchange, setExchange, } = useUser()
   const router = useRouter()
   const [filter, setFilter] = useState('')
   const [state, setState] = useState({})
@@ -548,14 +548,14 @@ export default function Home() {
       {modal === 'Save' && <Modal funcion={saveConfirm}>Estas por modificar la tasa de cambio de:  {item['currency']}</Modal>}
       {modal === 'NonExchange' && <Modal funcion={disableConfirm}>{item.code ? `La divisa ${item.code} no esta en la P2P de binance` : ''} {item.transAmount ? `o no se encontro cambio para el volumen ${item.transAmount}` : ''}</Modal>}
       {modal === 'Disable' && <Modal funcion={disableConfirm}>Estas por {item.habilitado !== undefined && item.habilitado !== false ? 'DESABILITAR' : 'HABILITAR'} el siguiente item:  {item['currency']}</Modal>}
-      <button className='fixed text-[20px] text-gray-500 h-[50px] w-[50px] rounded-full inline-block left-[0px] top-0 bottom-0 my-auto bg-[#00000010] z-20 lg:left-[20px]' onClick={prev}>{'<'}</button>
-      <button className='fixed text-[20px] text-gray-500 h-[50px] w-[50px] rounded-full inline-block right-[0px] top-0 bottom-0 my-auto bg-[#00000010] z-20 lg:right-[20px]' onClick={next}>{'>'}</button>
 
       <GetP2Pinterval></GetP2Pinterval>
+      <div className="w-full   relative h-full overflow-auto shadow-2xl p-5 bg-gray-300 min-h-[80vh] scroll-smooth">
+        <button className='fixed text-[20px] text-gray-500 h-[50px] w-[50px] rounded-full inline-block left-[0px] top-0 bottom-0 my-auto bg-[#00000010] z-20 lg:left-[20px]' onClick={prev}>{'<'}</button>
+        <button className='fixed text-[20px] text-gray-500 h-[50px] w-[50px] rounded-full inline-block right-[0px] top-0 bottom-0 my-auto bg-[#00000010] z-20 lg:right-[20px]' onClick={next}>{'>'}</button>
 
 
 
-      <div className="w-full   relative h-full overflow-auto shadow-2xl p-5 bg-white min-h-[80vh] scroll-smooth" ref={refFirst}>
 
 
 
@@ -589,8 +589,8 @@ export default function Home() {
         </form>
 
 
-        {resP2P && <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-          <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 ">
+        {resP2P && <div class="relative w-full mb-5 overflow-x-auto shadow-md sm:rounded-lg">
+          <table class="w-full min-w-[700px] text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 ">
             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
               <tr>
                 <th scope="col" class="px-6 py-3">
@@ -630,172 +630,185 @@ export default function Home() {
 
 
 
+        <div class="relative w-full mb-5 overflow-x-auto shadow-md sm:rounded-lg">
 
-        <form className=' min-w-[1000px] w-full' onSubmit={saveTarifas}>
-          <div className='bg-gray-800 grid grid-cols-7 p-1 font-bold text-[12px] uppercase'>
-            <span className='col-span-2 text-center'>Rango Tarifa 1</span>
-            <span className='col-span-2 text-center'>Rango Tarifa 2</span>
-            <span className='col-span-2 text-center'>Rango Tarifa 3</span>
-            <span className='text-center'>GUARDAR</span>
-          </div>
+          <form className=' min-w-[700px] w-full' onSubmit={saveTarifas}>
+            <div className='bg-gray-800 grid grid-cols-7 p-1 font-bold text-[12px] uppercase'>
+              <span className='col-span-2 text-center'>Rango Tarifa 1</span>
+              <span className='col-span-2 text-center'>Rango Tarifa 2</span>
+              <span className='col-span-2 text-center'>Rango Tarifa 3</span>
+              <span className='text-center'>GUARDAR</span>
+            </div>
 
-          <div className='grid grid-cols-7 place-items-center bg-gray-200 '>
+            <div className='grid grid-cols-7 place-items-center bg-gray-200 '>
 
-            <input type="number" name="tarifa_1_min" className='w-[100px] text-center text-black  p-1 outline-blue-200 rounded-xl' onChange={(e) => onChangeHandlerTarifa(e)} value={tarifas && tarifas['tarifa_1_min'] ? tarifas['tarifa_1_min'] : ''} />
-            <input type="number" name="tarifa_1_max" className='w-[100px] text-center text-black  p-1 outline-blue-200 rounded-xl' onChange={(e) => onChangeHandlerTarifa(e)} value={tarifas && tarifas['tarifa_1_max'] ? tarifas['tarifa_1_max'] : ''} />
+              <input type="number" name="tarifa_1_min" className='w-[100px] text-center text-black  p-1 outline-blue-200 rounded-xl' onChange={(e) => onChangeHandlerTarifa(e)} value={tarifas && tarifas['tarifa_1_min'] ? tarifas['tarifa_1_min'] : ''} />
+              <input type="number" name="tarifa_1_max" className='w-[100px] text-center text-black  p-1 outline-blue-200 rounded-xl' onChange={(e) => onChangeHandlerTarifa(e)} value={tarifas && tarifas['tarifa_1_max'] ? tarifas['tarifa_1_max'] : ''} />
 
-            <input type="number" name="tarifa_2_min" className='w-[100px] text-center text-black  p-1 outline-blue-200 rounded-xl' onChange={(e) => onChangeHandlerTarifa(e)} value={tarifas && tarifas['tarifa_2_min'] ? tarifas['tarifa_2_min'] : ''} />
-            <input type="number" name="tarifa_2_max" className='w-[100px] text-center text-black  p-1 outline-blue-200 rounded-xl' onChange={(e) => onChangeHandlerTarifa(e)} value={tarifas && tarifas['tarifa_2_max'] ? tarifas['tarifa_2_max'] : ''} />
+              <input type="number" name="tarifa_2_min" className='w-[100px] text-center text-black  p-1 outline-blue-200 rounded-xl' onChange={(e) => onChangeHandlerTarifa(e)} value={tarifas && tarifas['tarifa_2_min'] ? tarifas['tarifa_2_min'] : ''} />
+              <input type="number" name="tarifa_2_max" className='w-[100px] text-center text-black  p-1 outline-blue-200 rounded-xl' onChange={(e) => onChangeHandlerTarifa(e)} value={tarifas && tarifas['tarifa_2_max'] ? tarifas['tarifa_2_max'] : ''} />
 
-            <input type="number" name="tarifa_3_min" className='w-[100px] text-center text-black  p-1 outline-blue-200 rounded-xl' onChange={(e) => onChangeHandlerTarifa(e)} value={tarifas && tarifas['tarifa_3_min'] ? tarifas['tarifa_3_min'] : ''} />
-            <input type="number" name="tarifa_3_max" className='w-[100px] text-center text-black  p-1 outline-blue-200 rounded-xl' onChange={(e) => onChangeHandlerTarifa(e)} value={tarifas && tarifas['tarifa_3_max'] ? tarifas['tarifa_3_max'] : ''} />
+              <input type="number" name="tarifa_3_min" className='w-[100px] text-center text-black  p-1 outline-blue-200 rounded-xl' onChange={(e) => onChangeHandlerTarifa(e)} value={tarifas && tarifas['tarifa_3_min'] ? tarifas['tarifa_3_min'] : ''} />
+              <input type="number" name="tarifa_3_max" className='w-[100px] text-center text-black  p-1 outline-blue-200 rounded-xl' onChange={(e) => onChangeHandlerTarifa(e)} value={tarifas && tarifas['tarifa_3_max'] ? tarifas['tarifa_3_max'] : ''} />
 
-            <Button theme={"Success"}>Guardar</Button>
-          </div>
+              <Button theme={"Success"}>Guardar</Button>
+            </div>
 
-        </form>
-
-
-        <h3 className='font-medium text-[14px]'>Lista De Divisas, Tipo De Cambio y Comisiones</h3>
+          </form>
+        </div>
         <br />
-        <div className=' space-y-5 lg:space-y-0 lg:grid grid-cols-2 gap-2'>
-          <input type="text" className='border-b-[1px] text-[14px] outline-none w-[400px] text-black' onChange={onChangeFilter} placeholder='Buscar Divisa' />
+        <div className='w-[100%] overflow-x-auto p-3 md:p-5'>
+
+          <div className='min-w-[400px]'>
+            <h3 className='font-medium text-[14px] text-black'>Lista De Divisas, Tipo De Cambio y Comisiones</h3>
+            <br />
+            <div className=' space-y-5 lg:space-y-0 lg:grid grid-cols-2 gap-2'>
+
+              <input type="text" className='border-b-[1px] text-[14px] outline-none w-[400px] text-black  rounded-[5px] p-1 border-[1px] border-gray-400' onChange={onChangeFilter} placeholder='Buscar Divisa' />
 
 
-          {habilitados
-            ? <Button theme={"Success"} click={() => setHabilitados('')}>Habilitados</Button>
-            : <Button theme={"Disable"} click={() => setHabilitados(true)}>Habilitados</Button>
-          }
+              {habilitados
+                ? <Button theme={"Success"} click={() => setHabilitados('')}>Habilitados</Button>
+                : <Button theme={"Disable"} click={() => setHabilitados(true)}>Habilitados</Button>
+              }
+
+            </div>
+
+          </div>
+
+
+
+        </div>
+        <br />
+        <div className="w-full   relative h-full overflow-y-auto  shadow-2xl bg-white max-h-[calc(100vh-120px)] md:max-h-[calc(100vh-70px)] scroll-smooth" ref={refFirst}>
+
+          <table className="w-full overflow-visible  text-[14px] text-left text-gray-500  bg-gray-800 text-white" style={{ minWidth: '2000px' }}>
+            {/* <table className="relative w-full overflow-scroll max-w-[800px] h-[50px]  text-[14px] text-left text-gray-500 border-t-4 border-gray-400"> */}
+            <thead className="text-[14px] text-gray-700 uppercase  bg-gray-800 text-white">
+              <tr>
+                <th scope="col" className=" px-3 py-3">
+                  #
+                </th>
+                <th scope="col" className=" px-3 py-3">
+                  Pais
+                </th>
+                <th scope="col" className=" px-3 py-3">
+                  Code
+                </th>
+                <th scope="col" className=" px-3 py-3">
+                  Tasa de <br /> cambio USD
+                </th>
+                <th scope="col" className="text-center px-3 py-3">
+                  Compra
+                </th>
+                <th scope="col" className="text-center px-3 py-3">
+                  Compra- %
+                </th>
+                <th scope="col" className="text-center px-3 py-3">
+                  Venta
+                </th>
+                <th scope="col" className="text-center px-3 py-3">
+                  Venta+ %
+                </th>
+                <th scope="col" className="text-center px-3 py-3">
+                  Ultima Actualizacion
+                </th>
+                <th scope="col" className="text-center px-3 py-3">
+                  Volumen de exchange
+                </th>
+                <th scope="col" className="text-center px-3 py-3">
+                  Aply Exchange USD
+                </th>
+                <th scope="col" className="text-center px-3 py-3">
+                  Tarifa de Envio<br />
+                  {tarifas.tarifa_1_min} USD - {tarifas.tarifa_1_max} USD
+                </th>
+                <th scope="col" className="text-center px-3 py-3">
+                  Tarifa de Envio <br />
+                  {tarifas.tarifa_2_min} USD - {tarifas.tarifa_2_max} USD
+                </th>
+                <th scope="col" className="text-center px-3 py-3">
+                  Tarifa de Envio<br />
+                  {tarifas.tarifa_3_min} USD - {tarifas.tarifa_3_max} USD
+                </th>
+                <th scope="col" className="text-center px-3 py-3">
+                  Guardar
+                </th>
+                <th scope="col" className="text-center px-3 py-3">
+                  Habilitar
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {divisas && divisas !== undefined && time_stamp !== undefined && Object.values(divisas).map((i, index) => {
+                return i.currency !== undefined && i.currency.toLowerCase().includes(filter.toLowerCase()) && (i.habilitado !== undefined && habilitados && i.habilitado.toString() !== undefined ? i.habilitado.toString().includes(habilitados) : habilitados ? false : true) && <tr className={`text-[14px] border-b  border-gray-50   ${index % 2 === 0 ? 'bg-gray-300' : 'bg-gray-300'} `} key={index}>
+                  <td className="px-3 py-4  flex text-gray-900 ">
+                    <span className='h-full flex py-2'>{index + 1}</span>
+                  </td>
+                  <td className="px-3 py-4 text-gray-900 ">
+                    {i['translation']['spa']['common']}
+                  </td>
+                  <td className="px-3 py-4 text-gray-900 ">
+                    {i.code}/{i.currency}
+                  </td>
+                  <td className="w-[150px] px-3 py-4 text-gray-900 ">
+                    1 USDT  {exchange && exchange !== undefined && exchange[i.code] !== undefined && exchange[i.code]} {exchange && exchange !== undefined && exchange[i.code] !== undefined && `${i.code}`}
+                  </td>
+                  <td className="w-32 p-4">
+                    {/* <input type="number" name="compra" className='w-[100px] text-center p-2 outline-blue-200 rounded-xl' onChange={(e) => onChangeHandler(e, i)} defaultValue={i['compra'] !== undefined ? i['compra'] : 0} /> */}
+                    <input type="number" name="compra" className='w-[100px] text-center text-black p-2 outline-blue-200 rounded-xl' onChange={(e) => onChangeHandler(e, i)} value={state[i.code] && state[i.code].compra ? state[i.code].compra : (i['compra'] !== undefined ? i['compra'] : '')} />
+                  </td>
+                  <td className="w-32 p-4">
+                    {/* <input type="number" name="compra" className='w-[100px] text-center p-2 outline-blue-200 rounded-xl' onChange={(e) => onChangeHandler(e, i)} defaultValue={i['compra'] !== undefined ? i['compra'] : 0} /> */}
+                    <input type="number" name="compra porcentaje" className='w-[100px] text-center text-black  p-2 outline-blue-200 rounded-xl' onChange={(e) => onChangeHandler(e, i)} value={state[i.code] && state[i.code]['compra porcentaje'] ? state[i.code]['compra porcentaje'] : (i['compra porcentaje'] !== undefined ? i['compra porcentaje'] : '')} />
+                  </td>
+                  <td className="w-32 p-4">
+                    <input type="number" name="venta" className='w-[100px] text-center text-black  p-2 outline-blue-200 rounded-xl' onChange={(e) => onChangeHandler(e, i)} value={state[i.code] && state[i.code].venta ? state[i.code].venta : (i['venta'] !== undefined ? i['venta'] : '')} />
+                  </td>
+                  <td className="w-32 p-4">
+                    {/* <input type="number" name="compra" className='w-[100px] text-center p-2 outline-blue-200 rounded-xl' onChange={(e) => onChangeHandler(e, i)} defaultValue={i['compra'] !== undefined ? i['compra'] : 0} /> */}
+                    <input type="number" name="venta porcentaje" className='w-[100px] text-center text-black  p-2 outline-blue-200 rounded-xl' onChange={(e) => onChangeHandler(e, i)} value={state[i.code] && state[i.code]['venta porcentaje'] ? state[i.code]['venta porcentaje'] : (i['venta porcentaje'] !== undefined ? i['venta porcentaje'] : '')} />
+                  </td>
+                  <td className={`px-3 py-4 text-gray-900 ${((time_stamp - i.time_stamp) / 60000) > 60 && 'bg-red-200'} ${((time_stamp - i.time_stamp) / 60000) < 10 && 'bg-green-200'} ${((time_stamp - i.time_stamp) / 60000) > 10 && ((time_stamp - i.time_stamp) / 60000) < 60 && 'bg-yellow-200'}`}>
+
+                    {i.actualizacion && i.actualizacion !== undefined ? <>{i.actualizacion.split(' ')[0]} <br /> {i.actualizacion.split(' ')[1]}</> : ''}
+                  </td>
+                  <td className="w-32 p-4">
+                    <input type="number" name="transAmount" className='w-[100px] text-center text-black  p-2 outline-blue-200 rounded-xl' onChange={(e) => onChangeHandler(e, i)} value={state[i.code] && state[i.code].transAmount ? state[i.code].transAmount : (i['transAmount'] !== undefined ? i['transAmount'] : '')} />
+                  </td>
+
+                  <td className="w-[170px] p-4">
+                    <Button theme={"Success"} click={() => getExchage(i)}>Get & Apply</Button>
+                  </td>
+
+                  <td className="w-32 p-4">
+                    <input type="number" name="tarifa 1" className='w-[100px] text-center text-black  p-2 outline-blue-200 rounded-xl' onChange={(e) => onChangeHandler(e, i)} defaultValue={i['tarifa 1'] !== undefined ? i['tarifa 1'] : 0} />
+                  </td>
+                  <td className="w-32 p-4">
+                    <input type="number" name="tarifa 2" className='w-[100px] text-center text-black  p-2 outline-blue-200 rounded-xl' onChange={(e) => onChangeHandler(e, i)} defaultValue={i['tarifa 2'] !== undefined ? i['tarifa 2'] : 0} />
+                  </td>
+                  <td className="w-32 p-4">
+                    <input type="number" name="tarifa 3" className='w-[100px] text-center text-black  p-2 outline-blue-200 rounded-xl' onChange={(e) => onChangeHandler(e, i)} defaultValue={i['tarifa 3'] !== undefined ? i['tarifa 3'] : 0} />
+                  </td>
+                  <td className="px-3 py-4">
+                    {state && state[i.code] !== undefined
+                      ? <Button theme={"Success"} click={() => save(i)}>Guardar</Button>
+                      : <Button theme={"Disable"} >Disable</Button>
+                    }
+                  </td>
+                  <td className="px-3 py-4">
+                    {i.habilitado !== undefined && i.habilitado !== false
+                      ? <Button theme={"Success"} click={() => manage(i, 'Desabilitar')}>Habilitado</Button>
+                      : <Button theme={"Danger"} click={() => manage(i, 'Habilitar')}>Desabilitado</Button>
+                    }
+                  </td>
+                </tr>
+              })
+              }
+            </tbody>
+          </table>
         </div>
 
-
-        <br />
-        <br />
-        <table className="w-full overflow-visible  text-[14px] text-left text-gray-500 border-t-4 border-gray-400  bg-gray-800 text-white" style={{ minWidth: '2000px' }}>
-          {/* <table className="relative w-full overflow-scroll max-w-[800px] h-[50px]  text-[14px] text-left text-gray-500 border-t-4 border-gray-400"> */}
-          <thead className="text-[14px] text-gray-700 uppercase  bg-gray-800 text-white">
-            <tr>
-              <th scope="col" className=" px-3 py-3">
-                #
-              </th>
-              <th scope="col" className=" px-3 py-3">
-                Pais
-              </th>
-              <th scope="col" className=" px-3 py-3">
-                Code
-              </th>
-              <th scope="col" className=" px-3 py-3">
-                Tasa de <br /> cambio USD
-              </th>
-              <th scope="col" className="text-center px-3 py-3">
-                Compra
-              </th>
-              <th scope="col" className="text-center px-3 py-3">
-                Compra- %
-              </th>
-              <th scope="col" className="text-center px-3 py-3">
-                Venta
-              </th>
-              <th scope="col" className="text-center px-3 py-3">
-                Venta+ %
-              </th>
-              <th scope="col" className="text-center px-3 py-3">
-                Ultima Actualizacion
-              </th>
-              <th scope="col" className="text-center px-3 py-3">
-                Volumen de exchange
-              </th>
-              <th scope="col" className="text-center px-3 py-3">
-                Aply Exchange USD
-              </th>
-              <th scope="col" className="text-center px-3 py-3">
-                Tarifa de Envio<br />
-                 {tarifas.tarifa_1_min} USD - {tarifas.tarifa_1_max} USD
-              </th>
-              <th scope="col" className="text-center px-3 py-3">
-                Tarifa de Envio <br />
-                {tarifas.tarifa_2_min} USD - {tarifas.tarifa_2_max} USD
-                </th>
-              <th scope="col" className="text-center px-3 py-3">
-                Tarifa de Envio<br />
-                {tarifas.tarifa_3_min} USD - {tarifas.tarifa_3_max} USD
-                </th>
-              <th scope="col" className="text-center px-3 py-3">
-                Guardar
-              </th>
-              <th scope="col" className="text-center px-3 py-3">
-                Habilitar
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {divisas && divisas !== undefined && time_stamp !== undefined && Object.values(divisas).map((i, index) => {
-              return i.currency !== undefined && i.currency.toLowerCase().includes(filter.toLowerCase()) && (i.habilitado !== undefined && habilitados && i.habilitado.toString() !== undefined ? i.habilitado.toString().includes(habilitados) : habilitados ? false : true) && <tr className={`text-[14px] border-b  border-gray-50  hover:bg-gray-200  ${index % 2 === 0 ? 'bg-gray-200' : 'bg-gray-200'} `} key={index}>
-                <td className="px-3 py-4  flex text-gray-900 ">
-                  <span className='h-full flex py-2'>{index + 1}</span>
-                </td>
-                <td className="px-3 py-4 text-gray-900 ">
-                  {i['translation']['spa']['common']}
-                </td>
-                <td className="px-3 py-4 text-gray-900 ">
-                  {i.code}/{i.currency}
-                </td>
-                <td className="w-[150px] px-3 py-4 text-gray-900 ">
-                  1 USDT  {exchange && exchange !== undefined && exchange[i.code] !== undefined && exchange[i.code]} {exchange && exchange !== undefined && exchange[i.code] !== undefined && `${i.code}`}
-                </td>
-                <td className="w-32 p-4">
-                  {/* <input type="number" name="compra" className='w-[100px] text-center p-2 outline-blue-200 rounded-xl' onChange={(e) => onChangeHandler(e, i)} defaultValue={i['compra'] !== undefined ? i['compra'] : 0} /> */}
-                  <input type="number" name="compra" className='w-[100px] text-center text-black p-2 outline-blue-200 rounded-xl' onChange={(e) => onChangeHandler(e, i)} value={state[i.code] && state[i.code].compra ? state[i.code].compra : (i['compra'] !== undefined ? i['compra'] : '')} />
-                </td>
-                <td className="w-32 p-4">
-                  {/* <input type="number" name="compra" className='w-[100px] text-center p-2 outline-blue-200 rounded-xl' onChange={(e) => onChangeHandler(e, i)} defaultValue={i['compra'] !== undefined ? i['compra'] : 0} /> */}
-                  <input type="number" name="compra porcentaje" className='w-[100px] text-center text-black  p-2 outline-blue-200 rounded-xl' onChange={(e) => onChangeHandler(e, i)} value={state[i.code] && state[i.code]['compra porcentaje'] ? state[i.code]['compra porcentaje'] : (i['compra porcentaje'] !== undefined ? i['compra porcentaje'] : '')} />
-                </td>
-                <td className="w-32 p-4">
-                  <input type="number" name="venta" className='w-[100px] text-center text-black  p-2 outline-blue-200 rounded-xl' onChange={(e) => onChangeHandler(e, i)} value={state[i.code] && state[i.code].venta ? state[i.code].venta : (i['venta'] !== undefined ? i['venta'] : '')} />
-                </td>
-                <td className="w-32 p-4">
-                  {/* <input type="number" name="compra" className='w-[100px] text-center p-2 outline-blue-200 rounded-xl' onChange={(e) => onChangeHandler(e, i)} defaultValue={i['compra'] !== undefined ? i['compra'] : 0} /> */}
-                  <input type="number" name="venta porcentaje" className='w-[100px] text-center text-black  p-2 outline-blue-200 rounded-xl' onChange={(e) => onChangeHandler(e, i)} value={state[i.code] && state[i.code]['venta porcentaje'] ? state[i.code]['venta porcentaje'] : (i['venta porcentaje'] !== undefined ? i['venta porcentaje'] : '')} />
-                </td>
-                <td className={`px-3 py-4 text-gray-900 ${((time_stamp - i.time_stamp) / 60000) > 60 && 'bg-red-200'} ${((time_stamp - i.time_stamp) / 60000) < 10 && 'bg-green-200'} ${((time_stamp - i.time_stamp) / 60000) > 10 && ((time_stamp - i.time_stamp) / 60000) < 60 && 'bg-yellow-200'}`}>
-
-                  {i.actualizacion && i.actualizacion !== undefined ? <>{i.actualizacion.split(' ')[0]} <br /> {i.actualizacion.split(' ')[1]}</> : ''}
-                </td>
-                <td className="w-32 p-4">
-                  <input type="number" name="transAmount" className='w-[100px] text-center text-black  p-2 outline-blue-200 rounded-xl' onChange={(e) => onChangeHandler(e, i)} value={state[i.code] && state[i.code].transAmount ? state[i.code].transAmount : (i['transAmount'] !== undefined ? i['transAmount'] : '')} />
-                </td>
-
-                <td className="w-[170px] p-4">
-                  <Button theme={"Success"} click={() => getExchage(i)}>Get & Apply</Button>
-                </td>
-
-                <td className="w-32 p-4">
-                  <input type="number" name="tarifa 1" className='w-[100px] text-center text-black  p-2 outline-blue-200 rounded-xl' onChange={(e) => onChangeHandler(e, i)} defaultValue={i['tarifa 1'] !== undefined ? i['tarifa 1'] : 0} />
-                </td>
-                <td className="w-32 p-4">
-                  <input type="number" name="tarifa 2" className='w-[100px] text-center text-black  p-2 outline-blue-200 rounded-xl' onChange={(e) => onChangeHandler(e, i)} defaultValue={i['tarifa 2'] !== undefined ? i['tarifa 2'] : 0} />
-                </td>
-                <td className="w-32 p-4">
-                  <input type="number" name="tarifa 3" className='w-[100px] text-center text-black  p-2 outline-blue-200 rounded-xl' onChange={(e) => onChangeHandler(e, i)} defaultValue={i['tarifa 3'] !== undefined ? i['tarifa 3'] : 0} />
-                </td>
-                <td className="px-3 py-4">
-                  {state && state[i.code] !== undefined
-                    ? <Button theme={"Success"} click={() => save(i)}>Guardar</Button>
-                    : <Button theme={"Disable"} >Disable</Button>
-                  }
-                </td>
-                <td className="px-3 py-4">
-                  {i.habilitado !== undefined && i.habilitado !== false
-                    ? <Button theme={"Success"} click={() => manage(i, 'Desabilitar')}>Habilitado</Button>
-                    : <Button theme={"Danger"} click={() => manage(i, 'Habilitar')}>Desabilitado</Button>
-                  }
-                </td>
-              </tr>
-            })
-            }
-          </tbody>
-        </table>
       </div>
     </main >
   )

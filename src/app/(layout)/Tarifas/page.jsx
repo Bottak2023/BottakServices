@@ -38,15 +38,26 @@ export default function Home() {
         <main className='w-full h-full'>
             <button className='fixed text-[20px] text-gray-500 h-[50px] w-[50px] rounded-full inline-block left-[0px] top-0 bottom-0 my-auto bg-[#00000010] z-20 lg:left-[20px] hover:bg-[#00000060] transition-all' onClick={prev}>{'<'}</button>
             <button className='fixed text-[20px] text-gray-500 h-[50px] w-[50px] rounded-full inline-block right-[0px] top-0 bottom-0 my-auto bg-[#00000010] z-20 lg:right-[20px]  hover:bg-[#00000060] transition-all' onClick={next}>{'>'}</button>
-            <div className="w-full   relative h-full overflow-auto shadow-2xl p-5 bg-white min-h-[80vh] scroll-smooth" ref={refFirst}>
-                <h3 className='font-medium text-[14px]'>Lista De Cambios</h3>
+            <div className="w-full   relative h-full overflow-auto shadow-2xl  bg-gray-300 min-h-[80vh] scroll-smooth">
+               
+               
+               
+            <div className='w-[100%] overflow-x-auto p-3 md:p-5'>
+
+<div className='min-w-[1000px]'>
+                <h3 className='font-medium text-[14px] text-black'>Lista De Cambios</h3>
                 <br />
-                <input type="text" className='border-b-[1px] text-[14px] outline-none w-[400px]' onChange={onChangeFilter} placeholder='Buscar Divisa' />
+                <label htmlFor="" className='text-black text-[14px] pr-5 font-medium'>Filtrar: </label>
+
+                <input type="text" className='border-b-[1px] text-[14px] outline-none w-[400px] text-black  rounded-[5px] p-1 border-[1px] border-gray-400' onChange={onChangeFilter} placeholder='Buscar Divisa' />
                 <br />
-                <br />
+                </div>
+                </div>
+                <div className="w-full   relative h-full overflow-y-auto  shadow-2xl bg-white max-h-[calc(100vh-120px)] md:max-h-[calc(100vh-70px)] scroll-smooth" ref={refFirst}>
+
                 <table className="w-full overflow-visible min-w-[1000px]  text-[14px] text-left text-gray-500 border-t-4 border-gray-400">
-                    <thead className="text-[14px] uppercase bg-gray-800 text-white">
-                        <tr>
+                <thead className="text-[14px] text-gray-700 uppercase bg-gray-800 text-white sticky top-0  z-20">
+                <tr>
                             <th scope="col" className=" px-3 py-3">
                                 #
                             </th>
@@ -82,7 +93,7 @@ export default function Home() {
                     <tbody>
                         {divisas && divisas !== undefined && Object.values(divisas).filter((i) => i.currency !== undefined && i.habilitado !== undefined && i.habilitado === true).sort(sortArray).map((i, index) => {
                             return (i.currency.toLowerCase().includes(filter.toLowerCase()) || i.code.toLowerCase().includes(filter.toLowerCase())) &&
-                                <tr className={`text-[14px] border-b border-gray-50  py-1 transition-all ${index === row ? 'bg-gray-100' : 'bg-gray-200'} ${index % 2 === 0 ? '' : ''} `} key={index} onClick={() => setRow(index)}>
+                            <tr className={`text-[14px] border-b border-gray-50  py-1 transition-all ${(index % 2 === 0 ? 'bg-gray-100' : 'bg-gray-300')} `} key={index}>
                                     <td className="px-3 py-4  flex text-gray-900 ">
                                         <span className='h-full flex py-2'>{index + 1}</span>
                                     </td>
@@ -115,6 +126,7 @@ export default function Home() {
                         }
                     </tbody>
                 </table>
+            </div>
             </div>
         </main>
     )
