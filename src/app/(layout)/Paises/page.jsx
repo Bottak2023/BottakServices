@@ -158,17 +158,19 @@ export default function Home() {
                 <td className="px-3 py-4  flex text-gray-900 ">
                   <span className='h-full flex py-2'>{index + 1}</span>
                 </td>
+                {console.log(i.countries)}
                 <td className="px-3 py-4 text-gray-900 ">
                   {i['translation']['spa']['common']}
                 </td>
                 <td className="px-3 py-4 text-gray-900 ">
-                {i.code}
+                {i.code} 
                 </td>
                 {/* <td className="px-3 py-4 text-gray-900 ">
                   <input type="text" name="cuenta de cobro"  className='min-w-[100px] text-center p-2 outline-blue-200 rounded-xl' onChange={(e) => onChangeHandler(e, i)} defaultValue={i['cuenta de cobro'] !== undefined ? i['cuenta de cobro'] : 0} disabled />
                 </td> */}
                 <td className="px-3 py-4 text-gray-900 ">
-                  <input type="text" name="banco de cobro" className='min-w-[100px] text-center p-2 outline-blue-200 rounded-xl' onChange={(e) => onChangeHandler(e, i)} defaultValue={i['banco de cobro'] !== undefined ? i['banco de cobro'] : 0} disabled />
+                  {i?.countries && Object.values(i.countries).map(i=><div>{i.banco} <br/></div>)}
+                  {/* <input type="text" name="banco de cobro" className='min-w-[100px] text-center p-2 outline-blue-200 rounded-xl' onChange={(e) => onChangeHandler(e, i)} defaultValue={i['banco de cobro'] !== undefined ? i['banco de cobro'] : 0} disabled /> */}
                 </td>
                 {/* <td className="px-3 py-4 text-gray-900 ">
                   <label >

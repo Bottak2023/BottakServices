@@ -252,12 +252,6 @@ function Home() {
                             }
                     };
 
-
-
-
-
-
-
                 const html = (`<main style="font-family: Arial, sans-serif; background-color: #f0f0f0; padding: 20px;">
                         <table style="width: 100%; min-width: 50vw; border-radius: 20px; text-align: left; font-size: 14px; color: #6b7280; background-color: white; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);">
                             <thead style="text-align: center; font-weight: bold; background-color: #4b5563; color: white;">
@@ -489,7 +483,7 @@ function Home() {
                                                 value={pagosQR['cta bancaria']}
                                             />
                                         }
-                                         {pagosQR && pagosQR !== undefined && destinatario &&
+                                        {pagosQR && pagosQR !== undefined && destinatario &&
                                             <TextWithCopy
                                                 keys={'Banco'}
                                                 value={pagosQR.banco}

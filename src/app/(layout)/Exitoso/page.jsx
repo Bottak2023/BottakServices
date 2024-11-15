@@ -16,19 +16,6 @@ const InvoicePDF = dynamic(() => import("@/components/PDFprint"), {
 });
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 function Home() {
     const { nav, setNav, user, userDB, QRurl, setQRurl, transactionDB, setTransactionDB } = useUser()
     const router = useRouter()

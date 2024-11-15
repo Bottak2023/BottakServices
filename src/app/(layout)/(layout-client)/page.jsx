@@ -238,7 +238,7 @@ function Page() {
 
       {/* {showOnboarding && <Onboarding onClose={handleCloseOnboarding} />} */}
 
-      <OnboardingQuestions onFinish={handleFinishOnboarding} />
+      {/* <OnboardingQuestions onFinish={handleFinishOnboarding} /> */}
       <NavInit mobile={true} />
       <div className={`flex flex-col justify-center items-center h-[300px] lg:h-auto lg:hidden `}>
         <img src="/logo.svg" className={`h-[150px] w-[150px] ${style.logo}`} alt="User" />
@@ -253,7 +253,7 @@ function Page() {
 
       {/* FORM TRANSFERENCIA */}
       {modalInfo === false
-        ? <form className='lg:h-full lg:py-[30px] w-full h-[400px] flex flex-col justify-between items-center  ' onSubmit={handlerTransfer}>
+        ? <form className='lg:h-full lg:py-[30px] w-full h-[400px] flex flex-col justify-between items-center space-y-5 ' onSubmit={handlerTransfer}>
 
           <NavInit mobile={false} />
           <marquee behavior="" direction="" className='max-w-[370px] text-green-500'>{

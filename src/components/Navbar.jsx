@@ -167,7 +167,7 @@ export default function Navbar({ children }) {
                                     </button>)
                                     : '')
                             }
-                           {user && userDB&& pathname !== '/Login' && pathname !== '/SignUp' &&pathname !== '/Register' && <button type="button" className="relative inline-flex items-center text-gray-100 ml-4" onClick={(e) => { e.stopPropagation(); setNotificaciones(!notificaciones) }}>
+                            {user && userDB && pathname !== '/Login' && pathname !== '/SignUp' && pathname !== '/Register' && <button type="button" className="relative inline-flex items-center text-gray-100 ml-4" onClick={(e) => { e.stopPropagation(); setNotificaciones(!notificaciones) }}>
                                 {Object.values({ ...enviosDB, ...cambiosDB }).filter((i) => i.notificaciones !== undefined && i.notificaciones === true).length > 0 && <Ping />}
                                 <span className="sr-only">Open menu</span>
                                 <svg width="30" height="24" viewBox="0 0 30 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -226,19 +226,19 @@ export default function Navbar({ children }) {
                                 <Notificaciones />
                                 Notificaciones
                             </Link>
-                       
+
 
                         </>}
                         {user !== null && user !== undefined
-                                ? <button className="flex flex-col justify-between items-center bg-[#FFF500] text-[12px]  text-center font-medium   px-3 py-3 rounded-[15px] hover:bg-gray-100 sm:hover:bg-transparent border-[2px] border-[#FFF500] sm:hover:text-yellow-300 text-black" onClick={signOutHandler}>
-                                    <Logout />
-                                    Cerrar sesión
-                                </button>
-                                : <Link href="/Login" className="flex flex-col justify-between items-center bg-[#FFF500] text-[12px]  text-center font-medium   px-3 py-3 rounded-[15px] hover:bg-gray-100 sm:hover:bg-transparent border-[2px] border-[#FFF500] sm:hover:text-yellow-300 text-black" onClick={() => setNav(false)}>
-                                    <Logout />
-                                    Iniciar Sesión
-                                </Link>
-                            }
+                            ? <button className="flex flex-col justify-between items-center bg-[#FFF500] text-[12px]  text-center font-medium   px-3 py-3 rounded-[15px] hover:bg-gray-100 sm:hover:bg-transparent border-[2px] border-[#FFF500] sm:hover:text-yellow-300 text-black" onClick={signOutHandler}>
+                                <Logout />
+                                Cerrar sesión
+                            </button>
+                            : <Link href="/Login" className="flex flex-col justify-between items-center bg-[#FFF500] text-[12px]  text-center font-medium   px-3 py-3 rounded-[15px] hover:bg-gray-100 sm:hover:bg-transparent border-[2px] border-[#FFF500] sm:hover:text-yellow-300 text-black" onClick={() => setNav(false)}>
+                                <Logout />
+                                Iniciar Sesión
+                            </Link>
+                        }
 
 
 
@@ -269,9 +269,13 @@ export default function Navbar({ children }) {
                             <Paises />
                             Paises habilitados
                         </Link>
+                        <Link href="/Onboarding/1" className="flex flex-col justify-between items-center bg-[#FFF500] text-[12px]  text-center font-medium   px-3 py-3 rounded-[15px]   sm:hover:bg-transparent border-[2px] border-[#FFF500] sm:hover:text-yellow-300 text-black " onClick={() => setNav(false)}>
+                            <Historial />
+                            Onboarding
+                        </Link>
                     </div>
                 </li>
-                {userDB && 
+                {userDB &&
                     <li className="hidden sm:inline-block" onClick={(e) => handlerNavItem(e, 'Mi cuenta')}>
                         <h3 className='text-[12px] font-bold sm:text-[12px] sm:font-normal text-white py-5 cursor-pointer'>MI CUENTA</h3>
                         <div className={`relative sm:absolute sm:top-[80px] sm:right-[20px]  sm:w-[300px]  sm:bg-black  grid grid-cols-2 gap-[20px]  rounded-2xl z-20  ${navItem === 'Mi cuenta' ? 'h-auto sm:p-[20px]' : 'h-auto sm:h-0 sm:overflow-hidden'}`}>
@@ -294,19 +298,19 @@ export default function Navbar({ children }) {
                                     <Notificaciones />
                                     Notificaciones
                                 </Link>
-                         
+
 
                             </>}
-       {user !== null && user !== undefined
-                                    ? <button className="flex flex-col justify-between items-center bg-[#FFF500] text-[12px]  text-center font-medium   px-3 py-3 rounded-[15px] hover:bg-gray-100 sm:hover:bg-transparent border-[2px] border-[#FFF500] sm:hover:text-yellow-300 text-black" onClick={signOutHandler}>
-                                        <Logout />
-                                        Cerrar sesión
-                                    </button>
-                                    : <Link href="/Login" className="flex flex-col justify-between items-center bg-[#FFF500] text-[12px]  text-center font-medium   px-3 py-3 rounded-[15px] hover:bg-gray-100 sm:hover:bg-transparent border-[2px] border-[#FFF500] sm:hover:text-yellow-300 text-black" onClick={() => setNav(false)}>
-                                        <Logout />
-                                        Iniciar Sesión
-                                    </Link>
-                                }
+                            {user !== null && user !== undefined
+                                ? <button className="flex flex-col justify-between items-center bg-[#FFF500] text-[12px]  text-center font-medium   px-3 py-3 rounded-[15px] hover:bg-gray-100 sm:hover:bg-transparent border-[2px] border-[#FFF500] sm:hover:text-yellow-300 text-black" onClick={signOutHandler}>
+                                    <Logout />
+                                    Cerrar sesión
+                                </button>
+                                : <Link href="/Login" className="flex flex-col justify-between items-center bg-[#FFF500] text-[12px]  text-center font-medium   px-3 py-3 rounded-[15px] hover:bg-gray-100 sm:hover:bg-transparent border-[2px] border-[#FFF500] sm:hover:text-yellow-300 text-black" onClick={() => setNav(false)}>
+                                    <Logout />
+                                    Iniciar Sesión
+                                </Link>
+                            }
 
 
                         </div>
@@ -351,7 +355,7 @@ export default function Navbar({ children }) {
                 {((enviosDB && enviosDB !== undefined) || (cambiosDB && cambiosDB !== undefined)) && Object.values(enviosDB && enviosDB !== undefined && cambiosDB && cambiosDB !== undefined ? { ...enviosDB, ...cambiosDB } : (enviosDB && enviosDB !== undefined ? enviosDB : (cambiosDB && cambiosDB !== undefined ? cambiosDB : {}))).filter((i) => i.notificaciones !== undefined && i.notificaciones === true).length > 0 ? <ul> {Object.values({ ...enviosDB, ...cambiosDB }).filter((i) => i.notificaciones !== undefined && i.notificaciones === true).sort((a, b) => b.date - a.date).map((i, index) => {
                     return <li className='relative pb-4 pt-2 pr-5 border-b-[1px] border-gray-300 text-black' >
                         <span className='w-full pr-[10px]'>Tu {i.operacion} de dinero de
-                            <b> {i['importe neto']} {i['divisa de envio']}{i['divisa de usuario'] && i['divisa de usuario'] !== undefined ? `${i['divisa de usuario']} a ${i['divisa de cambio']}`:''}</b>  {i.destinatario !== undefined ? `a ${i.destinatario}, ` : ''}
+                            <b> {i['importe neto']} {i['divisa de envio']}{i['divisa de usuario'] && i['divisa de usuario'] !== undefined ? `${i['divisa de usuario']} a ${i['divisa de cambio']}` : ''}</b>  {i.destinatario !== undefined ? `a ${i.destinatario}, ` : ''}
                             {i.estado == 'En verificación' && <span className={` text-black`}>esta en verificación.</span>}
                             {i.estado == 'Verificado' && <span className={` text-black  bg-blue-100`}>esta VERIFICADO, la transaferencia esta apunto de realizarse.</span>}
                             {i.estado == 'Transfiriendo' && <span className={` text-black  bg-yellow-100`}>'ya se esta transfiriendo.</span>}
